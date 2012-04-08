@@ -1,3 +1,7 @@
 <Modules>
   <Module PersistentId="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA" ModuleId="GBlason" />
+  <Module PersistentId="19D8FBFB-1A42-4B31-B852-1993C83A5650" ModuleId="GBSFormatManager" />
+  <Module PersistentId="D701BDBD-A72B-4EF8-8423-C5D0795D6C75" ModuleId="GBRFormatManager" />
+  <Module PersistentId="70799D9B-CBC3-49DD-AE4A-C41030233BE2" ModuleId="LoadingManager" />
+  <Module PersistentId="6F6D044A-D211-4D2C-ACCD-9012E96D5305" ModuleId="GBlasonLogic" />
 </Modules>

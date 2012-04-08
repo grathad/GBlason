@@ -92,6 +92,15 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Control\Aggregate\" />
+    <Folder Include="Control\Custom\" />
+    <Folder Include="Converter\" />
+    <Folder Include="Culture\" />
+    <Folder Include="Validator\" />
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
