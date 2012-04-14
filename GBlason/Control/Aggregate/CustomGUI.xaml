@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="GBlason.Control.Aggregate.CustomGUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Aggregate="clr-namespace:GBlason.Control.Aggregate" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600">
+    <!-- TODO @Grathad link background to a style manager -->
+    <Grid x:Name="CustomGUIGrid" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" MinWidth="120" MaxWidth="300"/>
+            <ColumnDefinition Width="3px"/>
+            <ColumnDefinition Width="8*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" x:Name="PropertiesAndTreeGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3px"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Aggregate:Properties Grid.Row="0"/>
+            <GridSplitter Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="3" Name="propertiesSplitter"/>
+            <Aggregate:TreeView Grid.Row="2"/>
+        </Grid>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" Name="mainSplitter" VerticalAlignment="Stretch" Width="3" />
+        <TabControl Grid.Column="2" Name="MultiDocumentTabContent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TabItem Header="@To Bind" Name="Tab1">
+                <DockPanel>
+                    <Aggregate:CoatOfArmsViewer/>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

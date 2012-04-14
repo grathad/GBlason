@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<GbsFormat xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="0.9.0">
+  <XmlCoatOfArms>
+    <Shape Identifier="cb38438a-0b39-49e3-8e27-4a70281e45a3" TypeOfResource="Custom">
+      <Geometry>M 0,0 L 100,0 100,100 0,100 Z</Geometry>
+      <Name>Test</Name>
+    </Shape>
+  </XmlCoatOfArms>
+</GbsFormat>

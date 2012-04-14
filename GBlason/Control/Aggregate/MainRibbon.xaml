@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="GBlason.Control.Aggregate.MainRibbon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
+             xmlns:Properties="clr-namespace:GBlason.Properties" mc:Ignorable="d" 
+             xmlns:glbl="clr-namespace:GBlason.Global"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <glbl:RecentFiles x:Key="RecentFilesDataSource"/>
+    </UserControl.Resources>
+    <DockPanel>
+        <DockPanel.Resources>
+            <ResourceDictionary>
+                <!-- Group size definition -->
+                <ribbon:RibbonGroupSizeDefinitionCollection x:Key="ClipboardSizing">
+                    <ribbon:RibbonGroupSizeDefinition>
+                        <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True"/>
+                        <ribbon:RibbonControlSizeDefinition ImageSize="Small" IsLabelVisible="True"/>
+                        <ribbon:RibbonControlSizeDefinition ImageSize="Small" IsLabelVisible="True"/>
+                    </ribbon:RibbonGroupSizeDefinition>
+                    <ribbon:RibbonGroupSizeDefinition>
+                        <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True"/>
+                        <ribbon:RibbonControlSizeDefinition ImageSize="Small" IsLabelVisible="False"/>
+                        <ribbon:RibbonControlSizeDefinition ImageSize="Small" IsLabelVisible="False"/>
+                    </ribbon:RibbonGroupSizeDefinition>
+                    <ribbon:RibbonGroupSizeDefinition IsCollapsed="True"/>
+                </ribbon:RibbonGroupSizeDefinitionCollection>
+
+                <!-- Home Tab Commands -->
+                <ribbon:RibbonCommand x:Key="ClipBoardGroupCommand" LabelTitle="{x:Static Properties:Resources.GroupLabelClipboard}"/>
+                <ribbon:RibbonCommand x:Key="PasteCommand" LabelTitle="{x:Static Properties:Resources.ButtonLabelPaste}"
+                              LargeImageSource="../../Pictures/Icons32/paste_plain.png" SmallImageSource="../../Pictures/Icons16/paste_plain.png"
+                              CanExecute="RibbonCommandCanExecute" Executed="OnPaste"/>
+                <ribbon:RibbonCommand x:Key="CutCommand" LabelTitle="{x:Static Properties:Resources.ButtonLabelCut}"
+                              LargeImageSource="../../Pictures/Icons32/cut.png" SmallImageSource="../../Pictures/Icons16/cut.png"
+                              CanExecute="RibbonCommandCanExecute" Executed="OnCut"/>
+                <ribbon:RibbonCommand x:Key="CopyCommand" LabelTitle="{x:Static Properties:Resources.ButtonLabelCopy}"
+                              LargeImageSource="../../Pictures/Icons32/page_copy.png" SmallImageSource="../../Pictures/Icons16/page_copy.png"
+                              CanExecute="RibbonCommandCanExecute" Executed="OnCopy"/>
+                <!-- Application Menu Commands -->
+                <ribbon:RibbonCommand x:Key="ApplicationButtonCommand" CanExecute="RibbonCommandCanExecute"
+                                  Executed="RibbonCommandExecuted" LabelTitle="{x:Static Properties:Resources.ApplicationButtonLabel}"
+                                  LargeImageSource="../../Pictures/Icons32/shield.png" SmallImageSource="../../Pictures/Icons16/shield.png"/>
+                <ribbon:RibbonCommand x:Key="ApplicationButtonExitCommand" CanExecute="RibbonCommandCanExecute"
+                                  Executed="RibbonCommandExecuted" LabelTitle="{x:Static Properties:Resources.ButtonLabelQuit}"
+                                  LargeImageSource="../../Pictures/Icons32/cross.png" SmallImageSource="../../Pictures/Icons16/cross.png"/>
+                <ribbon:RibbonCommand x:Key="ApplicationButtonOptionsCommand" CanExecute="RibbonCommandCanExecute"
+                                  Executed="RibbonCommandExecuted" LabelTitle="{x:Static Properties:Resources.ButtonLabelOptions}"
+                                  LargeImageSource="../../Pictures/Icons32/legend.png" SmallImageSource="../../Pictures/Icons16/legend.png"/>
+                <ribbon:RibbonCommand x:Key="NewCommand" CanExecute="RibbonCommandCanExecute"
+                                  Executed="RibbonCommandExecuted" LabelTitle="{x:Static Properties:Resources.MenuLabelNewCoA}"
+                                  LargeImageSource="../../Pictures/Icons32/page_add.png" SmallImageSource="../../Pictures/Icons16/page_add.png"/>
+                <ribbon:RibbonCommand x:Key="OpenCommand" CanExecute="RibbonCommandCanExecute"
+                                  Executed="RibbonCommandExecuted" LabelTitle="{x:Static Properties:Resources.MenuLabelOpen}"
+                                  LargeImageSource="../../Pictures/Icons32/folder_page.png" SmallImageSource="../../Pictures/Icons16/folder_page.png"/>
+                <ribbon:RibbonCommand x:Key="SaveCommand" CanExecute="RibbonCommandCanExecute"
+                                  Executed="RibbonCommandExecuted" LabelTitle="{x:Static Properties:Resources.MenuLabelSave}"
+                                  LargeImageSource="../../Pictures/Icons32/page_save.png" SmallImageSource="../../Pictures/Icons16/page_save.png"/>
+                <ribbon:RibbonCommand x:Key="SaveAsCommand" CanExecute="RibbonCommandCanExecute"
+                                  Executed="RibbonCommandExecuted" LabelTitle="{x:Static Properties:Resources.MenuLabelSaveAs}"
+                                  LargeImageSource="../../Pictures/Icons32/page_save.png" SmallImageSource="../../Pictures/Icons16/page_save.png"/>
+                <ribbon:RibbonCommand x:Key="SaveAsSVGCommand" CanExecute="RibbonCommandCanExecute"
+                                  Executed="RibbonCommandExecuted" LabelTitle="{x:Static Properties:Resources.MenuLabelSaveAsSVG}"
+                                  LargeImageSource="../../Pictures/Icons32/page_code.png" SmallImageSource="../../Pictures/Icons16/page_code.png"/>
+                <ribbon:RibbonCommand x:Key="SaveAsImageCommand" CanExecute="RibbonCommandCanExecute"
+                                  Executed="RibbonCommandExecuted" LabelTitle="{x:Static Properties:Resources.MenuLabelSaveAsImage}"
+                                  LargeImageSource="../../Pictures/Icons32/file_extension_jpg.png" SmallImageSource="../../Pictures/Icons16/file_extension_jpg.png"/>
+                <ribbon:RibbonCommand x:Key="SaveAsGBSCommand" CanExecute="RibbonCommandCanExecute"
+                                  Executed="RibbonCommandExecuted" LabelTitle="{x:Static Properties:Resources.MenuLabelSaveAsGBS}"
+                                  LargeImageSource="../../Pictures/Icons32/disk.png" SmallImageSource="../../Pictures/Icons16/disk.png"/>
+            </ResourceDictionary>
+        </DockPanel.Resources>
+        <ribbon:Ribbon DockPanel.Dock="Top" Title="Titre à binder" x:Name="ApplicationRibbon">
+
+            <!-- APPLICATION MENU -->
+            <ribbon:Ribbon.ApplicationMenu>
+                <ribbon:RibbonApplicationMenu Command="{StaticResource ApplicationButtonCommand}">
+                    <ribbon:RibbonApplicationMenu.RecentItemList>
+                        <ribbon:RibbonHighlightingList ItemsSource="{DynamicResource RecentFilesDataSource}"
+                                                       DisplayMemberPath="Name"/>
+                    </ribbon:RibbonApplicationMenu.RecentItemList>
+                    <ribbon:RibbonApplicationMenuItem Command="{StaticResource NewCommand}" />
+                    <ribbon:RibbonApplicationMenuItem Command="{StaticResource OpenCommand}" />
+                    <ribbon:RibbonApplicationMenuItem Command="{StaticResource SaveCommand}" />
+                    <ribbon:RibbonApplicationSplitMenuItem Command="{StaticResource SaveAsCommand}">
+                        <ribbon:RibbonApplicationMenuItem Command="{StaticResource SaveAsGBSCommand}" />
+                        <ribbon:RibbonApplicationMenuItem Command="{StaticResource SaveAsSVGCommand}" />
+                        <ribbon:RibbonApplicationMenuItem Command="{StaticResource SaveAsImageCommand}" />
+                    </ribbon:RibbonApplicationSplitMenuItem>
+                    <!-- FOOTER -->
+                    <ribbon:RibbonApplicationMenu.Footer>
+                        <DockPanel LastChildFill="False">
+                            <ribbon:RibbonButton DockPanel.Dock="Right" Margin="2" Command="{StaticResource ApplicationButtonExitCommand}" />
+                            <ribbon:RibbonButton DockPanel.Dock="Right" Margin="2" Command="{StaticResource ApplicationButtonOptionsCommand}" />
+                        </DockPanel>
+                    </ribbon:RibbonApplicationMenu.Footer>
+                </ribbon:RibbonApplicationMenu>
+            </ribbon:Ribbon.ApplicationMenu>
+
+
+            <!-- TABS -->
+            <ribbon:RibbonTab x:Name="TabHome" Label="{x:Static Properties:Resources.TabLabelHome}">
+                <ribbon:RibbonGroup x:Name="GroupClipBoard"
+                                    Command="{StaticResource ClipBoardGroupCommand}"
+                                    HasDialogLauncher="True"
+                                    GroupSizeDefinitions="{StaticResource ClipboardSizing}">
+                    <ribbon:RibbonSplitButton x:Name="ButtonPaste"
+                                                 Command="{StaticResource PasteCommand}">
+                        <ribbon:RibbonSplitButton.Items>
+                            <MenuItem Header="{x:Static Properties:Resources.MenuLabelPaste}">
+                                <MenuItem.Icon>
+                                    <Image Source="../../Pictures/Icons16/paste_plain.png" Width="16" Height="16"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="{x:Static Properties:Resources.MenuLabelPasteSpecial}">
+                                <MenuItem.Icon>
+                                    <Image Source="../../Pictures/Icons16/paste_plain.png" Width="16" Height="16"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ribbon:RibbonSplitButton.Items>
+                    </ribbon:RibbonSplitButton>
+                    <ribbon:RibbonButton x:Name="ButtonCut" Command="{StaticResource CutCommand}"/>
+                    <ribbon:RibbonButton x:Name="ButtonCopy" Command="{StaticResource CopyCommand}"/>
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup x:Name="GroupShape">
+                    <ribbon:RibbonComboBox x:Name="ComboBoxShape"/>
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup x:Name="GroupEnamels">
+                    <ribbon:RibbonComboBox x:Name="ComboBoxEnamels"/>
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+            <ribbon:RibbonTab x:Name="TabInsert" Label="{x:Static Properties:Resources.TabLabelInsert}">
+            </ribbon:RibbonTab>
+        </ribbon:Ribbon>
+    </DockPanel>
+</UserControl>

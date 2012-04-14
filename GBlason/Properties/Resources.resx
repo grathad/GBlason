@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,69 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApplicationButtonLabel" xml:space="preserve">
+    <value>Coat Of Arms</value>
+  </data>
+  <data name="ButtonLabelCopy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="ButtonLabelCut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="ButtonLabelOptions" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="ButtonLabelPaste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="ButtonLabelQuit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="GroupLabelClipboard" xml:space="preserve">
+    <value>Clipboard</value>
+  </data>
+  <data name="GroupLabelEnamels" xml:space="preserve">
+    <value>Enamels</value>
+  </data>
+  <data name="GroupLabelShape" xml:space="preserve">
+    <value>Shape</value>
+  </data>
+  <data name="MenuLabelNewCoA" xml:space="preserve">
+    <value>New Coat Of Arms</value>
+  </data>
+  <data name="MenuLabelOpen" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="MenuLabelPaste" xml:space="preserve">
+    <value>_Paste</value>
+  </data>
+  <data name="MenuLabelPasteSpecial" xml:space="preserve">
+    <value>Paste _Special ...</value>
+  </data>
+  <data name="MenuLabelSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="MenuLabelSaveAs" xml:space="preserve">
+    <value>Save As</value>
+  </data>
+  <data name="MenuLabelSaveAsGBS" xml:space="preserve">
+    <value>GBS (Default format)</value>
+  </data>
+  <data name="MenuLabelSaveAsImage" xml:space="preserve">
+    <value>Image Format (jpg, png, ...)</value>
+  </data>
+  <data name="MenuLabelSaveAsSVG" xml:space="preserve">
+    <value>SVG</value>
+  </data>
+  <data name="TabLabelHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="TabLabelInsert" xml:space="preserve">
+    <value>Insert</value>
+  </data>
 </root>

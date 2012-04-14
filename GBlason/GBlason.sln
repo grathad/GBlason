@@ -1,17 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GBL.WPFClient", "GBL.WPFClient.csproj", "{44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation.csproj", "{44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GBL.GBSFormatManager", "..\GBSFormatManager\GBL.GBSFormatManager.csproj", "{19D8FBFB-1A42-4B31-B852-1993C83A5650}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GBL.GBRFormatManager", "GBRFormatManager\GBL.GBRFormatManager.csproj", "{D701BDBD-A72B-4EF8-8423-C5D0795D6C75}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GBL.FormatManager", "..\GBSFormatManager\GBL.FormatManager.csproj", "{19D8FBFB-1A42-4B31-B852-1993C83A5650}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GBL.Repository", "LoadingManager\GBL.Repository.csproj", "{70799D9B-CBC3-49DD-AE4A-C41030233BE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GBL.Logic", "GBlasonLogic\GBL.Logic.csproj", "{6F6D044A-D211-4D2C-ACCD-9012E96D5305}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDD", "..\TestDD\TestDD.csproj", "{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{868AD512-7350-4C03-9150-269866F3AC23}"
+	ProjectSection(SolutionItems) = preProject
+		GBlason.vsmdi = GBlason.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{B3B74AEE-6429-474D-AB03-C76986DE701E}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = GBlason.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -41,16 +53,6 @@ Global
 		{19D8FBFB-1A42-4B31-B852-1993C83A5650}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{19D8FBFB-1A42-4B31-B852-1993C83A5650}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{19D8FBFB-1A42-4B31-B852-1993C83A5650}.Release|x86.ActiveCfg = Release|Any CPU
-		{D701BDBD-A72B-4EF8-8423-C5D0795D6C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D701BDBD-A72B-4EF8-8423-C5D0795D6C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D701BDBD-A72B-4EF8-8423-C5D0795D6C75}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{D701BDBD-A72B-4EF8-8423-C5D0795D6C75}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{D701BDBD-A72B-4EF8-8423-C5D0795D6C75}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D701BDBD-A72B-4EF8-8423-C5D0795D6C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D701BDBD-A72B-4EF8-8423-C5D0795D6C75}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D701BDBD-A72B-4EF8-8423-C5D0795D6C75}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{D701BDBD-A72B-4EF8-8423-C5D0795D6C75}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{D701BDBD-A72B-4EF8-8423-C5D0795D6C75}.Release|x86.ActiveCfg = Release|Any CPU
 		{70799D9B-CBC3-49DD-AE4A-C41030233BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{70799D9B-CBC3-49DD-AE4A-C41030233BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70799D9B-CBC3-49DD-AE4A-C41030233BE2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -71,8 +73,21 @@ Global
 		{6F6D044A-D211-4D2C-ACCD-9012E96D5305}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6F6D044A-D211-4D2C-ACCD-9012E96D5305}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6F6D044A-D211-4D2C-ACCD-9012E96D5305}.Release|x86.ActiveCfg = Release|Any CPU
+		{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B3B74AEE-6429-474D-AB03-C76986DE701E} = {868AD512-7350-4C03-9150-269866F3AC23}
 	EndGlobalSection
 EndGlobal

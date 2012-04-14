@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GBlason</RootNamespace>
+    <AssemblyName>GBlason</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RibbonControlsLibrary">
+      <HintPath>..\..\Dropbox\Source code\RibbonControlsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Global\Context.cs" />
+    <Compile Include="ViewModel\GbsFileViewModel.cs" />
+    <Page Include="Control\Aggregate\CoatOfArmsViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Aggregate\CustomGUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Aggregate\MainRibbon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Aggregate\Properties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Aggregate\TreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\Aggregate\CoatOfArmsViewer.xaml.cs">
+      <DependentUpon>CoatOfArmsViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Aggregate\CustomGUI.xaml.cs">
+      <DependentUpon>CustomGUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Aggregate\MainRibbon.xaml.cs">
+      <DependentUpon>MainRibbon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Aggregate\Properties.xaml.cs">
+      <DependentUpon>Properties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Aggregate\TreeView.xaml.cs">
+      <DependentUpon>TreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Global\RecentFile.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.fr-FR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.fr-FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Control\Custom\" />
+    <Folder Include="Converter\" />
+    <Folder Include="Culture\" />
+    <Folder Include="Validator\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GBSFormatManager\GBL.FormatManager.csproj">
+      <Project>{19D8FBFB-1A42-4B31-B852-1993C83A5650}</Project>
+      <Name>GBL.FormatManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="GBlasonLogic\GBL.Logic.csproj">
+      <Project>{6F6D044A-D211-4D2C-ACCD-9012E96D5305}</Project>
+      <Name>GBL.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="LoadingManager\GBL.Repository.csproj">
+      <Project>{70799D9B-CBC3-49DD-AE4A-C41030233BE2}</Project>
+      <Name>GBL.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\shield.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\shield.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\paste_plain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\paste_plain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\cut.png" />
+    <Resource Include="Pictures\Icons16\disk.png" />
+    <Resource Include="Pictures\Icons16\page_copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\cut.png" />
+    <Resource Include="Pictures\Icons32\disk.png" />
+    <Resource Include="Pictures\Icons32\page_copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\cross.png" />
+    <Resource Include="Pictures\Icons16\legend.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\cross.png" />
+    <Resource Include="Pictures\Icons32\legend.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\folder_page.png" />
+    <Resource Include="Pictures\Icons16\page_add.png" />
+    <Resource Include="Pictures\Icons16\page_save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\folder_page.png" />
+    <Resource Include="Pictures\Icons32\page_add.png" />
+    <Resource Include="Pictures\Icons32\page_save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\file_extension_jpg.png" />
+    <Resource Include="Pictures\Icons16\page_code.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\file_extension_jpg.png" />
+    <Resource Include="Pictures\Icons32\page_code.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

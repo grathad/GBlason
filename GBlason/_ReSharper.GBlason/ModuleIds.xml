@@ -4,4 +4,5 @@
   <Module PersistentId="D701BDBD-A72B-4EF8-8423-C5D0795D6C75" ModuleId="GBRFormatManager" />
   <Module PersistentId="70799D9B-CBC3-49DD-AE4A-C41030233BE2" ModuleId="LoadingManager" />
   <Module PersistentId="6F6D044A-D211-4D2C-ACCD-9012E96D5305" ModuleId="GBlasonLogic" />
+  <Module PersistentId="77A0C94E-9A68-4424-A4A4-E4A5CC42B41D" ModuleId="TestDD" />
 </Modules>

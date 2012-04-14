@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GBlason.Properties
-{
-
-
+namespace GBlason.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,49 +22,221 @@ namespace GBlason.Properties
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    public class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ((resourceMan == null))
-                {
+        public static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GBlason.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        public static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Coat Of Arms.
+        /// </summary>
+        public static string ApplicationButtonLabel {
+            get {
+                return ResourceManager.GetString("ApplicationButtonLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy.
+        /// </summary>
+        public static string ButtonLabelCopy {
+            get {
+                return ResourceManager.GetString("ButtonLabelCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cut.
+        /// </summary>
+        public static string ButtonLabelCut {
+            get {
+                return ResourceManager.GetString("ButtonLabelCut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string ButtonLabelOptions {
+            get {
+                return ResourceManager.GetString("ButtonLabelOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paste.
+        /// </summary>
+        public static string ButtonLabelPaste {
+            get {
+                return ResourceManager.GetString("ButtonLabelPaste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        public static string ButtonLabelQuit {
+            get {
+                return ResourceManager.GetString("ButtonLabelQuit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clipboard.
+        /// </summary>
+        public static string GroupLabelClipboard {
+            get {
+                return ResourceManager.GetString("GroupLabelClipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enamels.
+        /// </summary>
+        public static string GroupLabelEnamels {
+            get {
+                return ResourceManager.GetString("GroupLabelEnamels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shape.
+        /// </summary>
+        public static string GroupLabelShape {
+            get {
+                return ResourceManager.GetString("GroupLabelShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Coat Of Arms.
+        /// </summary>
+        public static string MenuLabelNewCoA {
+            get {
+                return ResourceManager.GetString("MenuLabelNewCoA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string MenuLabelOpen {
+            get {
+                return ResourceManager.GetString("MenuLabelOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Paste.
+        /// </summary>
+        public static string MenuLabelPaste {
+            get {
+                return ResourceManager.GetString("MenuLabelPaste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paste _Special ....
+        /// </summary>
+        public static string MenuLabelPasteSpecial {
+            get {
+                return ResourceManager.GetString("MenuLabelPasteSpecial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string MenuLabelSave {
+            get {
+                return ResourceManager.GetString("MenuLabelSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save As.
+        /// </summary>
+        public static string MenuLabelSaveAs {
+            get {
+                return ResourceManager.GetString("MenuLabelSaveAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GBS (Default format).
+        /// </summary>
+        public static string MenuLabelSaveAsGBS {
+            get {
+                return ResourceManager.GetString("MenuLabelSaveAsGBS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image Format (jpg, png, ...).
+        /// </summary>
+        public static string MenuLabelSaveAsImage {
+            get {
+                return ResourceManager.GetString("MenuLabelSaveAsImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SVG.
+        /// </summary>
+        public static string MenuLabelSaveAsSVG {
+            get {
+                return ResourceManager.GetString("MenuLabelSaveAsSVG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string TabLabelHome {
+            get {
+                return ResourceManager.GetString("TabLabelHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert.
+        /// </summary>
+        public static string TabLabelInsert {
+            get {
+                return ResourceManager.GetString("TabLabelInsert", resourceCulture);
             }
         }
     }

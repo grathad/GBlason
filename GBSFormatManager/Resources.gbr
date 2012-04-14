@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<GbrFormat xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="0.9.0">
+  <Shapes>
+    <Shape Identifier="656897f5-a801-4f0a-ae8a-20d113737d56" TypeOfResource="Original">
+      <Geometry>M 0,0 L120,0 120,120 0,120 Z</Geometry>
+      <Name>BannerShape</Name>
+    </Shape>
+    <Shape Identifier="7585129f-49a2-4cd5-ba37-7982d760a704" TypeOfResource="Original">
+      <Geometry>M 60,0 L 110,60 L 60,120 L10,60 Z</Geometry>
+      <Name>DamselShape</Name>
+    </Shape>
+    <Shape Identifier="d2fb7b39-527c-465c-9ae1-77931d19f61b" TypeOfResource="Original">
+      <Geometry>M 0,150 H 120 Q 110,155 110,160 V 250 Q 110,260 100,260 H 80 Q 70,260 60,270 Q 50,260 40,260 H 20 Q 10,260 10,250 V 160 Q 10,155 0,150 Z</Geometry>
+      <Name>EnglishShape</Name>
+    </Shape>
+    <Shape Identifier="51cedabf-998b-408f-bc74-d2aa2a5681f6" TypeOfResource="Original">
+      <Geometry>M 86,0 c -17,0 -32,6 -45,19 c -13,-8 -34,-1 -36,15 c 2,-1 4,-2 6,-2  c 6,0 11,5 11,12 c 0,7 -5,12 -11,12 c -2,0 -4,0 -5,-1  c 0,17 -6,25 -6,41 c 0,32 30,62 60,62 c 30,0 58,-28 58,-61 c 0,-25 -19,-37 -19,-62 c 0,-24 10,-33 10,-33 c -8,-2 -17,-2 -24,-2 Z</Geometry>
+      <Name>GermanShape</Name>
+    </Shape>
+    <Shape Identifier="35291f87-495e-40ab-a81a-6adebf7f4e09" TypeOfResource="Original">
+      <Geometry>M 34.346021 3.7599543 c -9.82466 0 -17.27687 19.5402597 -33.90783066 21.6768297 0 53.54101 27.00433066 62.46452 27.00433066 88.769976 0 5.37705 -1.10449 6.46272 -1.10449 12.49516 0 15.607 9.78488 36.18165 28.66194 36.18165 18.87711 0 28.662 -20.57465 28.662 -36.18165 0 -6.03244 -1.10449 -7.11811 -1.10449 -12.49516 0 -26.305456 27.004329 -35.228966 27.004329 -88.769976 C 92.931722 23.301084 85.478631 3.7599543 75.653981 3.7599543 l -20.65401 0 -20.65395 0 0 0 Z</Geometry>
+      <Name>ItalianShape</Name>
+    </Shape>
+    <Shape Identifier="e5492a1c-4721-4da7-9dc1-eda1fa4add36" TypeOfResource="Original">
+      <Geometry>M 0,60 A 50,60 180 1 1 100,60 A 50,60 180 1 1 0,60</Geometry>
+      <Name>LadiesShape</Name>
+    </Shape>
+    <Shape Identifier="502edb98-a43e-487c-9e10-89860ef9511f" TypeOfResource="Original">
+      <Geometry>M 300,0 H 420 V 100 A 10,10 90 0 1 410,110 H 380 Q 370,110 360,120 Q 350,110 340,110 H310 A 10,10 90 0 1 300,100 Z</Geometry>
+      <Name>ModernFrenchShape</Name>
+    </Shape>
+    <Shape Identifier="5af9dd80-7a3e-49bf-8853-cf5fd20a1d26" TypeOfResource="Original">
+      <Geometry>M 0,0 H 120 V 30 Q 120,90 60,120 Q 0,90 0,30 Z</Geometry>
+      <Name>OldFrenchShape</Name>
+    </Shape>
+    <Shape Identifier="5afc08ad-1b1d-4fe3-9d66-8cd5528ba9ee" TypeOfResource="Original">
+      <Geometry>M 52.189212 0 c -10.254994 0 -16.649394 8.92073 -32.596428 11.42888 0.01288 9.67009 -3.932115 19.1825 -9.191804 25.4488 0 0 10.246156 4.91713 10.246156 15.79821 0 16.42972 -16.9764711 16.45817 -16.9764711 16.45817 0 0 -2.86249329 6.04605 -2.86249329 18.28685 0 28.01804 18.61424839 49.19324 32.74751339 55.72374 14.133255 6.5303 22.267497 9.3067 26.469632 15.239 4.202126 -5.9323 12.285743 -8.7087 26.418999 -15.239 14.133264 -6.5305 32.747514 -27.7083 32.747514 -55.72374 0 -12.2408 -2.86249 -18.28685 -2.86249 -18.28685 0 0 -16.976476 -0.0284 -16.976476 -16.45817 0 -10.88108 10.246156 -15.79821 10.246156 -15.79821 -5.2605 -6.26873 -9.20386 -15.77871 -9.19181 -25.4488 -15.947832 -2.50895 -22.342233 -11.42888 -32.596422 -11.42888 -5.847141 0 -7.785471 3.04781 -7.785471 3.04781 0 0 -1.988963 -3.04781 -7.836105 -3.04781 Z</Geometry>
+      <Name>PolishShape</Name>
+    </Shape>
+    <Shape Identifier="2d7e3167-b572-4bd7-959c-8d94ce037110" TypeOfResource="Original">
+      <Geometry>M 0,0 H 120 V 60 A 60,60 90 0 1 60,120 A 60,60 90 0 1 0,60 Z</Geometry>
+      <Name>SpanishShape</Name>
+    </Shape>
+    <Shape Identifier="e6bc688f-fc32-472f-b9ae-8bbadba3b09a" TypeOfResource="Original">
+      <Geometry>M 0,0 A 40,60 90 0 0 60,0 A 40,60 90 0 0 120,0 Q 120,100 60,120 M 0,0 Q 0,100 60,120</Geometry>
+      <Name>SwissShape</Name>
+    </Shape>
+  </Shapes>
+</GbrFormat>
