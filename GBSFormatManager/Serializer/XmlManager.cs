@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Text;
+using System.Xml;
 using System.Xml.Serialization;
 using GBSFormatManager;
 
@@ -15,19 +17,19 @@ namespace FormatManager.Serializer
         /// </summary>
         /// <param name="dataToSerialize">The data to serialize.</param>
         /// <param name="flow">The flow.</param>
+        /// <exception cref="InvalidOperationException">In case a serializzation error occur</exception>
         static public void Serialize<TFormat>(TFormat dataToSerialize, ref Stream flow)
         {
-            try
-            {
-                var serializer = new XmlSerializer(typeof(TFormat));
-                serializer.Serialize(flow, dataToSerialize);
-            }
-            catch (InvalidOperationException ioex)
-            {
-                //TODO @grathad : ajouter l'option de log
-                throw ioex;
-            }
+            var serializer = new XmlSerializer(typeof(TFormat));
+            serializer.Serialize(flow, dataToSerialize);
+        }
 
+        static public void Serialize<TFormat>(TFormat dataToSerialize, ref XmlWriter writer) where TFormat : class
+        {
+            if (dataToSerialize != null)
+            {
+                new XmlSerializer(typeof(TFormat)).Serialize(writer, dataToSerialize);
+            }
         }
 
         /// <summary>
@@ -51,16 +53,8 @@ namespace FormatManager.Serializer
         /// <returns>the intended object to be deserialized</returns>
         static public void Deserialize<TFormat>(ref TFormat dataToDeserialize, Stream flow)
         {
-            try
-            {
-                var deserializer = new XmlSerializer(typeof(TFormat));
-                dataToDeserialize = (TFormat)deserializer.Deserialize(flow);
-            }
-            catch (InvalidOperationException ioex)
-            {
-                //TODO @grathad : ajouter l'option de log
-                throw ioex;
-            }
+            var deserializer = new XmlSerializer(typeof(TFormat));
+            dataToDeserialize = (TFormat)deserializer.Deserialize(flow);
         }
 
         public FileStream PrepareFileStream(String filePath, FileMode mode)

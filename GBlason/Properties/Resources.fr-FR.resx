@@ -117,7 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TabLabelCoatOfArms" xml:space="preserve">
+  <data name="ApplicationButtonLabel" xml:space="preserve">
     <value>Blason</value>
+  </data>
+  <data name="ApplicationSeparatorChar" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Editeur de blason</value>
+  </data>
+  <data name="ButtonLabelCopy" xml:space="preserve">
+    <value>Copier</value>
+  </data>
+  <data name="ButtonLabelCut" xml:space="preserve">
+    <value>Couper</value>
+  </data>
+  <data name="ButtonLabelOptions" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="ButtonLabelPaste" xml:space="preserve">
+    <value>Coller</value>
+  </data>
+  <data name="ButtonLabelQuit" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+  <data name="GroupLabelClipboard" xml:space="preserve">
+    <value>Presse papier</value>
+  </data>
+  <data name="GroupLabelEnamels" xml:space="preserve">
+    <value>Champ</value>
+  </data>
+  <data name="GroupLabelSelectionProperty" xml:space="preserve">
+    <value>Propriétés de la sélection</value>
+  </data>
+  <data name="GroupLabelShape" xml:space="preserve">
+    <value>Forme</value>
+  </data>
+  <data name="MenuLabelNewCoA" xml:space="preserve">
+    <value>Nouveau blason</value>
+  </data>
+  <data name="MenuLabelOpen" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="MenuLabelPaste" xml:space="preserve">
+    <value>_Coller</value>
+  </data>
+  <data name="MenuLabelPasteSpecial" xml:space="preserve">
+    <value>Coller _Spécial ...</value>
+  </data>
+  <data name="MenuLabelSave" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="MenuLabelSaveAs" xml:space="preserve">
+    <value>Enregistrer sous</value>
+  </data>
+  <data name="MenuLabelSaveAsGBS" xml:space="preserve">
+    <value>GBS (format par défaut)</value>
+  </data>
+  <data name="MenuLabelSaveAsImage" xml:space="preserve">
+    <value>Format d'image (jpg, png, ...)</value>
+  </data>
+  <data name="MenuLabelSaveAsSVG" xml:space="preserve">
+    <value>SVG</value>
+  </data>
+  <data name="TabLabelHome" xml:space="preserve">
+    <value>Accueil</value>
+  </data>
+  <data name="TabLabelInsert" xml:space="preserve">
+    <value>Insérer</value>
   </data>
 </root>

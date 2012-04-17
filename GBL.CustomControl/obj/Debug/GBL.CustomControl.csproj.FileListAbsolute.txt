@@ -1,0 +1,13 @@
+C:\Users\grathad\GBlason\GBL.CustomControl\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\grathad\GBlason\GBL.CustomControl\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\grathad\GBlason\GBL.CustomControl\obj\Debug\GBL.CustomControl_MarkupCompile.cache
+C:\Users\grathad\GBlason\GBL.CustomControl\obj\Debug\GBL.CustomControl_MarkupCompile.lref
+C:\Users\grathad\GBlason\GBL.CustomControl\obj\Debug\GBL.CustomControl.dll
+C:\Users\grathad\GBlason\GBL.CustomControl\obj\Debug\GBL.CustomControl.pdb
+C:\Users\grathad\GBlason\GBL.CustomControl\bin\Debug\GBL.CustomControl.dll
+C:\Users\grathad\GBlason\GBL.CustomControl\bin\Debug\GBL.CustomControl.pdb
+C:\Users\grathad\GBlason\GBL.CustomControl\obj\Debug\Themes\Generic.baml
+C:\Users\grathad\GBlason\GBL.CustomControl\obj\Debug\GBL.CustomControl.g.resources
+C:\Users\grathad\GBlason\GBL.CustomControl\obj\Debug\GBL.CustomControl.Properties.Resources.resources
+C:\Users\grathad\GBlason\GBL.CustomControl\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\grathad\GBlason\GBL.CustomControl\obj\Debug\GenerateResource.write.1.tlog

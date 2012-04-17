@@ -120,6 +120,12 @@
   <data name="ApplicationButtonLabel" xml:space="preserve">
     <value>Coat Of Arms</value>
   </data>
+  <data name="ApplicationSeparatorChar" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Grathad's Coat Of Arms Editor</value>
+  </data>
   <data name="ButtonLabelCopy" xml:space="preserve">
     <value>Copy</value>
   </data>
@@ -135,14 +141,26 @@
   <data name="ButtonLabelQuit" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="GBSFormatExtension" xml:space="preserve">
+    <value>gbs</value>
+  </data>
   <data name="GroupLabelClipboard" xml:space="preserve">
     <value>Clipboard</value>
   </data>
   <data name="GroupLabelEnamels" xml:space="preserve">
     <value>Enamels</value>
   </data>
+  <data name="GroupLabelSelectionProperty" xml:space="preserve">
+    <value>Selection Property</value>
+  </data>
   <data name="GroupLabelShape" xml:space="preserve">
     <value>Shape</value>
+  </data>
+  <data name="MenuLabelHelp" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="MenuLabelNew" xml:space="preserve">
+    <value>New</value>
   </data>
   <data name="MenuLabelNewCoA" xml:space="preserve">
     <value>New Coat Of Arms</value>
@@ -151,10 +169,13 @@
     <value>Open</value>
   </data>
   <data name="MenuLabelPaste" xml:space="preserve">
-    <value>_Paste</value>
+    <value>Paste</value>
   </data>
   <data name="MenuLabelPasteSpecial" xml:space="preserve">
-    <value>Paste _Special ...</value>
+    <value>Paste Special ...</value>
+  </data>
+  <data name="MenuLabelRecent" xml:space="preserve">
+    <value>Recent</value>
   </data>
   <data name="MenuLabelSave" xml:space="preserve">
     <value>Save</value>
@@ -170,6 +191,17 @@
   </data>
   <data name="MenuLabelSaveAsSVG" xml:space="preserve">
     <value>SVG</value>
+  </data>
+  <data name="MenuTitleLabel" xml:space="preserve">
+    <value>File</value>
+    <comment>the menu in the ribbon first menu button</comment>
+  </data>
+  <data name="NewDocumentLabel" xml:space="preserve">
+    <value>New Coat of Arms {0}</value>
+    <comment>the first parameter have to be set as an increasing number</comment>
+  </data>
+  <data name="OpenDialogBoxFormatDescription" xml:space="preserve">
+    <value>GBlason Save</value>
   </data>
   <data name="TabLabelHome" xml:space="preserve">
     <value>Home</value>

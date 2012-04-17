@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\grathad\GBlason\GBlason\App.xaml
-7-1216187550
+10-1840311150
 
-14416779131
-16-373253857
-Control\Aggregate\CoatOfArmsViewer.xaml;Control\Aggregate\CustomGUI.xaml;Control\Aggregate\MainRibbon.xaml;Control\Aggregate\Properties.xaml;Control\Aggregate\TreeView.xaml;MainWindow.xaml;Themes\Generic.xaml;
+21-1367501708
+201810820289
+Control\Aggregate\CoatOfArmsViewer.xaml;Control\Aggregate\CustomGUI.xaml;Control\Aggregate\Properties.xaml;Control\Aggregate\TreeView.xaml;Control\CustomUserControl\ShapeViewerUC.xaml;Dictionary\RibbonCommandDictionary.xaml;Dictionary\RibbonGroupSizeDefinitionDictionary.xaml;Dictionary\RibbonTemplateDictionary.xaml;MainWindow.xaml;Themes\Generic.xaml;
 
 False
 

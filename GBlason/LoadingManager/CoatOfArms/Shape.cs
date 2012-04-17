@@ -48,5 +48,9 @@ namespace GBL.Repository.CoatOfArms
         public String Name { get; set; }
 
         public String Description { get; set; }
+
+        public ushort PathWidth { get; set; }
+
+        public ushort PathHeight { get; set; }
     }
 }

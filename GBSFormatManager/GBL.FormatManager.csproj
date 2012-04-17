@@ -40,10 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GBRFormat.cs" />
-    <Compile Include="GBSFormat.cs" />
+    <Compile Include="GbrFormat.cs" />
+    <Compile Include="GbsFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Serializer\GBSManager.cs" />
+    <Compile Include="Serializer\GbrManager.cs" />
+    <Compile Include="Serializer\GbsManager.cs" />
     <Compile Include="Serializer\XmlManager.cs" />
   </ItemGroup>
   <ItemGroup>

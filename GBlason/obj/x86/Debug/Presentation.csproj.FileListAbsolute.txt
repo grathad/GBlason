@@ -17,7 +17,6 @@ C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\Properties.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\TreeView.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\CoatOfArmsViewer.g.cs
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\CustomGUI.g.cs
-C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\MainRibbon.g.cs
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\Properties.g.cs
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\TreeView.g.cs
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\MainWindow.g.cs
@@ -26,7 +25,6 @@ C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason_MarkupCompile.cache
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason_MarkupCompile.lref
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\CustomGUI.baml
-C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\MainRibbon.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\MainWindow.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Themes\Generic.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.g.resources
@@ -37,3 +35,16 @@ C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\fr-FR\GBlason.resources.dll
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.exe
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.pdb
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Dictionary\RibbonGroupSizeDefinitionDictionary.baml
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Dictionary\RibbonCommandDictionary.g.cs
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Dictionary\RibbonCommandDictionary.baml
+C:\Users\grathad\GBlason\GBlason\bin\Debug\Fluent.dll
+C:\Users\grathad\GBlason\GBlason\bin\Debug\Fluent.xml
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\App.baml
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Dictionary\RibbonTemplateDictionary.baml
+C:\Users\grathad\GBlason\GBlason\bin\Debug\GBL.CustomControl.dll
+C:\Users\grathad\GBlason\GBlason\bin\Debug\GBL.CustomControl.pdb
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\CustomUserControl\ShapeViewerUC.g.cs
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\CustomUserControl\ShapeViewerUC.baml
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.Culture.BlasonVocabulary.resources
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.Culture.BlasonVocabulary.fr-FR.resources

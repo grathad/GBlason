@@ -1,26 +1,90 @@
-﻿<ribbon:RibbonWindow xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+﻿<Fluent:RibbonWindow x:Class="GBlason.MainWindow"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                     xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
-                     xmlns:Aggregate="clr-namespace:GBlason.Control.Aggregate" x:Class="GBlason.MainWindow"
-                     Icon="Pictures/Icons16/shield.png"
-                     Title="GBlason"
+                     xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent" xmlns:ViewModel="clr-namespace:GBlason.ViewModel"
+                     xmlns:Properties="clr-namespace:GBlason.Properties"
+                     xmlns:Aggregate="clr-namespace:GBlason.Control.Aggregate"
+                     Title="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=ApplicationTitle}"
                      mc:Ignorable="d"
-                     d:DesignHeight="480" d:DesignWidth="760"
-                     x:Name="RibbonWindow"
-                     MinWidth="310" MinHeight="260"
-                     DataContext="{Binding}">
-    <ribbon:RibbonWindow.Resources>
+                     Icon="Pictures\Icons32\shield.png"
+                     
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignWidth="750"
+                     SizeToContent="WidthAndHeight">
+    <Fluent:RibbonWindow.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionary/RibbonGroupSizeDefinitionDictionary.xaml"/>
+                <!--<ResourceDictionary Source="Dictionary/RibbonCommandDictionary.xaml"/>-->
+                <ResourceDictionary Source="Dictionary/RibbonTemplateDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </ribbon:RibbonWindow.Resources>
-    <DockPanel x:Name="LayoutRoot">
-        <Aggregate:MainRibbon DockPanel.Dock="Top"/>
-        <StatusBar DockPanel.Dock="Bottom" x:Name="StatusBar" MinHeight="20">
+    </Fluent:RibbonWindow.Resources>
 
+    <Fluent:RibbonWindow.CommandBindings>
+        <CommandBinding x:Name="OpenCommand" Command="Open" CanExecute="OpenCommandCanExecute" Executed="OpenCommandExecuted"/>
+    </Fluent:RibbonWindow.CommandBindings>
 
-        </StatusBar>
+    <DockPanel LastChildFill="True">
+        <Fluent:Ribbon DockPanel.Dock="Top" x:Name="ApplicationRibbon">
+            <!--Backstage-->
+            <Fluent:Ribbon.Menu>
+                <Fluent:Backstage Header="{x:Static Properties:Resources.MenuTitleLabel}" x:Name="FileMenu">
+                    <Fluent:BackstageTabControl>
+                        <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelSave}" Icon="Pictures\Icons16\disk.png"/>
+                        <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelSaveAs}" Icon="Pictures\Icons16\save_as.png"/>
+                        <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelOpen}" Icon="Pictures\Icons16\folder_page.png"
+                                       Command="Open"/>
+                        <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelRecent}">
+                            <DockPanel>
+                                <Label>Coucou</Label>
+                            </DockPanel>
+                        </Fluent:BackstageTabItem>
+                        <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelNew}"/>
+                        <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelHelp}"/>
+                        <Fluent:Button Header="{x:Static Properties:Resources.ButtonLabelOptions}" Icon="Pictures\Icons16\legend.png"/>
+                        <Fluent:Button Header="{x:Static Properties:Resources.ButtonLabelQuit}" Icon="Pictures\Icons16\cross.png"/>
+                    </Fluent:BackstageTabControl>
+                </Fluent:Backstage>
+            </Fluent:Ribbon.Menu>
+            <!--Tabs-->
+            <Fluent:RibbonTabItem Header="{x:Static Properties:Resources.TabLabelHome}" x:Name="TabHome">
+                <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelClipboard}">
+                    <Fluent:SplitButton Name="ButtonPaste" Header="{x:Static Properties:Resources.ButtonLabelPaste}"
+                                        Icon="Pictures\Icons16\paste_plain.png"
+                                        LargeIcon="Pictures\Icons32\paste_plain.png">
+                        <Fluent:SplitButton.Items>
+                            <Fluent:MenuItem Header="{x:Static Properties:Resources.MenuLabelPaste}" Icon="Pictures\Icons16\paste_plain.png"/>
+                            <Fluent:MenuItem Header="{x:Static Properties:Resources.MenuLabelPasteSpecial}" Icon="Pictures\Icons16\paste_plain.png"/>
+                        </Fluent:SplitButton.Items>
+                    </Fluent:SplitButton>
+                    <Fluent:Button Name="ButtonCut" Header="{x:Static Properties:Resources.ButtonLabelCut}" SizeDefinition="Middle,Small" Icon="Pictures\Icons16\cut.png"/>
+                    <Fluent:Button Name="ButtonCopy" Header="{x:Static Properties:Resources.ButtonLabelCopy}" SizeDefinition="Middle,Small" Icon="Pictures\Icons16\page_copy.png"/>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelSelectionProperty}">
+                    <Fluent:DropDownButton x:Name="ShapeGallery"
+                                           Header="{x:Static Properties:Resources.GroupLabelShape}"
+                                           Icon="Pictures\Icons16\vector.png" LargeIcon="Pictures\Icons32\vector.png">
+                        <Fluent:Gallery ItemsSource="{Binding Source={x:Static ViewModel:GbrFileViewModel.GetResources}, Path=ScaledForMenuShapeResources}"
+                                        MinItemsInRow="1" MaxItemsInRow="5"
+                                        ItemTemplate="{Binding Source={StaticResource ResourceKey=ShapeGalleryItemTemplate}}"
+                                        ItemWidth="60" ItemHeight="80">
+                        </Fluent:Gallery>
+                    </Fluent:DropDownButton>
+                    <Fluent:DropDownButton x:Name="EnamelGallery"
+                                           Header="{x:Static Properties:Resources.GroupLabelEnamels}"
+                                           Icon="Pictures\Icons16\color_swatch.png" LargeIcon="Pictures\Icons32\color_swatch.png">
+                        <Fluent:Gallery ItemsSource="{Binding Source={x:Static ViewModel:GbrFileViewModel.GetResources}, Path=ScaledForMenuShapeResources}"
+                                        MinItemsInRow="1" MaxItemsInRow="5"
+                                        ItemTemplate="{Binding Source={StaticResource ResourceKey=ShapeGalleryItemTemplate}}"
+                                        ItemWidth="60" ItemHeight="80">
+                        </Fluent:Gallery>
+                    </Fluent:DropDownButton>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+        </Fluent:Ribbon>
+        <StatusBar DockPanel.Dock="Bottom" x:Name="StatusBar" MinHeight="20"></StatusBar>
         <Aggregate:CustomGUI x:Name="MainFrame"/>
     </DockPanel>
-</ribbon:RibbonWindow>
+
+</Fluent:RibbonWindow>

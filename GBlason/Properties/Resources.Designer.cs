@@ -70,6 +70,24 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string ApplicationSeparatorChar {
+            get {
+                return ResourceManager.GetString("ApplicationSeparatorChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grathad&apos;s Coat Of Arms Editor.
+        /// </summary>
+        public static string ApplicationTitle {
+            get {
+                return ResourceManager.GetString("ApplicationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy.
         /// </summary>
         public static string ButtonLabelCopy {
@@ -115,6 +133,15 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to gbs.
+        /// </summary>
+        public static string GBSFormatExtension {
+            get {
+                return ResourceManager.GetString("GBSFormatExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clipboard.
         /// </summary>
         public static string GroupLabelClipboard {
@@ -133,11 +160,38 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Selection Property.
+        /// </summary>
+        public static string GroupLabelSelectionProperty {
+            get {
+                return ResourceManager.GetString("GroupLabelSelectionProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shape.
         /// </summary>
         public static string GroupLabelShape {
             get {
                 return ResourceManager.GetString("GroupLabelShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        public static string MenuLabelHelp {
+            get {
+                return ResourceManager.GetString("MenuLabelHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string MenuLabelNew {
+            get {
+                return ResourceManager.GetString("MenuLabelNew", resourceCulture);
             }
         }
         
@@ -160,7 +214,7 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Paste.
+        ///   Looks up a localized string similar to Paste.
         /// </summary>
         public static string MenuLabelPaste {
             get {
@@ -169,11 +223,20 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Paste _Special ....
+        ///   Looks up a localized string similar to Paste Special ....
         /// </summary>
         public static string MenuLabelPasteSpecial {
             get {
                 return ResourceManager.GetString("MenuLabelPasteSpecial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent.
+        /// </summary>
+        public static string MenuLabelRecent {
+            get {
+                return ResourceManager.GetString("MenuLabelRecent", resourceCulture);
             }
         }
         
@@ -219,6 +282,33 @@ namespace GBlason.Properties {
         public static string MenuLabelSaveAsSVG {
             get {
                 return ResourceManager.GetString("MenuLabelSaveAsSVG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        public static string MenuTitleLabel {
+            get {
+                return ResourceManager.GetString("MenuTitleLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Coat of Arms {0}.
+        /// </summary>
+        public static string NewDocumentLabel {
+            get {
+                return ResourceManager.GetString("NewDocumentLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GBlason Save.
+        /// </summary>
+        public static string OpenDialogBoxFormatDescription {
+            get {
+                return ResourceManager.GetString("OpenDialogBoxFormatDescription", resourceCulture);
             }
         }
         

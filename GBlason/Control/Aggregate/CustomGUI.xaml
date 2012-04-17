@@ -3,10 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:Aggregate="clr-namespace:GBlason.Control.Aggregate" mc:Ignorable="d" 
+             xmlns:Aggregate="clr-namespace:GBlason.Control.Aggregate"
+             xmlns:ViewModel="clr-namespace:GBlason.ViewModel" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
     <!-- TODO @Grathad link background to a style manager -->
-    <Grid x:Name="CustomGUIGrid" Background="White">
+  <UserControl.Resources>
+        <DataTemplate x:Key="CoAViewerTemplate" DataType="{x:Type ViewModel:GbsFileViewModel}">
+            <Aggregate:CoatOfArmsViewer/>
+        </DataTemplate>
+        <DataTemplate x:Key="TabItemTemplate" DataType="{x:Type ViewModel:GbsFileViewModel}">
+            <TextBlock Text="{Binding Path=FileName}"/>
+        </DataTemplate>
+  </UserControl.Resources>
+  <Grid x:Name="CustomGUIGrid" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" MinWidth="120" MaxWidth="300"/>
             <ColumnDefinition Width="3px"/>
@@ -23,12 +32,14 @@
             <Aggregate:TreeView Grid.Row="2"/>
         </Grid>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Center" Name="mainSplitter" VerticalAlignment="Stretch" Width="3" />
-        <TabControl Grid.Column="2" Name="MultiDocumentTabContent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <TabItem Header="@To Bind" Name="Tab1">
-                <DockPanel>
-                    <Aggregate:CoatOfArmsViewer/>
-                </DockPanel>
-            </TabItem>
+        <TabControl Grid.Column="2"
+                    Name="MultiDocumentTabContent"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    ItemsSource="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=OpenedFiles}"
+                    ContentTemplate="{StaticResource ResourceKey=CoAViewerTemplate}"
+                    ItemTemplate="{StaticResource ResourceKey=TabItemTemplate}"
+                    SelectedItem="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile}">
         </TabControl>
     </Grid>
 </UserControl>

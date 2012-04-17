@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ViewModel="clr-namespace:GBlason.ViewModel"
+                    xmlns:CustomUserControl="clr-namespace:GBlason.Control.CustomUserControl">
+
+    <DataTemplate x:Key="ShapeGalleryItemTemplate" DataType="{x:Type ViewModel:ShapeViewModel}">
+        <CustomUserControl:ShapeViewerUC DataContext="{Binding Path=.}" Fill="Red"/>
+    </DataTemplate>
+
+
+</ResourceDictionary>

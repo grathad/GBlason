@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{B3B74AEE-6429-474D-AB03-C76986DE701E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GBL.CustomControl", "..\GBL.CustomControl\GBL.CustomControl.csproj", "{F3670511-034C-4CE2-94AA-BB3D9499AEE0}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = GBlason.vsmdi
@@ -83,6 +85,16 @@ Global
 		{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{77A0C94E-9A68-4424-A4A4-E4A5CC42B41D}.Release|x86.ActiveCfg = Release|Any CPU
+		{F3670511-034C-4CE2-94AA-BB3D9499AEE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3670511-034C-4CE2-94AA-BB3D9499AEE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3670511-034C-4CE2-94AA-BB3D9499AEE0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F3670511-034C-4CE2-94AA-BB3D9499AEE0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F3670511-034C-4CE2-94AA-BB3D9499AEE0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F3670511-034C-4CE2-94AA-BB3D9499AEE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3670511-034C-4CE2-94AA-BB3D9499AEE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3670511-034C-4CE2-94AA-BB3D9499AEE0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F3670511-034C-4CE2-94AA-BB3D9499AEE0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F3670511-034C-4CE2-94AA-BB3D9499AEE0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

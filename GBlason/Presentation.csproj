@@ -36,11 +36,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fluent">
+      <HintPath>..\Fluent.dll</HintPath>
+    </Reference>
     <Reference Include="RibbonControlsLibrary">
       <HintPath>..\..\Dropbox\Source code\RibbonControlsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,8 +63,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Control\CustomUserControl\ShapeViewerUC.xaml.cs">
+      <DependentUpon>ShapeViewerUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Culture\BlasonVocabulary.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BlasonVocabulary.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Culture\BlasonVocabulary.fr-FR.Designer.cs">
+      <DependentUpon>BlasonVocabulary.fr-FR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Dictionary\RibbonCommandDictionary.xaml.cs">
+      <DependentUpon>RibbonCommandDictionary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Global\ApplicationSettingsManager.cs" />
     <Compile Include="Global\Context.cs" />
+    <Compile Include="ViewModel\GbrFileViewModel.cs" />
     <Compile Include="ViewModel\GbsFileViewModel.cs" />
+    <Compile Include="ViewModel\GlobalApplicationViewModel.cs" />
+    <Compile Include="ViewModel\ShapeViewModel.cs" />
     <Page Include="Control\Aggregate\CoatOfArmsViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -68,15 +93,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Control\Aggregate\MainRibbon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Control\Aggregate\Properties.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\Aggregate\TreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\CustomUserControl\ShapeViewerUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\RibbonCommandDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\RibbonGroupSizeDefinitionDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\RibbonTemplateDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -93,9 +130,6 @@
     </Compile>
     <Compile Include="Control\Aggregate\CustomGUI.xaml.cs">
       <DependentUpon>CustomGUI.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Control\Aggregate\MainRibbon.xaml.cs">
-      <DependentUpon>MainRibbon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\Aggregate\Properties.xaml.cs">
       <DependentUpon>Properties.xaml</DependentUpon>
@@ -132,6 +166,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Culture\BlasonVocabulary.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BlasonVocabulary.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Culture\BlasonVocabulary.fr-FR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BlasonVocabulary.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.fr-FR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.fr-FR.Designer.cs</LastGenOutput>
@@ -149,12 +191,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
-    <Folder Include="Control\Custom\" />
     <Folder Include="Converter\" />
-    <Folder Include="Culture\" />
     <Folder Include="Validator\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GBL.CustomControl\GBL.CustomControl.csproj">
+      <Project>{F3670511-034C-4CE2-94AA-BB3D9499AEE0}</Project>
+      <Name>GBL.CustomControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GBSFormatManager\GBL.FormatManager.csproj">
       <Project>{19D8FBFB-1A42-4B31-B852-1993C83A5650}</Project>
       <Name>GBL.FormatManager</Name>
@@ -215,6 +259,24 @@
   <ItemGroup>
     <Resource Include="Pictures\Icons32\file_extension_jpg.png" />
     <Resource Include="Pictures\Icons32\page_code.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\save_as.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\save_as.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\vector.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\vector.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\color_swatch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\color_swatch.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

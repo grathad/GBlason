@@ -47,7 +47,7 @@ namespace TestDD
             }
             catch (Exception)
             {
-                Assert.Fail("Exception while trying to open and deserialize "+ FilePathTest);
+                Assert.Fail("Exception while trying to open and deserialize " + FilePathTest);
             }
         }
 
@@ -59,86 +59,103 @@ namespace TestDD
                             {
                                 new Shape
                                     {
-                                        Geometry = "M 0,0 L120,0 120,120 0,120 Z",
+                                        Geometry = "M 0,0 L200,0 200,200 0,200 Z",
                                         Identifier = Guid.NewGuid(),
                                         TypeOfResource = ResourceType.Original,
-                                        Name = "BannerShape"
+                                        Name = "BannerShape",
+                                        PathHeight = 200,
+                                        PathWidth = 200
                                     },
                                 new Shape
                                     {
-                                        Geometry = "M 60,0 L 110,60 L 60,120 L10,60 Z",
+                                        Geometry = "M 100,0 L 200,100 L 100,200 L0,100 Z",
                                         Identifier = Guid.NewGuid(),
                                         TypeOfResource = ResourceType.Original,
-                                        Name = "DamselShape"
+                                        Name = "DamselShape",
+                                        PathHeight = 200,
+                                        PathWidth = 200
+                                    },
+                                new Shape
+                                    {
+                                        Geometry = "M 0,0 H 200 Q 180,10 180,20 V 160 A 20,20 90 0 1 160,180 H 120 Q 100,180 100,200 M 0,0 Q 20,10 20,20 V160 A 20,20 90 0 0 40,180 H 80 Q 100,180 100,200",
+                                        Identifier = Guid.NewGuid(),
+                                        TypeOfResource = ResourceType.Original,
+                                        Name = "EnglishShape",
+                                        PathHeight = 200,
+                                        PathWidth = 200
+                                    },
+                                new Shape
+                                    {
+                                        Geometry ="M 10,50 C 30,10 70,20 80,30 C 100,0 170,0 190,10 C 150,40 200,80 200,120 C 200,150 190,200 100,200 C 10,200 0,150 0,120 C 5,90 10,80 10,70 C 45,90 45,30 10,50",
+                                        Identifier = Guid.NewGuid(),
+                                        TypeOfResource = ResourceType.Original,
+                                        Name = "GermanShape",
+                                        PathHeight = 200,
+                                        PathWidth = 200
+                                    },
+                                new Shape
+                                    {
+                                        Geometry = "M 40 0 H 160 S 165,0 170,5 S 178,20 200,30 C 200,70 200,90 170,130 C 160,140 160,160 160,160 Q 160,200 100,200 M 40,0 S 35,0 30,5 S 22,20 0,30 C 0,70 0,90 30,130 C 40,140 40,160 40,160 Q 40,200 100,200",
+                                        Identifier = Guid.NewGuid(),
+                                        TypeOfResource = ResourceType.Original,
+                                        Name = "ItalianShape",
+                                        PathHeight = 200,
+                                        PathWidth = 200
+                                    },
+                                new Shape
+                                    {
+                                        Geometry = "M 0,100 A 100,100 180 1 1 200,100 A 100,100 180 1 1 0,100",
+                                        Identifier = Guid.NewGuid(),
+                                        TypeOfResource = ResourceType.Original,
+                                        Name = "LadiesShape",
+                                        PathHeight = 200,
+                                        PathWidth = 200
+                                    },
+                                new Shape
+                                    {
+                                        Geometry = "M 0,0 H 200 V 160 A 20,20 90 0 1 180,180 H 120 Q 100,180 100,200 M 0,0 V 160 A 20,20 90 0 0 20,180 H 80 Q 100,180 100,200",
+                                        Identifier = Guid.NewGuid(),
+                                        TypeOfResource = ResourceType.Original,
+                                        Name = "ModernFrenchShape",
+                                        PathHeight = 200,
+                                        PathWidth = 200
+                                    },
+                                new Shape
+                                    {
+                                        Geometry = "M 0,0 H 200 V 70 Q 200,150 100,200 M 0,0 V 70 Q 0,150 100,200",
+                                        Identifier = Guid.NewGuid(),
+                                        TypeOfResource = ResourceType.Original,
+                                        Name = "OldFrenchShape",
+                                        PathHeight = 200,
+                                        PathWidth = 200
+                                    },
+                                new Shape
+                                    {
+                                        Geometry = "M 30,15 C 50,15 70,0 80,0 Q 95,0 100,5 Q 105,0 120,0 C 130,0 150,15 170,15 Q 170,40 180,50 C 165,60 165,90 195,90 C 220,200 110,180 100,200 C 90,180 -20,200 5,90 C 35,90 35,60 20,50 Q 30,40 30,15",
+                                        Identifier = Guid.NewGuid(),
+                                        TypeOfResource = ResourceType.Original,
+                                        Name = "PolishShape",
+                                        PathHeight = 200,
+                                        PathWidth = 200
+                                    },
+                                new Shape
+                                    {
+                                        Geometry = "M 0,0 H 200 V 100 A 100,100 90 0 1 100,200 A 100,100 90 0 1 0,100 Z",
+                                        Identifier = Guid.NewGuid(),
+                                        TypeOfResource = ResourceType.Original,
+                                        Name = "SpanishShape",
+                                        PathHeight = 200,
+                                        PathWidth = 200
                                     },
                                 new Shape
                                     {
                                         Geometry =
-                                            "M 0,150 H 120 Q 110,155 110,160 V 250 Q 110,260 100,260 H 80 Q 70,260 60,270 Q 50,260 40,260 H 20 Q 10,260 10,250 V 160 Q 10,155 0,150 Z",
+                                            "M 0,0 A 80,100 90 0 0 100,0 A 80,100 90 0 0 200,0 Q 200,150 100,200 M 0,0 Q 0,150 100,200",
                                         Identifier = Guid.NewGuid(),
                                         TypeOfResource = ResourceType.Original,
-                                        Name = "EnglishShape"
-                                    },
-                                new Shape
-                                    {
-                                        Geometry =
-                                            "M 86,0 c -17,0 -32,6 -45,19 c -13,-8 -34,-1 -36,15 c 2,-1 4,-2 6,-2  c 6,0 11,5 11,12 c 0,7 -5,12 -11,12 c -2,0 -4,0 -5,-1  c 0,17 -6,25 -6,41 c 0,32 30,62 60,62 c 30,0 58,-28 58,-61 c 0,-25 -19,-37 -19,-62 c 0,-24 10,-33 10,-33 c -8,-2 -17,-2 -24,-2 Z",
-                                        Identifier = Guid.NewGuid(),
-                                        TypeOfResource = ResourceType.Original,
-                                        Name = "GermanShape"
-                                    },
-                                new Shape
-                                    {
-                                        Geometry =
-                                            "M 34.346021 3.7599543 c -9.82466 0 -17.27687 19.5402597 -33.90783066 21.6768297 0 53.54101 27.00433066 62.46452 27.00433066 88.769976 0 5.37705 -1.10449 6.46272 -1.10449 12.49516 0 15.607 9.78488 36.18165 28.66194 36.18165 18.87711 0 28.662 -20.57465 28.662 -36.18165 0 -6.03244 -1.10449 -7.11811 -1.10449 -12.49516 0 -26.305456 27.004329 -35.228966 27.004329 -88.769976 C 92.931722 23.301084 85.478631 3.7599543 75.653981 3.7599543 l -20.65401 0 -20.65395 0 0 0 Z",
-                                        Identifier = Guid.NewGuid(),
-                                        TypeOfResource = ResourceType.Original,
-                                        Name = "ItalianShape"
-                                    },
-                                new Shape
-                                    {
-                                        Geometry = "M 0,60 A 50,60 180 1 1 100,60 A 50,60 180 1 1 0,60",
-                                        Identifier = Guid.NewGuid(),
-                                        TypeOfResource = ResourceType.Original,
-                                        Name = "LadiesShape"
-                                    },
-                                new Shape
-                                    {
-                                        Geometry =
-                                            "M 300,0 H 420 V 100 A 10,10 90 0 1 410,110 H 380 Q 370,110 360,120 Q 350,110 340,110 H310 A 10,10 90 0 1 300,100 Z",
-                                        Identifier = Guid.NewGuid(),
-                                        TypeOfResource = ResourceType.Original,
-                                        Name = "ModernFrenchShape"
-                                    },
-                                new Shape
-                                    {
-                                        Geometry = "M 0,0 H 120 V 30 Q 120,90 60,120 Q 0,90 0,30 Z",
-                                        Identifier = Guid.NewGuid(),
-                                        TypeOfResource = ResourceType.Original,
-                                        Name = "OldFrenchShape"
-                                    },
-                                new Shape
-                                    {
-                                        Geometry =
-                                            "M 52.189212 0 c -10.254994 0 -16.649394 8.92073 -32.596428 11.42888 0.01288 9.67009 -3.932115 19.1825 -9.191804 25.4488 0 0 10.246156 4.91713 10.246156 15.79821 0 16.42972 -16.9764711 16.45817 -16.9764711 16.45817 0 0 -2.86249329 6.04605 -2.86249329 18.28685 0 28.01804 18.61424839 49.19324 32.74751339 55.72374 14.133255 6.5303 22.267497 9.3067 26.469632 15.239 4.202126 -5.9323 12.285743 -8.7087 26.418999 -15.239 14.133264 -6.5305 32.747514 -27.7083 32.747514 -55.72374 0 -12.2408 -2.86249 -18.28685 -2.86249 -18.28685 0 0 -16.976476 -0.0284 -16.976476 -16.45817 0 -10.88108 10.246156 -15.79821 10.246156 -15.79821 -5.2605 -6.26873 -9.20386 -15.77871 -9.19181 -25.4488 -15.947832 -2.50895 -22.342233 -11.42888 -32.596422 -11.42888 -5.847141 0 -7.785471 3.04781 -7.785471 3.04781 0 0 -1.988963 -3.04781 -7.836105 -3.04781 Z",
-                                        Identifier = Guid.NewGuid(),
-                                        TypeOfResource = ResourceType.Original,
-                                        Name = "PolishShape"
-                                    },
-                                new Shape
-                                    {
-                                        Geometry = "M 0,0 H 120 V 60 A 60,60 90 0 1 60,120 A 60,60 90 0 1 0,60 Z",
-                                        Identifier = Guid.NewGuid(),
-                                        TypeOfResource = ResourceType.Original,
-                                        Name = "SpanishShape"
-                                    },
-                                new Shape
-                                    {
-                                        Geometry =
-                                            "M 0,0 A 40,60 90 0 0 60,0 A 40,60 90 0 0 120,0 Q 120,100 60,120 M 0,0 Q 0,100 60,120",
-                                        Identifier = Guid.NewGuid(),
-                                        TypeOfResource = ResourceType.Original,
-                                        Name = "SwissShape"
+                                        Name = "SwissShape",
+                                        PathHeight = 200,
+                                        PathWidth = 200
                                     }
                             };
             GbrFormat enveloppe = new GbrFormat();
