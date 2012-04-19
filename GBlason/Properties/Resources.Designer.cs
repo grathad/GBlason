@@ -313,6 +313,24 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recent Documents.
+        /// </summary>
+        public static string RecentDocumentMenuRecentFileTitle {
+            get {
+                return ResourceManager.GetString("RecentDocumentMenuRecentFileTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Locations.
+        /// </summary>
+        public static string RecentDocumentMenuRecentLocationTitle {
+            get {
+                return ResourceManager.GetString("RecentDocumentMenuRecentLocationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string TabLabelHome {

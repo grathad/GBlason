@@ -180,6 +180,12 @@
   <data name="MenuLabelSaveAsSVG" xml:space="preserve">
     <value>SVG</value>
   </data>
+  <data name="RecentDocumentMenuRecentFileTitle" xml:space="preserve">
+    <value>Documents Récents</value>
+  </data>
+  <data name="RecentDocumentMenuRecentLocationTitle" xml:space="preserve">
+    <value>Emplacements Récents</value>
+  </data>
   <data name="TabLabelHome" xml:space="preserve">
     <value>Accueil</value>
   </data>

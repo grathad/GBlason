@@ -54,5 +54,52 @@ namespace GBlason.Properties {
                 this["RecentFiles"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("800, 600")]
+        public global::System.Drawing.Size PreferredSize {
+            get {
+                return ((global::System.Drawing.Size)(this["PreferredSize"]));
+            }
+            set {
+                this["PreferredSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point PreferredPosition {
+            get {
+                return ((global::System.Drawing.Point)(this["PreferredPosition"]));
+            }
+            set {
+                this["PreferredPosition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Maximized")]
+        public global::System.Windows.WindowState PreferredState {
+            get {
+                return ((global::System.Windows.WindowState)(this["PreferredState"]));
+            }
+            set {
+                this["PreferredState"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection RecentDirectories {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["RecentDirectories"]));
+            }
+            set {
+                this["RecentDirectories"] = value;
+            }
+        }
     }
 }

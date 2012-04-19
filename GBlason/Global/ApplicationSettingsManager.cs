@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,39 +16,63 @@ namespace GBlason.Global
     public class ApplicationSettingsManager
     {
         /// <summary>
-        /// Saves the recent files in the settings.
+        /// Saves the recent files and directories in the settings.
         /// </summary>
-        public static void SaveRecentFiles()
+        /// <remarks>The setting is NOT SAVED in this function</remarks>
+        public static void SaveCollectionSettings<T>(ref StringCollection settingObject, IList<T> collectionToSave) where T : class
         {
-            if (Settings.Default.RecentFiles == null)
-                Settings.Default.RecentFiles = new StringCollection();
+            if (settingObject == null)
+                settingObject = new StringCollection();
 
-            Settings.Default.RecentFiles.Clear();
-            foreach (var rF in GlobalApplicationViewModel.GetApplicationViewModel.RecentFiles)
+            settingObject.Clear();
+            foreach (var rF in collectionToSave)
             {
                 var stringBuilder = new StringBuilder();
                 var writer = XmlWriter.Create(stringBuilder, new XmlWriterSettings { OmitXmlDeclaration = true });
                 XmlManager.Serialize(rF, ref writer);
                 var serializedRecentSave = stringBuilder.ToString();
-
-                if (Settings.Default.RecentFiles == null)
-                {
-                    Settings.Default.RecentFiles = new StringCollection();
-                }
-                Settings.Default.RecentFiles.Add(serializedRecentSave);
+                settingObject.Add(serializedRecentSave);
             }
         }
 
-        public static void LoadRecentFiles()
+        /// <summary>
+        /// Load the list of recent files and directories, from the settings
+        /// </summary>
+        public static IList<T> LoadCollectionSettings<T>(StringCollection settingObject) where T : new()
         {
-            foreach (var fName in Settings.Default.RecentFiles)
+            var retour = new Collection<T>();
+            if (settingObject == null) return retour;
+            foreach (var fName in settingObject)
             {
-                var recentFile = new RecentFile();
-                XmlManager.Deserialize(ref recentFile,
+                var recentObject = new T();
+                XmlManager.Deserialize(ref recentObject,
                                        new MemoryStream(Encoding.Unicode.GetBytes(fName)));
 
-                GlobalApplicationViewModel.GetApplicationViewModel.RecentFiles.Add(recentFile);
+                retour.Add(recentObject);
             }
+            return retour;
+        }
+
+        public static void LoadPreferences()
+        {
+            //la taille de la fenetre
+            GlobalApplicationViewModel.GetApplicationViewModel.MainWindowWidth = Settings.Default.PreferredSize.Width;
+            GlobalApplicationViewModel.GetApplicationViewModel.MainWindowHeight = Settings.Default.PreferredSize.Height;
+            //La position de la fenetre
+            GlobalApplicationViewModel.GetApplicationViewModel.MainWindowTop = Settings.Default.PreferredPosition.Y;
+            GlobalApplicationViewModel.GetApplicationViewModel.MainWindowLeft = Settings.Default.PreferredPosition.X;
+            //L'etat de la fenetre
+            GlobalApplicationViewModel.GetApplicationViewModel.MainWindowState = Settings.Default.PreferredState;
+        }
+
+        public static void SavePreference()
+        {
+            //la taille de la fenetre
+            Settings.Default.PreferredSize = new Size(GlobalApplicationViewModel.GetApplicationViewModel.MainWindowWidth, GlobalApplicationViewModel.GetApplicationViewModel.MainWindowHeight);
+            //La position de la fenetre
+            Settings.Default.PreferredPosition = new Point(GlobalApplicationViewModel.GetApplicationViewModel.MainWindowLeft, GlobalApplicationViewModel.GetApplicationViewModel.MainWindowTop);
+            //L'etat de la fenetre
+            Settings.Default.PreferredState = GlobalApplicationViewModel.GetApplicationViewModel.MainWindowState;
         }
     }
 }

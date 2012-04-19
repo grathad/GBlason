@@ -16,12 +16,16 @@
         </DataTemplate>
   </UserControl.Resources>
   <Grid x:Name="CustomGUIGrid" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="78*" />
+            <RowDefinition Height="222*" />
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" MinWidth="120" MaxWidth="300"/>
             <ColumnDefinition Width="3px"/>
             <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" x:Name="PropertiesAndTreeGrid">
+        <Grid x:Name="PropertiesAndTreeGrid" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="3px"/>
@@ -31,7 +35,7 @@
             <GridSplitter Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="3" Name="propertiesSplitter"/>
             <Aggregate:TreeView Grid.Row="2"/>
         </Grid>
-        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" Name="mainSplitter" VerticalAlignment="Stretch" Width="3" />
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" Name="mainSplitter" VerticalAlignment="Stretch" Width="3" Grid.RowSpan="2" />
         <TabControl Grid.Column="2"
                     Name="MultiDocumentTabContent"
                     VerticalAlignment="Stretch"
@@ -39,7 +43,7 @@
                     ItemsSource="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=OpenedFiles}"
                     ContentTemplate="{StaticResource ResourceKey=CoAViewerTemplate}"
                     ItemTemplate="{StaticResource ResourceKey=TabItemTemplate}"
-                    SelectedItem="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile}">
+                    SelectedItem="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile}" Grid.RowSpan="2">
         </TabControl>
     </Grid>
 </UserControl>

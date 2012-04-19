@@ -18,8 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{B3B74AEE-6429-474D-AB03-C76986DE701E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GBL.CustomControl", "..\GBL.CustomControl\GBL.CustomControl.csproj", "{F3670511-034C-4CE2-94AA-BB3D9499AEE0}"
 EndProject
 Global
@@ -98,8 +96,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{B3B74AEE-6429-474D-AB03-C76986DE701E} = {868AD512-7350-4C03-9150-269866F3AC23}
 	EndGlobalSection
 EndGlobal

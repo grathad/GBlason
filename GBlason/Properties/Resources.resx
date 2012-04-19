@@ -203,6 +203,12 @@
   <data name="OpenDialogBoxFormatDescription" xml:space="preserve">
     <value>GBlason Save</value>
   </data>
+  <data name="RecentDocumentMenuRecentFileTitle" xml:space="preserve">
+    <value>Recent Documents</value>
+  </data>
+  <data name="RecentDocumentMenuRecentLocationTitle" xml:space="preserve">
+    <value>Recent Locations</value>
+  </data>
   <data name="TabLabelHome" xml:space="preserve">
     <value>Home</value>
   </data>
