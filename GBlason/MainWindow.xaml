@@ -27,6 +27,7 @@
 
     <Fluent:RibbonWindow.CommandBindings>
         <CommandBinding x:Name="OpenCommand" Command="Open" CanExecute="OpenCommandCanExecute" Executed="OpenCommandExecuted"/>
+        <CommandBinding x:Name="NewCommand" Command="New" CanExecute="NewCommandCanExecute"  Executed="NewCommandExecuted"/>
         <CommandBinding Command="{x:Static CustomCommand:CommandMenu.RecentObjectSelect}" Executed="RecentObjectSelected"/>
     </Fluent:RibbonWindow.CommandBindings>
 
@@ -35,16 +36,18 @@
             <!--Backstage-->
             <Fluent:Ribbon.Menu>
                 <Fluent:Backstage Header="{x:Static Properties:Resources.MenuTitleLabel}" x:Name="FileMenu">
-                    <Fluent:BackstageTabControl>
+                    <Fluent:BackstageTabControl SelectedValue="MenuRecentItem">
                         <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelSave}" Icon="Pictures\Icons16\disk.png"/>
                         <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelSaveAs}" Icon="Pictures\Icons16\save_as.png"/>
                         <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelOpen}" Icon="Pictures\Icons16\folder_page.png"
                                        Command="Open"/>
-                        <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelRecent}">
+                        <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelRecent}" x:Name="MenuRecentItem">
                             <Aggregate:RecentDocumentMenu DataContext="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}}"
                                                           Margin="4,4,30,4"/>
                         </Fluent:BackstageTabItem>
-                        <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelNew}"/>
+                        <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelNew}">
+                            <Aggregate:NewDocumentMenu/>
+                        </Fluent:BackstageTabItem>
                         <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelHelp}"/>
                         <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.ButtonLabelOptions}"/>
                         <Fluent:Button Header="{x:Static Properties:Resources.ButtonLabelQuit}" Icon="Pictures\Icons16\cross.png"/>

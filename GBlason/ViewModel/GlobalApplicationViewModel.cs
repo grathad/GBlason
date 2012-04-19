@@ -50,6 +50,17 @@ namespace GBlason.ViewModel
         public static ushort NumberOfNewDocument { get; set; }
 
         /// <summary>
+        /// Gets the culture related automatically generated name, for new files
+        /// </summary>
+        /// <returns>the name created</returns>
+        public static string GetNewFileName()
+        {
+            return String.Format(CultureInfo.CurrentCulture,
+                Resources.NewDocumentLabel,
+                ++NumberOfNewDocument);
+        }
+
+        /// <summary>
         /// Gets or sets the opened files.
         /// </summary>
         /// <value>
@@ -144,6 +155,7 @@ namespace GBlason.ViewModel
                 if (value == _currentlyDisplayedFile) return;
                 _currentlyDisplayedFile = value;
                 OnPropertyChanged("CurrentlyDisplayedFile");
+                OnPropertyChanged("ApplicationTitle");
             }
         }
 
@@ -199,8 +211,8 @@ namespace GBlason.ViewModel
 
         public void AddRecentFilesCollection(IList<RecentFileViewModel> collection)
         {
-            if(collection == null) return;
-            foreach(var val in collection)
+            if (collection == null) return;
+            foreach (var val in collection)
                 RecentFiles.Add(val);
         }
 
@@ -326,5 +338,6 @@ namespace GBlason.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
+
     }
 }

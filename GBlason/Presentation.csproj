@@ -67,6 +67,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\CustomCommand\CommandMenu.cs" />
+    <Compile Include="Control\Aggregate\NewDocumentMenu.xaml.cs">
+      <DependentUpon>NewDocumentMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Aggregate\RecentDocumentMenu.xaml.cs">
       <DependentUpon>RecentDocumentMenu.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\Aggregate\CustomGUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Aggregate\NewDocumentMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -309,6 +316,12 @@
   <ItemGroup>
     <Resource Include="Pictures\Icons32\flag_3.png" />
     <Resource Include="Pictures\Icons32\flag_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\asterisk_orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\asterisk_orange.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -19,14 +19,10 @@ namespace GBlason.ViewModel
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GbsFileViewModel"/> class.
-        /// Used when creating a document by using the "New" command
         /// </summary>
         /// <remarks>Increase the number of "new document" and affect the default file title to the new document</remarks>
         public GbsFileViewModel()
         {
-            FileName = String.Format(CultureInfo.CurrentCulture,
-                                     Properties.Resources.NewDocumentLabel,
-                                     ++GlobalApplicationViewModel.NumberOfNewDocument);
             if (GbrFileViewModel.GetResources.ScaledForMenuShapeResources.Any())
                 _currentShape = GbrFileViewModel.GetResources.ScaledForMenuShapeResources[0];
         }

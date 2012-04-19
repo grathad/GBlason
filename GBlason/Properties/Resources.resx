@@ -200,6 +200,9 @@
     <value>New Coat of Arms {0}</value>
     <comment>the first parameter have to be set as an increasing number</comment>
   </data>
+  <data name="NewDocumentMenuTitle" xml:space="preserve">
+    <value>Available models</value>
+  </data>
   <data name="OpenDialogBoxFormatDescription" xml:space="preserve">
     <value>GBlason Save</value>
   </data>

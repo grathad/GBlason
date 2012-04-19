@@ -51,3 +51,5 @@ C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.Culture.BlasonVocabulary.
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\RecentDocumentMenu.g.cs
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\RecentDocumentMenu.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Themes\Brushes.baml
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\NewDocumentMenu.g.cs
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\NewDocumentMenu.baml

@@ -304,6 +304,15 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Available models.
+        /// </summary>
+        public static string NewDocumentMenuTitle {
+            get {
+                return ResourceManager.GetString("NewDocumentMenuTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GBlason Save.
         /// </summary>
         public static string OpenDialogBoxFormatDescription {
