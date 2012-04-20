@@ -11,25 +11,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GBlason.ViewModel;
 
-namespace GBlason.Control.Aggregate
+namespace GBlason.Control.MenuControl
 {
     /// <summary>
-    /// Interaction logic for RecentDocumentMenu.xaml
+    /// Interaction logic for PropertiesMenu.xaml
     /// </summary>
-    public partial class RecentDocumentMenu
+    public partial class PropertiesMenu : UserControl
     {
-        public RecentDocumentMenu()
+        public PropertiesMenu()
         {
             InitializeComponent();
-        }
-
-        private void FlagRecentItemExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            var recentItem = e.Parameter as RecentFileViewModel;
-            if(recentItem != null)
-                recentItem.IsFixed = !recentItem.IsFixed;
         }
     }
 }

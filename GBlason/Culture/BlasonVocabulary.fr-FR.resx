@@ -120,11 +120,20 @@
   <data name="BannerShape" xml:space="preserve">
     <value>Bannière</value>
   </data>
+  <data name="ChargeViewModel" xml:space="preserve">
+    <value>Meuble</value>
+  </data>
+  <data name="CoatOfArmViewModel" xml:space="preserve">
+    <value>Blason</value>
+  </data>
   <data name="DamselShape" xml:space="preserve">
     <value>Damoiselle</value>
   </data>
   <data name="EnglishShape" xml:space="preserve">
     <value>Anglais</value>
+  </data>
+  <data name="FieldViewModel" xml:space="preserve">
+    <value>Champ</value>
   </data>
   <data name="GermanShape" xml:space="preserve">
     <value>Allemand</value>
@@ -135,17 +144,41 @@
   <data name="LadiesShape" xml:space="preserve">
     <value>Dame</value>
   </data>
+  <data name="LineViewModel" xml:space="preserve">
+    <value>Attribut géométrique</value>
+  </data>
   <data name="ModernFrenchShape" xml:space="preserve">
     <value>Français d'Empire</value>
   </data>
   <data name="OldFrenchShape" xml:space="preserve">
     <value>Français classique</value>
   </data>
+  <data name="PartitionViewModel" xml:space="preserve">
+    <value>Partition</value>
+  </data>
+  <data name="PartViewModel" xml:space="preserve">
+    <value>Arme</value>
+  </data>
+  <data name="PieceViewModel" xml:space="preserve">
+    <value>Pièce</value>
+  </data>
   <data name="PolishShape" xml:space="preserve">
     <value>Polonais</value>
   </data>
+  <data name="PositionViewModel" xml:space="preserve">
+    <value>Positionnement</value>
+  </data>
+  <data name="PropertyNameEnamel" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="PropertyNameShape" xml:space="preserve">
+    <value>Forme</value>
+  </data>
   <data name="SpanishShape" xml:space="preserve">
     <value>Espagnol / Portuguais / Flamand</value>
+  </data>
+  <data name="SubjectiveLayerViewModel" xml:space="preserve">
+    <value>Couche abstraite</value>
   </data>
   <data name="SwissShape" xml:space="preserve">
     <value>Suisse</value>

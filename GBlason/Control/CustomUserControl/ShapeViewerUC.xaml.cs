@@ -46,6 +46,67 @@ namespace GBlason.Control.CustomUserControl
 
         #endregion
 
+        #region Stroke property
+
+        /// <summary>
+        /// Represent the path given with the markup syntax (used by microsoft and svg)
+        /// </summary>
+        public Brush Stroke
+        {
+            get
+            {
+                return (Brush)GetValue(StrokeProperty);
+            }
+            set
+            {
+                SetValue(StrokeProperty, value);
+            }
+        }
+
+        public static DependencyProperty StrokeProperty = DependencyProperty.Register("Stroke", typeof(Brush), typeof(ShapeViewerUC),
+            new PropertyMetadata(new SolidColorBrush()));
+
+        public static readonly RoutedEvent StrokeChangedEvent = EventManager.RegisterRoutedEvent("StrokeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<Brush>), typeof(ShapeViewerUC));
+
+        protected virtual void OnStrokeChanged(Brush oldValue, Brush newValue)
+        {
+            var args = new RoutedPropertyChangedEventArgs<Brush>(oldValue, newValue) { RoutedEvent = StrokeChangedEvent };
+            RaiseEvent(args);
+        }
+
+        #endregion
+
+        #region StrokeThickness property
+
+        /// <summary>
+        /// Represent the path given with the markup syntax (used by microsoft and svg)
+        /// </summary>
+        public int StrokeThickness
+        {
+            get
+            {
+                return (int)GetValue(StrokeThicknessProperty);
+            }
+            set
+            {
+                SetValue(StrokeThicknessProperty, value);
+            }
+        }
+
+        public static DependencyProperty StrokeThicknessProperty = DependencyProperty.Register("StrokeThickness", typeof(int), typeof(ShapeViewerUC),
+            new PropertyMetadata(0));
+
+        public static readonly RoutedEvent StrokeThicknessChangedEvent = EventManager.RegisterRoutedEvent("StrokeThicknessChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<int>), typeof(ShapeViewerUC));
+
+        protected virtual void OnStrokeThicknessChanged(int oldValue, int newValue)
+        {
+            var args = new RoutedPropertyChangedEventArgs<int>(oldValue, newValue) { RoutedEvent = StrokeThicknessChangedEvent };
+            RaiseEvent(args);
+        }
+
+        #endregion
+
+
         #region Fill property
 
         /// <summary>

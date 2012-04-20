@@ -7,14 +7,17 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="..\Themes\Generic.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-        <!-- Use to define the display of shapes in the menu galleries or selection lists -->
+
+    <!-- Use to define the display of shapes in the menu galleries or selection lists -->
     <DataTemplate x:Key="ShapeGalleryItemTemplate" DataType="{x:Type ViewModel:ShapeViewModel}">
-        <CustomUserControl:ShapeViewerUC DataContext="{Binding Path=.}" Fill="Red"/>
+        <CustomUserControl:ShapeViewerUC DataContext="{Binding Path=.}" Fill="{StaticResource ResourceKey=CustomMiniShapeGlossyBrush}"
+                                         Stroke="{StaticResource ResourceKey=CustomGuiDarkBlueForeground}"
+                                         StrokeThickness="3"/>
     </DataTemplate>
-    
-    
+
+
     <!-- Used for the display of the recent files in the main menu -->
-    
+
     <DataTemplate x:Key="RecentFileDataTemplate" DataType="{x:Type ViewModel:RecentFileViewModel}">
         <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Button DockPanel.Dock="Right" Width="32" Command="CustomCommand:CommandMenu.RecentObjectFlag" CommandParameter="{Binding Path=.}"

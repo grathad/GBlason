@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="GBlason.Control.MenuControl.PropertiesMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Properties="clr-namespace:GBlason.Properties" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="#88FFFFFF">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="9px"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="1,5" BorderThickness="1" Width="1">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#11000000" Offset="0.0" />
+                        <GradientStop Color="#88000000" Offset="0.25" />
+                        <GradientStop Color="#88000000" Offset="0.75" />
+                        <GradientStop Color="#11000000" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+            </Border>
+            <GroupBox Background="#22000000" Header="{x:Static Properties:Resources.PropertiesCultureGroupHeader}" Grid.Column="0">
+                
+            </GroupBox>
+            <GroupBox Background="#22000000" Header="{x:Static Properties:Resources.PropertiesDisplayGroupHeader}" Grid.Column="2">
+
+            </GroupBox>
+        </Grid>
+    </ScrollViewer>
+
+</UserControl>

@@ -141,6 +141,9 @@
   <data name="ButtonLabelQuit" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="ControlPropertyTitle" xml:space="preserve">
+    <value>Properties</value>
+  </data>
   <data name="GBSFormatExtension" xml:space="preserve">
     <value>gbs</value>
   </data>
@@ -205,6 +208,12 @@
   </data>
   <data name="OpenDialogBoxFormatDescription" xml:space="preserve">
     <value>GBlason Save</value>
+  </data>
+  <data name="PropertiesCultureGroupHeader" xml:space="preserve">
+    <value>Culture and Language</value>
+  </data>
+  <data name="PropertiesDisplayGroupHeader" xml:space="preserve">
+    <value>Display</value>
   </data>
   <data name="RecentDocumentMenuRecentFileTitle" xml:space="preserve">
     <value>Recent Documents</value>

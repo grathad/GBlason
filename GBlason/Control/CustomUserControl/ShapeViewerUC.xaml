@@ -11,16 +11,10 @@
     <DockPanel>
         <TextBlock Text="{Binding Path=LocalizedName}" HorizontalAlignment="Center" VerticalAlignment="Stretch" MinHeight="20" DockPanel.Dock="Bottom" Margin="2"/>
         <Viewbox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2">
-            <Path Data="{Binding Path=Geometry}" Stroke="Black" StrokeThickness="4"
+            <Path Data="{Binding Path=Geometry}"
+                  Stroke="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=CustomUserControl:ShapeViewerUC}, Path=Stroke}"
+                  StrokeThickness="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=CustomUserControl:ShapeViewerUC}, Path=StrokeThickness}"
                   Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=CustomUserControl:ShapeViewerUC}, Path=Fill}">
-                <!--<Path.Fill>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="LightGray" Offset="0.0" />
-                        <GradientStop Color="DarkGray" Offset="0.49" />
-                        <GradientStop Color="Gray" Offset="0.5" />
-                        <GradientStop Color="Black" Offset="1" />
-                    </LinearGradientBrush>
-                </Path.Fill>-->
             </Path>
         </Viewbox>
     </DockPanel>

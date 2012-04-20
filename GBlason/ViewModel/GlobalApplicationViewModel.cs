@@ -10,6 +10,7 @@ using System.Text;
 using System.Windows;
 using GBlason.Global;
 using GBlason.Properties;
+using GBlason.ViewModel.Contract;
 
 namespace GBlason.ViewModel
 {

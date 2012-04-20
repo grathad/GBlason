@@ -48,8 +48,10 @@ C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\CustomUserControl\ShapeVi
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\CustomUserControl\ShapeViewerUC.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.Culture.BlasonVocabulary.resources
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.Culture.BlasonVocabulary.fr-FR.resources
-C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\RecentDocumentMenu.g.cs
-C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\RecentDocumentMenu.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Themes\Brushes.baml
-C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\NewDocumentMenu.g.cs
-C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\NewDocumentMenu.baml
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\NewDocumentMenu.g.cs
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\PropertiesMenu.g.cs
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\RecentDocumentMenu.g.cs
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\NewDocumentMenu.baml
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\PropertiesMenu.baml
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\RecentDocumentMenu.baml

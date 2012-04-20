@@ -31,7 +31,7 @@
                 <RowDefinition Height="3px"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Aggregate:Properties Grid.Row="0"/>
+            <Aggregate:Properties Grid.Row="0" DataContext="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile.CurrentlySelectedComponent}"/>
             <GridSplitter Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="3" Name="propertiesSplitter"/>
             <Aggregate:TreeView Grid.Row="2"/>
         </Grid>

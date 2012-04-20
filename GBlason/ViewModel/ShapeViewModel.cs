@@ -6,6 +6,7 @@ using System.Linq;
 using System.Resources;
 using System.Text;
 using GBlason.Culture;
+using GBlason.ViewModel.Contract;
 
 namespace GBlason.ViewModel
 {

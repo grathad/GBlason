@@ -70,6 +70,24 @@ namespace GBlason.Culture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Charge.
+        /// </summary>
+        internal static string ChargeViewModel {
+            get {
+                return ResourceManager.GetString("ChargeViewModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Coat of Arms.
+        /// </summary>
+        internal static string CoatOfArmViewModel {
+            get {
+                return ResourceManager.GetString("CoatOfArmViewModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Damsel.
         /// </summary>
         internal static string DamselShape {
@@ -84,6 +102,15 @@ namespace GBlason.Culture {
         internal static string EnglishShape {
             get {
                 return ResourceManager.GetString("EnglishShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field.
+        /// </summary>
+        internal static string FieldViewModel {
+            get {
+                return ResourceManager.GetString("FieldViewModel", resourceCulture);
             }
         }
         
@@ -115,6 +142,15 @@ namespace GBlason.Culture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Line.
+        /// </summary>
+        internal static string LineViewModel {
+            get {
+                return ResourceManager.GetString("LineViewModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modern French (Empire).
         /// </summary>
         internal static string ModernFrenchShape {
@@ -133,6 +169,33 @@ namespace GBlason.Culture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Partition.
+        /// </summary>
+        internal static string PartitionViewModel {
+            get {
+                return ResourceManager.GetString("PartitionViewModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Part.
+        /// </summary>
+        internal static string PartViewModel {
+            get {
+                return ResourceManager.GetString("PartViewModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ordinary.
+        /// </summary>
+        internal static string PieceViewModel {
+            get {
+                return ResourceManager.GetString("PieceViewModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Polish.
         /// </summary>
         internal static string PolishShape {
@@ -142,11 +205,47 @@ namespace GBlason.Culture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Position.
+        /// </summary>
+        internal static string PositionViewModel {
+            get {
+                return ResourceManager.GetString("PositionViewModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enamel.
+        /// </summary>
+        internal static string PropertyNameEnamel {
+            get {
+                return ResourceManager.GetString("PropertyNameEnamel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shape.
+        /// </summary>
+        internal static string PropertyNameShape {
+            get {
+                return ResourceManager.GetString("PropertyNameShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Spanish / Portuguese / Flamish.
         /// </summary>
         internal static string SpanishShape {
             get {
                 return ResourceManager.GetString("SpanishShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abstract layer.
+        /// </summary>
+        internal static string SubjectiveLayerViewModel {
+            get {
+                return ResourceManager.GetString("SubjectiveLayerViewModel", resourceCulture);
             }
         }
         

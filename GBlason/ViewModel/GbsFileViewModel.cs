@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Windows.Controls;
 using FormatManager.Serializer;
 using GBSFormatManager;
-using GBlason.Global;
-using GBlason.Properties;
+using GBlason.Common.Attributes;
+using GBlason.Common.Converter;
+using GBlason.ViewModel.Contract;
 
 namespace GBlason.ViewModel
 {
+    /// <summary>
+    /// Entry point of a Coat of Arm. Top of the tree. Handle the file, and the CoA root object, and the PropertiesVM, and the TreeViewVM
+    /// </summary>
     public class GbsFileViewModel : INotifyPropertyChanged
     {
         #region constructor
@@ -23,8 +23,6 @@ namespace GBlason.ViewModel
         /// <remarks>Increase the number of "new document" and affect the default file title to the new document</remarks>
         public GbsFileViewModel()
         {
-            if (GbrFileViewModel.GetResources.ScaledForMenuShapeResources.Any())
-                _currentShape = GbrFileViewModel.GetResources.ScaledForMenuShapeResources[0];
         }
 
         /// <summary>
@@ -32,19 +30,36 @@ namespace GBlason.ViewModel
         /// Used when opening a document by using the "Open" command
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
-        /// <param name="format">The format.</param>
-        public GbsFileViewModel(String fileName, GbsFormat format)
+        public GbsFileViewModel(String fileName)
         {
             FileName = fileName;
-
         }
 
+        #endregion
+
+        public CoatOfArmViewModel RootCoatOfArm { get; set; }
+
+        #region coat of arms
+
+        public CoatOfArmComponent CurrentlySelectedComponent
+        {
+            get { return _currentlySelectedComponent; }
+            set
+            {
+                if (value == _currentlySelectedComponent) return;
+                _currentlySelectedComponent = value;
+                OnPropertyChanged("CurrentlySelectedComponent");
+                _currentlySelectedComponent.UpdateBindingOnSelected();
+            }
+        }
+        private CoatOfArmComponent _currentlySelectedComponent;
         #endregion
 
         #region Tools and "from repo" building functions
 
         /// <summary>
-        /// Opens the files.
+        /// Centralized method to handle the opening of files (multi, single, new, dropping).
+        /// Do a lot of operation on the file opening
         /// </summary>
         /// <param name="fileNames">The file names.</param>
         /// <param name="checkFormat">if set to <c>true</c> [check format].</param>
@@ -56,7 +71,12 @@ namespace GBlason.ViewModel
             foreach (var fileName in fileNames)
             {
                 var loadGbsFile = opener.LoadGbsFile(fileName, checkFormat);
-                var vmFile = new GbsFileViewModel(Path.GetFileNameWithoutExtension(fileName), loadGbsFile){FullFileName = fileName};
+                var vmFile = new GbsFileViewModel(Path.GetFileNameWithoutExtension(fileName))
+                {
+                    FullFileName = fileName,
+                    RootCoatOfArm = loadGbsFile.XmlCoatOfArms.ConvertToViewModel()
+                };
+                vmFile.CurrentlySelectedComponent = vmFile.RootCoatOfArm;
                 //si le fichier est déjà ouvert, on ne fait que lui donner le focus (currently displayed), sinon on l'ajoute bien entendu ^^
                 var alreadyOpenedFile =
                     GlobalApplicationViewModel.GetApplicationViewModel.OpenedFiles.FirstOrDefault(
@@ -74,23 +94,6 @@ namespace GBlason.ViewModel
                 GlobalApplicationViewModel.GetApplicationViewModel.SaveOpenedOrSavedFileAsRecent(fileName);
             }
         }
-        #endregion
-
-        #region COA properties
-
-        public ShapeViewModel CurrentShape
-        {
-            get { return _currentShape; }
-            set
-            {
-                if (_currentShape == value)
-                    return;
-                    _currentShape = value;
-                OnPropertyChanged("currentShape");
-            }
-        }
-        private ShapeViewModel _currentShape;
-
         #endregion
 
         #region file properties

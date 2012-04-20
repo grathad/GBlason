@@ -66,11 +66,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\Attributes\DisplayInformation.cs" />
+    <Compile Include="Common\Converter\CoatOfArmConverter.cs" />
     <Compile Include="Common\CustomCommand\CommandMenu.cs" />
-    <Compile Include="Control\Aggregate\NewDocumentMenu.xaml.cs">
+    <Compile Include="Control\MenuControl\NewDocumentMenu.xaml.cs">
       <DependentUpon>NewDocumentMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\Aggregate\RecentDocumentMenu.xaml.cs">
+    <Compile Include="Control\MenuControl\PropertiesMenu.xaml.cs">
+      <DependentUpon>PropertiesMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\MenuControl\RecentDocumentMenu.xaml.cs">
       <DependentUpon>RecentDocumentMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\CustomUserControl\ShapeViewerUC.xaml.cs">
@@ -91,9 +96,12 @@
     </Compile>
     <Compile Include="Global\ApplicationSettingsManager.cs" />
     <Compile Include="Global\Context.cs" />
+    <Compile Include="ViewModel\CoatOfArmViewModel.cs" />
+    <Compile Include="ViewModel\Contract\CoatOfArmComponent.cs" />
     <Compile Include="ViewModel\GbrFileViewModel.cs" />
     <Compile Include="ViewModel\GbsFileViewModel.cs" />
     <Compile Include="ViewModel\GlobalApplicationViewModel.cs" />
+    <Compile Include="ViewModel\PropertiesDisplayViewModel.cs" />
     <Compile Include="ViewModel\ShapeViewModel.cs" />
     <Page Include="Control\Aggregate\CoatOfArmsViewer.xaml">
       <SubType>Designer</SubType>
@@ -103,7 +111,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Control\Aggregate\NewDocumentMenu.xaml">
+    <Page Include="Control\MenuControl\NewDocumentMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,7 +119,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Control\Aggregate\RecentDocumentMenu.xaml">
+    <Page Include="Control\MenuControl\PropertiesMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\MenuControl\RecentDocumentMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -212,8 +224,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Converter\" />
-    <Folder Include="Validator\" />
+    <Folder Include="Common\Validator\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GBL.CustomControl\GBL.CustomControl.csproj">

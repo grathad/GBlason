@@ -14,7 +14,8 @@
                      Icon="Pictures\Icons32\shield.png"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                     xmlns:CustomCommand="clr-namespace:GBlason.Common.CustomCommand" d:DesignWidth="750" d:DesignHeight="600">
+                     xmlns:CustomCommand="clr-namespace:GBlason.Common.CustomCommand"
+                     xmlns:MenuControl="clr-namespace:GBlason.Control.MenuControl" d:DesignWidth="750" d:DesignHeight="600">
     <Fluent:RibbonWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -42,14 +43,16 @@
                         <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelOpen}" Icon="Pictures\Icons16\folder_page.png"
                                        Command="Open"/>
                         <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelRecent}" x:Name="MenuRecentItem">
-                            <Aggregate:RecentDocumentMenu DataContext="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}}"
+                            <MenuControl:RecentDocumentMenu DataContext="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}}"
                                                           Margin="4,4,30,4"/>
                         </Fluent:BackstageTabItem>
                         <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelNew}">
-                            <Aggregate:NewDocumentMenu/>
+                            <MenuControl:NewDocumentMenu Margin="4,4,0,0"/>
                         </Fluent:BackstageTabItem>
                         <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelHelp}"/>
-                        <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.ButtonLabelOptions}"/>
+                        <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.ButtonLabelOptions}">
+                            <MenuControl:PropertiesMenu />
+                        </Fluent:BackstageTabItem>
                         <Fluent:Button Header="{x:Static Properties:Resources.ButtonLabelQuit}" Icon="Pictures\Icons16\cross.png"/>
                     </Fluent:BackstageTabControl>
                 </Fluent:Backstage>

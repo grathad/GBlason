@@ -133,6 +133,15 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Properties.
+        /// </summary>
+        public static string ControlPropertyTitle {
+            get {
+                return ResourceManager.GetString("ControlPropertyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to gbs.
         /// </summary>
         public static string GBSFormatExtension {
@@ -318,6 +327,24 @@ namespace GBlason.Properties {
         public static string OpenDialogBoxFormatDescription {
             get {
                 return ResourceManager.GetString("OpenDialogBoxFormatDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Culture and Language.
+        /// </summary>
+        public static string PropertiesCultureGroupHeader {
+            get {
+                return ResourceManager.GetString("PropertiesCultureGroupHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display.
+        /// </summary>
+        public static string PropertiesDisplayGroupHeader {
+            get {
+                return ResourceManager.GetString("PropertiesDisplayGroupHeader", resourceCulture);
             }
         }
         

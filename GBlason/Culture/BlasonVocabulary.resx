@@ -120,11 +120,22 @@
   <data name="BannerShape" xml:space="preserve">
     <value>Banner</value>
   </data>
+  <data name="ChargeViewModel" xml:space="preserve">
+    <value>Charge</value>
+    <comment>Meuble</comment>
+  </data>
   <data name="DamselShape" xml:space="preserve">
     <value>Damsel</value>
   </data>
   <data name="EnglishShape" xml:space="preserve">
     <value>English</value>
+  </data>
+  <data name="FieldViewModel" xml:space="preserve">
+    <value>Field</value>
+    <comment>Champ</comment>
+  </data>
+  <data name="CoatOfArmViewModel" xml:space="preserve">
+    <value>Coat of Arms</value>
   </data>
   <data name="GermanShape" xml:space="preserve">
     <value>German</value>
@@ -135,17 +146,47 @@
   <data name="LadiesShape" xml:space="preserve">
     <value>Lady</value>
   </data>
+  <data name="LineViewModel" xml:space="preserve">
+    <value>Line</value>
+    <comment>Attribut géométrique altérant une partition ou une piece</comment>
+  </data>
   <data name="ModernFrenchShape" xml:space="preserve">
     <value>Modern French (Empire)</value>
   </data>
   <data name="OldFrenchShape" xml:space="preserve">
     <value>Old French</value>
   </data>
+  <data name="PartitionViewModel" xml:space="preserve">
+    <value>Partition</value>
+    <comment>Partition</comment>
+  </data>
+  <data name="PartViewModel" xml:space="preserve">
+    <value>Part</value>
+    <comment>Armes</comment>
+  </data>
+  <data name="PieceViewModel" xml:space="preserve">
+    <value>Ordinary</value>
+    <comment>Pièce</comment>
+  </data>
   <data name="PolishShape" xml:space="preserve">
     <value>Polish</value>
   </data>
+  <data name="PositionViewModel" xml:space="preserve">
+    <value>Position</value>
+    <comment>Position possible d'un meuble / piece</comment>
+  </data>
+  <data name="PropertyNameEnamel" xml:space="preserve">
+    <value>Enamel</value>
+  </data>
+  <data name="PropertyNameShape" xml:space="preserve">
+    <value>Shape</value>
+  </data>
   <data name="SpanishShape" xml:space="preserve">
     <value>Spanish / Portuguese / Flamish</value>
+  </data>
+  <data name="SubjectiveLayerViewModel" xml:space="preserve">
+    <value>Abstract layer</value>
+    <comment>Just to hold content recursively, and the rules of what is possible</comment>
   </data>
   <data name="SwissShape" xml:space="preserve">
     <value>Swiss</value>
