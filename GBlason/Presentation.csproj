@@ -66,9 +66,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Common\Attributes\DisplayInformation.cs" />
+    <Compile Include="Common\Attribute\CoaPropertyAttribute.cs" />
     <Compile Include="Common\Converter\CoatOfArmConverter.cs" />
     <Compile Include="Common\CustomCommand\CommandMenu.cs" />
+    <Compile Include="Common\TemplateSelector\PropertyTable.cs" />
     <Compile Include="Control\MenuControl\NewDocumentMenu.xaml.cs">
       <DependentUpon>NewDocumentMenu.xaml</DependentUpon>
     </Compile>
@@ -98,10 +99,10 @@
     <Compile Include="Global\Context.cs" />
     <Compile Include="ViewModel\CoatOfArmViewModel.cs" />
     <Compile Include="ViewModel\Contract\CoatOfArmComponent.cs" />
+    <Compile Include="ViewModel\Contract\PropertyDisplayer.cs" />
     <Compile Include="ViewModel\GbrFileViewModel.cs" />
     <Compile Include="ViewModel\GbsFileViewModel.cs" />
     <Compile Include="ViewModel\GlobalApplicationViewModel.cs" />
-    <Compile Include="ViewModel\PropertiesDisplayViewModel.cs" />
     <Compile Include="ViewModel\ShapeViewModel.cs" />
     <Page Include="Control\Aggregate\CoatOfArmsViewer.xaml">
       <SubType>Designer</SubType>
@@ -132,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\CustomUserControl\ShapeViewerUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\PropertyTemplateDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -227,10 +232,6 @@
     <Folder Include="Common\Validator\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GBL.CustomControl\GBL.CustomControl.csproj">
-      <Project>{F3670511-034C-4CE2-94AA-BB3D9499AEE0}</Project>
-      <Name>GBL.CustomControl</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GBSFormatManager\GBL.FormatManager.csproj">
       <Project>{19D8FBFB-1A42-4B31-B852-1993C83A5650}</Project>
       <Name>GBL.FormatManager</Name>

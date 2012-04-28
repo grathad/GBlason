@@ -6,7 +6,7 @@
              xmlns:Aggregate="clr-namespace:GBlason.Control.Aggregate"
              xmlns:ViewModel="clr-namespace:GBlason.ViewModel" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
-    <!-- TODO @Grathad link background to a style manager -->
+    
   <UserControl.Resources>
         <DataTemplate x:Key="CoAViewerTemplate" DataType="{x:Type ViewModel:GbsFileViewModel}">
             <Aggregate:CoatOfArmsViewer/>
@@ -15,6 +15,7 @@
             <TextBlock Text="{Binding Path=FileName}"/>
         </DataTemplate>
   </UserControl.Resources>
+    
   <Grid x:Name="CustomGUIGrid" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="78*" />

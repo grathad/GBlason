@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using FormatManager.Serializer;
 using GBSFormatManager;
-using GBlason.Common.Attributes;
 using GBlason.Common.Converter;
 using GBlason.ViewModel.Contract;
 

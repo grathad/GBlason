@@ -42,8 +42,6 @@ C:\Users\grathad\GBlason\GBlason\bin\Debug\Fluent.dll
 C:\Users\grathad\GBlason\GBlason\bin\Debug\Fluent.xml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\App.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Dictionary\RibbonTemplateDictionary.baml
-C:\Users\grathad\GBlason\GBlason\bin\Debug\GBL.CustomControl.dll
-C:\Users\grathad\GBlason\GBlason\bin\Debug\GBL.CustomControl.pdb
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\CustomUserControl\ShapeViewerUC.g.cs
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\CustomUserControl\ShapeViewerUC.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.Culture.BlasonVocabulary.resources
@@ -55,3 +53,4 @@ C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\RecentDocumen
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\NewDocumentMenu.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\PropertiesMenu.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\RecentDocumentMenu.baml
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Dictionary\PropertyTemplateDictionary.baml

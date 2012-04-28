@@ -22,6 +22,7 @@
                 <ResourceDictionary Source="Dictionary/RibbonGroupSizeDefinitionDictionary.xaml"/>
                 <ResourceDictionary Source="Themes/Generic.xaml"/>
                 <ResourceDictionary Source="Dictionary/RibbonTemplateDictionary.xaml"/>
+                <ResourceDictionary Source="Dictionary\PropertyTemplateDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Fluent:RibbonWindow.Resources>

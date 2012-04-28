@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using GBlason.Common.Attributes;
+using GBlason.Common.Attribute;
 using GBlason.ViewModel.Contract;
 
 namespace GBlason.ViewModel
@@ -16,7 +17,6 @@ namespace GBlason.ViewModel
                 _currentShape = GbrFileViewModel.GetResources.ScaledForMenuShapeResources[0];
         }
 
-
         #region COA properties
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace GBlason.ViewModel
         /// <value>
         /// The current shape.
         /// </value>
-        [DisplayInformation("PropertyNameShape")]
+        [CoaProperty("PropertyNameShape")]
         public ShapeViewModel CurrentShape
         {
             get { return _currentShape; }
@@ -34,14 +34,11 @@ namespace GBlason.ViewModel
                 if (_currentShape == value)
                     return;
                 _currentShape = value;
-                OnPropertyChanged("currentShape");
+                OnPropertyChanged("CurrentShape");
             }
         }
         private ShapeViewModel _currentShape;
 
         #endregion
-
-        
-
     }
 }

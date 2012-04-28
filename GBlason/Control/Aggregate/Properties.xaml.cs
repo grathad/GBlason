@@ -17,7 +17,7 @@ namespace GBlason.Control.Aggregate
     /// <summary>
     /// Interaction logic for Properties.xaml
     /// </summary>
-    public partial class Properties : UserControl
+    public partial class Properties
     {
         public Properties()
         {

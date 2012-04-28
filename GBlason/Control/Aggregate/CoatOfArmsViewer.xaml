@@ -3,17 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:Custom="clr-namespace:GBL.CustomControl;assembly=GBL.CustomControl" mc:Ignorable="d" 
+             mc:Ignorable="d" 
              d:DesignHeight="632" d:DesignWidth="453">
     <Canvas>
-        <!--<Label>Affichage du blason</Label>-->
-        <Custom:ShapeViewer Geometry="M 0,0 H 200 Q 180,10 180,20 V 160 A 20,20 90 0 1 160,180 H 120 Q 100,180 100,200 M 0,0 Q 20,10 20,20 V160 A 20,20 90 0 0 40,180 H 80 Q 100,180 100,200"
-                            ScaleX="0.3" ScaleY="0.3" Fill="Green" Canvas.Left="262" Canvas.Top="119" Background="Gray"/>
-        <Custom:ShapeViewer Geometry="M 0,0 H 200 Q 180,10 180,20 V 160 A 20,20 90 0 1 160,180 H 120 Q 100,180 100,200 M 0,0 Q 20,10 20,20 V160 A 20,20 90 0 0 40,180 H 80 Q 100,180 100,200"
-                            ScaleX="0.16" ScaleY="0.16" Fill="Red"
-                            Canvas.Left="121" Canvas.Top="217" Background="Yellow"/>
-        <Viewbox Width="32" Height="40">
-            <Path Fill="Blue" Stroke="Black" StrokeThickness="2" Data="M 0,0 H 200 Q 180,10 180,20 V 160 A 20,20 90 0 1 160,180 H 120 Q 100,180 100,200 M 0,0 Q 20,10 20,20 V160 A 20,20 90 0 0 40,180 H 80 Q 100,180 100,200"/>
+        <Viewbox Width="Auto" Height="Auto">
+            <Path Fill="Blue" Stroke="Black" StrokeThickness="2" Data="{Binding Path=RootCoatOfArm.CurrentShape.Geometry}"/>
         </Viewbox>
     </Canvas>
 </UserControl>

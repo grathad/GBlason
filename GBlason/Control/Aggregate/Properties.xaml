@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:Properties="clr-namespace:GBlason.Properties" mc:Ignorable="d" 
+             xmlns:Properties="clr-namespace:GBlason.Properties"
+             xmlns:TemplateSelector="clr-namespace:GBlason.Common.TemplateSelector" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <ResourceDictionary Source="..\..\Themes\Brushes.xaml"/>
+        <TemplateSelector:PropertyTable x:Key="cellTemplateSelectorForProperties"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -15,28 +16,36 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                   Background="{StaticResource ResourceKey=CustomGuiMiddleBlueBackground}">
+                   Background="{DynamicResource ResourceKey=CustomGuiMiddleBlueBackground}">
             <Rectangle DockPanel.Dock="Right" x:Name="MiniView" Width="40" Height="40"
-                       Fill="White" StrokeThickness="1" Stroke="{StaticResource ResourceKey=CustomGuiLightBlueForeground}"
+                       Fill="White" StrokeThickness="1" Stroke="{DynamicResource ResourceKey=CustomGuiLightBlueForeground}"
                        Margin="0,2,2,2"/>
             <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock Text="{Binding Path=ComponentName}" VerticalAlignment="Center" HorizontalAlignment="Left"
-                           Margin="15,0,0,2" FontSize="13" Foreground="{StaticResource ResourceKey=CustomGuiDarkBlueForeground}"
+                           Margin="15,0,0,2" FontSize="13" Foreground="{DynamicResource ResourceKey=CustomGuiDarkBlueForeground}"
                            DockPanel.Dock="Bottom"/>
                 <TextBlock Text="{x:Static Properties:Resources.ControlPropertyTitle}"
                        VerticalAlignment="Center" HorizontalAlignment="Left"
                        Margin="10,2,2,0" FontSize="14"/>
             </DockPanel>            
         </DockPanel>
-        <DockPanel Grid.Row="1" x:Name="ControlProperties" Background="{StaticResource ResourceKey=CustomGuiLightBlueBackground}">
+        <DockPanel Grid.Row="1" x:Name="ControlProperties" Background="{DynamicResource ResourceKey=CustomGuiLightBlueBackground}">
             <Button Width="20" Height="20" Margin="2,2,0,2" DockPanel.Dock="Left">
                 <Image Source="..\..\Pictures\Icons16\anchor.png"/>
             </Button>
             <TextBox x:Name="SearchPropertiesTextBox" Margin="2"></TextBox>
         </DockPanel>
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <DataGrid HeadersVisibility="None" BorderThickness="0,1,0,0" BorderBrush="{StaticResource ResourceKey=CustomGuiLightBlueForeground}">
-                
+            <DataGrid HeadersVisibility="None" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource ResourceKey=CustomGuiLightBlueForeground}"
+                      x:Name="PropertiesDataGrid" ItemsSource="{Binding Path=PropertiesData}" 
+                      AllowDrop="False" AutoGenerateColumns="False" CanUserAddRows="False"
+                      CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="True"
+                      CanUserSortColumns="True" SelectionMode="Single" SelectionUnit="FullRow">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="PropertyNameColumn" Binding="{Binding Path=PropertyName}"/>
+                    <DataGridTemplateColumn x:Name="PropertyValueColumn" CanUserResize="True" CanUserSort="False"
+                                            CellTemplateSelector="{StaticResource ResourceKey=cellTemplateSelectorForProperties}"/>
+                </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
     </Grid>
