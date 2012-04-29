@@ -133,6 +133,15 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change shape from {0} to {1}.
+        /// </summary>
+        public static string CommandDescChangeShape {
+            get {
+                return ResourceManager.GetString("CommandDescChangeShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Properties.
         /// </summary>
         public static string ControlPropertyTitle {

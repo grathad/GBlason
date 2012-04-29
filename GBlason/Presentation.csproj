@@ -68,8 +68,16 @@
     </ApplicationDefinition>
     <Compile Include="Common\Attribute\CoaPropertyAttribute.cs" />
     <Compile Include="Common\Converter\CoatOfArmConverter.cs" />
+    <Compile Include="Common\CustomCommand\ChangeShape.cs" />
+    <Compile Include="Common\CustomCommand\CommandGeneric.cs" />
     <Compile Include="Common\CustomCommand\CommandMenu.cs" />
+    <Compile Include="Common\CustomCommand\CommandRepository.cs" />
+    <Compile Include="Common\CustomCommand\ICommandTarget.cs" />
     <Compile Include="Common\TemplateSelector\PropertyTable.cs" />
+    <Compile Include="Control\CustomUserControl\CommandComboBox.cs" />
+    <Compile Include="Control\DebugUC.xaml.cs">
+      <DependentUpon>DebugUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\MenuControl\NewDocumentMenu.xaml.cs">
       <DependentUpon>NewDocumentMenu.xaml</DependentUpon>
     </Compile>
@@ -109,6 +117,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\Aggregate\CustomGUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\DebugUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

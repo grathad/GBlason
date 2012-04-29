@@ -141,6 +141,10 @@
   <data name="ButtonLabelQuit" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="CommandDescChangeShape" xml:space="preserve">
+    <value>Change shape from {0} to {1}</value>
+    <comment>{0} is the old shape name, {1} is the new one</comment>
+  </data>
   <data name="ControlPropertyTitle" xml:space="preserve">
     <value>Properties</value>
   </data>

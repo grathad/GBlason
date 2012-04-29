@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using GBlason.Common.CustomCommand;
 
 namespace GBlason.Control.Aggregate
 {
@@ -22,6 +12,19 @@ namespace GBlason.Control.Aggregate
         public Properties()
         {
             InitializeComponent();
+        }
+
+        private void CommandBindingCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void ShapeChangingExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            
+            var command = e.Command as ChangeShape;
+            if(command!=null)
+                command.Execute(e.Parameter, e.Source as IInputElement);
         }
     }
 }

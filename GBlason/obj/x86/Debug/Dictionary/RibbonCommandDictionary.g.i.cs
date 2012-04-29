@@ -9,7 +9,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using GBlason.Common.CustomCommand;
+using GBlason.Control.CustomUserControl;
 using GBlason.Properties;
+using GBlason.ViewModel;
+using GBlason.ViewModel.Contract;
 using Microsoft.Windows.Controls.Ribbon;
 using System;
 using System.Diagnostics;

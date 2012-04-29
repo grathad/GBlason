@@ -53,6 +53,16 @@ namespace GBlason.ViewModel.Contract
             }
         }
 
+        public CoatOfArmComponent Parent { get; set; }
+
+        public CoatOfArmComponent RootParent
+        {
+            get
+            {
+                return Parent == null ? this : Parent.RootParent;
+            }
+        }
+
         //private ObservableCollection<PropertyTableViewModel> ReflectionAttributesForPropertiesReading()
         //{
         //    var type = GetType();

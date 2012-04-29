@@ -47,11 +47,9 @@
 
     <!-- //////////////////////////////////  Mini shape filling -->
 
-    <LinearGradientBrush x:Key="CustomMiniShapeGlossyBrush" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FFFFFFFF" Offset="0"/>
-        <GradientStop Color="#FFCED4DF" Offset=".4"/>
-        <GradientStop Color="#FFC2CCDB" Offset=".41"/>
-        <GradientStop Color="#FFC2CCDB" Offset="1"/>
-    </LinearGradientBrush>
+    <RadialGradientBrush x:Key="CustomMiniShapeGlossyBrush" GradientOrigin="0.5, 0.5">
+        <GradientStop Color="#FF5A5A5A" Offset="0"/>
+        <GradientStop Color="#FF444444" Offset="1"/>
+    </RadialGradientBrush>
 
 </ResourceDictionary>

@@ -160,6 +160,15 @@ namespace GBlason.Culture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string NoShape {
+            get {
+                return ResourceManager.GetString("NoShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Old French.
         /// </summary>
         internal static string OldFrenchShape {

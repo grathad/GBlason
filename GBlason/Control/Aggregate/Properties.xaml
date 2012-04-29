@@ -4,11 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Properties="clr-namespace:GBlason.Properties"
-             xmlns:TemplateSelector="clr-namespace:GBlason.Common.TemplateSelector" mc:Ignorable="d" 
+             xmlns:TemplateSelector="clr-namespace:GBlason.Common.TemplateSelector"
+             xmlns:Custom="clr-namespace:GBlason.Common.CustomCommand" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <TemplateSelector:PropertyTable x:Key="cellTemplateSelectorForProperties"/>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="Custom:CommandMenu.ChangingShape" CanExecute="CommandBindingCanExecute"
+                        Executed="ShapeChangingExecuted"/>
+    </UserControl.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="30" Height="Auto"/>
@@ -35,16 +40,26 @@
             </Button>
             <TextBox x:Name="SearchPropertiesTextBox" Margin="2"></TextBox>
         </DockPanel>
-        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch" >
             <DataGrid HeadersVisibility="None" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource ResourceKey=CustomGuiLightBlueForeground}"
                       x:Name="PropertiesDataGrid" ItemsSource="{Binding Path=PropertiesData}" 
                       AllowDrop="False" AutoGenerateColumns="False" CanUserAddRows="False"
                       CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="True"
-                      CanUserSortColumns="True" SelectionMode="Single" SelectionUnit="FullRow">
+                      CanUserSortColumns="True" SelectionMode="Single" SelectionUnit="FullRow"
+                      >
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="PropertyNameColumn" Binding="{Binding Path=PropertyName}"/>
+                    <DataGridTemplateColumn x:Name="PropertyNameColumn"
+                                        MinWidth="100" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+                                           Text="{Binding Path=PropertyName}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTemplateColumn x:Name="PropertyValueColumn" CanUserResize="True" CanUserSort="False"
-                                            CellTemplateSelector="{StaticResource ResourceKey=cellTemplateSelectorForProperties}"/>
+                                            CellTemplateSelector="{StaticResource ResourceKey=cellTemplateSelectorForProperties}"
+                                            Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>

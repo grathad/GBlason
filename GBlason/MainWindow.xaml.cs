@@ -173,7 +173,7 @@ namespace GBlason
 
         private void NewCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            var newCoatOfArmsFile = new GbsFileViewModel{FileName = GlobalApplicationViewModel.GetNewFileName()};
+            var newCoatOfArmsFile = GbsFileViewModel.CreateNew(GlobalApplicationViewModel.GetNewFileName());
             GlobalApplicationViewModel.GetApplicationViewModel.OpenedFiles.Add(newCoatOfArmsFile);
             GlobalApplicationViewModel.GetApplicationViewModel.CurrentlyDisplayedFile = newCoatOfArmsFile;
             TabHome.IsSelected = true;

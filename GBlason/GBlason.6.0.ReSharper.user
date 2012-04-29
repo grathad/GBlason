@@ -1,68 +1,68 @@
 <Configuration>
   <RecentFiles>
     <RecentFiles>
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Global/f:ApplicationSettingsManager.cs" caret="511" fromTop="10" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:MenuControl/f:NewDocumentMenu.xaml.cs" caret="93" fromTop="4" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:MenuControl/f:RecentDocumentMenu.xaml.cs" caret="77" fromTop="3" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:MenuControl/f:NewDocumentMenu.xaml" caret="2835" fromTop="4" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:MenuControl/f:RecentDocumentMenu.xaml" caret="2707" fromTop="38" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:CustomUserControl/f:ShapeViewerUC.xaml.cs" caret="3355" fromTop="17" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Brushes.xaml" caret="2159" fromTop="3" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:MenuControl/f:PropertiesMenu.xaml" caret="1" fromTop="0" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/f:GbrFileViewModel.cs" caret="0" fromTop="0" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:Converter/f:CoatOfArmConverter.cs" caret="641" fromTop="12" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Culture/f:BlasonVocabulary.Designer.cs" caret="0" fromTop="0" />
-      <File id="77A0C94E-9A68-4424-A4A4-E4A5CC42B41D/f:XMLFormatManagerTDD.cs" caret="8134" fromTop="4" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/f:MainWindow.xaml.cs" caret="4596" fromTop="6" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:CoatOfArmsViewer.xaml" caret="522" fromTop="8" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/f:GbsFileViewModel.cs" caret="1275" fromTop="7" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:CustomGUI.xaml" caret="987" fromTop="17" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="0" fromTop="0" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Dictionary/f:RibbonTemplateDictionary.xaml" caret="720" fromTop="11" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/f:MainWindow.xaml" caret="2250" fromTop="13" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml.cs" caret="589" fromTop="15" />
       <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:Attribute/f:CoaPropertyAttribute.cs" caret="418" fromTop="14" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/f:CoatOfArmViewModel.cs" caret="926" fromTop="15" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/f:GlobalApplicationViewModel.cs" caret="4802" fromTop="14" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:CoatOfArmComponent.cs" caret="1368" fromTop="7" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml" caret="3399" fromTop="8" />
       <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:TemplateSelector/f:PropertyTable.cs" caret="616" fromTop="19" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:PropertyDisplayer.cs" caret="98" fromTop="3" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/f:ShapeViewModel.cs" caret="117" fromTop="0" />
       <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:CustomUserControl/f:ShapeViewerUC.xaml" caret="1533" fromTop="8" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Dictionary/f:PropertyTemplateDictionary.xaml" caret="736" fromTop="13" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:MenuControl/f:RecentDocumentMenu.xaml" caret="633" fromTop="0" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:CustomCommand/f:CommandRepository.cs" caret="336" fromTop="12" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:CustomCommand/f:ICommandTarget.cs" caret="193" fromTop="8" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/f:CoatOfArmViewModel.cs" caret="1791" fromTop="16" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:MenuControl/f:NewDocumentMenu.xaml" caret="1949" fromTop="3" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:MenuControl/f:PropertiesMenu.xaml" caret="1" fromTop="0" />
+      <File id="77A0C94E-9A68-4424-A4A4-E4A5CC42B41D/f:XMLFormatManagerTDD.cs" caret="8134" fromTop="4" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/f:GbrFileViewModel.cs" caret="2968" fromTop="12" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Brushes.xaml" caret="2311" fromTop="21" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/f:ShapeViewModel.cs" caret="1876" fromTop="29" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:CoatOfArmComponent.cs" caret="3855" fromTop="29" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:CustomUserControl/f:ShapeViewerUC.xaml.cs" caret="1570" fromTop="24" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:CustomUserControl/f:CommandComboBox.cs" caret="692" fromTop="5" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Dictionary/f:RibbonTemplateDictionary.xaml" caret="1466" fromTop="17" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/f:GlobalApplicationViewModel.cs" caret="4751" fromTop="7" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/f:GbsFileViewModel.cs" caret="1499" fromTop="7" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:PropertyDisplayer.cs" caret="318" fromTop="8" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/f:App.xaml" caret="365" fromTop="5" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:CustomCommand/f:CommandGeneric.cs" caret="2160" fromTop="0" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:CustomCommand/f:CommandMenu.cs" caret="131" fromTop="5" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Dictionary/f:PropertyTemplateDictionary.xaml" caret="1509" fromTop="15" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/f:MainWindow.xaml.cs" caret="7604" fromTop="15" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="10137" fromTop="7" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml" caret="1" fromTop="0" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml.cs" caret="720" fromTop="17" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:CustomCommand/f:ChangeShape.cs" caret="2728" fromTop="11" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/f:DebugUC.xaml" caret="535" fromTop="8" />
     </RecentFiles>
     <RecentEdits>
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml.cs" caret="528" fromTop="11" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml" caret="708" fromTop="10" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml" caret="623" fromTop="4" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/f:MainWindow.xaml" caret="2250" fromTop="13" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml" caret="708" fromTop="7" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml" caret="1112" fromTop="3" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml" caret="1703" fromTop="9" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml" caret="2172" fromTop="8" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml" caret="2704" fromTop="15" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/f:CoatOfArmViewModel.cs" caret="1110" fromTop="20" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:PropertyDisplayer.cs" caret="595" fromTop="11" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:PropertyDisplayer.cs" caret="943" fromTop="21" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:PropertyDisplayer.cs" caret="520" fromTop="17" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:CoatOfArmComponent.cs" caret="2083" fromTop="20" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:CoatOfArmComponent.cs" caret="2083" fromTop="11" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:CoatOfArmComponent.cs" caret="3265" fromTop="10" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:Attribute/f:CoaPropertyAttribute.cs" caret="418" fromTop="20" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:Attribute/f:CoaPropertyAttribute.cs" caret="276" fromTop="10" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/f:CoatOfArmViewModel.cs" caret="825" fromTop="12" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:CoatOfArmComponent.cs" caret="1767" fromTop="10" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:CoatOfArmComponent.cs" caret="1209" fromTop="4" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:CoatOfArmComponent.cs" caret="1981" fromTop="16" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/d:Contract/f:CoatOfArmComponent.cs" caret="1275" fromTop="5" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:TemplateSelector/f:PropertyTable.cs" caret="314" fromTop="12" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:TemplateSelector/f:PropertyTable.cs" caret="598" fromTop="18" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:TemplateSelector/f:PropertyTable.cs" caret="681" fromTop="20" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml" caret="3399" fromTop="8" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Dictionary/f:PropertyTemplateDictionary.xaml" caret="256" fromTop="2" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Dictionary/f:PropertyTemplateDictionary.xaml" caret="709" fromTop="14" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Dictionary/f:PropertyTemplateDictionary.xaml" caret="569" fromTop="7" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:CustomCommand/f:ChangeShape.cs" caret="2724" fromTop="9" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="9979" fromTop="10" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="9915" fromTop="24" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="10639" fromTop="19" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="8703" fromTop="27" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="8981" fromTop="19" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="11295" fromTop="19" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="15598" fromTop="13" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="16890" fromTop="27" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="15915" fromTop="17" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="9779" fromTop="20" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="8030" fromTop="6" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="8703" fromTop="17" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="12059" fromTop="16" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="9245" fromTop="14" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="14912" fromTop="11" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Themes/f:Generic.xaml" caret="6646" fromTop="12" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:Aggregate/f:Properties.xaml.cs" caret="50" fromTop="0" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Common/d:CustomCommand/f:ChangeShape.cs" caret="2465" fromTop="5" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/f:DebugUC.xaml" caret="535" fromTop="4" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/f:DebugUC.xaml" caret="535" fromTop="7" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/f:DebugUC.xaml" caret="535" fromTop="8" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/f:DebugUC.xaml" caret="535" fromTop="10" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/f:DebugUC.xaml" caret="535" fromTop="12" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/f:DebugUC.xaml" caret="535" fromTop="16" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/f:DebugUC.xaml" caret="535" fromTop="5" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/f:DebugUC.xaml" caret="535" fromTop="0" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/f:DebugUC.xaml" caret="535" fromTop="13" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/f:DebugUC.xaml" caret="849" fromTop="9" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/f:DebugUC.xaml" caret="535" fromTop="8" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>
@@ -96,17 +96,17 @@
   </UnitTestSessions>
   <CompletionStatisticsManager>
     <ItemStatistics item="CSharpCodeCompletionContext">
-      <Item value="String`0" priority="1440" />
-      <Item value="public" priority="3324" />
+      <Item value="String`0" priority="1632" />
+      <Item value="public" priority="4091" />
       <Item value="prop" priority="127" />
       <Item value="AppDomainSetup`0" priority="31" />
       <Item value="IShape`0" priority="31" />
       <Item value="GetHashCode`0" priority="31" />
       <Item value="CoatOfArms" priority="28" />
       <Item value="blason" priority="127" />
-      <Item value="new" priority="1728" />
+      <Item value="new" priority="1920" />
       <Item value="Shape" priority="148" />
-      <Item value="void" priority="575" />
+      <Item value="void" priority="703" />
       <Item value="T`0" priority="95" />
       <Item value="where" priority="63" />
       <Item value="serializer" priority="64" />
@@ -120,12 +120,12 @@
       <Item value="Repository" priority="54" />
       <Item value="Concrete" priority="26" />
       <Item value="GbsFormat`0" priority="127" />
-      <Item value="var" priority="1375" />
+      <Item value="var" priority="1470" />
       <Item value="data" priority="31" />
-      <Item value="return" priority="1247" />
-      <Item value="private" priority="735" />
+      <Item value="return" priority="1629" />
+      <Item value="private" priority="957" />
       <Item value="version" priority="31" />
-      <Item value="value" priority="607" />
+      <Item value="value" priority="863" />
       <Item value="ContentArea`0" priority="31" />
       <Item value="Guid`0" priority="128" />
       <Item value="&lt;see cref=&quot;&quot;/&gt;" priority="25" />
@@ -138,8 +138,8 @@
       <Item value="Shape`0" priority="158" />
       <Item value="shape" priority="292" />
       <Item value="Original" priority="16" />
-      <Item value="Name" priority="163" />
-      <Item value="static" priority="639" />
+      <Item value="Name" priority="195" />
+      <Item value="static" priority="703" />
       <Item value="TFormat`0" priority="159" />
       <Item value="GbrFormat" priority="28" />
       <Item value="enveloppe" priority="31" />
@@ -147,7 +147,7 @@
       <Item value="try" priority="351" />
       <Item value="InvalidOperationException`0" priority="191" />
       <Item value="ioex" priority="31" />
-      <Item value="throw" priority="63" />
+      <Item value="throw" priority="95" />
       <Item value="NotImplementedException`0" priority="31" />
       <Item value="IEnumerable" priority="95" />
       <Item value="UpdateResourceFromGbr`0" priority="31" />
@@ -155,7 +155,7 @@
       <Item value="CultureInfo`0" priority="63" />
       <Item value="Properties" priority="144" />
       <Item value="Settings`0" priority="181" />
-      <Item value="if" priority="767" />
+      <Item value="if" priority="990" />
       <Item value="settingsFile" priority="31" />
       <Item value="class" priority="30" />
       <Item value="RecentFile`0" priority="190" />
@@ -165,12 +165,12 @@
       <Item value="RecentFile" priority="86" />
       <Item value="Path" priority="93" />
       <Item value="fName" priority="97" />
-      <Item value="ArgumentNullException`0" priority="31" />
+      <Item value="ArgumentNullException`0" priority="63" />
       <Item value="continue" priority="95" />
       <Item value="ArgumentException`0" priority="63" />
-      <Item value="bool" priority="127" />
+      <Item value="bool" priority="191" />
       <Item value="Stream`0" priority="31" />
-      <Item value="typeof" priority="255" />
+      <Item value="typeof" priority="319" />
       <Item value="Serialize`1" priority="63" />
       <Item value="deserializer" priority="31" />
       <Item value="nutshell" priority="31" />
@@ -181,7 +181,7 @@
       <Item value="Text" priority="49" />
       <Item value="UnicodeEncoding`0" priority="26" />
       <Item value="Encoding`0" priority="26" />
-      <Item value="target" priority="63" />
+      <Item value="target" priority="159" />
       <Item value="Geometry" priority="64" />
       <Item value="Identifier" priority="65" />
       <Item value="TypeOfResource" priority="32" />
@@ -199,11 +199,11 @@
       <Item value="FileStream" priority="28" />
       <Item value="filePath" priority="95" />
       <Item value="UnauthorizedAccessException`0" priority="63" />
-      <Item value="null" priority="351" />
+      <Item value="null" priority="511" />
       <Item value="fileStream" priority="127" />
       <Item value="PrepareFileStream`0" priority="63" />
       <Item value="&lt;example&gt;&lt;/example&gt;" priority="25" />
-      <Item value="&lt;exception cref=&quot;&quot;&gt;&lt;/exception&gt;" priority="181" />
+      <Item value="&lt;exception cref=&quot;&quot;&gt;&lt;/exception&gt;" priority="207" />
       <Item value="shell" priority="95" />
       <Item value="saver" priority="31" />
       <Item value="ex" priority="31" />
@@ -223,21 +223,21 @@
       <Item value="#endregion" priority="63" />
       <Item value="object" priority="31" />
       <Item value="CanExecuteRoutedEventArgs`0" priority="31" />
-      <Item value="e" priority="351" />
+      <Item value="e" priority="447" />
       <Item value="dialogOpener" priority="191" />
       <Item value="result" priority="127" />
       <Item value="false" priority="193" />
-      <Item value="GbsFileViewModel`0" priority="191" />
+      <Item value="GbsFileViewModel`0" priority="223" />
       <Item value="set" priority="32" />
       <Item value="_fileName" priority="95" />
-      <Item value="OnPropertyChanged`0" priority="506" />
+      <Item value="OnPropertyChanged`0" priority="634" />
       <Item value="Context`0" priority="255" />
       <Item value="_context" priority="31" />
       <Item value="Context" priority="57" />
-      <Item value="Resources`0" priority="112" />
+      <Item value="Resources`0" priority="144" />
       <Item value="ContextBoundObject`0" priority="63" />
       <Item value="CultureInfoConverter`0" priority="31" />
-      <Item value="GlobalApplicationViewModel`0" priority="544" />
+      <Item value="GlobalApplicationViewModel`0" priority="608" />
       <Item value="CultureInfoIetfLanguageTagConverter`0" priority="31" />
       <Item value="GBlason" priority="31" />
       <Item value="Multiselect" priority="27" />
@@ -275,7 +275,7 @@
       <Item value="GlobalApplicationViewModel" priority="57" />
       <Item value="RecentFiles" priority="351" />
       <Item value="ObservableCollection&lt;RecentFile&gt;" priority="57" />
-      <Item value="true" priority="159" />
+      <Item value="true" priority="286" />
       <Item value="ff" priority="31" />
       <Item value="fullPath" priority="95" />
       <Item value="test" priority="95" />
@@ -290,7 +290,7 @@
       <Item value="default" priority="31" />
       <Item value="else" priority="31" />
       <Item value="GlobalApplDicationViewModel`0" priority="31" />
-      <Item value="INotifyPropertyChanged`0" priority="95" />
+      <Item value="INotifyPropertyChanged`0" priority="127" />
       <Item value="_singleton" priority="192" />
       <Item value="MultiDocumentTabContent" priority="95" />
       <Item value="tests" priority="63" />
@@ -310,7 +310,7 @@
       <Item value="path" priority="127" />
       <Item value="formatGbr" priority="31" />
       <Item value="ShapeViewModel" priority="57" />
-      <Item value="Description" priority="31" />
+      <Item value="Description" priority="191" />
       <Item value="uint" priority="158" />
       <Item value="PathHeight" priority="32" />
       <Item value="PathWidth" priority="32" />
@@ -340,10 +340,10 @@
       <Item value="ApplicationRibbon" priority="63" />
       <Item value="BorderBrush" priority="31" />
       <Item value="Color`0" priority="31" />
-      <Item value="ShapeViewModel`0" priority="192" />
-      <Item value="_currentShape" priority="63" />
+      <Item value="ShapeViewModel`0" priority="286" />
+      <Item value="_currentShape" priority="127" />
       <Item value="manager" priority="31" />
-      <Item value="this" priority="63" />
+      <Item value="this" priority="159" />
       <Item value="Int32`0" priority="63" />
       <Item value="_mainWindowWidth" priority="95" />
       <Item value="_mainWindowPosition" priority="95" />
@@ -359,7 +359,7 @@
       <Item value="recentItem" priority="95" />
       <Item value="ItemPropertyInfo`0" priority="31" />
       <Item value="newItem" priority="63" />
-      <Item value="as" priority="63" />
+      <Item value="as" priority="94" />
       <Item value="RecentFilesFlaggedOrderedByDate" priority="31" />
       <Item value="Visibility`0" priority="63" />
       <Item value="RecentDirectories" priority="149" />
@@ -396,15 +396,15 @@
       <Item value="EnvironmentVariableTarget`0" priority="31" />
       <Item value="rman" priority="31" />
       <Item value="actualName" priority="31" />
-      <Item value="CoatOfArmViewModel`0" priority="63" />
+      <Item value="CoatOfArmViewModel`0" priority="160" />
       <Item value="PropertiesDisplayViewModel`0" priority="63" />
       <Item value="_properties" priority="95" />
-      <Item value="base" priority="31" />
+      <Item value="base" priority="383" />
       <Item value="PropertiesDisplayViewModel" priority="28" />
-      <Item value="protected" priority="31" />
+      <Item value="protected" priority="63" />
       <Item value="RootCoatOfArm" priority="119" />
       <Item value="Convert`0" priority="31" />
-      <Item value="CoatOfArmViewModel" priority="28" />
+      <Item value="CoatOfArmViewModel" priority="57" />
       <Item value="source" priority="255" />
       <Item value="debug" priority="31" />
       <Item value="DataView" priority="29" />
@@ -412,15 +412,15 @@
       <Item value="DataTable" priority="29" />
       <Item value="table" priority="191" />
       <Item value="DataColumn" priority="58" />
-      <Item value="Object`0" priority="127" />
+      <Item value="Object`0" priority="319" />
       <Item value="PropertyTableViewModel`0" priority="94" />
       <Item value="ObservableCollection&lt;PropertyTableViewModel&gt;" priority="57" />
       <Item value="DataTemplateSelector`0" priority="31" />
-      <Item value="switch" priority="63" />
+      <Item value="switch" priority="95" />
       <Item value="item" priority="95" />
       <Item value="GetType`0" priority="63" />
       <Item value="property" priority="31" />
-      <Item value="retour" priority="95" />
+      <Item value="retour" priority="255" />
       <Item value="PropertyTableViewModel" priority="57" />
       <Item value="PropertyName" priority="122" />
       <Item value="attr" priority="96" />
@@ -429,10 +429,10 @@
       <Item value="CellTemplateEditionStyleKey" priority="27" />
       <Item value="CellTemplateStyleKey" priority="32" />
       <Item value="PropertyValue" priority="65" />
-      <Item value="CurrentShape" priority="32" />
-      <Item value="name" priority="31" />
+      <Item value="CurrentShape" priority="64" />
+      <Item value="name" priority="95" />
       <Item value="Attribute" priority="31" />
-      <Item value="virtual" priority="31" />
+      <Item value="virtual" priority="127" />
       <Item value="_propertyValue" priority="95" />
       <Item value="PropertyDisplayer`0" priority="96" />
       <Item value="propertyInfo" priority="97" />
@@ -448,6 +448,56 @@
       <Item value="is" priority="31" />
       <Item value="propAttr" priority="31" />
       <Item value="propDis" priority="95" />
+      <Item value="CurrentlySelectedComponent" priority="27" />
+      <Item value="RoutedUICommand`0" priority="31" />
+      <Item value="CommandGeneric`0" priority="159" />
+      <Item value="CommandRepository`0" priority="95" />
+      <Item value="CommandHistory" priority="31" />
+      <Item value="ObservableCollection&lt;CommandGeneric&gt;" priority="28" />
+      <Item value="ICommandTarget`0" priority="160" />
+      <Item value="_commandTarget" priority="95" />
+      <Item value="_description" priority="127" />
+      <Item value="Type`0" priority="63" />
+      <Item value="text" priority="63" />
+      <Item value="ownerType" priority="31" />
+      <Item value="InputGesture`0" priority="31" />
+      <Item value="input" priority="31" />
+      <Item value="description" priority="31" />
+      <Item value="CommandTarget" priority="159" />
+      <Item value="override" priority="351" />
+      <Item value="currentRepo" priority="31" />
+      <Item value="_done" priority="63" />
+      <Item value="Done" priority="95" />
+      <Item value="ownertype" priority="31" />
+      <Item value="opf" priority="31" />
+      <Item value="elemCoa" priority="94" />
+      <Item value="element" priority="30" />
+      <Item value="shapeParam" priority="126" />
+      <Item value="CoatOfArmComponent`0" priority="63" />
+      <Item value="Parent" priority="95" />
+      <Item value="IInputElement`0" priority="96" />
+      <Item value="_oldShape" priority="159" />
+      <Item value="_newShape" priority="191" />
+      <Item value="Target" priority="31" />
+      <Item value="Execute`0" priority="31" />
+      <Item value="Parameter" priority="31" />
+      <Item value="parameter" priority="31" />
+      <Item value="coaTarget" priority="63" />
+      <Item value="readonly" priority="31" />
+      <Item value="ChangeShape`0" priority="31" />
+      <Item value="ChangeShape" priority="28" />
+      <Item value="ICommandSource`0" priority="31" />
+      <Item value="ICommand`0" priority="31" />
+      <Item value="_command" priority="63" />
+      <Item value="Command" priority="31" />
+      <Item value="RoutedCommand`0" priority="32" />
+      <Item value="rCommand" priority="63" />
+      <Item value="Paragraph`0" priority="31" />
+      <Item value="CommandParameter" priority="31" />
+      <Item value="ValidationRule`0" priority="31" />
+      <Item value="#region" priority="31" />
+      <Item value="CommandComboBox`0" priority="63" />
+      <Item value="command" priority="31" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GBL.Repository.Concrete.CoatOfArms">
       <Item value="Shape" priority="54" />
@@ -472,7 +522,7 @@
     <ItemStatistics item="Doc Comment tags">
       <Item value="&lt;see cref=&quot;&quot;/&gt;" priority="4" />
       <Item value="&lt;example&gt;&lt;/example&gt;" priority="4" />
-      <Item value="&lt;exception cref=&quot;&quot;&gt;&lt;/exception&gt;" priority="35" />
+      <Item value="&lt;exception cref=&quot;&quot;&gt;&lt;/exception&gt;" priority="40" />
       <Item value="&lt;remarks&gt;&lt;/remarks&gt;" priority="9" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GBL.Repository.CoatOfArms.Shape">
@@ -499,10 +549,10 @@
       <Item value="Shapes" priority="53" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Globalization.CultureInfo">
-      <Item value="CurrentCulture" priority="216" />
+      <Item value="CurrentCulture" priority="243" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Input.CanExecuteRoutedEventArgs">
-      <Item value="CanExecute" priority="110" />
+      <Item value="CanExecute" priority="137" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@GBlason.Properties.Settings">
       <Item value="Default" priority="350" />
@@ -551,6 +601,7 @@
       <Item value="BorderThickness" priority="5" />
       <Item value="CustomGuiMiddleBlueBackground" priority="5" />
       <Item value="CustomGuiLightBlueForeground" priority="5" />
+      <Item value="Disabled" priority="5" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@Microsoft.VisualStudio.TestTools.UnitTesting.Assert">
       <Item value="IsNotNull`0" priority="108" />
@@ -599,6 +650,7 @@
       <Item value="OpenDialogBoxFormatDescription" priority="26" />
       <Item value="GBSFormatExtension" priority="27" />
       <Item value="NewFileDefaultName" priority="26" />
+      <Item value="CommandDescChangeShape" priority="26" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@GBlason.Global.Context">
       <Item value="GetContext" priority="216" />
@@ -613,25 +665,27 @@
     <ItemStatistics item="Qualified:GBlason.ViewModel.GbsFileViewModel">
       <Item value="FileName" priority="108" />
       <Item value="FullFileName" priority="26" />
-      <Item value="CurrentlySelectedComponent" priority="53" />
-      <Item value="RootCoatOfArm" priority="26" />
+      <Item value="CurrentlySelectedComponent" priority="80" />
+      <Item value="RootCoatOfArm" priority="161" />
+      <Item value="CommandsApplied" priority="26" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.String">
       <Item value="Empty" priority="163" />
-      <Item value="Format`0" priority="135" />
+      <Item value="Format`0" priority="162" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.ComponentModel.PropertyChangedEventArgs">
       <Item value="PropertyName" priority="80" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@GBlason.ViewModel.GbsFileViewModel">
       <Item value="OpenFiles`0" priority="26" />
+      <Item value="CreateNew`0" priority="26" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Collections.ObjectModel.ObservableCollection`1">
-      <Item value="Add`0" priority="245" />
+      <Item value="Add`0" priority="273" />
       <Item value="Any`1" priority="106" />
       <Item value="Move`0" priority="26" />
       <Item value="IndexOf`0" priority="26" />
-      <Item value="FirstOrDefault`1" priority="82" />
+      <Item value="FirstOrDefault`1" priority="110" />
       <Item value="OrderBy`2" priority="27" />
       <Item value="Clear`0" priority="26" />
       <Item value="Remove`0" priority="26" />
@@ -671,7 +725,7 @@
       <Item value="UtcNow" priority="109" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@GBlason.ViewModel.GlobalApplicationViewModel">
-      <Item value="GetApplicationViewModel" priority="297" />
+      <Item value="GetApplicationViewModel" priority="347" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Controls.TabControl">
       <Item value="ActualHeight" priority="26" />
@@ -679,14 +733,14 @@
       <Item value="SelectedValue" priority="27" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GBlason.ViewModel.GlobalApplicationViewModel">
-      <Item value="CurrentlyDisplayedFile" priority="81" />
+      <Item value="CurrentlyDisplayedFile" priority="108" />
       <Item value="RecentFiles" priority="80" />
       <Item value="MainWindowWidth" priority="53" />
       <Item value="MainWindowTop" priority="22" />
       <Item value="RecentDirectories" priority="27" />
       <Item value="AddRecentFilesCollection`0" priority="27" />
       <Item value="AddRecentDirectoriesCollection`0" priority="27" />
-      <Item value="OpenedFiles" priority="26" />
+      <Item value="OpenedFiles" priority="53" />
       <Item value="PropertyChanged" priority="26" />
       <Item value="CurrentlySelectedComponent" priority="26" />
     </ItemStatistics>
@@ -724,6 +778,7 @@
       <Item value="Name" priority="22" />
       <Item value="Description" priority="26" />
       <Item value="Identifier" priority="26" />
+      <Item value="LocalizedName" priority="53" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Drawing.Size">
       <Item value="Height" priority="26" />
@@ -763,7 +818,7 @@
       <Item value="IsSelected" priority="53" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Resources.ResourceManager">
-      <Item value="GetString`0" priority="80" />
+      <Item value="GetString`0" priority="107" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GBlason.MainWindow">
       <Item value="Height" priority="26" />
@@ -777,7 +832,10 @@
       <Item value="X" priority="26" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Input.ExecutedRoutedEventArgs">
-      <Item value="Parameter" priority="80" />
+      <Item value="Parameter" priority="107" />
+      <Item value="Command" priority="80" />
+      <Item value="RoutedEvent" priority="26" />
+      <Item value="Source" priority="26" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GBlason.ViewModel.RecentFileViewModel">
       <Item value="IsFixed" priority="80" />
@@ -802,17 +860,19 @@
     </ItemStatistics>
     <ItemStatistics item="Qualified:@GBlason.Culture.BlasonVocabulary">
       <Item value="PropertyNameShape" priority="26" />
+      <Item value="NoShape" priority="26" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GBlason.ViewModel.Contract.CoatOfArmComponent">
       <Item value="GetType`0" priority="26" />
       <Item value="UpdateBindingOnSelected`0" priority="26" />
+      <Item value="RootParent" priority="26" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Type">
       <Item value="Name" priority="53" />
       <Item value="GetProperties`0" priority="54" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GBlason.ViewModel.CoatOfArmViewModel">
-      <Item value="CurrentShape" priority="26" />
+      <Item value="CurrentShape" priority="134" />
       <Item value="UpdateBindingOnSelected`0" priority="26" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GBL.Repository.CoatOfArms.CoatOfArms">
@@ -859,6 +919,22 @@
     </ItemStatistics>
     <ItemStatistics item="Qualified:GBlason.ViewModel.Contract.PropertyDisplayer">
       <Item value="PropertyValue" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:GBlason.Common.CustomCommand.CommandRepository">
+      <Item value="CommandHistory" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:GBlason.Control.CustomUserControl.CommandComboBox">
+      <Item value="Command" priority="27" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Input.ICommand">
+      <Item value="Execute`0" priority="27" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Input.RoutedCommand">
+      <Item value="Execute`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:GBlason.Common.CustomCommand.ChangeShape">
+      <Item value="Execute`0" priority="26" />
+      <Item value="CommandTarget" priority="26" />
     </ItemStatistics>
   </CompletionStatisticsManager>
 </Configuration>

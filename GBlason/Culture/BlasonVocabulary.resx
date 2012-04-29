@@ -191,4 +191,7 @@
   <data name="SwissShape" xml:space="preserve">
     <value>Swiss</value>
   </data>
+  <data name="NoShape" xml:space="preserve">
+    <value>None</value>
+  </data>
 </root>

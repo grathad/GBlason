@@ -6,6 +6,9 @@
              xmlns:Properties="clr-namespace:GBlason.Properties" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Background="#88FFFFFF">
+    <UserControl.Resources>
+        <ResourceDictionary Source="..\..\Themes\Brushes.xaml"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -33,7 +36,7 @@
             </Grid.RowDefinitions>
             <Button x:Name="ButtonCreateNew" Command="New" Width="40" Height="40"
                     Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left"
-                    Margin="10">
+                    Margin="10" Style="{DynamicResource ResourceKey=MenuRecentFileButtonStyle}">
                 <Image Source="..\..\Pictures\Icons32\asterisk_orange.png"/>
             </Button>
         </Grid>

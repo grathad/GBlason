@@ -5,6 +5,7 @@ using System.Linq;
 using FormatManager.Serializer;
 using GBSFormatManager;
 using GBlason.Common.Converter;
+using GBlason.Common.CustomCommand;
 using GBlason.ViewModel.Contract;
 
 namespace GBlason.ViewModel
@@ -36,10 +37,30 @@ namespace GBlason.ViewModel
 
         #endregion
 
+        /// <summary>
+        /// Gets or sets the root coat of arm. For this file
+        /// </summary>
+        /// <value>
+        /// The root coat of arm.
+        /// </value>
         public CoatOfArmViewModel RootCoatOfArm { get; set; }
+        /// <summary>
+        /// Gets or sets the repository of the commands applied.
+        /// </summary>
+        /// <value>
+        /// The commands applied.
+        /// </value>
+        public CommandRepository CommandsApplied { get; set; }
 
         #region coat of arms
 
+        /// <summary>
+        /// Gets or sets the currently selected component. Used for the display of the properties
+        /// Launch an update on he bindings, for all the children properties.
+        /// </summary>
+        /// <value>
+        /// The currently selected component.
+        /// </value>
         public CoatOfArmComponent CurrentlySelectedComponent
         {
             get { return _currentlySelectedComponent; }
@@ -92,6 +113,18 @@ namespace GBlason.ViewModel
                 //sauvegarde des fichiers recents - sous traités
                 GlobalApplicationViewModel.GetApplicationViewModel.SaveOpenedOrSavedFileAsRecent(fileName);
             }
+        }
+
+        /// <summary>
+        /// Creates a new File
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns></returns>
+        public static GbsFileViewModel CreateNew(String fileName)
+        {
+            var retour = new GbsFileViewModel {FileName = fileName, RootCoatOfArm = new CoatOfArmViewModel() };
+            retour.CurrentlySelectedComponent = retour.RootCoatOfArm;
+            return retour;
         }
         #endregion
 
