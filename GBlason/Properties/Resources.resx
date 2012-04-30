@@ -148,6 +148,9 @@
   <data name="ControlPropertyTitle" xml:space="preserve">
     <value>Properties</value>
   </data>
+  <data name="ControlTreeViewTitle" xml:space="preserve">
+    <value>TreeView</value>
+  </data>
   <data name="GBSFormatExtension" xml:space="preserve">
     <value>gbs</value>
   </data>
@@ -213,11 +216,14 @@
   <data name="OpenDialogBoxFormatDescription" xml:space="preserve">
     <value>GBlason Save</value>
   </data>
-  <data name="PropertiesCultureGroupHeader" xml:space="preserve">
-    <value>Culture and Language</value>
+  <data name="PreferencesMenuTitle" xml:space="preserve">
+    <value>Preferences</value>
   </data>
-  <data name="PropertiesDisplayGroupHeader" xml:space="preserve">
-    <value>Display</value>
+  <data name="PropertiesBlasonBackgroundHeader" xml:space="preserve">
+    <value>Coat of Arm's Screen Background</value>
+  </data>
+  <data name="PropertiesCultureHeader" xml:space="preserve">
+    <value>Culture and Language</value>
   </data>
   <data name="RecentDocumentMenuRecentFileTitle" xml:space="preserve">
     <value>Recent Documents</value>

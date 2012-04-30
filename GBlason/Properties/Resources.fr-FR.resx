@@ -180,6 +180,15 @@
   <data name="MenuLabelSaveAsSVG" xml:space="preserve">
     <value>SVG</value>
   </data>
+  <data name="PreferencesMenuTitle" xml:space="preserve">
+    <value>Préférences</value>
+  </data>
+  <data name="PropertiesBlasonBackgroundHeader" xml:space="preserve">
+    <value>Couleur de fond</value>
+  </data>
+  <data name="PropertiesCultureHeader" xml:space="preserve">
+    <value>Langue</value>
+  </data>
   <data name="RecentDocumentMenuRecentFileTitle" xml:space="preserve">
     <value>Documents Récents</value>
   </data>

@@ -103,6 +103,7 @@
     <Compile Include="Global\ApplicationSettingsManager.cs" />
     <Compile Include="Global\Context.cs" />
     <Compile Include="ViewModel\CoatOfArmViewModel.cs" />
+    <Compile Include="ViewModel\ComponentTreeViewViewModel.cs" />
     <Compile Include="ViewModel\Contract\CoatOfArmComponent.cs" />
     <Compile Include="ViewModel\Contract\PropertyDisplayer.cs" />
     <Compile Include="ViewModel\GbrFileViewModel.cs" />
@@ -154,6 +155,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dictionary\RibbonTemplateDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\TabControlTemplateDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary\TreeViewTemplateDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -339,6 +348,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Pictures\Icons32\asterisk_orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\color_management.png" />
+    <Resource Include="Pictures\Icons16\interface_preferences.png" />
+    <Resource Include="Pictures\Icons16\locate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\color_management.png" />
+    <Resource Include="Pictures\Icons32\interface_preferences.png" />
+    <Resource Include="Pictures\Icons32\locate.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

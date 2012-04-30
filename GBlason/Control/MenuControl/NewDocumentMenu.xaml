@@ -6,9 +6,6 @@
              xmlns:Properties="clr-namespace:GBlason.Properties" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Background="#88FFFFFF">
-    <UserControl.Resources>
-        <ResourceDictionary Source="..\..\Themes\Brushes.xaml"/>
-    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>

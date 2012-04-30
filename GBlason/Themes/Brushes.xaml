@@ -8,6 +8,12 @@
     <SolidColorBrush x:Key="FontDisabledBackgroundBrush" Color="#8d8d8d"/>
     
     <!-- /////////////////////////////////  CustomComboBox -->
+
+    <SolidColorBrush x:Key="LightYellowBorderBrush" Color="#FFF3AD09"/>
+    <SolidColorBrush x:Key="DarkYellowBorderBrush" Color="#FFCDA223"/>
+    <SolidColorBrush x:Key="SelectedGrayBorderBrush" Color="#AA888888"/>
+    <SolidColorBrush x:Key="SelectedGrayBackgroundBrush" Color="#AAAAAAAA"/>
+
     <LinearGradientBrush x:Key="YellowBackgroundBrush"  StartPoint="0.5,0" EndPoint="0.5,1">
         <GradientStop Color="#AAFFD000" Offset="0" />
         <GradientStop Color="#AAFFAA00" Offset="0.5" />
@@ -101,5 +107,42 @@
         <GradientStop Color="#33000000" Offset=".5"/>
         <GradientStop Color="#00000000" Offset="1"/>
     </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="HardUserControlHeaderBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#FFD5DDE8" Offset="0"/>
+                <GradientStop Color="#FFCBD1DC" Offset="1"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="UserControlInvertedHeaderBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#FFD5DDE8" Offset="1"/>
+                <GradientStop Color="#FFCBD1DC" Offset="0"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <RadialGradientBrush x:Key="InnerShadowUp">
+        <RadialGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1" ScaleY="1.5"/>
+                <SkewTransform AngleX="0" AngleY="0" CenterX="0.5" CenterY="0.5"/>
+                <RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+                <TranslateTransform X="0" Y="0.538"/>
+            </TransformGroup>
+        </RadialGradientBrush.RelativeTransform>
+        <GradientStop Color="#11000000" Offset="0"/>
+        <GradientStop Color="#00000000" Offset="1"/>
+    </RadialGradientBrush>
+
+    <SolidColorBrush x:Key="HardDarkColorBorderBrush" Color="#FFB5BAC2"/>
+    <SolidColorBrush x:Key="HardLightColorBackgroundBrush" Color="#FFD5DDE8"/>
+    <SolidColorBrush x:Key="HardDarkColorBackgroundBrush" Color="#FFCBD1DC"/>
+
+
 
 </ResourceDictionary>

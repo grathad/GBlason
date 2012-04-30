@@ -16,7 +16,7 @@
     </UserControl.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" MinHeight="20" MaxHeight="30"/>
+            <RowDefinition Height="30" MinHeight="20" MaxHeight="32"/>
             <RowDefinition Height="Auto" MinHeight="30"/>
             <RowDefinition Height="28"/>
             <RowDefinition Height="*"/>
@@ -29,16 +29,12 @@
                 BorderBrush="{StaticResource ResourceKey=DarkColorBorderBrush}">
             <Border Margin="0"
                     CornerRadius="0"
-                    BorderThickness="0,0,0,1"
+                    BorderThickness="1"
                     BorderBrush="{StaticResource ResourceKey=LightColorBorderBrush}">
                 <DockPanel>
-                    <Button DockPanel.Dock="Right" Width="20" Height="20" Margin="0,2,2,2"
-                            Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">X</Button>
-                    <Button DockPanel.Dock="Right" Width="20" Height="20" Margin="0,2,0,2"
-                            Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">Y</Button>
                     <TextBlock Text="{x:Static Properties:Resources.ControlPropertyTitle}"
                        VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Margin="10,2,2,0"/>
+                       Margin="10,0,2,0"/>
                 </DockPanel>
             </Border>
         </Border>

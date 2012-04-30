@@ -5,16 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Aggregate="clr-namespace:GBlason.Control.Aggregate"
              xmlns:ViewModel="clr-namespace:GBlason.ViewModel" mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="600">
+             d:DesignHeight="300" d:DesignWidth="600"
+             Background="{StaticResource ResourceKey=LightColorBackgroundBrush}">
     
-  <UserControl.Resources>
+    <UserControl.Resources>
         <DataTemplate x:Key="CoAViewerTemplate" DataType="{x:Type ViewModel:GbsFileViewModel}">
             <Aggregate:CoatOfArmsViewer/>
         </DataTemplate>
         <DataTemplate x:Key="TabItemTemplate" DataType="{x:Type ViewModel:GbsFileViewModel}">
             <TextBlock Text="{Binding Path=FileName}"/>
         </DataTemplate>
-  </UserControl.Resources>
+    </UserControl.Resources>
     
   <Grid x:Name="CustomGUIGrid" Background="White">
         <Grid.RowDefinitions>

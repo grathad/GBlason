@@ -1,0 +1,5 @@
+C:\Users\grathad\GBlason\GBlason\GBlasonLogic\bin\Release\GBlasonLogic.dll
+C:\Users\grathad\GBlason\GBlason\GBlasonLogic\bin\Release\GBlasonLogic.pdb
+C:\Users\grathad\GBlason\GBlason\GBlasonLogic\obj\Release\ResolveAssemblyReference.cache
+C:\Users\grathad\GBlason\GBlason\GBlasonLogic\obj\Release\GBlasonLogic.dll
+C:\Users\grathad\GBlason\GBlason\GBlasonLogic\obj\Release\GBlasonLogic.pdb

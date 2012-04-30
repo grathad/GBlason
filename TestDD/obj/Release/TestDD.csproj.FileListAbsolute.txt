@@ -1,0 +1,15 @@
+C:\Users\grathad\GBlason\TestDD\bin\Release\Resources.gbr
+C:\Users\grathad\GBlason\TestDD\bin\Release\TestDD.dll
+C:\Users\grathad\GBlason\TestDD\bin\Release\TestDD.pdb
+C:\Users\grathad\GBlason\TestDD\bin\Release\FormatManager.dll
+C:\Users\grathad\GBlason\TestDD\bin\Release\GBlasonLogic.dll
+C:\Users\grathad\GBlason\TestDD\bin\Release\Repository.dll
+C:\Users\grathad\GBlason\TestDD\bin\Release\GBlasonLogic.pdb
+C:\Users\grathad\GBlason\TestDD\bin\Release\Repository.pdb
+C:\Users\grathad\GBlason\TestDD\bin\Release\FormatManager.pdb
+C:\Users\grathad\GBlason\TestDD\bin\Release\fr-FR\Repository.resources.dll
+C:\Users\grathad\GBlason\TestDD\bin\Release\Repository_Accessor.dll
+C:\Users\grathad\GBlason\TestDD\bin\Release\Repository_Accessor.pdb
+C:\Users\grathad\GBlason\TestDD\obj\Release\ResolveAssemblyReference.cache
+C:\Users\grathad\GBlason\TestDD\obj\Release\TestDD.dll
+C:\Users\grathad\GBlason\TestDD\obj\Release\TestDD.pdb

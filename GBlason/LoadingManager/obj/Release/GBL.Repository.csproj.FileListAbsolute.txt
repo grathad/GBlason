@@ -1,0 +1,11 @@
+C:\Users\grathad\GBlason\GBlason\LoadingManager\bin\Release\Repository.dll
+C:\Users\grathad\GBlason\GBlason\LoadingManager\bin\Release\Repository.pdb
+C:\Users\grathad\GBlason\GBlason\LoadingManager\bin\Release\fr-FR\Repository.resources.dll
+C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Release\ResolveAssemblyReference.cache
+C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Release\GBL.Repository.Resources.BasicShapes.resources
+C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Release\GBL.Repository.Resources.BasicShapes.fr-FR.resources
+C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Release\GenerateResource.read.1.tlog
+C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Release\GenerateResource.write.1.tlog
+C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Release\fr-FR\Repository.resources.dll
+C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Release\Repository.dll
+C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Release\Repository.pdb

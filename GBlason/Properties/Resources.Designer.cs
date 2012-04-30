@@ -151,6 +151,15 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TreeView.
+        /// </summary>
+        public static string ControlTreeViewTitle {
+            get {
+                return ResourceManager.GetString("ControlTreeViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to gbs.
         /// </summary>
         public static string GBSFormatExtension {
@@ -340,20 +349,29 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Culture and Language.
+        ///   Looks up a localized string similar to Preferences.
         /// </summary>
-        public static string PropertiesCultureGroupHeader {
+        public static string PreferencesMenuTitle {
             get {
-                return ResourceManager.GetString("PropertiesCultureGroupHeader", resourceCulture);
+                return ResourceManager.GetString("PreferencesMenuTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Display.
+        ///   Looks up a localized string similar to Coat of Arm&apos;s Screen Background.
         /// </summary>
-        public static string PropertiesDisplayGroupHeader {
+        public static string PropertiesBlasonBackgroundHeader {
             get {
-                return ResourceManager.GetString("PropertiesDisplayGroupHeader", resourceCulture);
+                return ResourceManager.GetString("PropertiesBlasonBackgroundHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Culture and Language.
+        /// </summary>
+        public static string PropertiesCultureHeader {
+            get {
+                return ResourceManager.GetString("PropertiesCultureHeader", resourceCulture);
             }
         }
         

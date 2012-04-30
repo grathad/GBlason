@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Media;
 using GBlason.Global;
 using GBlason.Properties;
 using GBlason.ViewModel.Contract;
@@ -326,6 +327,13 @@ namespace GBlason.ViewModel
                     : String.Empty);
             }
         }
+
+        #region Preferences
+
+        public Color BlasonViewerBackgroundColor { get; set; }
+
+        #endregion
+
         #endregion
 
         #region INotifyPropertyChanged Members

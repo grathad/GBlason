@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -37,13 +38,36 @@ namespace GBlason.ViewModel
 
         #endregion
 
+        private ObservableCollection<CoatOfArmComponent> _rootForTreeView;
+
+        public ObservableCollection<CoatOfArmComponent> RootForTreeView
+        {
+            get
+            {
+                return
+                    _rootForTreeView ?? (_rootForTreeView = new ObservableCollection<CoatOfArmComponent> { RootCoatOfArm });
+            }
+        }
+
+        private CoatOfArmViewModel _rootCoatOfArm;
+
         /// <summary>
         /// Gets or sets the root coat of arm. For this file
         /// </summary>
         /// <value>
         /// The root coat of arm.
         /// </value>
-        public CoatOfArmViewModel RootCoatOfArm { get; set; }
+        public CoatOfArmViewModel RootCoatOfArm
+        {
+            get { return _rootCoatOfArm; }
+            set
+            {
+                if (value == _rootCoatOfArm) return;
+                _rootCoatOfArm = value;
+                OnPropertyChanged("RootCoatOfArm");
+                OnPropertyChanged("RootForTreeView");
+            }
+        }
         /// <summary>
         /// Gets or sets the repository of the commands applied.
         /// </summary>
@@ -122,7 +146,7 @@ namespace GBlason.ViewModel
         /// <returns></returns>
         public static GbsFileViewModel CreateNew(String fileName)
         {
-            var retour = new GbsFileViewModel {FileName = fileName, RootCoatOfArm = new CoatOfArmViewModel() };
+            var retour = new GbsFileViewModel { FileName = fileName, RootCoatOfArm = new CoatOfArmViewModel() };
             retour.CurrentlySelectedComponent = retour.RootCoatOfArm;
             return retour;
         }
@@ -142,6 +166,7 @@ namespace GBlason.ViewModel
                 OnPropertyChanged("FileName");
             }
         }
+
         private String _fileName;
 
         #endregion
