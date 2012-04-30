@@ -75,9 +75,6 @@
     <Compile Include="Common\CustomCommand\ICommandTarget.cs" />
     <Compile Include="Common\TemplateSelector\PropertyTable.cs" />
     <Compile Include="Control\CustomUserControl\CommandComboBox.cs" />
-    <Compile Include="Control\DebugUC.xaml.cs">
-      <DependentUpon>DebugUC.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Control\MenuControl\NewDocumentMenu.xaml.cs">
       <DependentUpon>NewDocumentMenu.xaml</DependentUpon>
     </Compile>
@@ -117,10 +114,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\Aggregate\CustomGUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Control\DebugUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

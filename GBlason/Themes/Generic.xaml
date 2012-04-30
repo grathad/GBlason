@@ -16,17 +16,18 @@
                     <Border
                         x:Name="Border"
                         BorderThickness="1"
+                        BorderBrush="Transparent"
                         CornerRadius="3">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.5*"/>
                                 <RowDefinition Height="0.5*"/>
                             </Grid.RowDefinitions>
-                            <Border HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.RowSpan="2" CornerRadius="3,3,3,3" Name="glow" Opacity="0" Background="{StaticResource CustomGlowEffectBackgroundBrush}">
+                            <Border HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.RowSpan="2" CornerRadius="3,3,3,3" Name="glow" Opacity="0" Background="{StaticResource GlowBrush}">
                             </Border>
-                            <Border HorizontalAlignment="Stretch" Margin="0" CornerRadius="3,3,4,4" Name="glossy" Opacity="0" Background="{StaticResource CustomGlossyEffectBackgroundBrush}">
+                            <Border HorizontalAlignment="Stretch" Margin="0" CornerRadius="3,3,4,4" Name="glossy" Opacity="0" Background="{StaticResource GlossyBrush}">
                             </Border>
-                            <Border HorizontalAlignment="Stretch" Margin="0" CornerRadius="3" Name="innerLight" Opacity=".4" Background="#44FFFFFF" BorderBrush="White" BorderThickness="1"
+                            <Border HorizontalAlignment="Stretch" Margin="0" CornerRadius="3" Name="innerLight" Opacity="0" Background="#44FFFFFF" BorderBrush="White" BorderThickness="1"
                                     Grid.RowSpan="2">
                             </Border>
 
@@ -37,27 +38,24 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
+                        <!--<Trigger Property="IsKeyboardFocused" Value="true">
                             <Setter TargetName="glow" Property="Opacity" Value="1"/> 
                             <Setter TargetName="glossy" Property="Opacity" Value="1"/>
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource CustomNormalButtonBackgroundBrush}" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource CustomNormalButtonBorderBrush}" />
-                        </Trigger>
+                            <Setter TargetName="innerLight" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ResourceKey=YellowBackgroundBrush}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#FFCDA223" />
+                        </Trigger>-->
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="glow" Property="Opacity" Value="1"/>
                             <Setter TargetName="glossy" Property="Opacity" Value="1"/>
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource CustomNormalButtonBackgroundBrush}" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource CustomNormalButtonBorderBrush}" />
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="false">
-                            <Setter TargetName="glow" Property="Opacity" Value="0"/>
-                            <Setter TargetName="glossy" Property="Opacity" Value="0"/>
-                            <Setter TargetName="Border" Property="Background" Value="#00FFFFFF" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#00FFFFFF" />
+                            <Setter TargetName="innerLight" Property="Opacity" Value=".4"/>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ResourceKey=YellowBackgroundBrush}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#FFCDA223" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource CustomNormalButtonPressedBackgroundBrush}" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource CustomNormalButtonBorderBrush}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ResourceKey=DarkYellowBackgroundBrush}" />
+                            <Setter TargetName="innerLight" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#FFF3AD09" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="glow" Property="Opacity" Value="0"/>
@@ -74,212 +72,217 @@
 
     <!-- CommandComboBox -->
 
-    <DrawingBrush x:Key="BurshDots" Stretch="UniformToFill" TileMode="Tile" Viewport="0,0,1,4" ViewportUnits="Absolute" >
-        <DrawingBrush.Drawing>
-            <DrawingGroup>
-                <DrawingGroup.Children>
-                    <GeometryDrawing Brush="#FF436B13" Geometry="F1 M -3.85367e-006,-1.52588e-005L 13.3317,-1.52588e-005L 13.3317,26.6633L -3.85367e-006,26.6633L -3.85367e-006,-1.52588e-005 Z "/>
-                    <GeometryDrawing Brush="#00436B13" Geometry="F1 M 1.23259e-006,26.6633L 13.3317,26.6633L 13.3317,53.3267L 1.23259e-006,53.3267L 1.23259e-006,26.6633 Z "/>
-                </DrawingGroup.Children>
-            </DrawingGroup>
-        </DrawingBrush.Drawing>
-    </DrawingBrush>
+    
 
-    <LinearGradientBrush x:Key="TextBoxBorder" MappingMode="Absolute" EndPoint="0,20" StartPoint="0,0">
-        <GradientStop Color="#ABADB3" Offset="0.05"/>
-        <GradientStop Color="#E2E3EA" Offset="0.07"/>
-        <GradientStop Color="#E3E9EF" Offset="1"/>
-    </LinearGradientBrush>
+    <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <Border x:Name="ExternBorder" 
+                            Grid.ColumnSpan="2"
+                            CornerRadius="0"
+                            Background="{StaticResource ResourceKey=NeutralBackgroundBrush}"
+                            BorderBrush="#BB888888"
+                            BorderThickness="1" />
+            <Border Grid.Column="0"
+                        x:Name="LeftBorder"
+                            CornerRadius="0"
+                            Margin="1,1,0,1" 
+                            Background="#00FFFFFF" 
+                            BorderBrush="#00888888"
+                            BorderThickness="0,0,1,0" />
+            <Border Grid.Column="1"
+                        x:Name="RightBorder"
+                        Margin="0,1,1,1"
+                            CornerRadius="0"
+                            Background="#00FFFFFF">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Border x:Name="Glossy" Grid.Row="0"
+                                Margin="1,1,1,0"
+                                Background="{StaticResource ResourceKey=GlossyBrush}"
+                                Opacity="0"/>
+                    <Border x:Name="Glow" Grid.Row="1"
+                                Margin="1"
+                                Background="{StaticResource ResourceKey=GlowBrush}"
+                                Opacity="0"/>
+                </Grid>
+            </Border>
+            <Path x:Name="Arrow"
+                          Grid.Column="1"     
+                          Fill="Black"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Data="M 0 0 L 4 4 L 8 0 Z"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                <Setter TargetName="RightBorder" Property="Background" Value="{StaticResource ResourceKey=YellowBackgroundBrush}" />
+                <Setter TargetName="ExternBorder" Property="BorderBrush" Value="#FFCDA223"/>
+                <Setter TargetName="LeftBorder" Property="BorderBrush" Value="#FFCDA223"/>
+                <Setter TargetName="Glossy" Property="Opacity" Value="1"/>
+                <Setter TargetName="Glow" Property="Opacity" Value="1"/>
+            </Trigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                <Setter TargetName="RightBorder" Property="Background" Value="{StaticResource ResourceKey=DarkYellowBackgroundBrush}" />
+                <Setter TargetName="ExternBorder" Property="BorderBrush" Value="#FFF3AD09"/>
+                <Setter TargetName="LeftBorder" Property="BorderBrush" Value="#FFF3AD09"/>
+                <Setter TargetName="Glossy" Property="Opacity" Value="1"/>
+                <Setter TargetName="Glow" Property="Opacity" Value="1"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="RightBorder" Property="Background" Value="#33AAAAAA" />
+                <Setter TargetName="LeftBorder" Property="Background" Value="#33AAAAAA" />
+                <Setter TargetName="LeftBorder" Property="BorderBrush" Value="#33AAAAAA" />
+                <Setter TargetName="ExternBorder" Property="BorderBrush" Value="#99999999" />
+                <Setter Property="Foreground" Value="#99999999"/>
+                <Setter TargetName="Arrow" Property="Fill" Value="#99999999" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 
-    <Style x:Key="ComboBoxFocusVisual">
-        <Setter Property="Control.Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Rectangle Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1" Margin="4,4,21,4" SnapsToDevicePixels="true"/>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
+        <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+    </ControlTemplate>
 
-    <Geometry x:Key="DownArrowGeometry">M 0 0 L 3.5 4 L 7 0 Z</Geometry>
-
-    <Style x:Key="ComboBoxEditableTemplate" TargetType="{x:Type TextBox}">
-        <Setter Property="OverridesDefaultStyle" Value="true"/>
-        <Setter Property="AllowDrop" Value="true"/>
-        <Setter Property="MinWidth" Value="0"/>
-        <Setter Property="MinHeight" Value="0"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TextBox}">
-                    <ScrollViewer x:Name="PART_ContentHost" Background="Transparent" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="CommandComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
-        <Setter Property="OverridesDefaultStyle" Value="true"/>
-        <Setter Property="IsTabStop" Value="false"/>
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="ClickMode" Value="Press"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border
-                        x:Name="Chrome"
-                        BorderThickness="1,0,0,0"
-                        BorderBrush="#66000000"
-                        CornerRadius="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.5*"/>
-                                <RowDefinition Height="0.5*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1"/>
-                                <ColumnDefinition Width="*" MaxWidth="16"/>
-                            </Grid.ColumnDefinitions>
-                            <Border HorizontalAlignment="Stretch" Margin="0,0,0,0"
-                                    Grid.RowSpan="2" Grid.ColumnSpan="2" Name="glow"
-                                    Opacity="0" Background="{StaticResource CustomGlowEffectBackgroundBrush}">
-                            </Border>
-                            <Border HorizontalAlignment="Stretch" Margin="0"
-                                    Name="glossy" Opacity="0" Background="{StaticResource CustomGlossyEffectBackgroundBrush}"
-                                    Grid.ColumnSpan="2">
-                            </Border>
-                            <Border HorizontalAlignment="Stretch" Margin="0"
-                                    Name="innerLight" Opacity=".4" Background="#44FFFFFF"
-                                    BorderBrush="White"
-                                    BorderThickness="1"
-                                    Grid.RowSpan="2" Grid.ColumnSpan="2">
-                            </Border>
-
-                            <Path Grid.Column="1" Grid.RowSpan="2"
-                                  Fill="{TemplateBinding Foreground}" HorizontalAlignment="Center"
-                                  Margin="4"
-                                  x:Name="content" VerticalAlignment="Center" Data="{StaticResource ResourceKey=DownArrowGeometry}"/>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="BorderThickness" TargetName="Chrome" Value="1,1,1,0"/>
-                            <Setter Property="CornerRadius" TargetName="Chrome" Value="0"/>
-                            <Setter TargetName="Chrome" Property="Background" Value="{StaticResource CustomNormalButtonPressedBackgroundBrush}" />
-                            <Setter TargetName="Chrome" Property="BorderBrush" Value="{StaticResource CustomNormalButtonBorderBrush}" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="glow" Property="Opacity" Value="0"/>
-                            <Setter TargetName="glossy" Property="Opacity" Value="0"/>
-                            <Setter TargetName="Chrome" Property="Background" Value="{StaticResource CustomNormalButtonDisabledBackgroundBrush}" />
-                            <Setter TargetName="Chrome" Property="BorderBrush" Value="{StaticResource FontDisabledBackgroundBrush}" />
-                            <Setter TargetName="content" Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="false">
-                            <Setter TargetName="glow" Property="Opacity" Value="0"/>
-                            <Setter TargetName="glossy" Property="Opacity" Value="0"/>
-                            <Setter TargetName="Chrome" Property="Background" Value="#00FFFFFF" />
-                            <Setter TargetName="Chrome" Property="BorderBrush" Value="#00FFFFFF" />
-                        </Trigger>
-                        <DataTrigger Binding="{Binding IsFocused, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" Value="True">
-                            <Setter Property="Background" TargetName="Chrome" Value="#22000000"/>
-                            <Setter Property="BorderBrush" TargetName="Chrome" Value="#44000000"/>
-                        </DataTrigger >
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Popup Margin="1" x:Key="PopupCommandCombo"
-           AllowsTransparency="true"
-           IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
-           Placement="Bottom" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}"
-           Grid.ColumnSpan="2">
-        <Border x:Name="DropDownBorder"
-                Background="White"
-                MinWidth="{Binding Path=ActualWidth, ElementName=MainGrid}"
-                BorderBrush="Red"
-                BorderThickness="1"
-                CornerRadius="0,0,4,4">
-            <ScrollViewer CanContentScroll="true">
-                <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
-            </ScrollViewer>
-        </Border>
-    </Popup>
-
-    <Style TargetType="{x:Type CustomUserControl:CommandComboBox}">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource ComboBoxFocusVisual}"/>
-        <!--<Setter Property="Background" Value="{TemplateBinding Background}"/>-->
-        <!--<Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="{TemplateBinding BorderThickness}"/>-->
+    <Style x:Key="{x:Type CustomUserControl:CommandComboBox}" TargetType="{x:Type CustomUserControl:CommandComboBox}">
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="Padding" Value="4,3"/>
-        <!--<Setter Property="FontFamily" Value="Tahoma"/>
-        <Setter Property="FontSize" Value="11"/>-->
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="MinWidth" Value="120"/>
+        <Setter Property="MinHeight" Value="20"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CustomUserControl:CommandComboBox}">
-                    <Grid x:Name="MainGrid" SnapsToDevicePixels="true">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
-                        </Grid.ColumnDefinitions>
-                        <Popup Margin="1" x:Name="PopupCommandCombo" AllowsTransparency="true"
-                               IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                               Placement="Bottom"
-                               PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Grid.ColumnSpan="2">
-                            <Border x:Name="DropDownBorder"
-                                    Background="White"
-                                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                                    MinWidth="{Binding Path=ActualWidth, ElementName=MainGrid}"
-                                    BorderBrush="Black" BorderThickness="1,0,1,1">
-                                <ScrollViewer CanContentScroll="true">
-                                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                    <Grid>
+                        <ToggleButton Name="ToggleButton"
+                                          Template="{StaticResource ComboBoxToggleButton}" 
+                                          Grid.Column="2" 
+                                          Focusable="false"
+                                          IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                                          ClickMode="Press">
+                        </ToggleButton>
+                        <ContentPresenter Name="ContentSite"
+                                              IsHitTestVisible="False" 
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                              Margin="3,3,23,3"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left" />
+                        <TextBox x:Name="PART_EditableTextBox"
+                                     Style="{x:Null}" 
+                                     Template="{StaticResource ComboBoxTextBox}" 
+                                     HorizontalAlignment="Left" 
+                                     VerticalAlignment="Center" 
+                                     Margin="3,3,23,3"
+                                     Focusable="True" 
+                                     Background="Transparent"
+                                     Visibility="Hidden"
+                                     IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                        <Popup Name="Popup"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True" 
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+                            <Grid Name="DropDown"
+                                      SnapsToDevicePixels="True"                
+                                      MinWidth="{TemplateBinding ActualWidth}"
+                                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <Border x:Name="DropDownBorder"
+                                            Background="#FFFFFFFF"
+                                            BorderThickness="1"
+                                            Margin="0,2,0,0"
+                                            BorderBrush="#BB333333"/>
+                                <ScrollViewer Margin="1,4,1,1" SnapsToDevicePixels="True">
+                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                                 </ScrollViewer>
-                            </Border>
+                            </Grid>
                         </Popup>
-                        <DockPanel Grid.ColumnSpan="2">
-                        <ToggleButton Style="{StaticResource CommandComboBoxToggleButton}"
-                                      Background="{TemplateBinding Background}"
-                                      BorderBrush="{TemplateBinding BorderBrush}"
-                                      DockPanel.Dock="Right"
-                                      IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>                        
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          Margin="{TemplateBinding Padding}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          IsHitTestVisible="false"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                          Content="{TemplateBinding SelectionBoxItem}"
-                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"/>
-                        </DockPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasItems" Value="false">
-                            <Setter Property="Height" TargetName="DropDownBorder" Value="95"/>
+                            <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                            <Setter Property="Background" Value="#FFF4F4F4"/>
+                            <Setter Property="Foreground" Value="#99999999"/>
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </Trigger>
+                        <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                            <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+                        </Trigger>
+                        <Trigger Property="IsEditable" Value="true">
+                            <Setter Property="IsTabStop" Value="false"/>
+                            <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsEditable" Value="true">
-                <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorder}"/>
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
-                <Setter Property="IsTabStop" Value="false"/>
-                <Setter Property="Padding" Value="3"/>
-                <Setter Property="Template" Value="{StaticResource ComboBoxEditableTemplate}"/>
-            </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                    <Border x:Name="Border"
+                                Margin="1,0,1,1"
+                                SnapsToDevicePixels="true"
+                                BorderThickness="1"
+                                BorderBrush="Transparent"
+                                Background="Transparent">
+                        <Grid ClipToBounds="True"
+                                  x:Name="gridIntern"
+                                  Margin="-1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition Height="0.5*"/>
+                            </Grid.RowDefinitions>
+                            <Border x:Name="Glossy" Grid.Row="0"
+                                        Margin="1,1,1,0"
+                                        Background="{StaticResource ResourceKey=GlossyBrush}"
+                                        Opacity="0"/>
+                            <Border x:Name="Glow" Grid.Row="1"
+                                        Margin="1,0,1,1"
+                                        Background="{StaticResource ResourceKey=GlowBrush}"
+                                        Opacity="0"/>
+                            <ContentPresenter x:Name="Content" Grid.RowSpan="2"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#AAAAAAAA"/>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#AA888888"/>
+                            <Setter TargetName="Glossy" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Glow" Property="Opacity" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="gridIntern" Property="Background" Value="{StaticResource ResourceKey=YellowBackgroundBrush}"/>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#BB333333"/>
+                            <Setter TargetName="Glossy" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Glow" Property="Opacity" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Content" Property="Opacity" Value=".55"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     
 </ResourceDictionary>

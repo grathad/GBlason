@@ -5,7 +5,33 @@
 
     <SolidColorBrush x:Key="CustomDefaultBorder" Color="Black"/>
 
-    <RadialGradientBrush x:Key="CustomGlowEffectBackgroundBrush">
+    <SolidColorBrush x:Key="FontDisabledBackgroundBrush" Color="#8d8d8d"/>
+    
+    <!-- /////////////////////////////////  CustomComboBox -->
+    <LinearGradientBrush x:Key="YellowBackgroundBrush"  StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#AAFFD000" Offset="0" />
+        <GradientStop Color="#AAFFAA00" Offset="0.5" />
+        <GradientStop Color="#AAFFD000" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DarkYellowBackgroundBrush"  StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#EAFFDA00" Offset="0" />
+        <GradientStop Color="#EAFFAF00" Offset="0.5" />
+        <GradientStop Color="#EAFFDA00" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="NeutralBackgroundBrush"  StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#FFDDDDDD" Offset="0.0" />
+        <GradientStop Color="#FFFFFFFF" Offset="0.19" />
+        <GradientStop Color="#FFFFFFFF" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GlossyBrush"  StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#CCFFFFFF" Offset="0.0" />
+        <GradientStop Color="#44FFFFFF" Offset="1" />
+    </LinearGradientBrush>
+
+    <RadialGradientBrush x:Key="GlowBrush">
         <RadialGradientBrush.RelativeTransform>
             <TransformGroup>
                 <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.633" ScaleY="1.944"/>
@@ -14,16 +40,9 @@
                 <TranslateTransform X="0" Y="0.538"/>
             </TransformGroup>
         </RadialGradientBrush.RelativeTransform>
-        <GradientStop Color="#FFFFFFFF" Offset="0"/>
+        <GradientStop Color="#AAFFFFFF" Offset="0"/>
         <GradientStop Color="#00EAEAEA" Offset="1"/>
     </RadialGradientBrush>
-
-    <LinearGradientBrush x:Key="CustomGlossyEffectBackgroundBrush" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FFFFFFFF" Offset="0"/>
-        <GradientStop Color="#88FFFFFF" Offset="1"/>
-    </LinearGradientBrush>
-
-    <SolidColorBrush x:Key="FontDisabledBackgroundBrush" Color="#8d8d8d"/>
 
     <!-- /////////////////////////////////  CustomNormalButton -->
 
@@ -51,5 +70,36 @@
         <GradientStop Color="#FF5A5A5A" Offset="0"/>
         <GradientStop Color="#FF444444" Offset="1"/>
     </RadialGradientBrush>
+
+    <!-- //////////////////////////////////  UserControl (float) -->
+    <LinearGradientBrush x:Key="UserControlHeaderBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#99BAC6D9" Offset="0"/>
+                <GradientStop Color="#99A9B3C4" Offset="1"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="LightColorBorderBrush" Color="#66FFFFFF"/>
+    <SolidColorBrush x:Key="DarkColorBorderBrush" Color="#AA9097A3"/>
+    <SolidColorBrush x:Key="LightColorBackgroundBrush" Color="#66BAC6D9"/>
+    <SolidColorBrush x:Key="DarkColorBackgroundBrush" Color="#99A9B3C4"/>
+
+    <LinearGradientBrush x:Key="UserControlHeaderDropingShadow" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#33000000" Offset="0"/>
+        <GradientStop Color="#00000000" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="UserControlHeaderDropingShadowUp" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#33000000" Offset="1"/>
+        <GradientStop Color="#00000000" Offset="0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="HorizontalSeparatorBrush" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#00000000" Offset="0"/>
+        <GradientStop Color="#33000000" Offset=".5"/>
+        <GradientStop Color="#00000000" Offset="1"/>
+    </LinearGradientBrush>
 
 </ResourceDictionary>

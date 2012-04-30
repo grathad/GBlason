@@ -16,52 +16,156 @@
     </UserControl.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="30" Height="Auto"/>
-            <RowDefinition MinHeight="20" Height="Auto"/>
+            <RowDefinition Height="30" MinHeight="20" MaxHeight="30"/>
+            <RowDefinition Height="Auto" MinHeight="30"/>
+            <RowDefinition Height="28"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                   Background="{DynamicResource ResourceKey=CustomGuiMiddleBlueBackground}">
-            <Rectangle DockPanel.Dock="Right" x:Name="MiniView" Width="40" Height="40"
-                       Fill="White" StrokeThickness="1" Stroke="{DynamicResource ResourceKey=CustomGuiLightBlueForeground}"
-                       Margin="0,2,2,2"/>
-            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Border Grid.Row="0"
+                Background="{StaticResource ResourceKey=UserControlHeaderBackgroundBrush}"
+                CornerRadius="0"
+                Margin="0"
+                BorderThickness="1"
+                BorderBrush="{StaticResource ResourceKey=DarkColorBorderBrush}">
+            <Border Margin="0"
+                    CornerRadius="0"
+                    BorderThickness="0,0,0,1"
+                    BorderBrush="{StaticResource ResourceKey=LightColorBorderBrush}">
+                <DockPanel>
+                    <Button DockPanel.Dock="Right" Width="20" Height="20" Margin="0,2,2,2"
+                            Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">X</Button>
+                    <Button DockPanel.Dock="Right" Width="20" Height="20" Margin="0,2,0,2"
+                            Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">Y</Button>
+                    <TextBlock Text="{x:Static Properties:Resources.ControlPropertyTitle}"
+                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Margin="10,2,2,0"/>
+                </DockPanel>
+            </Border>
+        </Border>
+        <Border x:Name="DataProperty"
+                Grid.Row="1"
+                BorderThickness="1,0,1,0"
+                BorderBrush="{StaticResource ResourceKey=DarkColorBorderBrush}"
+                Background="{StaticResource ResourceKey=DarkColorBackgroundBrush}">
+            <DockPanel Background="#AAFFFFFF">
+                <Border DockPanel.Dock="Right" Height="28" Width="28"
+                           Background="White" Margin="4"
+                        BorderBrush="{StaticResource ResourceKey=DarkColorBorderBrush}"
+                        BorderThickness="1"/>
                 <TextBlock Text="{Binding Path=ComponentName}" VerticalAlignment="Center" HorizontalAlignment="Left"
                            Margin="15,0,0,2" FontSize="13" Foreground="{DynamicResource ResourceKey=CustomGuiDarkBlueForeground}"
                            DockPanel.Dock="Bottom"/>
-                <TextBlock Text="{x:Static Properties:Resources.ControlPropertyTitle}"
-                       VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Margin="10,2,2,0" FontSize="14"/>
-            </DockPanel>            
-        </DockPanel>
-        <DockPanel Grid.Row="1" x:Name="ControlProperties" Background="{DynamicResource ResourceKey=CustomGuiLightBlueBackground}">
-            <Button Width="20" Height="20" Margin="2,2,0,2" DockPanel.Dock="Left">
-                <Image Source="..\..\Pictures\Icons16\anchor.png"/>
-            </Button>
-            <TextBox x:Name="SearchPropertiesTextBox" Margin="2"></TextBox>
-        </DockPanel>
-        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch" >
-            <DataGrid HeadersVisibility="None" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource ResourceKey=CustomGuiLightBlueForeground}"
-                      x:Name="PropertiesDataGrid" ItemsSource="{Binding Path=PropertiesData}" 
-                      AllowDrop="False" AutoGenerateColumns="False" CanUserAddRows="False"
-                      CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="True"
-                      CanUserSortColumns="True" SelectionMode="Single" SelectionUnit="FullRow"
-                      >
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn x:Name="PropertyNameColumn"
-                                        MinWidth="100" Width="Auto">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                                           Text="{Binding Path=PropertyName}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn x:Name="PropertyValueColumn" CanUserResize="True" CanUserSort="False"
-                                            CellTemplateSelector="{StaticResource ResourceKey=cellTemplateSelectorForProperties}"
-                                            Width="*"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </ScrollViewer>
+            </DockPanel>
+        </Border>
+        <Border x:Name="DropShadowHeader"
+                Height="4" VerticalAlignment="Top"
+                Margin="1,0"
+                Background="{StaticResource ResourceKey=UserControlHeaderDropingShadow}"
+                Grid.Row="1">
+        </Border>
+        <Border Grid.Row="2"
+                Background="{StaticResource ResourceKey=UserControlHeaderBackgroundBrush}"
+                CornerRadius="0"
+                Margin="0"
+                BorderThickness="1,1,1,0"
+                BorderBrush="{StaticResource ResourceKey=DarkColorBorderBrush}">
+            <Border Margin="0"
+                    CornerRadius="0"
+                    BorderThickness="1,1,1,0"
+                    BorderBrush="{StaticResource ResourceKey=LightColorBorderBrush}">
+                <DockPanel>
+                    <Button DockPanel.Dock="Left" Width="18" Height="18" Margin="0,2,2,2"
+                            Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">X</Button>
+                    <Button DockPanel.Dock="Left" Width="18" Height="18" Margin="0,2,0,2"
+                            Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">Y</Button>
+                    <TextBox x:Name="SearchPropertiesTextBox" Margin="2"></TextBox>
+                </DockPanel>
+            </Border>
+        </Border>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0"
+                    Background="{StaticResource ResourceKey=DarkColorBackgroundBrush}"
+                    BorderBrush="{StaticResource ResourceKey=DarkColorBorderBrush}"
+                    BorderThickness="1,0,0,1">
+                <Border x:Name="InnerBorderBottomLeft"
+                        BorderBrush="{StaticResource ResourceKey=LightColorBorderBrush}"
+                        BorderThickness="1,0,0,1"
+                        Margin="0,0,0,1"/>
+            </Border>
+            <Border Grid.Column="2"
+                    Background="{StaticResource ResourceKey=DarkColorBackgroundBrush}"
+                    BorderBrush="{StaticResource ResourceKey=DarkColorBorderBrush}"
+                    BorderThickness="0,0,1,1">
+                <Border x:Name="InnerBorderBottomRight"
+                        BorderBrush="{StaticResource ResourceKey=LightColorBorderBrush}"
+                        Margin="1,0,0,0"
+                        BorderThickness="0,0,1,1"/>
+            </Border>
+            <Border Grid.Column="1" Background="{StaticResource ResourceKey=DarkColorBackgroundBrush}">
+                <Border x:Name="FieldContainerLightBorder"
+                        Margin="-2,0,-2,1"
+                        CornerRadius="2,2,0,0"
+                        BorderThickness="1,1,1,0"
+                         BorderBrush="{StaticResource ResourceKey=LightColorBorderBrush}">
+                    <Border x:Name="FieldContainerDarkBorder"
+                        Margin="0"
+                        CornerRadius="2,2,0,0"
+                        BorderThickness="1,1,1,0"
+                         BorderBrush="{StaticResource ResourceKey=DarkColorBorderBrush}"/>
+                </Border>
+            </Border>
+            <Border x:Name="ContentBackground"
+                    Grid.Column="1"
+                    Margin="0,2,0,0"
+                    CornerRadius="2,2,0,0"
+                    Background="#AAFFFFFF">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              HorizontalAlignment="Stretch">
+                    <DataGrid HeadersVisibility="None"
+                              BorderThickness="0,0,0,1"
+                              Background="Transparent"
+                              RowBackground="Transparent"
+                              BorderBrush="{StaticResource ResourceKey=DarkColorBorderBrush}"
+                              x:Name="PropertiesDataGrid"
+                              ItemsSource="{Binding Path=PropertiesData}"
+                              AllowDrop="False" AutoGenerateColumns="False"
+                              CanUserAddRows="False" CanUserDeleteRows="False"
+                              CanUserReorderColumns="False" CanUserResizeColumns="True"
+                              CanUserSortColumns="True" SelectionMode="Single" SelectionUnit="FullRow"
+                              HorizontalGridLinesBrush="{StaticResource ResourceKey=HorizontalSeparatorBrush}"
+                              VerticalGridLinesBrush="Transparent"
+                              CellStyle="{DynamicResource ResourceKey=DataGridCellStyle}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn x:Name="PropertyNameColumn"
+                                                    MinWidth="100" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                   Margin="4,1"
+                                                   Text="{Binding Path=PropertyName}" Foreground="Black"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn x:Name="PropertyValueColumn" CanUserResize="True" CanUserSort="False"
+                                                    CellTemplateSelector="{StaticResource ResourceKey=cellTemplateSelectorForProperties}"
+                                                    Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </Border>
+            <Border x:Name="DropShadowContent"
+                    Height="4" VerticalAlignment="Top"
+                    Margin="0,2"
+                    CornerRadius="2,2,0,0"
+                    Background="{StaticResource ResourceKey=UserControlHeaderDropingShadow}"
+                    Grid.Column="1">
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

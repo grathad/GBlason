@@ -18,13 +18,13 @@
                                            CommandTarget="{Binding Source={x:Static Member=ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile.RootCoatOfArm}">
             <CustomUserControl:CommandComboBox.ItemTemplate>
                 <DataTemplate>
-                    <DockPanel>
+                    <DockPanel Margin="2">
                         <Viewbox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" MaxHeight="30" DockPanel.Dock="Left">
                             <Path Data="{Binding Path=Geometry}" Stroke="Black" StrokeThickness="3" Fill="{StaticResource ResourceKey=CustomMiniShapeGlossyBrush}">
                             </Path>
                         </Viewbox>
-                        <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="2" MaxHeight="26"
-                                   Text="{Binding Path=LocalizedName}"/>
+                        <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="4,2,3,2" MaxHeight="26"
+                                   Text="{Binding Path=LocalizedName}" Foreground="Black"/>
                     </DockPanel>
                 </DataTemplate>
             </CustomUserControl:CommandComboBox.ItemTemplate>
@@ -36,5 +36,31 @@
             </Path>
         </Viewbox>-->
     </DataTemplate>
+
+    <!-- The grid in the properties -->
+
+    <Style x:Key="DataGridCellStyle" TargetType="{x:Type DataGridCell}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Border Background="Transparent" 
+                            BorderBrush="{TemplateBinding BorderBrush}"  
+                            BorderThickness="0"
+                            SnapsToDevicePixels="True"
+                            Margin="1,3,1,3">
+                        <ContentPresenter x:Name="Content" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>

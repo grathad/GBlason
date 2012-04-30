@@ -54,5 +54,3 @@ C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\NewDocumentMe
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\PropertiesMenu.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\RecentDocumentMenu.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Dictionary\PropertyTemplateDictionary.baml
-C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\DebugUC.g.cs
-C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\DebugUC.baml
