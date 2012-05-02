@@ -46,7 +46,7 @@
       <DependentUpon>BasicShapes.resx</DependentUpon>
     </Compile>
     <Compile Include="CoatOfArms\CoatOfArms.cs" />
-    <Compile Include="CoatOfArms\ContentArea.cs" />
+    <Compile Include="CoatOfArms\SplitArea.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CoatOfArms\Shape.cs" />
     <Compile Include="Resources\Enumeration.cs" />

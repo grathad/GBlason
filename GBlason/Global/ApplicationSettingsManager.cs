@@ -6,10 +6,12 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Media;
 using System.Xml;
 using FormatManager.Serializer;
 using GBlason.Properties;
 using GBlason.ViewModel;
+using Color = System.Windows.Media.Color;
 
 namespace GBlason.Global
 {
@@ -63,6 +65,12 @@ namespace GBlason.Global
             GlobalApplicationViewModel.GetApplicationViewModel.MainWindowLeft = Settings.Default.PreferredPosition.X;
             //L'etat de la fenetre
             GlobalApplicationViewModel.GetApplicationViewModel.MainWindowState = Settings.Default.PreferredState;
+            //color preferences
+            GlobalApplicationViewModel.GetApplicationViewModel.BlasonViewerBackgroundColor = new SolidColorBrush(Color.FromArgb(
+                Settings.Default.BackgroundViewerColor.A,
+                Settings.Default.BackgroundViewerColor.R,
+                Settings.Default.BackgroundViewerColor.G,
+                Settings.Default.BackgroundViewerColor.B));
         }
 
         public static void SavePreference()

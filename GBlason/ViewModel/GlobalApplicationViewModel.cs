@@ -330,8 +330,18 @@ namespace GBlason.ViewModel
 
         #region Preferences
 
-        public Color BlasonViewerBackgroundColor { get; set; }
-
+        public SolidColorBrush BlasonViewerBackgroundColor
+        {
+            get { return _blasonViewerBackgroundColor; }
+            set
+            {
+                if (value == _blasonViewerBackgroundColor)
+                    return;
+                _blasonViewerBackgroundColor = value;
+                OnPropertyChanged("BlasonViewerBackgroundColor");
+            }
+        }
+        private SolidColorBrush _blasonViewerBackgroundColor;
         #endregion
 
         #endregion

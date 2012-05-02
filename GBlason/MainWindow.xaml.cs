@@ -178,7 +178,49 @@ namespace GBlason
             GlobalApplicationViewModel.GetApplicationViewModel.CurrentlyDisplayedFile = newCoatOfArmsFile;
             TabHome.IsSelected = true;
         }
-        #endregion
+        
+        private void SaveCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = false;
+            //the difference with the save as is when the issavable file will be put on, save won't be allowed then
+            if (GlobalApplicationViewModel.GetApplicationViewModel.CurrentlyDisplayedFile != null)
+                e.CanExecute = true;
+        }
 
+        private void SaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if(!String.IsNullOrEmpty(GlobalApplicationViewModel.GetApplicationViewModel.CurrentlyDisplayedFile.FullFileName))
+                GlobalApplicationViewModel.GetApplicationViewModel.CurrentlyDisplayedFile.SaveThisFile(
+                    GlobalApplicationViewModel.GetApplicationViewModel.CurrentlyDisplayedFile.FullFileName);
+            else
+                SaveAsCommandExecuted(sender, e);
+        }
+
+        private void SaveAsCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = false;
+            if (GlobalApplicationViewModel.GetApplicationViewModel.CurrentlyDisplayedFile != null)
+                e.CanExecute = true;
+        }
+
+        private void SaveAsCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            var saveFileDialog = new SaveFileDialog
+            {
+                DefaultExt = String.Format(CultureInfo.CurrentCulture,
+                                           ".{0}",
+                                           Properties.Resources.GBSFormatExtension),
+                Filter = String.Format(CultureInfo.CurrentCulture,
+                                       "{0} (.{1})|*.{1}",
+                                       Properties.Resources.OpenDialogBoxFormatDescription,
+                                       Properties.Resources.GBSFormatExtension),
+                FileName = GlobalApplicationViewModel.GetApplicationViewModel.CurrentlyDisplayedFile.FileName,
+                AddExtension = true
+            };
+            if(saveFileDialog.ShowDialog() == true)
+                GlobalApplicationViewModel.GetApplicationViewModel.CurrentlyDisplayedFile.SaveThisFile(
+                    saveFileDialog.FileName);
+        }
+        #endregion
     }
 }

@@ -9,6 +9,9 @@
                 <ResourceDictionary Source="Themes\Brushes.xaml" />
                 <ResourceDictionary Source="Themes\Generic.xaml" />
                 <ResourceDictionary Source="Dictionary\TabControlTemplateDictionary.xaml"/>
+                <ResourceDictionary Source="Dictionary/RibbonTemplateDictionary.xaml"/>
+                <ResourceDictionary Source="Dictionary\PropertyTemplateDictionary.xaml"/>
+                <ResourceDictionary Source="Dictionary/RibbonGroupSizeDefinitionDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Resources;
 using System.Text;
+using GBL.Repository.Resources;
 using GBlason.Culture;
 using GBlason.ViewModel.Contract;
+using ResourceManager = System.Resources.ResourceManager;
 
 namespace GBlason.ViewModel
 {
@@ -71,7 +72,7 @@ namespace GBlason.ViewModel
         /// <value>
         /// The width of the prefered.
         /// </value>
-        public uint PreferedWidth { get; set; }
+        public ushort PreferedWidth { get; set; }
 
         /// <summary>
         /// Gets or sets the height of the prefered.
@@ -79,11 +80,9 @@ namespace GBlason.ViewModel
         /// <value>
         /// The height of the prefered.
         /// </value>
-        public uint PreferedHeight { get; set; }
+        public ushort PreferedHeight { get; set; }
 
-        public double ScaleX { get; set; }
-
-        public double ScaleY { get; set; }
+        public ResourceType TypeOfResource { get; set; }
 
         #region INotifyPropertyChanged Members
 

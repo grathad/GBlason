@@ -10,7 +10,7 @@
     
     <UserControl.Resources>
         <DataTemplate x:Key="CoAViewerTemplate" DataType="{x:Type ViewModel:GbsFileViewModel}">
-            <Aggregate:CoatOfArmsViewer/>
+            <Aggregate:CoatOfArmsViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0"/>
         </DataTemplate>
         <DataTemplate x:Key="TabItemTemplate" DataType="{x:Type ViewModel:GbsFileViewModel}">
             <TextBlock Text="{Binding Path=FileName}"/>

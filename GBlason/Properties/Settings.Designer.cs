@@ -101,5 +101,17 @@ namespace GBlason.Properties {
                 this["RecentDirectories"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("238, 240, 243")]
+        public global::System.Drawing.Color BackgroundViewerColor {
+            get {
+                return ((global::System.Drawing.Color)(this["BackgroundViewerColor"]));
+            }
+            set {
+                this["BackgroundViewerColor"] = value;
+            }
+        }
     }
 }

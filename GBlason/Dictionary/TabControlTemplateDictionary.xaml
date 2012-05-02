@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ViewModel="clr-namespace:GBlason.ViewModel">
     
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="..\Themes\Brushes.xaml"/>
@@ -52,10 +53,19 @@
                                         BorderThickness="1"
                                         Margin="0"
                                         BorderBrush="{StaticResource ResourceKey=HardDarkColorBorderBrush}"
+                                            
                                         CornerRadius="0">
-
-                                        <ContentPresenter x:Name="PART_SelectedContentHost"
-                                                  ContentSource="SelectedContent" />
+                                        <DockPanel Background="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=BlasonViewerBackgroundColor}">
+                                            <Border x:Name="DropShadowBorder" DockPanel.Dock="Top"
+                                                    Background="{StaticResource ResourceKey=UserControlHeaderDropingShadow}"
+                                                    Height="4"/>
+                                            <ContentPresenter x:Name="PART_SelectedContentHost"
+                                                          ContentSource="SelectedContent"
+                                                          VerticalAlignment="Stretch"
+                                                          HorizontalAlignment="Stretch"
+                                                          Margin="0"/>
+                                        </DockPanel>
+                                            
                                     </Border>
                                 </Border>
                             </Border>
@@ -76,8 +86,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid x:Name="Root">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" MaxWidth="160"/>
+                            <!--<ColumnDefinition Width="12"/>-->
+                        </Grid.ColumnDefinitions>
                         <Border x:Name="ExternBorder"
-                                    Margin="0,0,1,1"
+                                Grid.Column="0"
+                                    Margin="0,4,1,1"
                                     BorderThickness="1,1,1,0"
                                     CornerRadius="3,3,0,0"
                                     BorderBrush="{StaticResource ResourceKey=HardDarkColorBorderBrush}"
@@ -112,12 +127,14 @@
                                                   ContentSource="Header"
                                                   Margin="12,4,12,4"
                                                   RecognizesAccessKey="True"
-                                                          Grid.RowSpan="2"/>
+                                                          Grid.RowSpan="2">
+                                    </ContentPresenter>
                                 </Border>
 
                             </Grid>
 
                         </Border>
+                        
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
@@ -126,6 +143,7 @@
                             <Setter TargetName="ExternBorder" Property="Background" Value="{StaticResource ResourceKey=HardUserControlHeaderBackgroundBrush}"/>
                             <Setter TargetName="AntiBorderDown" Property="Opacity" Value="1"/>
                             <Setter TargetName="InnerBorder" Property="Margin" Value="0,0,0,-1"/>
+                            <Setter TargetName="ExternBorder" Property="Margin" Value="0,0,1,1"/>
                             <Setter TargetName="Shadow" Property="Opacity" Value="0"/>
                         </Trigger>
                         <MultiTrigger>

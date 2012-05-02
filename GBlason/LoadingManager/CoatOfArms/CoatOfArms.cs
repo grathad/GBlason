@@ -15,13 +15,5 @@ namespace GBL.Repository.CoatOfArms
         /// The shape of the global coat of arms (the shield).
         /// </value>
         public Shape Shape { get; set; }
-
-        /// <summary>
-        /// Gets or sets the content area of the shield. This is a case without restrictions
-        /// </summary>
-        /// <value>
-        /// The content area.
-        /// </value>
-        public ContentArea ContentArea { get; set; }
     }
 }

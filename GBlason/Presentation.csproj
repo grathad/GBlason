@@ -60,6 +60,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\..\Dropbox\Source code\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -68,6 +71,7 @@
     </ApplicationDefinition>
     <Compile Include="Common\Attribute\CoaPropertyAttribute.cs" />
     <Compile Include="Common\Converter\CoatOfArmConverter.cs" />
+    <Compile Include="Common\Converter\SelectionToVisibilityConverter.cs" />
     <Compile Include="Common\CustomCommand\ChangeShape.cs" />
     <Compile Include="Common\CustomCommand\CommandGeneric.cs" />
     <Compile Include="Common\CustomCommand\CommandMenu.cs" />
@@ -358,6 +362,24 @@
     <Resource Include="Pictures\Icons32\color_management.png" />
     <Resource Include="Pictures\Icons32\interface_preferences.png" />
     <Resource Include="Pictures\Icons32\locate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\construction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\construction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\filter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\filter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\find.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\find.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

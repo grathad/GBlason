@@ -153,6 +153,9 @@
   <data name="GroupLabelShape" xml:space="preserve">
     <value>Forme</value>
   </data>
+  <data name="MenuContextHeaderCoatOfArms" xml:space="preserve">
+    <value>Blason</value>
+  </data>
   <data name="MenuLabelNewCoA" xml:space="preserve">
     <value>Nouveau blason</value>
   </data>

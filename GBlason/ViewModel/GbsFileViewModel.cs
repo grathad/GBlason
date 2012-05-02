@@ -91,9 +91,12 @@ namespace GBlason.ViewModel
             set
             {
                 if (value == _currentlySelectedComponent) return;
+                if(_currentlySelectedComponent!=null)
+                    _currentlySelectedComponent.IsSelected = false;
                 _currentlySelectedComponent = value;
+                if(_currentlySelectedComponent!=null)
+                    _currentlySelectedComponent.IsSelected = true;
                 OnPropertyChanged("CurrentlySelectedComponent");
-                _currentlySelectedComponent.UpdateBindingOnSelected();
             }
         }
         private CoatOfArmComponent _currentlySelectedComponent;
@@ -137,6 +140,16 @@ namespace GBlason.ViewModel
                 //sauvegarde des fichiers recents - sous traités
                 GlobalApplicationViewModel.GetApplicationViewModel.SaveOpenedOrSavedFileAsRecent(fileName);
             }
+        }
+
+        public void SaveThisFile(String fileName, bool checkFormat = true)
+        {
+            var saver = new GbsManager();
+            saver.SaveAsGbs(RootCoatOfArm.ConvertToCoatOfArms(), fileName, checkFormat);
+            FullFileName = fileName;
+            FileName = Path.GetFileNameWithoutExtension(fileName);
+            //sauvegarde des fichiers recents - sous traités
+            GlobalApplicationViewModel.GetApplicationViewModel.SaveOpenedOrSavedFileAsRecent(fileName);
         }
 
         /// <summary>

@@ -11,17 +11,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GBlason.ViewModel;
+using GBlason.ViewModel.Contract;
 
 namespace GBlason.Control.Aggregate
 {
     /// <summary>
     /// Interaction logic for TreeView.xaml
     /// </summary>
-    public partial class TreeView : UserControl
+    public partial class TreeView
     {
         public TreeView()
         {
             InitializeComponent();
+        }
+
+        private void TreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            GlobalApplicationViewModel.GetApplicationViewModel.CurrentlyDisplayedFile.CurrentlySelectedComponent =
+                e.NewValue as CoatOfArmComponent;
         }
     }
 }

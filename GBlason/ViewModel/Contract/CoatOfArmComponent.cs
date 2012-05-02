@@ -168,7 +168,10 @@ namespace GBlason.ViewModel.Contract
                 if (value != _isSelected)
                 {
                     _isSelected = value;
-                    this.OnPropertyChanged("IsSelected");
+                    OnPropertyChanged("IsSelected");
+                    OnPropertyChanged("ComponentName");
+                    OnPropertyChanged("PropertiesData");
+                    OnPropertyChanged("Children");
                 }
             }
         }
@@ -189,13 +192,6 @@ namespace GBlason.ViewModel.Contract
         #endregion
 
         #region INotifyPropertyChanged Members
-
-        public void UpdateBindingOnSelected()
-        {
-            OnPropertyChanged("ComponentName");
-            OnPropertyChanged("PropertiesData");
-            OnPropertyChanged("Children");
-        }
 
         protected void OnPropertyChanged(string propertyName)
         {

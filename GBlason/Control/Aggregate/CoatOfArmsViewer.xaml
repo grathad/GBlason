@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" 
+             VerticalAlignment="Stretch" HorizontalAlignment="Stretch" mc:Ignorable="d" 
              d:DesignHeight="632" d:DesignWidth="453">
-    <Canvas>
-        <Viewbox Width="Auto" Height="Auto">
-            <Path Fill="Blue" Stroke="Black" StrokeThickness="2" Data="{Binding Path=RootCoatOfArm.CurrentShape.Geometry}"/>
+    <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2">
+        <Viewbox Width="Auto" Height="Auto" DockPanel.Dock="Top">
+            <Path Fill="Gray" Data="{Binding Path=RootCoatOfArm.CurrentShape.Geometry}"/>
         </Viewbox>
-    </Canvas>
+    </DockPanel>
 </UserControl>

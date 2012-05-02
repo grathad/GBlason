@@ -10,4 +10,11 @@ namespace GBL.Repository.Resources
         Original = 1,
         Custom = 2
     }
+
+    public enum Splittings
+    {
+        Division, // partition (FR)
+        Ordinary, // pièce (FR)
+        Charges   // meuble (FR)
+    }
 }

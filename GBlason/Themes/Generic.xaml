@@ -104,7 +104,7 @@
                         <RowDefinition Height="0.5*"/>
                     </Grid.RowDefinitions>
                     <Border x:Name="Glossy" Grid.Row="0"
-                                Margin="1,1,1,0"
+                                Margin="0"
                                 Background="{StaticResource ResourceKey=GlossyBrush}"
                                 Opacity="0"/>
                     <Border x:Name="Glow" Grid.Row="1"

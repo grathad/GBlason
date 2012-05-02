@@ -169,6 +169,24 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced Division.
+        /// </summary>
+        public static string GroupLabelAdvancedDivision {
+            get {
+                return ResourceManager.GetString("GroupLabelAdvancedDivision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basic Division.
+        /// </summary>
+        public static string GroupLabelBasicDivision {
+            get {
+                return ResourceManager.GetString("GroupLabelBasicDivision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clipboard.
         /// </summary>
         public static string GroupLabelClipboard {
@@ -205,6 +223,15 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Divisible.
+        /// </summary>
+        public static string MenuContextHeaderDivisible {
+            get {
+                return ResourceManager.GetString("MenuContextHeaderDivisible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string MenuLabelHelp {
@@ -232,11 +259,56 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Division.
+        /// </summary>
+        public static string MenuLabelNoDivision {
+            get {
+                return ResourceManager.GetString("MenuLabelNoDivision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
         public static string MenuLabelOpen {
             get {
                 return ResourceManager.GetString("MenuLabelOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party per Bend.
+        /// </summary>
+        public static string MenuLabelPartyBend {
+            get {
+                return ResourceManager.GetString("MenuLabelPartyBend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party per Bend Sinister.
+        /// </summary>
+        public static string MenuLabelPartyBendSinister {
+            get {
+                return ResourceManager.GetString("MenuLabelPartyBendSinister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party per Fess.
+        /// </summary>
+        public static string MenuLabelPartyFess {
+            get {
+                return ResourceManager.GetString("MenuLabelPartyFess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party per Pale.
+        /// </summary>
+        public static string MenuLabelPartyPale {
+            get {
+                return ResourceManager.GetString("MenuLabelPartyPale", resourceCulture);
             }
         }
         
@@ -390,6 +462,15 @@ namespace GBlason.Properties {
         public static string RecentDocumentMenuRecentLocationTitle {
             get {
                 return ResourceManager.GetString("RecentDocumentMenuRecentLocationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cutting.
+        /// </summary>
+        public static string TabLabelCut {
+            get {
+                return ResourceManager.GetString("TabLabelCut", resourceCulture);
             }
         }
         

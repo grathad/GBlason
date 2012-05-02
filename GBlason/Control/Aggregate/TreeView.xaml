@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Properties="clr-namespace:GBlason.Properties" xmlns:ViewModel="clr-namespace:GBlason.ViewModel"
-             mc:Ignorable="d" 
+             xmlns:Contract="clr-namespace:GBlason.ViewModel.Contract" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ResourceDictionary Source="..\..\Dictionary\TreeViewTemplateDictionary.xaml"/>
@@ -12,7 +12,7 @@
     <Grid>
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="60" MinHeight="20" MaxHeight="60"/>
+            <RowDefinition Height="Auto" MinHeight="20" MaxHeight="80"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0"
@@ -27,20 +27,23 @@
                 BorderBrush="{StaticResource ResourceKey=LightColorBorderBrush}">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Bottom">
-                        <Button DockPanel.Dock="Left" Width="18" Height="18" Margin="0,2,2,2"
-                            Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">X</Button>
-                        <Button DockPanel.Dock="Left" Width="18" Height="18" Margin="0,2,0,2"
-                            Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">Y</Button>
-                        <TextBox x:Name="SearchPropertiesTextBox" Margin="2"></TextBox>
+                        <Button DockPanel.Dock="Left" Width="22" Height="22" Margin="2,0"
+                            Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}"
+                                x:Name="UnselectAllButton">
+                            <Image Source="..\..\Pictures\Icons16\construction.png" Height="16" Width="16"/>
+                        </Button>
+                        <Button DockPanel.Dock="Left" Width="22" Height="22" Margin="2,0"
+                            Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}" x:Name="DeleteNodeButton">
+                            <Image Source="..\..\Pictures\Icons16\cross.png" Height="16" Width="16"/>
+                        </Button>
+                        <Image Source="..\..\Pictures\Icons16\find.png" Height="16" Width="16" Margin="8,0,2,0"
+                               VerticalAlignment="Center"/>
+                        <TextBox x:Name="SearchPropertiesTextBox" Margin="2" Height="22"></TextBox>
                     </DockPanel>
-                    <DockPanel>
-                        <Button DockPanel.Dock="Right" Width="20" Height="20" Margin="0,2,2,2"
-                            Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">X</Button>
-                        <Button DockPanel.Dock="Right" Width="20" Height="20" Margin="0,2,0,2"
-                            Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">Y</Button>
+                    <DockPanel Margin="0,5,0,5">
                         <TextBlock Text="{x:Static Properties:Resources.ControlTreeViewTitle}"
                        VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Margin="10,2,2,0"/>
+                       Margin="10,0,2,0"/>
                     </DockPanel>
 
                 </DockPanel>
@@ -92,11 +95,13 @@
                               HorizontalScrollBarVisibility="Disabled"
                               HorizontalAlignment="Stretch">
                     <TreeView Background="Transparent"
+                              x:Name="PropertiesTreeview"
                               BorderThickness="0"
                               BorderBrush="Transparent"
-                              ItemsSource="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile.RootForTreeView}">
+                              ItemsSource="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile.RootForTreeView}"
+                              SelectedItemChanged="TreeViewSelectedItemChanged">
                         <TreeView.ItemTemplate>
-                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}" DataType="{x:Type Contract:CoatOfArmComponent}">
                                 <DockPanel>
                                     <TextBlock Text="{Binding ComponentName}" />
                                 </DockPanel>

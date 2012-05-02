@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="BasicShapesTest.cs" />
     <Compile Include="CoatOfArmsTest.cs" />
-    <Compile Include="ContentAreaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceManagerTest.cs" />
     <Compile Include="ShapeTest.cs" />

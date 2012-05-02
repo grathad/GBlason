@@ -23,5 +23,8 @@
     <Setting Name="RecentDirectories" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="BackgroundViewerColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">238, 240, 243</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

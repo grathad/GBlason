@@ -77,21 +77,6 @@ namespace TestDD
         }
 
         /// <summary>
-        ///A test for ContentArea
-        ///</summary>
-        [TestMethod()]
-        public void ContentAreaTest()
-        {
-            var target = new CoatOfArms(); // TODO: Initialize to an appropriate value
-            ContentArea expected = null; // TODO: Initialize to an appropriate value
-            ContentArea actual;
-            target.ContentArea = expected;
-            actual = target.ContentArea;
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
         ///A test for Shape
         ///</summary>
         [TestMethod]

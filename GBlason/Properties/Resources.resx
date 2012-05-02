@@ -154,6 +154,13 @@
   <data name="GBSFormatExtension" xml:space="preserve">
     <value>gbs</value>
   </data>
+  <data name="GroupLabelAdvancedDivision" xml:space="preserve">
+    <value>Advanced Division</value>
+    <comment>Partitions avancées</comment>
+  </data>
+  <data name="GroupLabelBasicDivision" xml:space="preserve">
+    <value>Basic Division</value>
+  </data>
   <data name="GroupLabelClipboard" xml:space="preserve">
     <value>Clipboard</value>
   </data>
@@ -166,6 +173,9 @@
   <data name="GroupLabelShape" xml:space="preserve">
     <value>Shape</value>
   </data>
+  <data name="MenuContextHeaderDivisible" xml:space="preserve">
+    <value>Divisible</value>
+  </data>
   <data name="MenuLabelHelp" xml:space="preserve">
     <value>Help</value>
   </data>
@@ -175,8 +185,27 @@
   <data name="MenuLabelNewCoA" xml:space="preserve">
     <value>New Coat Of Arms</value>
   </data>
+  <data name="MenuLabelNoDivision" xml:space="preserve">
+    <value>No Division</value>
+  </data>
   <data name="MenuLabelOpen" xml:space="preserve">
     <value>Open</value>
+  </data>
+  <data name="MenuLabelPartyBend" xml:space="preserve">
+    <value>Party per Bend</value>
+    <comment>Tranché</comment>
+  </data>
+  <data name="MenuLabelPartyBendSinister" xml:space="preserve">
+    <value>Party per Bend Sinister</value>
+    <comment>Taillé</comment>
+  </data>
+  <data name="MenuLabelPartyFess" xml:space="preserve">
+    <value>Party per Fess</value>
+    <comment>Coupé</comment>
+  </data>
+  <data name="MenuLabelPartyPale" xml:space="preserve">
+    <value>Party per Pale</value>
+    <comment>Parti</comment>
   </data>
   <data name="MenuLabelPaste" xml:space="preserve">
     <value>Paste</value>
@@ -230,6 +259,9 @@
   </data>
   <data name="RecentDocumentMenuRecentLocationTitle" xml:space="preserve">
     <value>Recent Locations</value>
+  </data>
+  <data name="TabLabelCut" xml:space="preserve">
+    <value>Cutting</value>
   </data>
   <data name="TabLabelHome" xml:space="preserve">
     <value>Home</value>

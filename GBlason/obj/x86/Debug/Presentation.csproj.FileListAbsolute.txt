@@ -56,3 +56,4 @@ C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\RecentDocumen
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Dictionary\PropertyTemplateDictionary.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Dictionary\TreeViewTemplateDictionary.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Dictionary\TabControlTemplateDictionary.baml
+C:\Users\grathad\GBlason\GBlason\bin\Debug\WPFToolkit.Extended.dll

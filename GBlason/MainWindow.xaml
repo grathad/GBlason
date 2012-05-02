@@ -15,21 +15,17 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:CustomCommand="clr-namespace:GBlason.Common.CustomCommand"
-                     xmlns:MenuControl="clr-namespace:GBlason.Control.MenuControl" d:DesignWidth="750" d:DesignHeight="600">
+                     xmlns:MenuControl="clr-namespace:GBlason.Control.MenuControl"
+                     xmlns:Converter="clr-namespace:GBlason.Common.Converter" d:DesignWidth="750" d:DesignHeight="600">
     <Fluent:RibbonWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Dictionary/RibbonGroupSizeDefinitionDictionary.xaml"/>
-                <ResourceDictionary Source="Themes/Generic.xaml"/>
-                <ResourceDictionary Source="Dictionary/RibbonTemplateDictionary.xaml"/>
-                <ResourceDictionary Source="Dictionary\PropertyTemplateDictionary.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <Converter:SelectionToVisibilityConverter x:Key="SelectionToVisibility"/>
     </Fluent:RibbonWindow.Resources>
 
     <Fluent:RibbonWindow.CommandBindings>
         <CommandBinding x:Name="OpenCommand" Command="Open" CanExecute="OpenCommandCanExecute" Executed="OpenCommandExecuted"/>
         <CommandBinding x:Name="NewCommand" Command="New" CanExecute="NewCommandCanExecute"  Executed="NewCommandExecuted"/>
+        <CommandBinding x:Name="SaveCommand" Command="Save" CanExecute="SaveCommandCanExecute" Executed="SaveCommandExecuted"/>
+        <CommandBinding x:Name="SaveAsCommand" Command="SaveAs" CanExecute="SaveAsCommandCanExecute" Executed="SaveAsCommandExecuted"/>
         <CommandBinding Command="{x:Static CustomCommand:CommandMenu.RecentObjectSelect}" Executed="RecentObjectSelected"/>
     </Fluent:RibbonWindow.CommandBindings>
 
@@ -39,8 +35,10 @@
             <Fluent:Ribbon.Menu>
                 <Fluent:Backstage Header="{x:Static Properties:Resources.MenuTitleLabel}" x:Name="FileMenu">
                     <Fluent:BackstageTabControl SelectedValue="MenuRecentItem">
-                        <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelSave}" Icon="Pictures\Icons16\disk.png"/>
-                        <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelSaveAs}" Icon="Pictures\Icons16\save_as.png"/>
+                        <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelSave}" Icon="Pictures\Icons16\disk.png"
+                                       Command="Save"/>
+                        <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelSaveAs}" Icon="Pictures\Icons16\save_as.png"
+                                       Command="SaveAs"/>
                         <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelOpen}" Icon="Pictures\Icons16\folder_page.png"
                                        Command="Open"/>
                         <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelRecent}" x:Name="MenuRecentItem">
@@ -58,6 +56,12 @@
                     </Fluent:BackstageTabControl>
                 </Fluent:Backstage>
             </Fluent:Ribbon.Menu>
+            <!--contextual tabs-->
+            <Fluent:Ribbon.ContextualGroups>
+                <Fluent:RibbonContextualTabGroup Header="{x:Static Properties:Resources.MenuContextHeaderDivisible}"
+                                                 Visibility="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile.CurrentlySelectedComponent, Mode=OneWay, Converter={StaticResource ResourceKey=SelectionToVisibility}}"
+                                                 x:Name="DivisibleGroup" Background="Green" BorderBrush="Green" />
+            </Fluent:Ribbon.ContextualGroups>
             <!--Tabs-->
             <Fluent:RibbonTabItem Header="{x:Static Properties:Resources.TabLabelHome}" x:Name="TabHome">
                 <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelClipboard}">
@@ -72,25 +76,23 @@
                     <Fluent:Button Name="ButtonCut" Header="{x:Static Properties:Resources.ButtonLabelCut}" SizeDefinition="Middle,Small" Icon="Pictures\Icons16\cut.png"/>
                     <Fluent:Button Name="ButtonCopy" Header="{x:Static Properties:Resources.ButtonLabelCopy}" SizeDefinition="Middle,Small" Icon="Pictures\Icons16\page_copy.png"/>
                 </Fluent:RibbonGroupBox>
-                <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelSelectionProperty}">
-                    <Fluent:DropDownButton x:Name="ShapeGallery"
-                                           Header="{x:Static Properties:Resources.GroupLabelShape}"
-                                           Icon="Pictures\Icons16\vector.png" LargeIcon="Pictures\Icons32\vector.png">
-                        <Fluent:Gallery ItemsSource="{Binding Source={x:Static ViewModel:GbrFileViewModel.GetResources}, Path=ScaledForMenuShapeResources}"
-                                        MinItemsInRow="1" MaxItemsInRow="5"
-                                        ItemTemplate="{Binding Source={StaticResource ResourceKey=ShapeGalleryItemTemplate}}"
-                                        ItemWidth="60" ItemHeight="80">
-                        </Fluent:Gallery>
-                    </Fluent:DropDownButton>
-                    <Fluent:DropDownButton x:Name="EnamelGallery"
-                                           Header="{x:Static Properties:Resources.GroupLabelEnamels}"
-                                           Icon="Pictures\Icons16\color_swatch.png" LargeIcon="Pictures\Icons32\color_swatch.png">
-                        <Fluent:Gallery ItemsSource="{Binding Source={x:Static ViewModel:GbrFileViewModel.GetResources}, Path=ScaledForMenuShapeResources}"
-                                        MinItemsInRow="1" MaxItemsInRow="5"
-                                        ItemTemplate="{Binding Source={StaticResource ResourceKey=ShapeGalleryItemTemplate}}"
-                                        ItemWidth="60" ItemHeight="80">
-                        </Fluent:Gallery>
-                    </Fluent:DropDownButton>
+            </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem Header="{x:Static Properties:Resources.TabLabelCut}" x:Name="TabCut"
+                                  Group="{Binding ElementName=DivisibleGroup}">
+                <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelBasicDivision}" x:Name="GroupDivision">
+                    <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelNoDivision}" x:Name="ButtonNoDivision"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelPartyFess}" x:Name="ButtonFess"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelPartyPale}" x:Name="ButtonPale"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelPartyBend}" x:Name="ButtonBend"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelPartyBendSinister}" x:Name="ButtonBendSinister"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelAdvancedDivision}" x:Name="GroupAdvancedDivision">
+                    
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
         </Fluent:Ribbon>
