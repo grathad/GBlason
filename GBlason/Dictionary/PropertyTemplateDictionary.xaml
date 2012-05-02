@@ -12,7 +12,7 @@
     <!-- Default shape display -->
     <DataTemplate x:Key="PropertyTableCellItemTemplate" DataType="{x:Type Contract:PropertyDisplayer}">
         <CustomUserControl:CommandComboBox x:Name="ShapeComboBoxProperty" ItemsSource="{Binding Source={x:Static ViewModel:GbrFileViewModel.GetResources}, Path=ScaledForMenuShapeResources}"
-                                           SelectedItem="{Binding Path=PropertyValue, Mode=OneWay}"
+                                           SelectedValue="{Binding Path=PropertyValue, Mode=OneWay}"
                                            Command="CustomCommand:CommandMenu.ChangingShape"
                                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"
                                            CommandTarget="{Binding Source={x:Static Member=ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile.RootCoatOfArm}">

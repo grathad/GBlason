@@ -15,7 +15,7 @@ namespace GBlason.ViewModel
     /// Presentation view model to store the data for the shape property.
     /// The shape is used as a coat of arm property. Or as a resource (to edit the coat of arm property)
     /// </summary>
-    public class ShapeViewModel : INotifyPropertyChanged
+    public class ShapeViewModel : INotifyPropertyChanged, IEquatable<ShapeViewModel>
     {
         /// <summary>
         /// Gets or sets the technical name.
@@ -36,7 +36,7 @@ namespace GBlason.ViewModel
         {
             get
             {
-                var manager = new ResourceManager(typeof(BlasonVocabulary));
+                var manager = new ResourceManager(typeof (BlasonVocabulary));
                 var name = manager.GetString(Name);
                 return name ?? Name;
             }
@@ -96,5 +96,25 @@ namespace GBlason.ViewModel
 
         #endregion
 
+        public bool Equals(ShapeViewModel p)
+        {
+            // If parameter is null, return false.
+            if (ReferenceEquals(p, null))
+            {
+                return false;
+            }
+
+            // Optimization for a common success case.
+            if (ReferenceEquals(this, p))
+            {
+                return true;
+            }
+
+            // If run-time types are not exactly the same, return false.
+            if (GetType() != p.GetType())
+                return false;
+
+            return (Identifier == p.Identifier);
+        }
     }
 }
