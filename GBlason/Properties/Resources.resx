@@ -161,15 +161,27 @@
   <data name="GroupLabelBasicDivision" xml:space="preserve">
     <value>Common Division</value>
   </data>
+  <data name="GroupLabelBasicTinctures" xml:space="preserve">
+    <value>Basic Tinctures</value>
+  </data>
   <data name="GroupLabelClipboard" xml:space="preserve">
     <value>Clipboard</value>
+  </data>
+  <data name="GroupLabelCustomTinctures" xml:space="preserve">
+    <value>Custom Tinctures</value>
   </data>
   <data name="GroupLabelEnamels" xml:space="preserve">
     <value>Enamels</value>
   </data>
+  <data name="GroupLabelFurs" xml:space="preserve">
+    <value>Furs</value>
+  </data>
   <data name="GroupLabelHonourableOrdinaries" xml:space="preserve">
     <value>Honourable Ordinaries</value>
     <comment>Pièces honorables</comment>
+  </data>
+  <data name="GroupLabelModernTinctures" xml:space="preserve">
+    <value>Later Tinctures</value>
   </data>
   <data name="GroupLabelSelectionProperty" xml:space="preserve">
     <value>Selection Property</value>
@@ -180,6 +192,9 @@
   <data name="GroupLabelSubOrdinaries" xml:space="preserve">
     <value>Subordinaries</value>
     <comment>Pièces</comment>
+  </data>
+  <data name="MenuContextFillable" xml:space="preserve">
+    <value>Fillable</value>
   </data>
   <data name="MenuContextHeaderDivisible" xml:space="preserve">
     <value>Divisible</value>
@@ -260,5 +275,9 @@
   </data>
   <data name="TabLabelOrdinaries" xml:space="preserve">
     <value>Ordinaries</value>
+  </data>
+  <data name="TabLabelTinctures" xml:space="preserve">
+    <value>Tinctures</value>
+    <comment>Couleur</comment>
   </data>
 </root>

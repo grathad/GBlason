@@ -124,6 +124,51 @@ namespace GBlason.Culture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ermine.
+        /// </summary>
+        public static string FurErmine {
+            get {
+                return ResourceManager.GetString("FurErmine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ermines.
+        /// </summary>
+        public static string FurErmines {
+            get {
+                return ResourceManager.GetString("FurErmines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Erminois.
+        /// </summary>
+        public static string FurErminois {
+            get {
+                return ResourceManager.GetString("FurErminois", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pean.
+        /// </summary>
+        public static string FurPean {
+            get {
+                return ResourceManager.GetString("FurPean", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vair.
+        /// </summary>
+        public static string FurVair {
+            get {
+                return ResourceManager.GetString("FurVair", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to German.
         /// </summary>
         public static string GermanShape {
@@ -372,6 +417,123 @@ namespace GBlason.Culture {
         public static string TiercedPale {
             get {
                 return ResourceManager.GetString("TiercedPale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cendrée.
+        /// </summary>
+        public static string TinctureAcier {
+            get {
+                return ResourceManager.GetString("TinctureAcier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Argent.
+        /// </summary>
+        public static string TinctureArgent {
+            get {
+                return ResourceManager.GetString("TinctureArgent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Azure.
+        /// </summary>
+        public static string TinctureAzure {
+            get {
+                return ResourceManager.GetString("TinctureAzure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Carnation.
+        /// </summary>
+        public static string TinctureCarnation {
+            get {
+                return ResourceManager.GetString("TinctureCarnation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gules.
+        /// </summary>
+        public static string TinctureGules {
+            get {
+                return ResourceManager.GetString("TinctureGules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Murrey.
+        /// </summary>
+        public static string TinctureMurrey {
+            get {
+                return ResourceManager.GetString("TinctureMurrey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Or.
+        /// </summary>
+        public static string TinctureOr {
+            get {
+                return ResourceManager.GetString("TinctureOr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tenné.
+        /// </summary>
+        public static string TinctureOrange {
+            get {
+                return ResourceManager.GetString("TinctureOrange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Proper.
+        /// </summary>
+        public static string TinctureProper {
+            get {
+                return ResourceManager.GetString("TinctureProper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purpure.
+        /// </summary>
+        public static string TincturePurpure {
+            get {
+                return ResourceManager.GetString("TincturePurpure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sable.
+        /// </summary>
+        public static string TinctureSable {
+            get {
+                return ResourceManager.GetString("TinctureSable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sanguine.
+        /// </summary>
+        public static string TinctureSanguine {
+            get {
+                return ResourceManager.GetString("TinctureSanguine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vert.
+        /// </summary>
+        public static string TinctureVert {
+            get {
+                return ResourceManager.GetString("TinctureVert", resourceCulture);
             }
         }
     }

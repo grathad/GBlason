@@ -187,11 +187,29 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Basic Tinctures.
+        /// </summary>
+        public static string GroupLabelBasicTinctures {
+            get {
+                return ResourceManager.GetString("GroupLabelBasicTinctures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clipboard.
         /// </summary>
         public static string GroupLabelClipboard {
             get {
                 return ResourceManager.GetString("GroupLabelClipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Tinctures.
+        /// </summary>
+        public static string GroupLabelCustomTinctures {
+            get {
+                return ResourceManager.GetString("GroupLabelCustomTinctures", resourceCulture);
             }
         }
         
@@ -205,11 +223,29 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Furs.
+        /// </summary>
+        public static string GroupLabelFurs {
+            get {
+                return ResourceManager.GetString("GroupLabelFurs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Honourable Ordinaries.
         /// </summary>
         public static string GroupLabelHonourableOrdinaries {
             get {
                 return ResourceManager.GetString("GroupLabelHonourableOrdinaries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Later Tinctures.
+        /// </summary>
+        public static string GroupLabelModernTinctures {
+            get {
+                return ResourceManager.GetString("GroupLabelModernTinctures", resourceCulture);
             }
         }
         
@@ -237,6 +273,15 @@ namespace GBlason.Properties {
         public static string GroupLabelSubOrdinaries {
             get {
                 return ResourceManager.GetString("GroupLabelSubOrdinaries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fillable.
+        /// </summary>
+        public static string MenuContextFillable {
+            get {
+                return ResourceManager.GetString("MenuContextFillable", resourceCulture);
             }
         }
         
@@ -471,6 +516,15 @@ namespace GBlason.Properties {
         public static string TabLabelOrdinaries {
             get {
                 return ResourceManager.GetString("TabLabelOrdinaries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tinctures.
+        /// </summary>
+        public static string TabLabelTinctures {
+            get {
+                return ResourceManager.GetString("TabLabelTinctures", resourceCulture);
             }
         }
     }

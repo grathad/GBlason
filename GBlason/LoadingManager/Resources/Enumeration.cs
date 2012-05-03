@@ -33,4 +33,37 @@ namespace GBL.Repository.Resources
         TiercedFess,
         TiercedPale
     }
+
+    public enum TinctureMetals
+    {
+        TinctureOr,
+        TinctureArgent
+    }
+
+    public enum TinctureColoursBasic
+    {
+        TinctureAzure,
+        TinctureGules,
+        TinctureSable,
+        TinctureVert
+    }
+
+    public enum TinctureColourLater
+    {
+        TinctureAcier,
+        TinctureCarnation,
+        TinctureMurrey,
+        TinctureOrange,
+        TincturePurpure,
+        TinctureSanguine
+    }
+
+    public enum Furs
+    {
+        FurErmine,
+        FurErmines,
+        FurErminois,
+        FurPean,
+        FurVair
+    }
 }

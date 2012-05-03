@@ -242,4 +242,76 @@
     <value>Tierced per Pale</value>
     <comment>tiercé en pal</comment>
   </data>
+  <data name="FurErmine" xml:space="preserve">
+    <value>Ermine</value>
+    <comment>Hermine plain</comment>
+  </data>
+  <data name="FurErmines" xml:space="preserve">
+    <value>Ermines</value>
+    <comment>Contre hermine plain</comment>
+  </data>
+  <data name="FurErminois" xml:space="preserve">
+    <value>Erminois</value>
+    <comment>Herminais plain</comment>
+  </data>
+  <data name="FurPean" xml:space="preserve">
+    <value>Pean</value>
+    <comment>Pean plain</comment>
+  </data>
+  <data name="FurVair" xml:space="preserve">
+    <value>Vair</value>
+    <comment>Vair</comment>
+  </data>
+  <data name="TinctureAcier" xml:space="preserve">
+    <value>Cendrée</value>
+    <comment>Acier</comment>
+  </data>
+  <data name="TinctureArgent" xml:space="preserve">
+    <value>Argent</value>
+    <comment>Argent</comment>
+  </data>
+  <data name="TinctureAzure" xml:space="preserve">
+    <value>Azure</value>
+    <comment>Azur</comment>
+  </data>
+  <data name="TinctureCarnation" xml:space="preserve">
+    <value>Carnation</value>
+    <comment>Carnation</comment>
+  </data>
+  <data name="TinctureGules" xml:space="preserve">
+    <value>Gules</value>
+    <comment>Geules</comment>
+  </data>
+  <data name="TinctureMurrey" xml:space="preserve">
+    <value>Murrey</value>
+    <comment>Mûre</comment>
+  </data>
+  <data name="TinctureOr" xml:space="preserve">
+    <value>Or</value>
+    <comment>Or</comment>
+  </data>
+  <data name="TinctureOrange" xml:space="preserve">
+    <value>Tenné</value>
+    <comment>Orangé</comment>
+  </data>
+  <data name="TinctureProper" xml:space="preserve">
+    <value>Proper</value>
+    <comment>Naturel</comment>
+  </data>
+  <data name="TincturePurpure" xml:space="preserve">
+    <value>Purpure</value>
+    <comment>Pourpre</comment>
+  </data>
+  <data name="TinctureSable" xml:space="preserve">
+    <value>Sable</value>
+    <comment>Sable</comment>
+  </data>
+  <data name="TinctureSanguine" xml:space="preserve">
+    <value>Sanguine</value>
+    <comment>Sanguine</comment>
+  </data>
+  <data name="TinctureVert" xml:space="preserve">
+    <value>Vert</value>
+    <comment>Sinople</comment>
+  </data>
 </root>

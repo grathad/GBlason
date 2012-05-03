@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using GBlason.ViewModel;
+using GBlason.ViewModel.Contract;
 
 namespace GBlason.Common.Converter
 {
@@ -12,7 +13,7 @@ namespace GBlason.Common.Converter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value != null && value is CoatOfArmViewModel)
+            if (value != null && value is IDivisible)
                 return Visibility.Visible;
             return Visibility.Collapsed;
         }

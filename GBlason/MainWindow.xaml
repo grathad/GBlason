@@ -64,7 +64,10 @@
             <Fluent:Ribbon.ContextualGroups>
                 <Fluent:RibbonContextualTabGroup Header="{x:Static Properties:Resources.MenuContextHeaderDivisible}"
                                                  Visibility="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile.CurrentlySelectedComponent, Mode=OneWay, Converter={StaticResource ResourceKey=SelectionToVisibility}}"
-                                                 x:Name="DivisibleGroup" Background="Orange" BorderBrush="Orange" />
+                                                 x:Name="MenuContextHeaderDivisible" Background="Orange" BorderBrush="Orange" />
+                <Fluent:RibbonContextualTabGroup Header="{x:Static Properties:Resources.MenuContextFillable}"
+                                                 Visibility="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile.CurrentlySelectedComponent, Mode=OneWay, Converter={StaticResource ResourceKey=SelectionToVisibility}}"
+                                                 x:Name="MenuContextFillable" Background="Blue" BorderBrush="Blue" />
             </Fluent:Ribbon.ContextualGroups>
             <!--Tabs-->
             <Fluent:RibbonTabItem Header="{x:Static Properties:Resources.TabLabelHome}" x:Name="TabHome">
@@ -82,7 +85,7 @@
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
             <Fluent:RibbonTabItem Header="{x:Static Properties:Resources.TabLabelCut}" x:Name="TabDivision"
-                                  Group="{Binding ElementName=DivisibleGroup}">
+                                  Group="{Binding ElementName=MenuContextHeaderDivisible}">
                 <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelBasicDivision}" x:Name="GroupDivision">
                     <Fluent:Button Header="{x:Static Culture:BlasonVocabulary.PartyPlain}" x:Name="ButtonNoDivision"
                                    Command="{x:Static CustomCommand:CommandMenu.AddingDivision}"
@@ -115,11 +118,32 @@
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
             <Fluent:RibbonTabItem Header="{x:Static Properties:Resources.TabLabelOrdinaries}" x:Name="TabOrdinaries"
-                                  Group="{Binding ElementName=DivisibleGroup}">
+                                  Group="{Binding ElementName=MenuContextHeaderDivisible}">
                 <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelHonourableOrdinaries}" x:Name="GroupHonourableOrdinaries">
                     
                 </Fluent:RibbonGroupBox>
                 <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelSubOrdinaries}" x:Name="GroupSubOrdinaries">
+
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem Header="{x:Static Properties:Resources.TabLabelTinctures}" x:Name="TabTinctures"
+                                  Group="{Binding ElementName=MenuContextFillable}">
+                <Fluent:RibbonGroupBox x:Name="GroupLabelBasicTinctures" Header="{x:Static Properties:Resources.GroupLabelBasicTinctures}">
+                    <Fluent:Button x:Name="ButtonOr" Header="{x:Static Culture:BlasonVocabulary.TinctureOr}" />
+                    <Fluent:Button x:Name="ButtonArgent" Header="{x:Static Culture:BlasonVocabulary.TinctureArgent}"/>
+                    <Fluent:SeparatorTabItem />
+                    <Fluent:Button x:Name="ButtonAzure" Header="{x:Static Culture:BlasonVocabulary.TinctureAzure}"/>
+                    <Fluent:Button x:Name="ButtonVert" Header="{x:Static Culture:BlasonVocabulary.TinctureVert}"/>
+                    <Fluent:Button x:Name="ButtonGules" Header="{x:Static Culture:BlasonVocabulary.TinctureGules}"/>
+                    <Fluent:Button x:Name="ButtonSable" Header="{x:Static Culture:BlasonVocabulary.TinctureSable}"/>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox x:Name="GroupLabelModernTinctures" Header="{x:Static Properties:Resources.GroupLabelModernTinctures}">
+
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox x:Name="GroupLabelFurs" Header="{x:Static Properties:Resources.GroupLabelFurs}">
+
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox x:Name="GroupLabelCustomTinctures" Header="{x:Static Properties:Resources.GroupLabelCustomTinctures}">
 
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
