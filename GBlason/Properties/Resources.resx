@@ -159,7 +159,7 @@
     <comment>Partitions avancées</comment>
   </data>
   <data name="GroupLabelBasicDivision" xml:space="preserve">
-    <value>Basic Division</value>
+    <value>Common Division</value>
   </data>
   <data name="GroupLabelClipboard" xml:space="preserve">
     <value>Clipboard</value>
@@ -167,11 +167,19 @@
   <data name="GroupLabelEnamels" xml:space="preserve">
     <value>Enamels</value>
   </data>
+  <data name="GroupLabelHonourableOrdinaries" xml:space="preserve">
+    <value>Honourable Ordinaries</value>
+    <comment>Pièces honorables</comment>
+  </data>
   <data name="GroupLabelSelectionProperty" xml:space="preserve">
     <value>Selection Property</value>
   </data>
   <data name="GroupLabelShape" xml:space="preserve">
     <value>Shape</value>
+  </data>
+  <data name="GroupLabelSubOrdinaries" xml:space="preserve">
+    <value>Subordinaries</value>
+    <comment>Pièces</comment>
   </data>
   <data name="MenuContextHeaderDivisible" xml:space="preserve">
     <value>Divisible</value>
@@ -185,27 +193,8 @@
   <data name="MenuLabelNewCoA" xml:space="preserve">
     <value>New Coat Of Arms</value>
   </data>
-  <data name="MenuLabelNoDivision" xml:space="preserve">
-    <value>No Division</value>
-  </data>
   <data name="MenuLabelOpen" xml:space="preserve">
     <value>Open</value>
-  </data>
-  <data name="MenuLabelPartyBend" xml:space="preserve">
-    <value>Party per Bend</value>
-    <comment>Tranché</comment>
-  </data>
-  <data name="MenuLabelPartyBendSinister" xml:space="preserve">
-    <value>Party per Bend Sinister</value>
-    <comment>Taillé</comment>
-  </data>
-  <data name="MenuLabelPartyFess" xml:space="preserve">
-    <value>Party per Fess</value>
-    <comment>Coupé</comment>
-  </data>
-  <data name="MenuLabelPartyPale" xml:space="preserve">
-    <value>Party per Pale</value>
-    <comment>Parti</comment>
   </data>
   <data name="MenuLabelPaste" xml:space="preserve">
     <value>Paste</value>
@@ -261,12 +250,15 @@
     <value>Recent Locations</value>
   </data>
   <data name="TabLabelCut" xml:space="preserve">
-    <value>Cutting</value>
+    <value>Division</value>
   </data>
   <data name="TabLabelHome" xml:space="preserve">
     <value>Home</value>
   </data>
   <data name="TabLabelInsert" xml:space="preserve">
     <value>Insert</value>
+  </data>
+  <data name="TabLabelOrdinaries" xml:space="preserve">
+    <value>Ordinaries</value>
   </data>
 </root>

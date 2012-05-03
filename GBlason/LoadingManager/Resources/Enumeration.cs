@@ -17,4 +17,20 @@ namespace GBL.Repository.Resources
         Ordinary, // pièce (FR)
         Charges   // meuble (FR)
     }
+
+    public enum DivisionType
+    {
+        PartyPlain,
+        PartyFess,
+        PartyPale,
+        PartyBend,
+        PartyBendSinister,
+        PartySaltire,
+        PartyCross,
+        PartyPall,
+        TiercedBend,
+        TiercedBendSinister,
+        TiercedFess,
+        TiercedPale
+    }
 }

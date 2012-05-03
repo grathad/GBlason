@@ -72,6 +72,7 @@
     <Compile Include="Common\Attribute\CoaPropertyAttribute.cs" />
     <Compile Include="Common\Converter\CoatOfArmConverter.cs" />
     <Compile Include="Common\Converter\SelectionToVisibilityConverter.cs" />
+    <Compile Include="Common\CustomCommand\AddDivisionCommand.cs" />
     <Compile Include="Common\CustomCommand\ChangeShape.cs" />
     <Compile Include="Common\CustomCommand\CommandGeneric.cs" />
     <Compile Include="Common\CustomCommand\CommandMenu.cs" />
@@ -109,7 +110,10 @@
     <Compile Include="ViewModel\CoatOfArmViewModel.cs" />
     <Compile Include="ViewModel\ComponentTreeViewViewModel.cs" />
     <Compile Include="ViewModel\Contract\CoatOfArmComponent.cs" />
+    <Compile Include="ViewModel\Contract\IDivisible.cs" />
+    <Compile Include="ViewModel\Contract\ILineCustomizable.cs" />
     <Compile Include="ViewModel\Contract\PropertyDisplayer.cs" />
+    <Compile Include="ViewModel\DivisionViewModel.cs" />
     <Compile Include="ViewModel\GbrFileViewModel.cs" />
     <Compile Include="ViewModel\GbsFileViewModel.cs" />
     <Compile Include="ViewModel\GlobalApplicationViewModel.cs" />
@@ -224,7 +228,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Culture\BlasonVocabulary.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BlasonVocabulary.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Culture\BlasonVocabulary.fr-FR.resx">

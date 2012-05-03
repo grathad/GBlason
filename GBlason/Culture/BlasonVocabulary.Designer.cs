@@ -22,7 +22,7 @@ namespace GBlason.Culture {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class BlasonVocabulary {
+    public class BlasonVocabulary {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace GBlason.Culture {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GBlason.Culture.BlasonVocabulary", typeof(BlasonVocabulary).Assembly);
@@ -51,7 +51,7 @@ namespace GBlason.Culture {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Banner.
         /// </summary>
-        internal static string BannerShape {
+        public static string BannerShape {
             get {
                 return ResourceManager.GetString("BannerShape", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Charge.
         /// </summary>
-        internal static string ChargeViewModel {
+        public static string ChargeViewModel {
             get {
                 return ResourceManager.GetString("ChargeViewModel", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Coat of Arms.
         /// </summary>
-        internal static string CoatOfArmViewModel {
+        public static string CoatOfArmViewModel {
             get {
                 return ResourceManager.GetString("CoatOfArmViewModel", resourceCulture);
             }
@@ -90,16 +90,25 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Damsel.
         /// </summary>
-        internal static string DamselShape {
+        public static string DamselShape {
             get {
                 return ResourceManager.GetString("DamselShape", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Division ({0}).
+        /// </summary>
+        public static string DivisionViewModel {
+            get {
+                return ResourceManager.GetString("DivisionViewModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
-        internal static string EnglishShape {
+        public static string EnglishShape {
             get {
                 return ResourceManager.GetString("EnglishShape", resourceCulture);
             }
@@ -108,7 +117,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Field.
         /// </summary>
-        internal static string FieldViewModel {
+        public static string FieldViewModel {
             get {
                 return ResourceManager.GetString("FieldViewModel", resourceCulture);
             }
@@ -117,7 +126,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to German.
         /// </summary>
-        internal static string GermanShape {
+        public static string GermanShape {
             get {
                 return ResourceManager.GetString("GermanShape", resourceCulture);
             }
@@ -126,7 +135,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Italian.
         /// </summary>
-        internal static string ItalianShape {
+        public static string ItalianShape {
             get {
                 return ResourceManager.GetString("ItalianShape", resourceCulture);
             }
@@ -135,7 +144,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Lady.
         /// </summary>
-        internal static string LadiesShape {
+        public static string LadiesShape {
             get {
                 return ResourceManager.GetString("LadiesShape", resourceCulture);
             }
@@ -144,7 +153,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Line.
         /// </summary>
-        internal static string LineViewModel {
+        public static string LineViewModel {
             get {
                 return ResourceManager.GetString("LineViewModel", resourceCulture);
             }
@@ -153,7 +162,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Modern French (Empire).
         /// </summary>
-        internal static string ModernFrenchShape {
+        public static string ModernFrenchShape {
             get {
                 return ResourceManager.GetString("ModernFrenchShape", resourceCulture);
             }
@@ -162,7 +171,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
-        internal static string NoShape {
+        public static string NoShape {
             get {
                 return ResourceManager.GetString("NoShape", resourceCulture);
             }
@@ -171,7 +180,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Old French.
         /// </summary>
-        internal static string OldFrenchShape {
+        public static string OldFrenchShape {
             get {
                 return ResourceManager.GetString("OldFrenchShape", resourceCulture);
             }
@@ -180,7 +189,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Partition.
         /// </summary>
-        internal static string PartitionViewModel {
+        public static string PartitionViewModel {
             get {
                 return ResourceManager.GetString("PartitionViewModel", resourceCulture);
             }
@@ -189,16 +198,88 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Part.
         /// </summary>
-        internal static string PartViewModel {
+        public static string PartViewModel {
             get {
                 return ResourceManager.GetString("PartViewModel", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Party per Bend.
+        /// </summary>
+        public static string PartyBend {
+            get {
+                return ResourceManager.GetString("PartyBend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party per Bend Sinister.
+        /// </summary>
+        public static string PartyBendSinister {
+            get {
+                return ResourceManager.GetString("PartyBendSinister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party per Cross.
+        /// </summary>
+        public static string PartyCross {
+            get {
+                return ResourceManager.GetString("PartyCross", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party per Fess.
+        /// </summary>
+        public static string PartyFess {
+            get {
+                return ResourceManager.GetString("PartyFess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party per Pale.
+        /// </summary>
+        public static string PartyPale {
+            get {
+                return ResourceManager.GetString("PartyPale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party per Pall.
+        /// </summary>
+        public static string PartyPall {
+            get {
+                return ResourceManager.GetString("PartyPall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plain.
+        /// </summary>
+        public static string PartyPlain {
+            get {
+                return ResourceManager.GetString("PartyPlain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party per Saltire.
+        /// </summary>
+        public static string PartySaltire {
+            get {
+                return ResourceManager.GetString("PartySaltire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ordinary.
         /// </summary>
-        internal static string PieceViewModel {
+        public static string PieceViewModel {
             get {
                 return ResourceManager.GetString("PieceViewModel", resourceCulture);
             }
@@ -207,7 +288,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Polish.
         /// </summary>
-        internal static string PolishShape {
+        public static string PolishShape {
             get {
                 return ResourceManager.GetString("PolishShape", resourceCulture);
             }
@@ -216,7 +297,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Position.
         /// </summary>
-        internal static string PositionViewModel {
+        public static string PositionViewModel {
             get {
                 return ResourceManager.GetString("PositionViewModel", resourceCulture);
             }
@@ -225,7 +306,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Enamel.
         /// </summary>
-        internal static string PropertyNameEnamel {
+        public static string PropertyNameEnamel {
             get {
                 return ResourceManager.GetString("PropertyNameEnamel", resourceCulture);
             }
@@ -234,7 +315,7 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Shape.
         /// </summary>
-        internal static string PropertyNameShape {
+        public static string PropertyNameShape {
             get {
                 return ResourceManager.GetString("PropertyNameShape", resourceCulture);
             }
@@ -243,27 +324,54 @@ namespace GBlason.Culture {
         /// <summary>
         ///   Looks up a localized string similar to Spanish / Portuguese / Flamish.
         /// </summary>
-        internal static string SpanishShape {
+        public static string SpanishShape {
             get {
                 return ResourceManager.GetString("SpanishShape", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Abstract layer.
+        ///   Looks up a localized string similar to Swiss.
         /// </summary>
-        internal static string SubjectiveLayerViewModel {
+        public static string SwissShape {
             get {
-                return ResourceManager.GetString("SubjectiveLayerViewModel", resourceCulture);
+                return ResourceManager.GetString("SwissShape", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Swiss.
+        ///   Looks up a localized string similar to Tierced per Bend.
         /// </summary>
-        internal static string SwissShape {
+        public static string TiercedBend {
             get {
-                return ResourceManager.GetString("SwissShape", resourceCulture);
+                return ResourceManager.GetString("TiercedBend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tierced per Bend Sinister.
+        /// </summary>
+        public static string TiercedBendSinister {
+            get {
+                return ResourceManager.GetString("TiercedBendSinister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tierced per Fess.
+        /// </summary>
+        public static string TiercedFess {
+            get {
+                return ResourceManager.GetString("TiercedFess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tierced per Pale.
+        /// </summary>
+        public static string TiercedPale {
+            get {
+                return ResourceManager.GetString("TiercedPale", resourceCulture);
             }
         }
     }

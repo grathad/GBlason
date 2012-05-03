@@ -184,14 +184,62 @@
   <data name="SpanishShape" xml:space="preserve">
     <value>Spanish / Portuguese / Flamish</value>
   </data>
-  <data name="SubjectiveLayerViewModel" xml:space="preserve">
-    <value>Abstract layer</value>
-    <comment>Just to hold content recursively, and the rules of what is possible</comment>
+  <data name="DivisionViewModel" xml:space="preserve">
+    <value>Division ({0})</value>
+    <comment>handle the division, the parameter is used for the type of division</comment>
   </data>
   <data name="SwissShape" xml:space="preserve">
     <value>Swiss</value>
   </data>
   <data name="NoShape" xml:space="preserve">
     <value>None</value>
+  </data>
+  <data name="PartyBend" xml:space="preserve">
+    <value>Party per Bend</value>
+    <comment>Tranché</comment>
+  </data>
+  <data name="PartyBendSinister" xml:space="preserve">
+    <value>Party per Bend Sinister</value>
+    <comment>Taillé</comment>
+  </data>
+  <data name="PartyCross" xml:space="preserve">
+    <value>Party per Cross</value>
+    <comment>écartelé</comment>
+  </data>
+  <data name="PartyFess" xml:space="preserve">
+    <value>Party per Fess</value>
+    <comment>Coupé</comment>
+  </data>
+  <data name="PartyPale" xml:space="preserve">
+    <value>Party per Pale</value>
+    <comment>Parti</comment>
+  </data>
+  <data name="PartyPall" xml:space="preserve">
+    <value>Party per Pall</value>
+    <comment>tiercé en pairle</comment>
+  </data>
+  <data name="PartyPlain" xml:space="preserve">
+    <value>Plain</value>
+    <comment>Plain (no partition)</comment>
+  </data>
+  <data name="PartySaltire" xml:space="preserve">
+    <value>Party per Saltire</value>
+    <comment>écartelé en sautoir</comment>
+  </data>
+  <data name="TiercedBend" xml:space="preserve">
+    <value>Tierced per Bend</value>
+    <comment>tiercé en bande</comment>
+  </data>
+  <data name="TiercedBendSinister" xml:space="preserve">
+    <value>Tierced per Bend Sinister</value>
+    <comment>tiercé en barre</comment>
+  </data>
+  <data name="TiercedFess" xml:space="preserve">
+    <value>Tierced per Fess</value>
+    <comment>tiercé en fasce</comment>
+  </data>
+  <data name="TiercedPale" xml:space="preserve">
+    <value>Tierced per Pale</value>
+    <comment>tiercé en pal</comment>
   </data>
 </root>

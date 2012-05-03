@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using GBL.Repository.CoatOfArms;
 using GBlason.Common.Attribute;
+using GBlason.Common.Converter;
 using GBlason.Common.CustomCommand;
 using GBlason.ViewModel.Contract;
 
@@ -9,7 +11,7 @@ namespace GBlason.ViewModel
     /// <summary>
     /// Handle the presentation logic for the root of a coat of arm
     /// </summary>
-    public class CoatOfArmViewModel : CoatOfArmComponent, ICommandTarget
+    public class CoatOfArmViewModel : CoatOfArmComponent, ICommandTarget, IDivisible
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CoatOfArmViewModel"/> class.
@@ -21,6 +23,25 @@ namespace GBlason.ViewModel
             if (GbrFileViewModel.GetResources.ScaledForMenuShapeResources.Any())
                 CurrentShape = GbrFileViewModel.GetResources.ScaledForMenuShapeResources[0];
             Parent = null; //this is the root of the coat of arms
+        }
+
+        private CoatOfArms _originObject;
+
+        /// <summary>
+        /// Return the CoatOfArms from the repository linked with this object
+        /// </summary>
+        public override Object OriginObject
+        {
+            get { return _originObject ?? (_originObject = new CoatOfArms {Shape = CurrentShape.ConvertToShape()}); }
+            set
+            {
+                if (value == _originObject) return;
+                var coa = value as CoatOfArms;
+                if (coa != null)
+                    CurrentShape = coa.Shape.ConvertToViewModel();
+                _originObject = coa;
+                OnPropertyChanged("OriginObject");
+            }
         }
 
         #region COA properties
@@ -61,5 +82,10 @@ namespace GBlason.ViewModel
         }
         #endregion
 
+
+        public void AddDivision(GBL.Repository.Resources.DivisionType division)
+        {
+            AddChild(new DivisionViewModel{DivisionType = division, Parent = this});
+        }
     }
 }

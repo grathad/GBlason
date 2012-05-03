@@ -16,7 +16,7 @@ namespace GBlason.Common.Converter
         /// <returns></returns>
         public static CoatOfArmViewModel ConvertToViewModel(this CoatOfArms source)
         {
-            return new CoatOfArmViewModel { CurrentShape = source.Shape.ConvertToViewModel() };
+            return new CoatOfArmViewModel { OriginObject = source };
         }
 
         /// <summary>

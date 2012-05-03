@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using GBlason.Common.CustomCommand;
 using GBlason.Global;
 using GBlason.Properties;
 using GBlason.ViewModel;
@@ -221,6 +222,22 @@ namespace GBlason
                 GlobalApplicationViewModel.GetApplicationViewModel.CurrentlyDisplayedFile.SaveThisFile(
                     saveFileDialog.FileName);
         }
+
+        private void AddDivisionCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            var command = e.Command as AddDivisionCommand;
+            if (command != null)
+                e.CanExecute = command.CanExecute(e.Parameter, e.Source as IInputElement);
+        }
+
+        private void AddDivisionCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            var command = e.Command as AddDivisionCommand;
+            if (command != null)
+                command.Execute(e.Parameter, e.Source as IInputElement);
+        }
         #endregion
+
+        
     }
 }

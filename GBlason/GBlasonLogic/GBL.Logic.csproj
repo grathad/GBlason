@@ -41,6 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules\DivisionRules.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LoadingManager\GBL.Repository.csproj">
+      <Project>{70799D9B-CBC3-49DD-AE4A-C41030233BE2}</Project>
+      <Name>GBL.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

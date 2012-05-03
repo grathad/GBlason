@@ -178,7 +178,7 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Basic Division.
+        ///   Looks up a localized string similar to Common Division.
         /// </summary>
         public static string GroupLabelBasicDivision {
             get {
@@ -205,6 +205,15 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Honourable Ordinaries.
+        /// </summary>
+        public static string GroupLabelHonourableOrdinaries {
+            get {
+                return ResourceManager.GetString("GroupLabelHonourableOrdinaries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Selection Property.
         /// </summary>
         public static string GroupLabelSelectionProperty {
@@ -219,6 +228,15 @@ namespace GBlason.Properties {
         public static string GroupLabelShape {
             get {
                 return ResourceManager.GetString("GroupLabelShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subordinaries.
+        /// </summary>
+        public static string GroupLabelSubOrdinaries {
+            get {
+                return ResourceManager.GetString("GroupLabelSubOrdinaries", resourceCulture);
             }
         }
         
@@ -259,56 +277,11 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Division.
-        /// </summary>
-        public static string MenuLabelNoDivision {
-            get {
-                return ResourceManager.GetString("MenuLabelNoDivision", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
         public static string MenuLabelOpen {
             get {
                 return ResourceManager.GetString("MenuLabelOpen", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Party per Bend.
-        /// </summary>
-        public static string MenuLabelPartyBend {
-            get {
-                return ResourceManager.GetString("MenuLabelPartyBend", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Party per Bend Sinister.
-        /// </summary>
-        public static string MenuLabelPartyBendSinister {
-            get {
-                return ResourceManager.GetString("MenuLabelPartyBendSinister", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Party per Fess.
-        /// </summary>
-        public static string MenuLabelPartyFess {
-            get {
-                return ResourceManager.GetString("MenuLabelPartyFess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Party per Pale.
-        /// </summary>
-        public static string MenuLabelPartyPale {
-            get {
-                return ResourceManager.GetString("MenuLabelPartyPale", resourceCulture);
             }
         }
         
@@ -466,7 +439,7 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cutting.
+        ///   Looks up a localized string similar to Division.
         /// </summary>
         public static string TabLabelCut {
             get {
@@ -489,6 +462,15 @@ namespace GBlason.Properties {
         public static string TabLabelInsert {
             get {
                 return ResourceManager.GetString("TabLabelInsert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ordinaries.
+        /// </summary>
+        public static string TabLabelOrdinaries {
+            get {
+                return ResourceManager.GetString("TabLabelOrdinaries", resourceCulture);
             }
         }
     }

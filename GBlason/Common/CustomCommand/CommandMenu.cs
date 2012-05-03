@@ -20,5 +20,11 @@ namespace GBlason.Common.CustomCommand
         /// Parameter : The new shape, Target : the coat of arm. Both may be set
         /// </summary>
         public static readonly ChangeShape ChangingShape = new ChangeShape(typeof(UIElement));
+
+        /// <summary>
+        /// CommandGeneric, that means can perform an undo / redo action, and handle the adding of division
+        /// Parameter : the type of the division to add
+        /// </summary>
+        public static readonly AddDivisionCommand AddingDivision = new AddDivisionCommand(typeof(UIElement));
     }
 }

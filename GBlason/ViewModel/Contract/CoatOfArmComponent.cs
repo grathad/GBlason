@@ -27,7 +27,7 @@ namespace GBlason.ViewModel.Contract
         /// <value>
         /// The name of the component.
         /// </value>
-        public String ComponentName
+        public virtual String ComponentName
         {
             get
             {
@@ -40,6 +40,8 @@ namespace GBlason.ViewModel.Contract
         {
             _children = new ObservableCollection<CoatOfArmComponent>();
         }
+
+        public abstract Object OriginObject { get; set; }
 
         #region properties
 
