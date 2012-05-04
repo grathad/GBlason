@@ -63,3 +63,7 @@ C:\Users\grathad\GBlason\GBlason\bin\Debug\ja-JP\GBlason.resources.dll
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.Culture.BlasonVocabulary.ja-JP.resources
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.Properties.Resources.ja-JP.resources
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\ja-JP\GBlason.resources.dll
+C:\Users\grathad\GBlason\GBlason\bin\Debug\de-DE\GBlason.resources.dll
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.Culture.BlasonVocabulary.de-DE.resources
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.Properties.Resources.de-DE.resources
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\de-DE\GBlason.resources.dll

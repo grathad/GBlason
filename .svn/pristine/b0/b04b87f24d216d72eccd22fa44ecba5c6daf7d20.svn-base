@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="GBlason.Control.Aggregate.CustomGUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Aggregate="clr-namespace:GBlason.Control.Aggregate"
+             xmlns:ViewModel="clr-namespace:GBlason.ViewModel" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600"
+             Background="{StaticResource ResourceKey=LightColorBackgroundBrush}">
+    
+    <UserControl.Resources>
+        <DataTemplate x:Key="CoAViewerTemplate" DataType="{x:Type ViewModel:GbsFileViewModel}">
+            <Aggregate:CoatOfArmsViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0"/>
+        </DataTemplate>
+        <DataTemplate x:Key="TabItemTemplate" DataType="{x:Type ViewModel:GbsFileViewModel}">
+            <TextBlock Text="{Binding Path=FileName}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    
+  <Grid x:Name="CustomGUIGrid" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="78*" />
+            <RowDefinition Height="222*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" MinWidth="120" MaxWidth="300"/>
+            <ColumnDefinition Width="3px"/>
+            <ColumnDefinition Width="8*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="PropertiesAndTreeGrid" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3px"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Aggregate:Properties Grid.Row="0" DataContext="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile.CurrentlySelectedComponent}"/>
+            <GridSplitter Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="3" Name="propertiesSplitter"/>
+            <Aggregate:TreeView Grid.Row="2"/>
+        </Grid>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" Name="mainSplitter" VerticalAlignment="Stretch" Width="3" Grid.RowSpan="2" />
+        <TabControl Grid.Column="2"
+                    Name="MultiDocumentTabContent"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    ItemsSource="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=OpenedFiles}"
+                    ContentTemplate="{StaticResource ResourceKey=CoAViewerTemplate}"
+                    ItemTemplate="{StaticResource ResourceKey=TabItemTemplate}"
+                    SelectedItem="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile}" Grid.RowSpan="2">
+        </TabControl>
+    </Grid>
+</UserControl>

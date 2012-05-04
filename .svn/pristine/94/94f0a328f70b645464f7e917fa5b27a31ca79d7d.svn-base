@@ -1,0 +1,109 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:ViewModel="clr-namespace:GBlason.ViewModel"
+					xmlns:CustomUserControl="clr-namespace:GBlason.Control.CustomUserControl"
+					xmlns:Global="clr-namespace:GBlason.Global" xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"
+                    xmlns:CustomCommand="clr-namespace:GBlason.Common.CustomCommand"
+                    xmlns:Globalization="clr-namespace:System.Globalization;assembly=mscorlib"
+                    xmlns:IO="clr-namespace:System.IO;assembly=mscorlib"
+                    xmlns:Converter="clr-namespace:GBlason.Common.Converter">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="..\Themes\Generic.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Use to define the display of shapes in the menu galleries or selection lists -->
+    <DataTemplate x:Key="ShapeGalleryItemTemplate" DataType="{x:Type ViewModel:ShapeViewModel}">
+        <CustomUserControl:ShapeViewerUC DataContext="{Binding Path=.}" Fill="{StaticResource ResourceKey=CustomMiniShapeGlossyBrush}"
+                                         Stroke="{StaticResource ResourceKey=CustomGuiDarkBlueForeground}"
+                                         StrokeThickness="3"/>
+    </DataTemplate>
+
+
+    <!-- Used for the display of the recent files in the main menu -->
+
+    <DataTemplate x:Key="RecentFileDataTemplate" DataType="{x:Type ViewModel:RecentFileViewModel}">
+        <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Button DockPanel.Dock="Right" Width="32" Command="CustomCommand:CommandMenu.RecentObjectFlag" CommandParameter="{Binding Path=.}"
+                    Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">
+                <Image x:Name="FlagImage" HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Pictures\Icons32\flag_3.png" Margin="2"/>
+            </Button>
+            <Button HorizontalContentAlignment="Left" Command="CustomCommand:CommandMenu.RecentObjectSelect" CommandParameter="{Binding Path=.}"
+                    Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">
+                <DockPanel HorizontalAlignment="Left">
+                    <Image DockPanel.Dock="Left" Source="..\Pictures\Icons32\page.png" Margin="2"/>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="{Binding Path=Name}" HorizontalAlignment="Left" Margin="5,0"/>
+                        <TextBlock Grid.Row="1" Text="{Binding Path=Path}" HorizontalAlignment="Left" Margin="5,0" Foreground="Gray"/>
+                    </Grid>
+                </DockPanel>
+            </Button>
+        </DockPanel>
+        <DataTemplate.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=IsFixed}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Source" TargetName="FlagImage" Value="..\Pictures\Icons32\flag_red.png"/>
+            </MultiDataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RecentDirectoryDataTemplate"  DataType="{x:Type ViewModel:RecentFileViewModel}" >
+        <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Button DockPanel.Dock="Right" Width="32" Command="CustomCommand:CommandMenu.RecentObjectFlag" CommandParameter="{Binding Path=.}"
+                    Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">
+                <Image x:Name="FlagImage" HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Pictures\Icons32\flag_3.png" Margin="2"/>
+            </Button>
+            <Button HorizontalContentAlignment="Left" Command="CustomCommand:CommandMenu.RecentObjectSelect" CommandParameter="{Binding Path=.}"
+                    Style="{StaticResource ResourceKey=MenuRecentFileButtonStyle}">
+                <DockPanel HorizontalAlignment="Left">
+                    <Image DockPanel.Dock="Left" Source="..\Pictures\Icons32\folder_go.png" Margin="2"/>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="{Binding Path=Name}" HorizontalAlignment="Left" Margin="5,0"/>
+                        <TextBlock Grid.Row="1" Text="{Binding Path=Path}" HorizontalAlignment="Left" Margin="5,0" Foreground="Gray"/>
+                    </Grid>
+                </DockPanel>
+            </Button>
+        </DockPanel>
+        <DataTemplate.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=IsFixed}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Source" TargetName="FlagImage" Value="..\Pictures\Icons32\flag_red.png"/>
+            </MultiDataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+    
+    <!-- Used for the display of the language name in the menu and the status bar -->
+    <Converter:CultureNameToString x:Key="CultureNameToString" />
+  <DataTemplate x:Key="LanguageDataTemplate" DataType="{x:Type Globalization:CultureInfo}">
+        <DockPanel>
+            <Image DockPanel.Dock="Left" MaxHeight="16" MaxWidth="16"
+                                   Margin="2">
+              <Image.Resources>
+                    <Converter:StringToImageConverter x:Key="StringToImageConverter" />
+              </Image.Resources>
+              <Image.Source>
+                    <MultiBinding ConverterParameter="pack://application:,,,/Pictures{1}Icons16{1}{0}.png" Converter="{StaticResource ResourceKey=StringToImageConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Source="{x:Static IO:Path.DirectorySeparatorChar}"/>
+                    </MultiBinding>
+                </Image.Source>
+            </Image>
+            <TextBlock Text="{Binding Path=Name, Converter={StaticResource ResourceKey=CultureNameToString}}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="2"/>
+        </DockPanel>
+    </DataTemplate>
+
+</ResourceDictionary>

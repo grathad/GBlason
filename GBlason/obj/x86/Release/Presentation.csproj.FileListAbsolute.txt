@@ -55,3 +55,11 @@ C:\Users\grathad\GBlason\GBlason\obj\x86\Release\GenerateResource.write.1.tlog
 C:\Users\grathad\GBlason\GBlason\obj\x86\Release\fr-FR\GBlason.resources.dll
 C:\Users\grathad\GBlason\GBlason\obj\x86\Release\GBlason.exe
 C:\Users\grathad\GBlason\GBlason\obj\x86\Release\GBlason.pdb
+C:\Users\grathad\GBlason\GBlason\bin\Release\ja-JP\GBlason.resources.dll
+C:\Users\grathad\GBlason\GBlason\bin\Release\WPFToolkit.Extended.dll
+C:\Users\grathad\GBlason\GBlason\obj\x86\Release\Control\MenuControl\PreferenceMenu.g.cs
+C:\Users\grathad\GBlason\GBlason\obj\x86\Release\Control\MenuControl\PreferenceMenu.baml
+C:\Users\grathad\GBlason\GBlason\obj\x86\Release\Dictionary\TabControlTemplateDictionary.baml
+C:\Users\grathad\GBlason\GBlason\obj\x86\Release\GBlason.Culture.BlasonVocabulary.ja-JP.resources
+C:\Users\grathad\GBlason\GBlason\obj\x86\Release\GBlason.Properties.Resources.ja-JP.resources
+C:\Users\grathad\GBlason\GBlason\obj\x86\Release\ja-JP\GBlason.resources.dll

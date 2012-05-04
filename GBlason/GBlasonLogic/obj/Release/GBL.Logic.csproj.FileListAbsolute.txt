@@ -3,3 +3,6 @@ C:\Users\grathad\GBlason\GBlason\GBlasonLogic\bin\Release\GBlasonLogic.pdb
 C:\Users\grathad\GBlason\GBlason\GBlasonLogic\obj\Release\ResolveAssemblyReference.cache
 C:\Users\grathad\GBlason\GBlason\GBlasonLogic\obj\Release\GBlasonLogic.dll
 C:\Users\grathad\GBlason\GBlason\GBlasonLogic\obj\Release\GBlasonLogic.pdb
+C:\Users\grathad\GBlason\GBlason\GBlasonLogic\bin\Release\Repository.dll
+C:\Users\grathad\GBlason\GBlason\GBlasonLogic\bin\Release\Repository.pdb
+C:\Users\grathad\GBlason\GBlason\GBlasonLogic\bin\Release\fr-FR\Repository.resources.dll

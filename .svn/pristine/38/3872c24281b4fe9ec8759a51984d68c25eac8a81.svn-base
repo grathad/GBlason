@@ -1,0 +1,155 @@
+﻿<Fluent:RibbonWindow x:Class="GBlason.MainWindow"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent" xmlns:ViewModel="clr-namespace:GBlason.ViewModel"
+                     xmlns:Properties="clr-namespace:GBlason.Properties"
+                     xmlns:Aggregate="clr-namespace:GBlason.Control.Aggregate"
+                     Title="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=ApplicationTitle}"
+                     Width="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=MainWindowWidth}"
+                     Height="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=MainWindowHeight}"
+                     Top="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=MainWindowTop}"
+                     Left="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=MainWindowLeft}"
+                     WindowState="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=MainWindowState}"
+                     mc:Ignorable="d"
+                     Icon="Pictures\Icons32\shield.png"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:CustomCommand="clr-namespace:GBlason.Common.CustomCommand"
+                     xmlns:MenuControl="clr-namespace:GBlason.Control.MenuControl"
+                     xmlns:Converter="clr-namespace:GBlason.Common.Converter"
+                     xmlns:Culture="clr-namespace:GBlason.Culture"
+                     xmlns:Resources="clr-namespace:GBL.Repository.Resources;assembly=Repository" d:DesignWidth="750" d:DesignHeight="600">
+    <Fluent:RibbonWindow.Resources>
+        <Converter:SelectionToVisibilityConverter x:Key="SelectionToVisibility"/>
+    </Fluent:RibbonWindow.Resources>
+
+    <Fluent:RibbonWindow.CommandBindings>
+        <CommandBinding x:Name="OpenCommand" Command="Open" CanExecute="OpenCommandCanExecute" Executed="OpenCommandExecuted"/>
+        <CommandBinding x:Name="NewCommand" Command="New" CanExecute="NewCommandCanExecute"  Executed="NewCommandExecuted"/>
+        <CommandBinding x:Name="SaveCommand" Command="Save" CanExecute="SaveCommandCanExecute" Executed="SaveCommandExecuted"/>
+        <CommandBinding x:Name="SaveAsCommand" Command="SaveAs" CanExecute="SaveAsCommandCanExecute" Executed="SaveAsCommandExecuted"/>
+        <CommandBinding Command="{x:Static CustomCommand:CommandMenu.RecentObjectSelect}" Executed="RecentObjectSelected"/>
+        <CommandBinding x:Name="AddDivisionCommand" Command="{x:Static CustomCommand:CommandMenu.AddingDivision}"
+                        CanExecute="AddDivisionCommandCanExecute" Executed="AddDivisionCommandExecuted"/>
+    </Fluent:RibbonWindow.CommandBindings>
+
+    <DockPanel LastChildFill="True">
+        <Fluent:Ribbon DockPanel.Dock="Top" x:Name="ApplicationRibbon">
+            <!--Backstage-->
+            <Fluent:Ribbon.Menu>
+                <Fluent:Backstage Header="{x:Static Properties:Resources.MenuTitleLabel}" x:Name="FileMenu">
+                    <Fluent:BackstageTabControl SelectedValue="MenuRecentItem">
+                        <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelSave}" Icon="Pictures\Icons16\disk.png"
+                                       Command="Save"/>
+                        <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelSaveAs}" Icon="Pictures\Icons16\save_as.png"
+                                       Command="SaveAs"/>
+                        <Fluent:Button Header="{x:Static Properties:Resources.MenuLabelOpen}" Icon="Pictures\Icons16\folder_page.png"
+                                       Command="Open"/>
+                        <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelRecent}" x:Name="MenuRecentItem">
+                            <MenuControl:RecentDocumentMenu DataContext="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}}"
+                                                          Margin="4,4,30,4"/>
+                        </Fluent:BackstageTabItem>
+                        <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelNew}">
+                            <MenuControl:NewDocumentMenu Margin="4,4,0,0"/>
+                        </Fluent:BackstageTabItem>
+                        <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.MenuLabelHelp}"/>
+                        <Fluent:BackstageTabItem Header="{x:Static Properties:Resources.ButtonLabelOptions}">
+                            <MenuControl:PropertiesMenu />
+                        </Fluent:BackstageTabItem>
+                        <Fluent:Button Header="{x:Static Properties:Resources.ButtonLabelQuit}" Icon="Pictures\Icons16\cross.png"/>
+                    </Fluent:BackstageTabControl>
+                </Fluent:Backstage>
+            </Fluent:Ribbon.Menu>
+            <!--contextual tabs-->
+            <Fluent:Ribbon.ContextualGroups>
+                <Fluent:RibbonContextualTabGroup Header="{x:Static Properties:Resources.MenuContextHeaderDivisible}"
+                                                 Visibility="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile.CurrentlySelectedComponent, Mode=OneWay, Converter={StaticResource ResourceKey=SelectionToVisibility}}"
+                                                 x:Name="MenuContextHeaderDivisible" Background="Orange" BorderBrush="Orange" />
+                <Fluent:RibbonContextualTabGroup Header="{x:Static Properties:Resources.MenuContextFillable}"
+                                                 Visibility="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel}, Path=CurrentlyDisplayedFile.CurrentlySelectedComponent, Mode=OneWay, Converter={StaticResource ResourceKey=SelectionToVisibility}}"
+                                                 x:Name="MenuContextFillable" Background="Blue" BorderBrush="Blue" />
+            </Fluent:Ribbon.ContextualGroups>
+            <!--Tabs-->
+            <Fluent:RibbonTabItem Header="{x:Static Properties:Resources.TabLabelHome}" x:Name="TabHome">
+                <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelClipboard}">
+                    <Fluent:SplitButton Name="ButtonPaste" Header="{x:Static Properties:Resources.ButtonLabelPaste}"
+                                        Icon="Pictures\Icons16\paste_plain.png"
+                                        LargeIcon="Pictures\Icons32\paste_plain.png">
+                        <Fluent:SplitButton.Items>
+                            <Fluent:MenuItem Header="{x:Static Properties:Resources.MenuLabelPaste}" Icon="Pictures\Icons16\paste_plain.png"/>
+                            <Fluent:MenuItem Header="{x:Static Properties:Resources.MenuLabelPasteSpecial}" Icon="Pictures\Icons16\paste_plain.png"/>
+                        </Fluent:SplitButton.Items>
+                    </Fluent:SplitButton>
+                    <Fluent:Button Name="ButtonCut" Header="{x:Static Properties:Resources.ButtonLabelCut}" SizeDefinition="Middle,Small" Icon="Pictures\Icons16\cut.png"/>
+                    <Fluent:Button Name="ButtonCopy" Header="{x:Static Properties:Resources.ButtonLabelCopy}" SizeDefinition="Middle,Small" Icon="Pictures\Icons16\page_copy.png"/>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem Header="{x:Static Properties:Resources.TabLabelCut}" x:Name="TabDivision"
+                                  Group="{Binding ElementName=MenuContextHeaderDivisible}">
+                <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelBasicDivision}" x:Name="GroupDivision">
+                    <Fluent:Button Header="{x:Static Culture:BlasonVocabulary.PartyPlain}" x:Name="ButtonNoDivision"
+                                   Command="{x:Static CustomCommand:CommandMenu.AddingDivision}"
+                                   CommandParameter="{x:Static Resources:DivisionType.PartyPlain}"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Culture:BlasonVocabulary.PartyFess}" x:Name="ButtonFess"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Culture:BlasonVocabulary.PartyPale}" x:Name="ButtonPale"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Culture:BlasonVocabulary.PartyBend}" x:Name="ButtonBend"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Culture:BlasonVocabulary.PartyBendSinister}" x:Name="ButtonBendSinister"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelAdvancedDivision}" x:Name="GroupAdvancedDivision">
+                    <Fluent:Button Header="{x:Static Culture:BlasonVocabulary.PartySaltire}" x:Name="ButtonSaltire"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Culture:BlasonVocabulary.PartyCross}" x:Name="ButtonPartyCross"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Culture:BlasonVocabulary.PartyPall}" x:Name="ButtonPall"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Culture:BlasonVocabulary.TiercedBend}" x:Name="ButtonTiercedBend"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Culture:BlasonVocabulary.TiercedBendSinister}" x:Name="ButtonTiercedBendSinister"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Culture:BlasonVocabulary.TiercedPale}" x:Name="ButtonTiercedPale"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                    <Fluent:Button Header="{x:Static Culture:BlasonVocabulary.TiercedFess}" x:Name="ButtonTiercedFess"
+                                   Icon="Pictures\Icons16\construction.png" LargeIcon="Pictures\Icons32\construction.png"/>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem Header="{x:Static Properties:Resources.TabLabelOrdinaries}" x:Name="TabOrdinaries"
+                                  Group="{Binding ElementName=MenuContextHeaderDivisible}">
+                <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelHonourableOrdinaries}" x:Name="GroupHonourableOrdinaries">
+                    
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="{x:Static Properties:Resources.GroupLabelSubOrdinaries}" x:Name="GroupSubOrdinaries">
+
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem Header="{x:Static Properties:Resources.TabLabelTinctures}" x:Name="TabTinctures"
+                                  Group="{Binding ElementName=MenuContextFillable}">
+                <Fluent:RibbonGroupBox x:Name="GroupLabelBasicTinctures" Header="{x:Static Properties:Resources.GroupLabelBasicTinctures}">
+                    <Fluent:Button x:Name="ButtonOr" Header="{x:Static Culture:BlasonVocabulary.TinctureOr}" />
+                    <Fluent:Button x:Name="ButtonArgent" Header="{x:Static Culture:BlasonVocabulary.TinctureArgent}"/>
+                    <Fluent:SeparatorTabItem />
+                    <Fluent:Button x:Name="ButtonAzure" Header="{x:Static Culture:BlasonVocabulary.TinctureAzure}"/>
+                    <Fluent:Button x:Name="ButtonVert" Header="{x:Static Culture:BlasonVocabulary.TinctureVert}"/>
+                    <Fluent:Button x:Name="ButtonGules" Header="{x:Static Culture:BlasonVocabulary.TinctureGules}"/>
+                    <Fluent:Button x:Name="ButtonSable" Header="{x:Static Culture:BlasonVocabulary.TinctureSable}"/>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox x:Name="GroupLabelModernTinctures" Header="{x:Static Properties:Resources.GroupLabelModernTinctures}">
+
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox x:Name="GroupLabelFurs" Header="{x:Static Properties:Resources.GroupLabelFurs}">
+
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox x:Name="GroupLabelCustomTinctures" Header="{x:Static Properties:Resources.GroupLabelCustomTinctures}">
+
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+        </Fluent:Ribbon>
+        <StatusBar DockPanel.Dock="Bottom" x:Name="StatusBar" MinHeight="20"></StatusBar>
+        <Aggregate:CustomGUI x:Name="MainFrame"/>
+    </DockPanel>
+
+</Fluent:RibbonWindow>
