@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:Properties="clr-namespace:GBlason.Properties" xmlns:ViewModel="clr-namespace:GBlason.ViewModel"
-             mc:Ignorable="d" 
+             xmlns:MenuControl="clr-namespace:GBlason.Control.MenuControl" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Background="#88FFFFFF">
     <UserControl.Resources>
@@ -23,7 +23,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <DockPanel>
-                <Image Source="..\..\Pictures\Icons32\interface_preferences.png"
+                <Image Source="/Pictures\Icons32\preferences.png"
                        DockPanel.Dock="Left"
                        Margin="6"
                        Width="32"
@@ -35,54 +35,27 @@
             <Rectangle Grid.Row="1" StrokeThickness="0,0,0,1" StrokeDashArray="2 5" Height="1"
                        HorizontalAlignment="Stretch" Stroke="DarkGray" VerticalAlignment="Center" Margin="5,0">
             </Rectangle>
-            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto"
-                          HorizontalScrollBarVisibility="Auto"
-                          Margin="8">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="16"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Image Grid.Column="0"
-                           Grid.Row="0"
-                           Source="..\..\Pictures\Icons16\color_management.png"
-                           Width="16" Height="16"/>
-                    <TextBlock Grid.Column="1"
-                               Text="{x:Static Properties:Resources.PropertiesBlasonBackgroundHeader}"
-                               Margin="8"/>
-                    <xctk:ColorPicker Grid.Column="2"
-                                      SelectedColor="{Binding Source={x:Static ViewModel:GlobalApplicationViewModel.GetApplicationViewModel},
-                        Path=BlasonViewerBackgroundColor.Color,
-                        Mode=TwoWay}">
-                        
-                    </xctk:ColorPicker>
-
-                        <Image Grid.Column="0"
-                           Grid.Row="1"
-                           Source="..\..\Pictures\Icons16\locate.png"
-                           Width="16" Height="16"/>
-                    <TextBlock Grid.Column="1"
-                               Grid.Row="1"
-                               Text="{x:Static Properties:Resources.PropertiesCultureHeader}"
-                               Margin="8"/>
-                </Grid>
-            </ScrollViewer>
+            <MenuControl:PreferenceMenu Grid.Row="2"/>
         </Grid>
         <Grid x:Name="Parameters" Grid.Column="2">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="4px" />
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto" MinHeight="40px"/>
             </Grid.RowDefinitions>
-            <Button x:Name="ButtonCreateNew" Command="New" Width="40" Height="40"
-                    Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left"
-                    Margin="10" Style="{DynamicResource ResourceKey=MenuRecentFileButtonStyle}">
-                <Image Source="..\..\Pictures\Icons32\asterisk_orange.png"/>
-            </Button>
+            <DockPanel>
+                <Image Source="..\..\Pictures\Icons32\interface_preferences.png"
+                       DockPanel.Dock="Left"
+                       Margin="6"
+                       Width="32"
+                       Height="32"
+                       VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="0" FontSize="16" Foreground="#DD000000" Text="{x:Static Properties:Resources.ParametersMenuTitle}"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"/>
+            </DockPanel>
+            <Rectangle Grid.Row="1" StrokeThickness="0,0,0,1" StrokeDashArray="2 5" Height="1"
+                       HorizontalAlignment="Stretch" Stroke="DarkGray" VerticalAlignment="Center" Margin="5,0">
+            </Rectangle>
         </Grid>
         <Border Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="1,5" BorderThickness="1" Width="1">
             <Border.BorderBrush>

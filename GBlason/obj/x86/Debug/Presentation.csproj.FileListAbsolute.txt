@@ -57,3 +57,9 @@ C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Dictionary\PropertyTemplateDictio
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Dictionary\TreeViewTemplateDictionary.baml
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Dictionary\TabControlTemplateDictionary.baml
 C:\Users\grathad\GBlason\GBlason\bin\Debug\WPFToolkit.Extended.dll
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\PreferenceMenu.g.cs
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\MenuControl\PreferenceMenu.baml
+C:\Users\grathad\GBlason\GBlason\bin\Debug\ja-JP\GBlason.resources.dll
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.Culture.BlasonVocabulary.ja-JP.resources
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GBlason.Properties.Resources.ja-JP.resources
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\ja-JP\GBlason.resources.dll

@@ -71,17 +71,23 @@
     </ApplicationDefinition>
     <Compile Include="Common\Attribute\CoaPropertyAttribute.cs" />
     <Compile Include="Common\Converter\CoatOfArmConverter.cs" />
+    <Compile Include="Common\Converter\CultureNameToString.cs" />
     <Compile Include="Common\Converter\SelectionToVisibilityConverter.cs" />
+    <Compile Include="Common\Converter\StringToImageConverter.cs" />
     <Compile Include="Common\CustomCommand\AddDivisionCommand.cs" />
     <Compile Include="Common\CustomCommand\ChangeShape.cs" />
     <Compile Include="Common\CustomCommand\CommandGeneric.cs" />
     <Compile Include="Common\CustomCommand\CommandMenu.cs" />
     <Compile Include="Common\CustomCommand\CommandRepository.cs" />
     <Compile Include="Common\CustomCommand\ICommandTarget.cs" />
+    <Compile Include="Common\PictureManager.cs" />
     <Compile Include="Common\TemplateSelector\PropertyTable.cs" />
     <Compile Include="Control\CustomUserControl\CommandComboBox.cs" />
     <Compile Include="Control\MenuControl\NewDocumentMenu.xaml.cs">
       <DependentUpon>NewDocumentMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\MenuControl\PreferenceMenu.xaml.cs">
+      <DependentUpon>PreferenceMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\MenuControl\PropertiesMenu.xaml.cs">
       <DependentUpon>PropertiesMenu.xaml</DependentUpon>
@@ -102,11 +108,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Culture\BlasonVocabulary.ja-JP.Designer.cs">
+      <DependentUpon>BlasonVocabulary.ja-JP.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Dictionary\RibbonCommandDictionary.xaml.cs">
       <DependentUpon>RibbonCommandDictionary.xaml</DependentUpon>
     </Compile>
     <Compile Include="Global\ApplicationSettingsManager.cs" />
     <Compile Include="Global\Context.cs" />
+    <Compile Include="Properties\Resources.ja-JP.Designer.cs">
+      <DependentUpon>Resources.ja-JP.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="ViewModel\CoatOfArmViewModel.cs" />
     <Compile Include="ViewModel\ComponentTreeViewViewModel.cs" />
     <Compile Include="ViewModel\Contract\CoatOfArmComponent.cs" />
@@ -131,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\Aggregate\Properties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\MenuControl\PreferenceMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -234,6 +254,14 @@
     <EmbeddedResource Include="Culture\BlasonVocabulary.fr-FR.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>BlasonVocabulary.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Culture\BlasonVocabulary.ja-JP.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BlasonVocabulary.ja-JP.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ja-JP.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ja-JP.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.fr-FR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -384,6 +412,26 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Pictures\Icons32\find.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\de-DE.png" />
+    <Resource Include="Pictures\Icons16\en-GB.png" />
+    <Resource Include="Pictures\Icons16\fr-FR.png" />
+    <Resource Include="Pictures\Icons16\ja-JP.png" />
+    <Resource Include="Pictures\Icons16\preferences.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\de-DE.png" />
+    <Resource Include="Pictures\Icons32\en-GB.png" />
+    <Resource Include="Pictures\Icons32\fr-FR.png" />
+    <Resource Include="Pictures\Icons32\ja-JP.png" />
+    <Resource Include="Pictures\Icons32\preferences.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons32\exclamation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Icons16\exclamation.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

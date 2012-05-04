@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ApplicationButtonLabel" xml:space="preserve">
     <value>Blason</value>
@@ -201,7 +201,91 @@
   <data name="TabLabelHome" xml:space="preserve">
     <value>Accueil</value>
   </data>
-  <data name="TabLabelInsert" xml:space="preserve">
-    <value>Insérer</value>
+  <data name="CommandDescChangeShape" xml:space="preserve">
+    <value>Changer la forme de {0} à {1}</value>
+  </data>
+  <data name="ControlPropertyTitle" xml:space="preserve">
+    <value>Propriétés</value>
+  </data>
+  <data name="ControlTreeViewTitle" xml:space="preserve">
+    <value>Composition du blason</value>
+  </data>
+  <data name="GBSFormatExtension" xml:space="preserve">
+    <value>gbs</value>
+  </data>
+  <data name="GroupLabelAdvancedDivision" xml:space="preserve">
+    <value>Partition avancées</value>
+  </data>
+  <data name="GroupLabelBasicDivision" xml:space="preserve">
+    <value>Partition simples</value>
+  </data>
+  <data name="GroupLabelBasicTinctures" xml:space="preserve">
+    <value>Couleurs normales</value>
+  </data>
+  <data name="GroupLabelCustomTinctures" xml:space="preserve">
+    <value>Couleurs personnalisées</value>
+  </data>
+  <data name="GroupLabelFurs" xml:space="preserve">
+    <value>Fourrures</value>
+  </data>
+  <data name="GroupLabelHonourableOrdinaries" xml:space="preserve">
+    <value>Pièces honorables</value>
+  </data>
+  <data name="GroupLabelModernTinctures" xml:space="preserve">
+    <value>Couleurs modernes</value>
+  </data>
+  <data name="GroupLabelSubOrdinaries" xml:space="preserve">
+    <value>Pièces secondaires</value>
+  </data>
+  <data name="MenuContextFillable" xml:space="preserve">
+    <value>Remplissable</value>
+  </data>
+  <data name="MenuContextHeaderDivisible" xml:space="preserve">
+    <value>Divisable</value>
+  </data>
+  <data name="MenuLabelHelp" xml:space="preserve">
+    <value>Aide</value>
+  </data>
+  <data name="MenuLabelNew" xml:space="preserve">
+    <value>Nouveau</value>
+  </data>
+  <data name="MenuLabelRecent" xml:space="preserve">
+    <value>Récent</value>
+  </data>
+  <data name="MenuTitleLabel" xml:space="preserve">
+    <value>Fichier</value>
+  </data>
+  <data name="NewDocumentLabel" xml:space="preserve">
+    <value>Nouveau Blason {0}</value>
+  </data>
+  <data name="NewDocumentMenuTitle" xml:space="preserve">
+    <value>Modèles disponibles</value>
+  </data>
+  <data name="OpenDialogBoxFormatDescription" xml:space="preserve">
+    <value>GBlason Sauvegarde</value>
+  </data>
+  <data name="ParametersMenuTitle" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="TabLabelCut" xml:space="preserve">
+    <value>Partition</value>
+  </data>
+  <data name="TabLabelOrdinaries" xml:space="preserve">
+    <value>Pièces</value>
+  </data>
+  <data name="TabLabelTinctures" xml:space="preserve">
+    <value>Emaux</value>
+  </data>
+  <data name="fr_FR" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="ja_JP" xml:space="preserve">
+    <value>Japonais</value>
+  </data>
+  <data name="en_GB" xml:space="preserve">
+    <value>Anglais</value>
+  </data>
+  <data name="ToolTipLanguageChangeWarning" xml:space="preserve">
+    <value>Le changement de langue, ne sera pris en compte que lors du prochain lancement de l'application</value>
   </data>
 </root>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -71,6 +72,9 @@ namespace GBlason.Global
                 Settings.Default.BackgroundViewerColor.R,
                 Settings.Default.BackgroundViewerColor.G,
                 Settings.Default.BackgroundViewerColor.B));
+            //language preference
+            GlobalApplicationViewModel.GetApplicationViewModel.PropertyPreferenceCultureInfo = Settings.Default.PreferredLanguage;
+
         }
 
         public static void SavePreference()
@@ -81,6 +85,8 @@ namespace GBlason.Global
             Settings.Default.PreferredPosition = new Point(GlobalApplicationViewModel.GetApplicationViewModel.MainWindowLeft, GlobalApplicationViewModel.GetApplicationViewModel.MainWindowTop);
             //L'etat de la fenetre
             Settings.Default.PreferredState = GlobalApplicationViewModel.GetApplicationViewModel.MainWindowState;
+            //language preference
+            Settings.Default.PreferredLanguage = GlobalApplicationViewModel.GetApplicationViewModel.PropertyPreferenceCultureInfo;
         }
     }
 }

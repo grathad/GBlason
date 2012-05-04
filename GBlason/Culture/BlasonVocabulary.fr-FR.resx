@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BannerShape" xml:space="preserve">
     <value>Bannière</value>
@@ -182,5 +182,101 @@
   </data>
   <data name="SwissShape" xml:space="preserve">
     <value>Suisse</value>
+  </data>
+  <data name="DivisionViewModel" xml:space="preserve">
+    <value>Partition ({0})</value>
+  </data>
+  <data name="NoShape" xml:space="preserve">
+    <value>Aucune</value>
+  </data>
+  <data name="PartyBend" xml:space="preserve">
+    <value>Tranché</value>
+  </data>
+  <data name="PartyBendSinister" xml:space="preserve">
+    <value>Taillé</value>
+  </data>
+  <data name="PartyCross" xml:space="preserve">
+    <value>Ecartelé</value>
+  </data>
+  <data name="PartyFess" xml:space="preserve">
+    <value>Coupé</value>
+  </data>
+  <data name="PartyPale" xml:space="preserve">
+    <value>Parti</value>
+  </data>
+  <data name="PartyPall" xml:space="preserve">
+    <value>Tiercé en Pairle</value>
+  </data>
+  <data name="PartyPlain" xml:space="preserve">
+    <value>Plain</value>
+  </data>
+  <data name="PartySaltire" xml:space="preserve">
+    <value>Ecartelé en Sautoir</value>
+  </data>
+  <data name="TiercedBend" xml:space="preserve">
+    <value>Tiercé en Bande</value>
+  </data>
+  <data name="TiercedBendSinister" xml:space="preserve">
+    <value>Tiercé en Barre</value>
+  </data>
+  <data name="TiercedFess" xml:space="preserve">
+    <value>Tiercé en Fasce</value>
+  </data>
+  <data name="TiercedPale" xml:space="preserve">
+    <value>Tiercé en Pal</value>
+  </data>
+  <data name="FurErmine" xml:space="preserve">
+    <value>Hermine Plain</value>
+  </data>
+  <data name="FurErmines" xml:space="preserve">
+    <value>Contre Hermine Plain</value>
+  </data>
+  <data name="FurErminois" xml:space="preserve">
+    <value>Herminais Plain</value>
+  </data>
+  <data name="FurPean" xml:space="preserve">
+    <value>Péan Plain</value>
+  </data>
+  <data name="FurVair" xml:space="preserve">
+    <value>Vair</value>
+  </data>
+  <data name="TinctureAcier" xml:space="preserve">
+    <value>Acier</value>
+  </data>
+  <data name="TinctureArgent" xml:space="preserve">
+    <value>Argent</value>
+  </data>
+  <data name="TinctureAzure" xml:space="preserve">
+    <value>Azur</value>
+  </data>
+  <data name="TinctureCarnation" xml:space="preserve">
+    <value>Carnation</value>
+  </data>
+  <data name="TinctureGules" xml:space="preserve">
+    <value>Gueules</value>
+  </data>
+  <data name="TinctureMurrey" xml:space="preserve">
+    <value>Mûre</value>
+  </data>
+  <data name="TinctureOr" xml:space="preserve">
+    <value>Or</value>
+  </data>
+  <data name="TinctureOrange" xml:space="preserve">
+    <value>Tenné</value>
+  </data>
+  <data name="TinctureProper" xml:space="preserve">
+    <value>Naturel</value>
+  </data>
+  <data name="TincturePurpure" xml:space="preserve">
+    <value>Pourpre</value>
+  </data>
+  <data name="TinctureSable" xml:space="preserve">
+    <value>Sable</value>
+  </data>
+  <data name="TinctureSanguine" xml:space="preserve">
+    <value>Sanguine</value>
+  </data>
+  <data name="TinctureVert" xml:space="preserve">
+    <value>Sinople</value>
   </data>
 </root>

@@ -151,11 +151,29 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TreeView.
+        ///   Looks up a localized string similar to Object components.
         /// </summary>
         public static string ControlTreeViewTitle {
             get {
                 return ResourceManager.GetString("ControlTreeViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string en_GB {
+            get {
+                return ResourceManager.GetString("en_GB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to French.
+        /// </summary>
+        public static string fr_FR {
+            get {
+                return ResourceManager.GetString("fr_FR", resourceCulture);
             }
         }
         
@@ -259,20 +277,20 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shape.
-        /// </summary>
-        public static string GroupLabelShape {
-            get {
-                return ResourceManager.GetString("GroupLabelShape", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Subordinaries.
         /// </summary>
         public static string GroupLabelSubOrdinaries {
             get {
                 return ResourceManager.GetString("GroupLabelSubOrdinaries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Japanese.
+        /// </summary>
+        public static string ja_JP {
+            get {
+                return ResourceManager.GetString("ja_JP", resourceCulture);
             }
         }
         
@@ -439,6 +457,15 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameters.
+        /// </summary>
+        public static string ParametersMenuTitle {
+            get {
+                return ResourceManager.GetString("ParametersMenuTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Preferences.
         /// </summary>
         public static string PreferencesMenuTitle {
@@ -502,15 +529,6 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Insert.
-        /// </summary>
-        public static string TabLabelInsert {
-            get {
-                return ResourceManager.GetString("TabLabelInsert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Ordinaries.
         /// </summary>
         public static string TabLabelOrdinaries {
@@ -520,11 +538,20 @@ namespace GBlason.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tinctures.
+        ///   Looks up a localized string similar to Enamels.
         /// </summary>
         public static string TabLabelTinctures {
             get {
                 return ResourceManager.GetString("TabLabelTinctures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The language will change at the next application launch.
+        /// </summary>
+        public static string ToolTipLanguageChangeWarning {
+            get {
+                return ResourceManager.GetString("ToolTipLanguageChangeWarning", resourceCulture);
             }
         }
     }

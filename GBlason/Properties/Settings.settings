@@ -26,5 +26,8 @@
     <Setting Name="BackgroundViewerColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">238, 240, 243</Value>
     </Setting>
+    <Setting Name="PreferredLanguage" Type="System.Globalization.CultureInfo" Scope="User">
+      <Value Profile="(Default)">(Default)</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -3,7 +3,10 @@
 					xmlns:ViewModel="clr-namespace:GBlason.ViewModel"
 					xmlns:CustomUserControl="clr-namespace:GBlason.Control.CustomUserControl"
 					xmlns:Global="clr-namespace:GBlason.Global" xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"
-                    xmlns:CustomCommand="clr-namespace:GBlason.Common.CustomCommand">
+                    xmlns:CustomCommand="clr-namespace:GBlason.Common.CustomCommand"
+                    xmlns:Globalization="clr-namespace:System.Globalization;assembly=mscorlib"
+                    xmlns:IO="clr-namespace:System.IO;assembly=mscorlib"
+                    xmlns:Converter="clr-namespace:GBlason.Common.Converter">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="..\Themes\Generic.xaml"/>
     </ResourceDictionary.MergedDictionaries>
@@ -80,6 +83,27 @@
         </DataTemplate.Triggers>
     </DataTemplate>
     
-    
+    <!-- Used for the display of the language name in the menu and the status bar -->
+    <Converter:CultureNameToString x:Key="CultureNameToString" />
+  <DataTemplate x:Key="LanguageDataTemplate" DataType="{x:Type Globalization:CultureInfo}">
+        <DockPanel>
+            <Image DockPanel.Dock="Left" MaxHeight="16" MaxWidth="16"
+                                   Margin="2">
+              <Image.Resources>
+                    <Converter:StringToImageConverter x:Key="StringToImageConverter" />
+              </Image.Resources>
+              <Image.Source>
+                    <MultiBinding ConverterParameter="pack://application:,,,/Pictures{1}Icons16{1}{0}.png" Converter="{StaticResource ResourceKey=StringToImageConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Source="{x:Static IO:Path.DirectorySeparatorChar}"/>
+                    </MultiBinding>
+                </Image.Source>
+            </Image>
+            <TextBlock Text="{Binding Path=Name, Converter={StaticResource ResourceKey=CultureNameToString}}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="2"/>
+        </DockPanel>
+    </DataTemplate>
 
 </ResourceDictionary>

@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Reflection;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using GBlason.Common.CustomCommand;
 using GBlason.Global;
 using GBlason.Properties;
 using GBlason.ViewModel;
 using Microsoft.Win32;
-using Microsoft.Windows.Controls.Ribbon;
 
 namespace GBlason
 {

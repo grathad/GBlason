@@ -113,5 +113,17 @@ namespace GBlason.Properties {
                 this["BackgroundViewerColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(Default)")]
+        public global::System.Globalization.CultureInfo PreferredLanguage {
+            get {
+                return ((global::System.Globalization.CultureInfo)(this["PreferredLanguage"]));
+            }
+            set {
+                this["PreferredLanguage"] = value;
+            }
+        }
     }
 }

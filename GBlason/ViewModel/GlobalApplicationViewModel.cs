@@ -169,6 +169,18 @@ namespace GBlason.ViewModel
             set { _recentDirectories = value; }
         }
 
+        private CultureInfo _propertyPreferenceCultureInfo;
+
+        public CultureInfo PropertyPreferenceCultureInfo
+        {
+            get { return _propertyPreferenceCultureInfo; }
+            set{ if(_propertyPreferenceCultureInfo == value)
+                return;
+                _propertyPreferenceCultureInfo = value;
+                OnPropertyChanged("PropertyPreferenceCultureInfo");
+            }
+        }
+
         private ObservableCollection<RecentFileViewModel> _recentDirectories;
 
         public void AddRecentDirectoriesCollection(IList<RecentFileViewModel> collection)
