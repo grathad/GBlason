@@ -1,11 +1,11 @@
 C:\Users\grathad\GBlason\GBlason\LoadingManager\bin\Debug\Repository.dll
 C:\Users\grathad\GBlason\GBlason\LoadingManager\bin\Debug\Repository.pdb
+C:\Users\grathad\GBlason\GBlason\LoadingManager\bin\Debug\fr-FR\Repository.resources.dll
 C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Debug\Repository.dll
-C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Debug\Repository.pdb
+C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Debug\GBL.Repository.Resources.BasicShapes.resources
+C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Debug\GBL.Repository.Resources.BasicShapes.fr-FR.resources
 C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Debug\GenerateResource.read.1.tlog
 C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Debug\GenerateResource.write.1.tlog
-C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Debug\GBL.Repository.Resources.BasicShapes.resources
-C:\Users\grathad\GBlason\GBlason\LoadingManager\bin\Debug\fr-FR\Repository.resources.dll
-C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Debug\GBL.Repository.Resources.BasicShapes.fr-FR.resources
 C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Debug\fr-FR\Repository.resources.dll
+C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Debug\Repository.dll
+C:\Users\grathad\GBlason\GBlason\LoadingManager\obj\Debug\Repository.pdb

@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pictures/icons16/exclamation.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pictures/icons16/error.png")]
 
 

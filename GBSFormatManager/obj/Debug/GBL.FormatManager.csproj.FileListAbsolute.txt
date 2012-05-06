@@ -1,3 +1,4 @@
+C:\Users\grathad\GBlason\GBSFormatManager\bin\Debug\Resources.gbr
 C:\Users\grathad\GBlason\GBSFormatManager\bin\Debug\FormatManager.dll
 C:\Users\grathad\GBlason\GBSFormatManager\bin\Debug\FormatManager.pdb
 C:\Users\grathad\GBlason\GBSFormatManager\bin\Debug\Repository.dll
@@ -6,4 +7,3 @@ C:\Users\grathad\GBlason\GBSFormatManager\bin\Debug\fr-FR\Repository.resources.d
 C:\Users\grathad\GBlason\GBSFormatManager\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\grathad\GBlason\GBSFormatManager\obj\Debug\FormatManager.dll
 C:\Users\grathad\GBlason\GBSFormatManager\obj\Debug\FormatManager.pdb
-C:\Users\grathad\GBlason\GBSFormatManager\bin\Debug\Resources.gbr

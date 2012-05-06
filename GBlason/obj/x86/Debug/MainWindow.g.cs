@@ -21,7 +21,6 @@ using GBlason.Global;
 using GBlason.Properties;
 using GBlason.ViewModel;
 using GBlason.ViewModel.Contract;
-using Microsoft.Windows.Controls.Ribbon;
 using System;
 using System.Diagnostics;
 using System.Globalization;
