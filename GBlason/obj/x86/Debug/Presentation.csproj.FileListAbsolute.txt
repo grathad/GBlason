@@ -67,3 +67,5 @@ C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\fr-FR\GBlason.resources.dll
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\ja-JP\GBlason.resources.dll
 C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\de-DE\GBlason.resources.dll
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\ActionHistory.g.cs
+C:\Users\grathad\GBlason\GBlason\obj\x86\Debug\Control\Aggregate\ActionHistory.baml

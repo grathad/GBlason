@@ -27,9 +27,9 @@
       <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:ViewModel/f:GlobalApplicationViewModel.cs" caret="1034" fromTop="0" />
       <File id="19D8FBFB-1A42-4B31-B852-1993C83A5650/d:Serializer/f:GbsManager.cs" caret="479" fromTop="8" />
       <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:DialogBox/f:ExceptionDialogBox.xaml" caret="1775" fromTop="5" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/f:MainWindow.xaml.cs" caret="6542" fromTop="70" />
-      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:MenuControl/f:PropertiesMenu.xaml" caret="413" fromTop="5" />
       <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:MenuControl/f:PreferenceMenu.xaml" caret="2147" fromTop="11" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:MenuControl/f:PropertiesMenu.xaml" caret="413" fromTop="5" />
+      <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/f:MainWindow.xaml.cs" caret="6542" fromTop="70" />
     </RecentFiles>
     <RecentEdits>
       <File id="44F69864-A3BC-4B1F-8EA5-54DE7A3D20DA/d:Control/d:MenuControl/f:PreferenceMenu.xaml" caret="2913" fromTop="10" />

@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pictures/icons16/error.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pictures/icons32/arrow_rotate_clockwise.png")]
 
 
