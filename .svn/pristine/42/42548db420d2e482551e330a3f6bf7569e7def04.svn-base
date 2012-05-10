@@ -76,8 +76,8 @@ namespace GBlason.Common.CustomCommand
             //sauvegarde, c'est affreux, je peux pas le faire dans la classe abstraite parceque c'est cette instance que je dois cloner :(
             //copie de code pour tous les execute !!
             Parameter = parameter;
-            parameter.Target.CommandsApplied.CommandHistory.Add((ChangeShape)Clone());
             Done = true;
+            parameter.Target.CommandsApplied.CommandHistory.Add((ChangeShape)Clone());
         }
 
         /// <summary>
