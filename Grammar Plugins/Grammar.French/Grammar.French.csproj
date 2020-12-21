@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Thomas Santonja</Authors>
+    <Company>CJB</Company>
+    <Product>GBlazon</Product>
+    <Description>This is the default grammar support for French blazon.</Description>
+    <AssemblyName>GBlazon.Grammar.French</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <DocumentationFile>bin\Debug\netstandard2.0\GBlazon.Grammar.French.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Composition" Version="1.0.31" />
+    <PackageReference Include="System.Composition" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Grammar\Grammar.csproj" />
+    <ProjectReference Include="..\..\Utils\Utils.csproj" />
+  </ItemGroup>
+
+</Project>

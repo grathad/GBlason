@@ -1,8 +1,0 @@
-C:\Users\grathad\GBlason\GBlason\GBlasonLogic\bin\Debug\GBlasonLogic.dll
-C:\Users\grathad\GBlason\GBlason\GBlasonLogic\bin\Debug\GBlasonLogic.pdb
-C:\Users\grathad\GBlason\GBlason\GBlasonLogic\bin\Debug\Repository.dll
-C:\Users\grathad\GBlason\GBlason\GBlasonLogic\bin\Debug\Repository.pdb
-C:\Users\grathad\GBlason\GBlason\GBlasonLogic\bin\Debug\fr-FR\Repository.resources.dll
-C:\Users\grathad\GBlason\GBlason\GBlasonLogic\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\grathad\GBlason\GBlason\GBlasonLogic\obj\Debug\GBlasonLogic.dll
-C:\Users\grathad\GBlason\GBlason\GBlasonLogic\obj\Debug\GBlasonLogic.pdb

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="GBlazon.Format">
+      <HintPath>..\ExternalLibraries\Format\Release\netstandard2.0\GBlazon.Format.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

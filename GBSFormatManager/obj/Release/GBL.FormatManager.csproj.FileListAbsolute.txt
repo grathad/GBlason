@@ -1,9 +1,0 @@
-C:\Users\grathad\GBlason\GBSFormatManager\bin\Release\Resources.gbr
-C:\Users\grathad\GBlason\GBSFormatManager\bin\Release\FormatManager.dll
-C:\Users\grathad\GBlason\GBSFormatManager\bin\Release\FormatManager.pdb
-C:\Users\grathad\GBlason\GBSFormatManager\bin\Release\Repository.dll
-C:\Users\grathad\GBlason\GBSFormatManager\bin\Release\Repository.pdb
-C:\Users\grathad\GBlason\GBSFormatManager\bin\Release\fr-FR\Repository.resources.dll
-C:\Users\grathad\GBlason\GBSFormatManager\obj\Release\ResolveAssemblyReference.cache
-C:\Users\grathad\GBlason\GBSFormatManager\obj\Release\FormatManager.dll
-C:\Users\grathad\GBlason\GBSFormatManager\obj\Release\FormatManager.pdb

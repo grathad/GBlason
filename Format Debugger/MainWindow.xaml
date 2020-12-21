@@ -1,0 +1,413 @@
+﻿<mah:MetroWindow x:Class="Format_Debugger.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Format_Debugger"
+        d:DataContext="{d:DesignInstance Type=local:ViewModel}"
+        xmlns:pn="clr-namespace:Grammar.PluginBase.Token;assembly=Grammar.PluginBase"
+        mc:Ignorable="d"
+        Title="MainWindow" WindowState="Maximized"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <mah:MetroWindow.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <local:NullVisibilityConverter x:Key="NullToVisibilityConverter"/>
+        <local:RightParentVisibilityConverter x:Key="RightParentVisibilityConverter"/>
+        <local:LeftParentVisibilityConverter x:Key="LeftParentVisibilityConverter"/>
+
+        <DrawingImage x:Key="magnifying_glassDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V511.979 H511.979 V0 H0 Z">
+                    <DrawingGroup Opacity="1">
+                        <GeometryDrawing Brush="#FF1B74D6" Geometry="F1 M511.979,511.979z M0,0z M113.756,366.401L18.474,493.503C33.118,508.147,56.863,508.147,71.507,493.503L156.182,408.828z" />
+                        <GeometryDrawing Brush="#FF1E8AFF" Geometry="F1 M511.979,511.979z M0,0z M134.969,387.614L50.293,472.29C35.649,486.934 21.401,496.431 18.473,493.503 3.82899999999999,478.859 3.82899999999999,455.114 18.473,440.47L103.148,355.795z" />
+                        <DrawingGroup Transform="0.707,-0.707,0.707,0.707,-205.84,214.649">
+                            <GeometryDrawing Brush="#FFFFEAC3" Geometry="F1 M511.979,511.979z M0,0z M118.683,333.296L193.683,333.296 193.683,378.296 118.683,378.296z" />
+                        </DrawingGroup>
+                        <GeometryDrawing Brush="#FFFFD17E" Geometry="F1 M511.979,511.979z M0,0z M150.825,286.907L134.97,323.976 188.003,377.009 225.072,361.154z" />
+                        <GeometryDrawing Brush="#FFFFB739" Geometry="F1 M511.979,511.979z M0,0z M166.79,398.222L145.577,377.009 124.364,398.222 145.577,419.435C151.435,425.293 160.932,425.293 166.79,419.435 172.648,413.577 172.648,404.08 166.79,398.222z" />
+                        <GeometryDrawing Brush="#FFFFD17E" Geometry="F1 M511.979,511.979z M0,0z M145.577,398.222C151.435,392.364,151.435,382.867,145.577,377.009L113.757,345.189C107.899,339.331 98.402,339.331 92.544,345.189 86.686,351.047 86.686,360.544 92.544,366.402L124.364,398.222C130.221,404.08,139.719,404.08,145.577,398.222z" />
+                        <GeometryDrawing Brush="#FFFFB739">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry RadiusX="188.5" RadiusY="188.5" Center="315.99,195.989" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FFDBEBFF" Geometry="F1 M511.979,511.979z M0,0z M315.99,37.489L315.99,354.489C403.527,354.489 474.49,283.526 474.49,195.989 474.49,108.452 403.527,37.489 315.99,37.489z" />
+                        <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M511.979,511.979z M0,0z M444.49,195.989C444.49,108.452 386.959,37.489 315.99,37.489 228.453,37.489 157.49,108.452 157.49,195.989 157.49,283.526 228.453,354.489 315.99,354.489 386.958,354.49 444.49,283.527 444.49,195.989z" />
+                        <GeometryDrawing Brush="#FF000000" Geometry="F1 M511.979,511.979z M0,0z M315.979,0C207.904,0 119.979,87.925 119.979,196 119.979,228.91 128.144,259.943 142.536,287.202L128.064,321.036C126.859,323.854,127.489,327.122,129.656,329.289L134.959,334.592 124.353,345.198 119.05,339.895C114.8,335.645 109.151,333.305 103.141,333.305 97.131,333.305 91.481,335.646 87.232,339.895 82.982,344.145 80.641,349.795 80.641,355.805 80.641,359.216 81.42,362.501 82.849,365.49L13.159,435.18C-4.38600000000002,452.725 -4.38600000000002,481.274 13.159,498.82 21.932,507.593 33.456,511.979 44.979,511.979 56.502,511.979 68.026,507.593 76.799,498.82L146.494,429.124C149.548,430.577 152.856,431.328 156.172,431.328 161.934,431.328 167.696,429.135 172.083,424.749 180.854,415.976 180.854,401.702 172.083,392.929L166.779,387.625 177.385,377.019 182.688,382.322C184.125,383.758 186.042,384.519 187.994,384.519 188.988,384.519 189.99,384.321 190.941,383.915L224.775,369.443C252.036,383.835 283.069,392 315.979,392 424.054,392 511.979,304.075 511.979,196 511.979,87.9250000000001 424.054,1.13686837721616E-13 315.979,1.13686837721616E-13z M66.192,488.213C54.497,499.91 35.463,499.91 23.766,488.213 12.069,476.516 12.069,457.483 23.766,445.786L92.534,377.019 134.96,419.445z M161.477,414.142C158.551,417.066,153.793,417.067,150.87,414.142L97.837,361.108C96.421,359.691 95.641,357.808 95.641,355.805 95.641,353.802 96.421,351.919 97.837,350.502 99.254,349.085 101.137,348.305 103.141,348.305 105.144,348.305 107.028,349.085 108.444,350.502L161.477,403.535C164.401,406.46,164.401,411.218,161.477,414.142z M156.173,377.019L134.96,355.806 145.566,345.2 166.779,366.413z M189.708,368.128L143.85,322.271 151.995,303.229C166.813,325.814,186.165,345.166,208.75,359.984z M315.979,377C216.175,377 134.979,295.804 134.979,196 134.979,96.196 216.175,15.0000000000001 315.979,15.0000000000001 415.783,15.0000000000001 496.979,96.1960000000001 496.979,196 496.979,295.804 415.783,377 315.979,377z" />
+                        <GeometryDrawing Brush="#FF000000" Geometry="F1 M511.979,511.979z M0,0z M315.979,30C277.436,30 239.88,43.509 210.23,68.04 207.039,70.681 206.592,75.408 209.233,78.6 211.873,81.792 216.6,82.238 219.793,79.598 246.758,57.287 280.918,45 315.979,45 399.241,45 466.979,112.738 466.979,196 466.979,279.262 399.241,347 315.979,347 232.717,347 164.979,279.262 164.979,196 164.979,160.94 177.266,126.78 199.576,99.812 202.217,96.621 201.77,91.893 198.578,89.252 195.388,86.612 190.658,87.057 188.019,90.25 163.489,119.901 149.979,157.457 149.979,195.999 149.979,287.532 224.447,361.999 315.979,361.999 407.511,361.999 481.979,287.532 481.979,195.999 481.979,104.466 407.511,30 315.979,30z" />
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="chronometerDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V128 H128 V0 H0 Z">
+                    <DrawingGroup Opacity="1">
+                        <GeometryDrawing Brush="#FF3EA2E5">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry RadiusX="49.321" RadiusY="49.321" Center="64,72.372" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FFDFEEF4">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry RadiusX="37.912" RadiusY="37.912" Center="64,72.372" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <DrawingGroup Opacity="1">
+                            <GeometryDrawing Brush="#FFF45858">
+                                <GeometryDrawing.Geometry>
+                                    <EllipseGeometry RadiusX="6.243" RadiusY="6.243" Center="64,72.372" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="#FFF45858" Geometry="F1 M128,128z M0,0z M54.576,6.306L73.423,6.306 73.423,14.555 54.576,14.555z" />
+                            <GeometryDrawing Brush="#FFF45858" Geometry="F1 M128,128z M0,0z M91.966,31.752L92.066,31.807 97.899,21.653 90.747,17.544 84.917,27.691 85.005,27.742A49.189,49.189,0,0,1,91.966,31.752z" />
+                            <GeometryDrawing Brush="#FFF45858" Geometry="F1 M128,128z M0,0z M36.035,31.751A49.213,49.213,0,0,1,43,27.742L43.088,27.691 37.258,17.544 30.106,21.653 35.939,31.807z" />
+                            <GeometryDrawing Brush="#FFF45858" Geometry="F1 M128,128z M0,0z M59.876,14.555L59.876,23.221 60.07,23.221C61.37,23.121 62.676,23.051 64,23.051 65.324,23.051 66.632,23.119 67.93,23.221L68.124,23.221 68.124,14.555z" />
+                        </DrawingGroup>
+                        <DrawingGroup Opacity="1">
+                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M128,128z M0,0z M17.659,83.168A47.58,47.58,0,0,1,103.145,45.333A1.75,1.75,0,0,0,106.023,43.341A51.126,51.126,0,0,0,94.352,31.331L99.412,22.524A1.75,1.75,0,0,0,98.767,20.135L91.614,16.026A1.75,1.75,0,0,0,89.225,16.672L84.167,25.472A50.994,50.994,0,0,0,69.874,21.65L69.874,16.305 73.424,16.305A1.75,1.75,0,0,0,75.174,14.555L75.174,6.30700000000001A1.749,1.749,0,0,0,73.424,4.55700000000001L54.576,4.55700000000001A1.749,1.749,0,0,0,52.826,6.30700000000001L52.826,14.555A1.75,1.75,0,0,0,54.576,16.305L58.126,16.305 58.126,21.649A50.663,50.663,0,0,0,43.826,25.463L38.775,16.672A1.749,1.749,0,0,0,36.386,16.026L29.233,20.135A1.75,1.75,0,0,0,28.588,22.524L33.647,31.329A51.105,51.105,0,0,0,14.247,83.959A1.75,1.75,0,0,0,15.947,85.314A1.813,1.813,0,0,0,16.347,85.269A1.751,1.751,0,0,0,17.659,83.168z M91.388,19.933L95.505,22.3 91.458,29.344C90.122,28.491,88.758,27.693,87.347,26.968z M56.326,8.05700000000001L71.674,8.05700000000001 71.674,12.805 56.326,12.805z M61.626,16.305L66.374,16.305 66.374,21.374C65.585,21.337 64.8,21.3 64,21.3 63.2,21.3 62.413,21.324 61.626,21.361z M32.495,22.3L36.612,19.935 40.656,26.974Q38.541,28.066,36.543,29.346z" />
+                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M128,128z M0,0z M110.222,50.623A1.75,1.75,0,0,0,107.056,52.115A47.579,47.579,0,0,1,26.83,102.064A1.749,1.749,0,0,0,24.1,104.25A51.081,51.081,0,0,0,110.224,50.623z" />
+                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M128,128z M0,0z M20.135,90.813A1.751,1.751,0,0,0,16.908,92.171C17.517,93.616,18.201,95.051,18.943,96.438A1.75,1.75,0,1,0,22.029,94.787C21.338,93.5,20.7,92.158,20.135,90.813z" />
+                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M128,128z M0,0z M98.219,52.319A1.672,1.672,0,0,0,98.119,52.184A39.942,39.942,0,0,0,84.014,38.152A1.515,1.515,0,0,0,83.864,38.043A1.608,1.608,0,0,0,83.689,37.965A39.516,39.516,0,0,0,44.124,38.072A1.781,1.781,0,0,0,43.946,38.154A1.617,1.617,0,0,0,43.813,38.254A39.951,39.951,0,0,0,29.778,52.36A0.946,0.946,0,0,0,29.592,52.684A39.518,39.518,0,0,0,29.7,92.25A1.732,1.732,0,0,0,29.78,92.426C29.802,92.464,29.835,92.492,29.859,92.526A39.941,39.941,0,0,0,43.982,106.59A1.707,1.707,0,0,0,44.135,106.701C44.179,106.726,44.227,106.736,44.272,106.758A39.526,39.526,0,0,0,83.922,106.645C83.965,106.624 84.011,106.615 84.053,106.59 84.095,106.565 84.141,106.525 84.186,106.49A39.95,39.95,0,0,0,98.244,92.346C98.271,92.307,98.305,92.278,98.329,92.236A1.443,1.443,0,0,0,98.408,92.061A39.52,39.52,0,0,0,98.3,52.494A1.622,1.622,0,0,0,98.219,52.319z M83.763,102.633L81.514,98.8A1.75,1.75,0,1,0,78.494,100.57L80.746,104.412A35.9,35.9,0,0,1,65.746,108.494L65.746,104.029A1.75,1.75,0,0,0,62.246,104.029L62.246,108.494A35.891,35.891,0,0,1,47.432,104.5L49.662,100.647A1.75,1.75,0,0,0,46.633,98.894L44.406,102.743A36.443,36.443,0,0,1,33.739,92.135L37.576,89.887A1.75,1.75,0,0,0,35.807,86.867L31.965,89.119A35.9,35.9,0,0,1,27.882,74.119L32.347,74.119A1.75,1.75,0,0,0,32.347,70.619L27.882,70.619A35.9,35.9,0,0,1,31.873,55.801L35.727,58.03A1.75,1.75,0,0,0,37.479,55.001L33.631,52.774A36.44,36.44,0,0,1,44.237,42.111L46.486,45.948A1.75,1.75,0,0,0,49.506,44.179L47.254,40.337A35.882,35.882,0,0,1,62.254,36.255L62.254,40.719A1.75,1.75,0,0,0,65.754,40.719L65.754,36.255A35.9,35.9,0,0,1,80.572,40.245L78.338,44.1A1.75,1.75,0,1,0,81.367,45.853L83.594,42A36.443,36.443,0,0,1,94.261,52.61L90.424,54.858A1.75,1.75,0,1,0,92.193,57.878L96.036,55.626A35.916,35.916,0,0,1,100.118,70.626L95.653,70.626A1.75,1.75,0,0,0,95.653,74.126L100.118,74.126A35.9,35.9,0,0,1,96.127,88.94L92.274,86.71A1.75,1.75,0,0,0,90.521,89.74L94.369,91.967A36.437,36.437,0,0,1,83.763,102.633z" />
+                            <GeometryDrawing Brush="#FF000000" Geometry="F1 M128,128z M0,0z M90.394,72.373A1.75,1.75,0,0,0,88.644,70.623L71.794,70.623A8.013,8.013,0,0,0,65.75,64.578L65.75,47.729A1.75,1.75,0,0,0,62.25,47.729L62.25,64.578A7.991,7.991,0,1,0,71.794,74.123L88.644,74.123A1.751,1.751,0,0,0,90.394,72.373z M64,76.866A4.494,4.494,0,1,1,68.493,72.373A4.5,4.5,0,0,1,64,76.866z" />
+                        </DrawingGroup>
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <SolidColorBrush x:Key="GlyphBrush" Color="#444" />
+        
+        <Style x:Key="ExpandCollapseToggleStyle" TargetType="ToggleButton">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid
+                            Width="15"
+                            Height="13"
+                            Background="Transparent">
+                            <Path x:Name="ExpandPath"
+                                  HorizontalAlignment="Left" 
+                                  VerticalAlignment="Center" 
+                                  Margin="1,1,1,1"
+                                  Fill="{StaticResource GlyphBrush}"
+                                  Data="M 4 0 L 8 4 L 4 8 Z"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked"
+                                     Value="True">
+                                <Setter Property="Data"
+                                        TargetName="ExpandPath"
+                                        Value="M 0 4 L 8 4 L 4 8 Z"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </mah:MetroWindow.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="5" x:Name="inputSection">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="blazonText" Grid.Column="0" Text="ARGENT, ON A BEND SABLE, THREE OWLS OF THE FIRST"/>
+            <Button x:Name="parseButton" Grid.Column="1" Content="Parse" Click="parseButton_Click" IsEnabled="{Binding Context.ParsingNotInProgress}"/>
+        </Grid>
+
+        <mah:MetroTabControl Grid.Row="1" Margin="5" x:Name="resultSection">
+            <mah:MetroTabItem Header="Keywords">
+                <!--<mah:MetroTabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{StaticResource magnifying_glassDrawingImage}" Width="16" VerticalAlignment="Center"/>
+                        <TextBlock Text=" Keywords" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </mah:MetroTabItem.Header>-->
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5 0 0 5">                    
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
+                            <TextBlock VerticalAlignment="Center" Text="Detected " />
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Context.ResultKeywords.Count}"/>
+                            <TextBlock VerticalAlignment="Center" Text=" Keyword(s) in "/>
+                            <Border Padding="3" Background="#44000000" CornerRadius="6">
+                                <TextBlock Text="{Binding Context.DetectorBenchmarkTime}"/>
+                            </Border>
+                            <TextBlock VerticalAlignment="Center" Text=" millisecond(s)"/>
+                        </StackPanel>
+                        <ItemsControl Grid.Row="1" ItemsSource="{Binding Context.ResultKeywords}" Margin="5">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" Margin="0 0 0 5"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="#44000000" BorderThickness="1" Margin="0 0 4 0">
+                                        <TextBlock Margin="5">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Value}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Key}" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </TextBlock>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </StackPanel>
+            </mah:MetroTabItem>
+            <mah:MetroTabItem Header="Result">
+                <TreeView x:Name="resultTree" ItemsSource="{Binding Context.Root}">
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="{x:Type TreeViewItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <ContentPresenter Grid.Row="0" Name="PART_Header" ContentSource="Header" HorizontalAlignment="Stretch"/>
+                                            <ItemsPresenter Grid.Row="1" VerticalAlignment="Stretch" x:Name="ItemsHost"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsExpanded" Value="false">
+                                                <Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
+                                            </Trigger>
+                                            <Trigger Property="IsExpanded" Value="true">
+                                                <Setter Property="Visibility" TargetName="ItemsHost" Value="Visible"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ItemsPanel">
+                                <Setter.Value>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Stretch" IsItemsHost="True" Orientation="Horizontal"  />
+                                    </ItemsPanelTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="IsExpanded" Value="True"/>
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type pn:ContainerToken}" ItemsSource="{Binding Children}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="1" MaxWidth="1"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Rectangle x:Name="ParentVerLn" Width="1" MinHeight="12" Grid.Row="0" Grid.Column="1" Stroke="#44000000" Margin="0,0,0,0" SnapsToDevicePixels="true" Fill="#44000000" HorizontalAlignment="Center"
+                                   Visibility="{Binding Parent, Converter={StaticResource NullToVisibilityConverter}}"/>
+                                <Rectangle x:Name="ParentRightLn" 
+                                       Height="1" 
+                                       Grid.Column="2"
+                                       Grid.Row="0"
+                                       MinWidth="4"
+                                       Stroke="#44000000" 
+                                       Margin="0,0,0,0" 
+                                       SnapsToDevicePixels="true" 
+                                       Fill="#44000000"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Top"
+                                       Visibility="{Binding Converter={StaticResource RightParentVisibilityConverter}}"/>
+                                <Rectangle x:Name="ParentLeftLn" 
+                                       Height="1" 
+                                       Grid.Column="0"
+                                       Grid.Row="0"
+                                       MinWidth="4"
+                                       Stroke="#44000000" 
+                                       Margin="0,0,0,0" 
+                                       SnapsToDevicePixels="true" 
+                                       Fill="#44000000"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Top"
+                                       Visibility="{Binding Converter={StaticResource LeftParentVisibilityConverter}}"/>
+
+                                <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" BorderThickness="1" BorderBrush="#44000000" Margin="4,0,4,0">
+                                    <TextBlock Text="{Binding}" Padding="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Border.ToolTip>
+                                        <TextBlock Text="{Binding UniqueId}"/>
+                                    </Border.ToolTip>
+                                </Border>
+                                <Rectangle x:Name="VerLn" Width="1" MinHeight="12" Grid.Row="2" Grid.Column="1" Stroke="#44000000" Margin="0,0,0,0" SnapsToDevicePixels="true" Fill="#44000000" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </HierarchicalDataTemplate>
+                        <DataTemplate DataType="{x:Type pn:LeafToken}">
+                            <StackPanel Orientation="Vertical">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Rectangle x:Name="ParentVerLn" Width="1" MinHeight="12" Grid.Column="1" Stroke="#44000000" Margin="0,0,0,0" SnapsToDevicePixels="true" Fill="#44000000" HorizontalAlignment="Center"
+                                   Visibility="{Binding Parent, Converter={StaticResource NullToVisibilityConverter}}"/>
+                                    <Rectangle x:Name="ParentRightLn" 
+                                       Height="1" 
+                                       Grid.Column="2"
+                                       MinWidth="4"
+                                       Stroke="#44000000" 
+                                       Margin="0,0,0,0" 
+                                       SnapsToDevicePixels="true" 
+                                       Fill="#44000000"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Top"
+                                       Visibility="{Binding Converter={StaticResource RightParentVisibilityConverter}}"/>
+                                    <Rectangle x:Name="ParentLeftLn" 
+                                       Height="1" 
+                                       Grid.Column="0"
+                                       Grid.Row="0"
+                                       MinWidth="4"
+                                       Stroke="#44000000" 
+                                       Margin="0,0,0,0" 
+                                       SnapsToDevicePixels="true" 
+                                       Fill="#44000000"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Top"
+                                       Visibility="{Binding Converter={StaticResource LeftParentVisibilityConverter}}"/>
+                                </Grid>
+                                <Border BorderThickness="1" BorderBrush="#44000000" Padding="4" Margin="4,0,4,0">
+                                    <TextBlock Text="{Binding Type}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Border.ToolTip>
+                                        <TextBlock Text="{Binding UniqueId}"/>
+                                    </Border.ToolTip>
+                                </Border>
+                                <Rectangle x:Name="VerLn" Width="1" Height="24" Stroke="#44000000" SnapsToDevicePixels="true" Fill="#44000000" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+                                <Border BorderThickness="1" Background="#AA000000" BorderBrush="#AA000000" Padding="4" Margin="4 0 4 0">
+                                    <TextBlock Foreground="White" Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Border.ToolTip>
+                                        <TextBlock Text="{Binding UniqueId}"/>
+                                    </Border.ToolTip>
+                                </Border>
+                            </StackPanel>
+                        </DataTemplate>
+                    </TreeView.Resources>
+                    <TreeView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid HorizontalAlignment="Center" IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </TreeView.ItemsPanel>
+                </TreeView>
+            </mah:MetroTabItem>
+            <mah:MetroTabItem Header="Parser Call Stack" IsSelected="True" x:Name="TabParserCallStack">
+                <TreeView x:Name="callStackTreeview" ItemsSource="{Binding Context.ResultCallStack}" TreeViewItem.Selected="callStackTreeview_Selected">
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="{x:Type TreeViewItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <ToggleButton x:Name="Expander" ClickMode="Press" IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ExpandCollapseToggleStyle}"/>
+                                                <ContentPresenter Name="PART_Header" ContentSource="Header" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,8,0" Grid.Column="1"/>
+                                            </Grid>
+                                            <ItemsPresenter Grid.Row="1" VerticalAlignment="Stretch" x:Name="ItemsHost"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsExpanded" Value="false">
+                                                <Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
+                                            </Trigger>
+                                            <Trigger Property="IsExpanded" Value="true">
+                                                <Setter Property="Visibility" TargetName="ItemsHost" Value="Visible"/>
+                                            </Trigger>
+                                            <Trigger Property="HasItems" Value="false">
+                                                <Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ItemsPanel">
+                                <Setter.Value>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Stretch" IsItemsHost="True" Margin="0,8" Orientation="Horizontal"  />
+                                    </ItemsPanelTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="IsExpanded" Value="{Binding IsInProgressOrSuccesfull}"/>
+                            <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type local:EnrichedParserNode}" ItemsSource="{Binding EnrichedChildren}">
+                            <Border BorderThickness="1" BorderBrush="#44000000" VerticalAlignment="Stretch" x:Name="nodeBorder">
+                                <Grid VerticalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="24"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="{StaticResource chronometerDrawingImage}" Height="16" Grid.Column="0" HorizontalAlignment="Center" Margin="4">
+                                        <Image.ToolTip>
+                                            <TextBlock Text="{Binding ExecutionTime}"/>
+                                        </Image.ToolTip>
+                                    </Image>
+                                    <Rectangle Width="1" Height="Auto" Stroke="#44000000" Grid.Column="1" VerticalAlignment="Stretch" />
+                                    <TextBlock Text="{Binding PositionText}" Grid.Column="2" Margin="4 0" VerticalAlignment="Center"/>
+                                    <Rectangle Width="1" Height="Auto" Stroke="#44000000" Grid.Column="3" VerticalAlignment="Stretch" />
+                                    <TextBlock Text="{Binding ParserText}" Grid.Column="4" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="4">
+                                        <TextBlock.ToolTip>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="{Binding ResultText}"/>
+                                                <TextBlock FontStyle="Italic" FontWeight="Bold" Foreground="DarkGreen" Text="{Binding TextUsed}"/>
+                                                <TextBlock Text="{Binding StatusText}"/>
+                                            </StackPanel>
+                                        </TextBlock.ToolTip>
+                            </TextBlock>
+                                </Grid>
+                            </Border>
+                            <HierarchicalDataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding ResultText}" Value="found">
+                                    <Setter Property="Background" TargetName="nodeBorder" Value="#55008800" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ResultText}" Value="no valid result">
+                                    <Setter Property="Background" TargetName="nodeBorder" Value="#55880000" />
+                                </DataTrigger>
+                            </HierarchicalDataTemplate.Triggers>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </mah:MetroTabItem>
+        </mah:MetroTabControl>
+
+    </Grid>
+</mah:MetroWindow>
