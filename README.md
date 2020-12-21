@@ -1,80 +1,30 @@
+# GBlason
+
 ## Introduction
 
-The grammar engine is handling everything related to blazon (i.e text representing the coat of arms)
-
-It is a translator between a text (blazon) and a [format](https://gitlab.com/gblason/Format) (see the format project)
-
-### Text to format
-
-The main purpose of the grammar engine is to turn a blazon into a valid format that can be used to render or save the resulting coat of arms
-
-The contract works as follow:
-
-* Input:
- * The text to read and translate as format
- * The plugins to use for the parsing
- 
-* Output:
- * The format generated from the text
- * The list of errors encountered while parsing
- 
-### Format to text
-
-* Input:
- * Format
- 
-* Output:
- * Plugins to use for the creation of the text
- * List of text that are a valid representation of the format
- 
-## Plugins
-
-The grammar engine support plugins that can be used to define the behavior of the parsing.
-The plugin contract is defined and is meant to receive the text (string or stream) and expect as a result a format with the list of errors encountered.
-
-The format definition have to be respected to produce a correct output.
-Everything else is up to the implementation.
-
-The default plugins that enable the grammar parser are included within the solution.
-For now it is one default plugin per language supported.
-
-## Blazon
+This repository is associated with the namesake project [GBlason](https://github.com/users/grathad/projects/1). The name is using the French version of the term `Blason` rather than the English one for historical reason (most of the vocabulary used in blazonning comes from French)
 
 > The word "Blazon" is used with some number of meanings, but practically it may be confined to the verb "to blazon," which is to describe in words a given coat of arms, and the noun "blazon," which is such a description.
 
-The Grammar project, have more than the format to worry about, and need to implement the rules of blazonment in order to turn every day words into a valid format (or detect potential errors there).
+The project is separated in multiple concept. The central one is the definition of a file format, that can represent any kind of coat of arms. The foundation of the format is based on the logic of the construct of blazon, the documentation on the subject is relatively scarce, and mostly done before today's notions of grammar or syntax. Most of the inspiration comes from [there](https://www.gutenberg.org/files/41617/41617-h/41617-h.htm)
 
-### Order
+## Format
 
-> The commencement of any blazon is of necessity a description of the field
+The notion of format should be redundant, in the sense that there is a defined (although not respected) way of describing a coat of arms using plain langugage. Given the complexity of some coat of arms, the goal is still to represent those blazon using a more modern definition of the different parts that composes it.
+The format is thus a center piece of this project, used as an input for rendering purpose, or as an output from parsing a bazon.
 
-#### Field
+## Parser
 
-* The colour is used first to represent a simple field
-* For composite fields, the composition is the first terms
+The parser is a logic that use a grammar definition and use it to interpret (parse) a blazon. Its goal is to turn regular words into their associated hearaldry concepts, especially in relation to each other.
+The Parser itself is made of multiple blocks:
+1. Pilot: The pilot is the part of the parser that do execute the parsing using the grammar and the blazon text
+1. Grammar: The definition of rules that are applied by the parser to understand a blazon, it is language based
+1. Keywords: The specific vocabulary used by the pilot when parsing
 
-The only exception is for partition with only colours, in this case the colour is stated first, then the partition, then the colour.
+## Renderer
 
-#### Semy
+A distant project, meant to represent the format into a SVG
 
-After the field description, it is possible to (if present) describe any seme.
+## Editor
 
-#### Charge
-
-The second thing to be mentioned in the blazon is the principal charge.
-If multiple charges, then the colour can be shared at the end if it is the same for all the charges.
-
-If the charge is charged (possible for ordinary) then the secondary charge is of lesser importance and thus will always be defined (which is why there are "on" keywords)
-
-The position of the charges need not be specified when they would naturally fall into a certain position with regard to the ordinaries. Thus, 
-
-* A chevron between three figures of necessity has two in chief and one in base.
-* A bend between two figures of necessity has one above and one below. A fess has two above and one below.
-* A cross between four has one in each angle. 
-
-In none of these cases is it necessary to state the position.
-If, however, those positions or numbers do not come within the category mentioned, care must be taken to specify what the coat exactly is.
-If a bend is accompanied only by one charge, the position of this charge must be stated.
-
-##### Ordinary
-
+An even more distant project, meant to update the format through UI and thus enable the edition of the rendered result
