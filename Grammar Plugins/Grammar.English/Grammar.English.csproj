@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<NeutralLanguage>en-GB</NeutralLanguage>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Grammar.PluginBase\Grammar.PluginBase.csproj" />
+		<ProjectReference Include="..\..\Grammar\Grammar.csproj" />
+		<ProjectReference Include="..\..\Utils\Utils.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Keywords.en-GB" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="GBlazon.Format">
+			<HintPath>..\..\ExternalLibraries\Format\Release\netstandard2.0\GBlazon.Format.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+</Project>

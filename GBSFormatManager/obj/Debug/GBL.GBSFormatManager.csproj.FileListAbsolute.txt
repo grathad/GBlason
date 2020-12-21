@@ -1,7 +1,0 @@
-C:\Users\grathad\GBlason\GBSFormatManager\bin\Debug\GBSFormatManager.dll
-C:\Users\grathad\GBlason\GBSFormatManager\bin\Debug\GBSFormatManager.pdb
-C:\Users\grathad\GBlason\GBSFormatManager\bin\Debug\Repository.dll
-C:\Users\grathad\GBlason\GBSFormatManager\bin\Debug\Repository.pdb
-C:\Users\grathad\GBlason\GBSFormatManager\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\grathad\GBlason\GBSFormatManager\obj\Debug\GBSFormatManager.dll
-C:\Users\grathad\GBlason\GBSFormatManager\obj\Debug\GBSFormatManager.pdb

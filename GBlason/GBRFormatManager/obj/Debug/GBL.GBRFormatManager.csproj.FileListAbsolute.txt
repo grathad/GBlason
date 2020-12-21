@@ -1,5 +1,0 @@
-C:\Users\grathad\GBlason\GBlason\GBRFormatManager\bin\Debug\GBRFormatManager.dll
-C:\Users\grathad\GBlason\GBlason\GBRFormatManager\bin\Debug\GBRFormatManager.pdb
-C:\Users\grathad\GBlason\GBlason\GBRFormatManager\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\grathad\GBlason\GBlason\GBRFormatManager\obj\Debug\GBRFormatManager.dll
-C:\Users\grathad\GBlason\GBlason\GBRFormatManager\obj\Debug\GBRFormatManager.pdb

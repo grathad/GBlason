@@ -1,0 +1,946 @@
+{
+    "Keywords": {
+
+        /* *** ***************** *** */
+        /* *** General key words *** */
+        /* *** ***************** *** */
+
+        "Charged": [ "charged", "ch." ],
+        "Field": [ "field" ],
+
+        /* *** ********* *** */
+        /* *** Tinctures *** */
+        /* *** ********* *** */
+
+        /* Colours and metals */
+        "Azure": [ "azure" ],
+        "Gules": [ "gules" ],
+        "Sable": [ "sable" ],
+        "Vert": [ "vert" ],
+        "Carnation": [ "carnation" ],
+        "Purpure": [ "purpure" ],
+        "Sanguine": [ "sanguine" ],
+        "Orange": [ "orange" ],
+        "Murrey": [ "murrey" ],
+        "Or": [ "or" ],
+        "Argent": [ "argent" ],
+
+        /* Furs */
+        "Ermine": [ "ermine" ],
+        "Ermines": [ "ermines" ],
+        "Erminois": [ "erminois" ],
+        "Pean": [ "pean" ],
+        "Vair": [ "vair" ],
+        "Counter": [ "counter" ],
+        "Menu": [ "menu" ],
+        "Beffroi": [ "beffroi" ],
+        "Potent": [ "potent" ],
+        "Plumete": [ "plumete", "plumeté", "plumetty" ],
+        "Papelonne": [ "papelonne", "papelonné", "papellony" ],
+        "Masoned": [ "masoned", "masonry" ],
+        "Vaire": [ "vaire", "vairé" ],
+        "Potente": [ "potente", "potenté", "potenty" ],
+
+        /* Other */
+        "Proper": [ "proper" ],
+        "Counterchanged": [ "counterchanged", "counterchanging" ],
+        "Changed": [ "changed" ],
+
+        /* *** ********************** *** */
+        /* *** Determiner and numbers *** */
+        /* *** ********************** *** */
+
+        //Digit				: ('0'..'9');
+        "DigitOne": [ "1" ],
+        "DigitTwo": [ "2" ],
+
+        //Number				: Digit+;
+        "A": [ "a" ],
+        "An": [ "an" ],
+        "Many": [ "many" ],
+        "The": [ "the" ],
+        "One": [ "one", "i" ],
+        "Two": [ "two", "ii" ],
+        "Three": [ "three", "iii" ],
+        "Four": [ "four", "iv" ],
+        "Five": [ "five", "v" ],
+        "Six": [ "six", "vi" ],
+        "Seven": [ "seven", "vii" ],
+        "Eight": [ "eight", "viii" ],
+        "Nine": [ "nine", "ix" ],
+        "Ten": [ "ten", "x" ],
+        "Eleven": [ "eleven", "xi" ],
+        "Twelve": [ "twelve", "xii" ],
+        "Fifteen": [ "fifteen", "xv" ],
+        "Sixteen": [ "sixteen", "xvi" ],
+        "Twenty": [ "twenty", "xx" ],
+        "First": [ "first", "1st" ],
+        "Second": [ "second", "2nd" ],
+        "Third": [ "third", "3rd" ],
+        "Fourth": [ "fourth", "4th" ],
+        /* more than 5 */
+        "NumberRanking": [ "th" ],
+
+        //multiplicators
+        /* less than 1 */
+        "Quarter": [ "quarter", "quarters" ],
+        "Half": [ "half" ],
+        "Part": [ "part" ],
+        /* more than 1 */
+        "Double": [ "double" ],
+        "Triple": [ "triple" ],
+
+
+        /* references */
+        "Last": [ "last" ],
+        "B": [ "b" ],
+        "C": [ "c" ],
+        "D": [ "d" ],
+        "Of": [ "of", "de" ],
+        "Same": [ "same" ],
+
+
+        /* *** ******************** *** */
+        /* *** Position determiners *** */
+        /* *** ******************** *** */
+
+        "On": [ "on" ],
+        "In": [ "in" ],
+        "At": [ "at" ],
+        "By": [ "by" ],
+        "As": [ "as" ],
+        "With": [ "with" ],
+        "Within": [ "within" ],
+        "Between": [ "between" ],
+        "Over": [ "over" ],
+        "To": [ "to" ],
+
+        /* *** ********** *** */
+        /* *** Properties *** */
+        /* *** ********** *** */
+
+        "Consisting": [ "consisting" ],
+        "Conjoined": [ "conjoined" ],
+
+        /* *** ******** *** */
+        /* *** Grouping *** */
+        /* *** ******** *** */
+
+        "And": [ "and" ],
+        "All": [ "all" ],
+        "Per": [ "per" ],
+        "Each": [ "each" ],
+        "Pair": [ "pair" ],
+
+        /* *** ******* *** */
+        /* *** Purpose *** */
+        /* *** ******* *** */
+
+        "For": [ "for" ],
+
+        /* *** ********* *** */
+        /* *** Positions *** */
+        /* *** ********* *** */
+
+        "Dexter": [ "dexter" ],
+        "Sinister": [ "sinister" ],
+        "Middle": [ "middle" ],
+        "Chief": [ "chief" ],
+        "Base": [ "base" ],
+        "Point": [ "point" ],
+        "Flank": [ "flank" ],
+        "Flanks": [ "flanks" ],
+        "Nombril": [ "nombril" ],
+        "Honour": [ "honour" ],
+        "Navel": [ "navel" ],
+        "Center": [ "center", "centre" ],
+        "Top": [ "top" ],
+        "Surmounted": [ "surmounted", "surmonte", "surmonté", "debruised" ],
+        "Surtout": [ "sur-le-tout", "sur le tout", "en surtout", "en-surtout" ],
+        "Overall": [ "overall", "over all" ],
+        "Above": [ "above" ],
+        "Below": [ "below" ],
+        "Perched": [ "perched" ],
+        "Issuing": [ "issuant", "issuing" ],
+
+        /* *** ********** *** */
+        /* *** Directions *** */
+        /* *** ********** *** */
+
+        "Wise": [ "wise", "ways" ],
+        "Paleways": [ "palewise", "paleways", "pale wise" ],
+        "Fessways": [ "fesswise", "fessways", "fess wise" ],
+        "Bendways": [ "bendwise", "bendways", "bend wise" ],
+        "Saltirewise": [ "saltire wise" ],
+        "Crosswise": [ "cross wise" ],
+        "Pallwise": [ "pall wise" ],
+
+        /* *** *********************** *** */
+        /* *** Variations of the field *** */
+        /* *** *********************** *** */
+
+        /* Honourables */
+        "Barruly": [ "barruly" ],
+        "BarryPily": [ "barry pily" ],
+        "Barry": [ "barry" ],
+        "Paly": [ "paly" ],
+        "BendySinister": [ "bendy sinister" ],
+        "Bendy": [ "bendy" ],
+        "Chevronny": [ "chevronny" ],
+        "Chequy": [ "chequy", "checky" ],
+        "Lozengy": [ "lozengy" ],
+        "Fusilly": [ "fusilly" ],
+        "Masculy": [ "masculy" ],
+        "Gyronny": [ "gyronny" ],
+        "Fretty": [ "fretty" ],
+        //only for charges though, and mostly ordinaries
+        "Compony": [ "compony", "componé", "gobony", "gobonne" ],
+
+        /* Pre defined */
+        "Bezanty": [ "bezanty", "bezanté", "bezantée", "bezantie", "bezante", "bezantee" ],
+        "Hurty": [ "hurty", "hurté", "hurte" ],
+        "Crusily": [ "crusily", "crusilé", "crusile" ],
+        "Platy": [ "platy", "platé" ], //plate is a valid input for a type of predefined charge so can't be used here to support lack of accent
+        "Billety": [ "billety", "billeté", "billete" ],
+        "Annulletty": [ "annulletty", "annulletté", "annullette" ],
+        "Etincelle": [ "etincellé", "etincelle" ],
+        "Goutte": [ "gutté", "gutte", "guttée", "guttee", "goutté", "goutte", "gouttée", "gouttee" ],
+        "GoutteGules": [ "de sang", "de-sang" ],
+        "GoutteSable": [ "de poix", "de-poix" ],
+        "GoutteArgent": [ "d'eau", "de eau", "de-eau" ],
+        "GoutteAzure": [ "de larmes", "de-larmes" ],
+        "GoutteVert": [ "d'olives", "d'huile", "d'olive" ],
+        "GoutteOr": [ "d'or", "auré" ],
+        "Tortelly": [ "tortelly" ],
+
+        /* Semy */
+        "Semy": [ "semy", "seme", "semee", "semé", "semée" ],
+
+
+        /* ****************************** */
+        /* *** Properties of elements *** */
+        /* ****************************** */
+
+        "Voided": [ "voided" ],
+        "Fimbriated": [ "fimbriated" ],
+        "Reversed": [ "reversed" ],
+        "Inverted": [ "inverted" ],
+        "Enhanced": [ "enhanced" ],
+        "Abased": [ "abased" ],
+        "Cotticed": [ "coticed", "cotised", "cottised", "cotticed", "cotized", "cotoye" ],
+        "Doubly": [ "doubly" ],
+        "Endorsed": [ "endorsed" ],
+        "CoupleClosed": [ "couple closed", "couple closes" ],
+        "Rompu": [ "rompu" ],
+
+
+        /* ****************************** */
+        /* *** Variations of the line *** */
+        /* ****************************** */
+
+        "Indented": [ "indented" ],
+        "Dancetty": [ "dancetty" ],
+        "Dentilly": [ "dentilly" ],
+        "Rayonny": [ "rayonny", "rayonné", "rayonne" ],
+        "Wavy": [ "wavy" ],
+        "Undy": [ "undy" ],
+        "Nebuly": [ "nebuly" ],
+        "Engrailed": [ "engrailed" ],
+        "Invected": [ "invected" ],
+        "Embattled": [ "embattled" ],
+        //already as a seme keyword: "Potenty"
+        "Embowed": [ "embowed" ],
+        "Nowy": [ "nowy" ],
+        "Bretesse": [ "bretessé", "bretesse" ],
+        "Urdy": [ "urdy" ],
+
+        /* variation of the chief */
+        "Triangular": [ "triangular" ],
+        "Enarched": [ "enarched" ],
+        "DoubleArched": [ "double arched" ],
+
+
+        /* *** ******* *** */
+        /* *** Charges *** */
+        /* *** ******* *** */
+
+        /* *** Cadency *** */
+        "Difference": [ "difference" ],
+
+
+        /* *** Ordinaries *** */
+
+        /* Honourable */
+        "Cross": [ "cross", "crosses" ],
+        "Pale": [ "pale" ],
+        "Fess": [ "fess", "fesse" ],
+        "Bar": [ "bars" ],
+        "Bend": [ "bend", "bends" ],
+        "BendSinister": [ "bend sinister", "bends sinister" ],
+        "Chevron": [ "chevron", "chevrons" ],
+        "Saltire": [ "saltire", "saltires" ],
+        "Bordure": [ "bordure", "border" ],
+        "Pile": [ "pile", "piles" ],
+        "Pall": [ "pall" ],
+        /* The chief honourable is the same word than the position so added there */
+
+        /* Fixed */
+        "Canton": [ "canton" ],
+        "Flaunches": [ "flaunches" ],
+        "Fret": [ "fret" ],
+        "Gore": [ "gore" ],
+        "Gyron": [ "gyron" ],
+        "Orle": [ "orle" ],
+        "Tressure": [ "tressure" ],
+
+        /* Mobile  */
+        "Escutcheon": [ "escutcheon", "escutcheons" ],
+        "Lozenge": [ "lozenge", "lozenges" ],
+        "Fusil": [ "fusil", "fusils" ],
+        "Mascle": [ "mascle", "mascles" ],
+        "Rustre": [ "rustre", "rustres" ],
+        "Roundel": [ "roundel", "roundels" ],
+        "Annulet": [ "annulet", "annulets" ],
+        "Billet": [ "billet", "billets" ],
+        "Mullet": [ "mullet", "mullets" ],
+        "Star": [ "star", "stars" ],
+        "Crescent": [ "crescent", "crescents", "increscent", "increscents", "decrescent", "decrescents" ],
+        "Demi": [ "demi" ],
+        "Bezant": [ "bezant", "bezants" ],
+        "Plate": [ "plate", "plates" ], //plate without s is already defined in the variation "platy"
+        "Hurt": [ "hurt", "hurts" ],
+        "Torteau": [ "torteau", "torteaux" ],
+        "Pellet": [ "pellet", "pellets", "ogresse", "ogresses" ],
+        "Pomme": [ "pomme", "pommes" ],
+        "Golpe": [ "golpe, golpes" ],
+        "Guze": [ "guze", "guzes" ],
+
+        /* Diminutives */
+        "Label": [ "label" ],
+        "Pallet": [ "pallet", "pallets" ],
+        "Endorse": [ "endorse", "endorses" ],
+        "Barrulet": [ "barrulet", "barrulets" ],
+        "Gemel": [ "gemel" ],
+        "Hamade": [ "hamade", "hamaide", "hamades", "hamaides", "hummet", "hummets" ],
+        "Bendlet": [ "bendlet", "bendlets" ],
+        "Ribbon": [ "cost", "ribbon", "ribband" ],
+        "Baton": [ "baton", "batons" ],
+        "Chevronel": [ "chevronel", "chevronels" ],
+        "Comble": [ "comble" ],
+        "BendletSinister": [ "bendlet sinister", "bendlets sinister", "scarpe" ],
+        "BatonSinister": [ "baton sinister", "batons sinister" ],
+        "FilletCross": [ "fillet cross", "cross fillet" ],
+        "Fillet": [ "fillet", "fillets" ],
+        "FilletSaltire": [ "fillet saltire" ],
+        "Saltorel": [ "saltorel", "saltorels" ],
+        "Cotice": [ "cotice", "couste", "cottise", "cottize" ],
+
+        /* *** Symbols *** */
+        //will be defined as any names (or any suite of names) and then retrieved from the available ones
+
+        /* *** *********** *** */
+        /* *** Sub symbols *** */
+        /* *** *********** *** */
+
+        //"Armed": [ "armed" ],
+        //"Crowned": [ "crowned" ],
+        //"Langued": [ "langued" ],
+
+        /* *** **************** *** */
+        /* *** Symbols Attitude *** */
+        /* *** **************** *** */
+
+        /* Animals */
+        "Affronte": [ "affronte", "affronté" ],
+        "Guardant": [ "guardant", "in full aspect", "gardant" ],
+        "Rampant": [ "rampant" ],
+        "Passant": [ "passant" ],
+        "Sejant": [ "sejant" ],
+        "Couchant": [ "couchant", "lodged" ],
+        "Courant": [ "courant", "at speed", "in full charge" ],
+        "Coward": [ "coward" ],
+        "Dormant": [ "dormant" ],
+        "Salient": [ "salient", "springing", "saltant" ],
+        "Statant": [ "statant", "at bay" ],
+        "Pascuant": [ "pascuant" ],
+        /* Birds / winged */
+        "Displayed": [ "displayed" ],
+        "Addorsed": [ "addorsed" ], //endorsed already defined as the property of elements
+        "Overt": [ "overt", "closed", "trussed" ],
+        "Rising": [ "rising", "rousant" ],
+        "Volant": [ "volant" ],
+        "Recursant": [ "recursant" ],
+        "Vigilant": [ "vigilant", "in its vigilance" ],
+        "Vulning": [ "vulning", "in her piety" ],
+        /* Other charges */
+        "Segreant": [ "segreant" ],
+        "Combatant": [ "combatant", "respectant" ],
+        "Naiant": [ "naiant" ],
+        "Hauriant": [ "hauriant" ],
+        "Urinant": [ "urinant" ],
+        "Glissant": [ "glissant" ],
+        "Nowed": [ "nowed" ],
+
+        /* *** Attributes of the attitude *** */
+        "Contourne": [ "contourne", "coutourné" ],
+        "EnArriere": [ "en arriere", "en arrière" ],
+        "Regardant": [ "regardant" ],
+        "InTrianAspect": [ "in trian aspect" ],
+        "Erect": [ "erect" ],
+        "Expanded": [ "expanded", "espanie", "epandre", "épandre" ],
+        "Lowered": [ "lowered", "abaise", "abaisé" ],
+        "Elevated": [ "elevated" ],
+
+        /* *** ********************* *** */
+        /* *** Variations of symbols *** */
+        /* *** ********************* *** */
+
+        /* Crosses (mostly) */
+        "Moline": [ "moline", "anchory" ],
+        "Botonny": [ "botonny", "trefly" ],
+        "Crosslet": [ "crosslet" ],
+        "Flory": [ "flory", "fleury" ],
+        "Maltese": [ "maltese" ],
+        "Patee": [ "patee", "patée", "formy", "formee", "formée" ],
+        "Patonce": [ "patonce", "patoncé" ],
+        //duplicate from furs "Potent"			: ["potent"],
+        "Avelane": [ "avellane" ],
+        "Barby": [ "barby" ],
+        "Cercelee": [ "cercelee", "cercelée", "recercely" ],
+        "Erminee": [ "erminee", "erminée" ],
+        "Fitchy": [ "fitchy", "fitchée", "fitchee" ],
+        "Fourchy": [ "fourchy", "fourchee", "fourchée" ],
+        "Jerusalem": [ "jerusalem" ],
+        "Patriarchal": [ "patriarchal" ],
+        "Pommy": [ "pommy" ],
+        "Pierced": [ "pierced" ],
+
+        /* *** ********************** *** */
+        /* *** Divisions of the field *** */
+        /* *** ********************** *** */
+
+        "Party": [ "party", "parted" ],
+        /* since all the division are following honourables, only specific names are declared here */
+        "Pairle": [ "pairle" ],
+        "Quarterly": [ "quarterly" ],
+        "Chausse": [ "chausse", "chaussé" ],
+        "Chape": [ "chapee", "chapée" ],
+        "Tierced": [ "tierced" ],
+
+        /* *** ********* *** */
+        /* *** Separator *** */
+        /* *** ********* *** */
+        "Coma": [ "," ],
+        "SemiColon": [ ";" ],
+        "Dot": [ "." ],
+        "Colon": [ ":" ]
+    },
+
+    /* *** ******************************** *** */
+    /* *** List of words that can be merged *** */
+    /* *** ******************************** *** */
+
+    "MergeableWords": [ "Goutte", "Counter", "Menu", "Over", "Half", "Pale", "Bend", "Fess" ],
+
+    /* *** ************************** *** */
+    /* *** List of tokens for parsers *** */
+    /* *** ************************** *** */
+
+    "Tokens": {
+
+        "TinctureColour": [
+            [ "Azure" ],
+            [ "Gules" ],
+            [ "Sable" ],
+            [ "Vert" ],
+            [ "Carnation" ],
+            [ "Purpure" ],
+            [ "Sanguine" ],
+            [ "Orange" ],
+            [ "Murrey" ]
+        ],
+        "TinctureMetal": [
+            [ "Or" ],
+            [ "Argent" ]
+        ],
+        "Determiner": [
+            [ "A" ],
+            [ "An" ],
+            [ "The" ],
+            [ "One" ],
+            [ "Two" ],
+            [ "Three" ],
+            [ "Four" ],
+            [ "Five" ],
+            [ "Six" ],
+            [ "Seven" ],
+            [ "Eight" ],
+            [ "Nine" ],
+            [ "Ten" ],
+            [ "Eleven" ],
+            [ "Twelve" ],
+            [ "Fifteen" ],
+            [ "Sixteen" ],
+            [ "Twenty" ],
+            [ "As", "Many" ]
+        ],
+
+        "FieldVariationNumber": [
+            [ "Two" ],
+            [ "Three" ],
+            [ "Four" ],
+            [ "Five" ],
+            [ "Six" ],
+            [ "Seven" ],
+            [ "Eight" ],
+            [ "Nine" ],
+            [ "Ten" ],
+            [ "Eleven" ],
+            [ "Twelve" ],
+            [ "Fifteen" ],
+            [ "Sixteen" ],
+            [ "Twenty" ]
+        ],
+
+        "SymbolAlteration": [
+            [ "Half" ],
+            [ "Double" ],
+            [ "Quarter" ]
+        ],
+        "SymbolSubPartPossession": [
+            [ "With" ]
+
+        ],
+        "And": [
+            [ "And" ]
+        ],
+        "SharedKeyWord": [
+            [ "All" ],
+            [ "Each" ]
+        ],
+        "SharedObjectReference": [
+            [ "of", "the", "last" ],
+            [ "of", "the", "first" ],
+            [ "of", "them" ],
+            [ "pair" ]
+        ],
+        "SharedPropertyAdverb": [
+            [ "Devouring" ],
+            [ "Charged", "With" ],
+            [ "Charged" ],
+            [ "Consisting", "Of" ],
+            [ "With" ],
+            [ "Conjoined" ],
+            [ "Carrying" ]
+        ],
+        "SymbolAttitude": [
+            [ "Affronte" ],
+            [ "Guardant" ],
+            [ "Rampant" ],
+            [ "Passant" ],
+            [ "Sejant" ],
+            [ "Couchant" ],
+            [ "Courant" ],
+            [ "Coward" ],
+            [ "Dormant" ],
+            [ "Salient" ],
+            [ "Statant" ],
+            [ "Pascuant" ],
+            [ "Displayed" ],
+            [ "Addorsed" ],
+            [ "Endorsed" ],
+            [ "Overt" ],
+            [ "Rising" ],
+            [ "Volant" ],
+            [ "Recursant" ],
+            [ "Vigilant" ],
+            [ "Vulning" ],
+            [ "Segreant" ],
+            [ "Combatant" ],
+            [ "Naiant" ],
+            [ "Hauriant" ],
+            [ "Urinant" ],
+            [ "Glissant" ],
+            [ "Nowed" ]
+        ],
+        "SymbolAttitudeAttribute": [
+            [ "Contourne" ],
+            [ "EnArriere" ],
+            [ "Regardant" ],
+            [ "InTrianAspect" ],
+            [ "Erect" ],
+            [ "Expanded" ],
+            [ "Lowered" ],
+            [ "Elevated" ]
+        ],
+        "SymbolStateDeterminer": [
+            [ "In" ]
+        ],
+        "Point": [
+            [ "Point" ]
+        ],
+        "LocationBefore": [
+            [ "In" ]
+        ],
+        "PositionBetween": [
+            [ "Within" ],
+            [ "Between" ],
+            [ "And", "Overall" ],
+            [ "Overall" ],
+            [ "In" ],
+            [ "Above" ],
+            [ "Perched" ],
+            [ "Below" ],
+            [ "Surmounted", "By" ],
+            [ "Surmounted", "Of" ]
+        ],
+        "PositionOverall": [
+            [ "And", "Overall" ],
+            [ "Overall" ]
+        ],
+        "PositionBefore": [
+            [ "Within" ],
+            [ "Between" ],
+            [ "Over" ],
+            [ "Above" ],
+            [ "Perched", "On" ],
+            [ "Below" ],
+            [ "On" ]
+        ],
+        "Cadency": [
+            [ "For", "Difference" ]
+        ],
+
+        "OrdinaryHonourable": [
+            [ "Cross" ],
+            [ "Pale" ],
+            [ "Fess" ],
+            [ "Bar" ],
+            [ "Bend" ],
+            [ "BendSinister" ],
+            [ "Chevron" ],
+            [ "Saltire" ],
+            [ "Bordure" ],
+            [ "Pile" ],
+            [ "Pall" ],
+            [ "Chief" ]
+        ],
+
+        "Cross": [
+            [ "Cross" ]
+        ],
+
+        "OrdinaryFixed": [
+            [ "Canton" ],
+            [ "Flaunches" ],
+            [ "Fret" ],
+            [ "Gore" ],
+            [ "Gyron" ],
+            [ "Orle" ],
+            [ "Tressure" ]
+        ],
+        "OrdinaryMobile": [
+            [ "Escutcheon" ],
+            [ "Lozenge" ],
+            [ "Fusil" ],
+            [ "Mascle" ],
+            [ "Rustre" ],
+            [ "Roundel" ],
+            [ "Annulet" ],
+            [ "Billet" ],
+            [ "Mullet" ],
+            [ "Star" ],
+            [ "Crescent" ],
+            [ "Demi" ],
+            [ "Bezant" ],
+            [ "Plate" ],
+            [ "Hurt" ],
+            [ "Torteau" ],
+            [ "Pellet" ],
+            [ "Pomme" ],
+            [ "Golpe" ],
+            [ "Guze" ]
+        ],
+
+        "OrdinaryDiminutive": [
+            [ "Label" ],
+            [ "Pallet" ],
+            [ "Endorse" ],
+            [ "Barrulet" ],
+            [ "Gemel" ],
+            [ "Hamade" ],
+            [ "Bendlet" ],
+            [ "Ribbon" ],
+            [ "Baton" ],
+            [ "Chevronel" ],
+            [ "Comble" ],
+            [ "BendletSinister" ],
+            [ "BatonSinister" ],
+            [ "FilletCross" ],
+            [ "Fillet" ],
+            [ "FilletSaltire" ],
+            [ "Saltorel" ],
+            [ "Cotice" ]
+        ],
+        "OrdinaryAlteration": [
+            [ "Half" ],
+            [ "Quarter" ],
+            [ "Double" ]
+        ],
+
+        "Charged": [
+            [ "Charged", "With" ],
+            [ "Charged" ]
+        ],
+
+        "TinctureReference": [
+            [ "Of", "The", "Last" ],
+            [ "Of", "The", "Field" ],
+            [ "Of", "The", "First" ],
+            [ "Of", "The", "Second" ],
+            [ "Of", "The", "Third" ],
+            [ "Of", "The", "Fourth" ]
+        ],
+
+        "Of": [
+            [ "Of" ]
+        ],
+
+        "TinctureProper": [
+            [ "Proper" ]
+        ],
+
+        "DivisionBy4Name": [
+            [ "Quarterly" ],
+            [ "Party", "Per", "Cross" ],
+            [ "Party", "Per", "Saltire" ],
+            [ "Party", "Per", "Quarter" ],
+            [ "Per", "Cross" ],
+            [ "Per", "Saltire" ],
+            [ "Per", "Quarter" ]
+        ],
+        "DivisionBy2Name": [
+            [ "Party", "Per", "Fess" ],
+            [ "Party", "Per", "Pale" ],
+            [ "Party", "Per", "Bend" ],
+            [ "Party", "Per", "BendSinister" ],
+            [ "Party", "Per", "Chevron" ],
+            [ "Per", "Fess" ],
+            [ "Per", "Pale" ],
+            [ "Per", "Bend" ],
+            [ "Per", "BendSinister" ],
+            [ "Per", "Chevron" ]
+        ],
+        "DivisionBy3Name": [
+            [ "Tierced", "Per", "Fess" ],
+            [ "Tierced", "Per", "Pale" ],
+            [ "Tierced", "Per", "Bend" ],
+            [ "Tierced", "Per", "BendSinister" ],
+            [ "Tierced", "Per", "Pall" ],
+            [ "Per", "Pall" ]
+        ],
+
+        "Separator": [
+            [ "Coma" ],
+            [ "Dot" ],
+            [ "Colon" ],
+            [ "SemiColon" ]
+        ],
+        "DivisionBy4Separator": [
+            [ "Coma" ],
+            [ "Colon" ],
+            [ "SemiColon" ]
+        ],
+
+        "LightSeparator": [
+            [ "Coma" ]
+        ],
+
+        "ChargeSeparator": [
+            [ "SemiColon" ]
+        ],
+
+        "ComplexPositionnedChargeSeparator": [
+            [ "SemiColon" ],
+            [ "All" ]
+        ],
+        "FirstDivisionNumber": [
+            [ "One" ],
+            [ "First" ],
+            [ "A" ]
+        ],
+        "SecondDivisionNumber": [
+            [ "Two" ],
+            [ "Second" ],
+            [ "B" ]
+        ],
+        "ThirdDivisionNumber": [
+            [ "Three" ],
+            [ "Third" ],
+            [ "C" ]
+        ],
+        "FourthDivisionNumber": [
+            [ "Four" ],
+            [ "Fourth" ],
+            [ "D" ]
+        ],
+        "SimpleFur": [
+            [ "Ermines" ],
+            [ "Erminois" ],
+            [ "Ermine" ],
+            [ "Pean" ]
+        ],
+
+        "Counter": [
+            [ "Counter" ]
+        ],
+        "VairName": [
+            [ "Vair" ],
+            [ "Potent" ],
+            [ "Beffroi" ],
+            [ "Menu", "Vair" ]
+        ],
+        "VaireName": [
+            [ "Vaire" ],
+            [ "Potente" ],
+            [ "Plumete" ],
+            [ "Menu", "Vaire" ]
+        ],
+        "VaireBetweenName": [
+            [ "Papelonne" ],
+            [ "Masoned" ]
+        ],
+        "Direction": [
+            [ "Paleways" ],
+            [ "Fessways" ],
+            [ "Bendways" ],
+            [ "Saltirewise" ],
+            [ "Crosswise" ],
+            [ "Pallwise" ],
+            [ "In", "Pale" ],
+            [ "In", "Fess" ],
+            [ "In", "Bend" ],
+            [ "In", "Saltire" ],
+            [ "In", "Cross" ],
+            [ "In", "Pall" ]
+        ],
+
+        "FurOrientationName": [
+            [ "Pale" ],
+            [ "Fess" ],
+            [ "BendSinister" ],
+            [ "Bend" ],
+            [ "Point" ]
+        ],
+        "LineVariation": [
+            [ "Indented" ],
+            [ "Dancetty" ],
+            [ "Dentilly" ],
+            [ "Rayonny" ],
+            [ "Wavy" ],
+            [ "Undy" ],
+            [ "Nebuly" ],
+            [ "Engrailed" ],
+            [ "Invected" ],
+            [ "Embattled" ],
+            [ "Potenty" ],
+            [ "Embowed" ],
+            [ "Nowy" ],
+            [ "Bretesse" ],
+            [ "Flory" ],
+            [ "Urdy" ]
+        ],
+        "CrossVariation": [
+            [ "Moline" ],
+            [ "Botonny" ],
+            [ "Crosslet" ],
+            [ "Flory" ],
+            [ "Maltese" ],
+            [ "Patee" ],
+            [ "Patonce" ],
+            [ "Potent" ],
+            [ "Avelane" ],
+            [ "Barby" ],
+            [ "Cercelee" ],
+            [ "Erminee" ],
+            [ "Fitchy" ],
+            [ "Fourchy" ],
+            [ "Jerusalem" ],
+            [ "Patriarchal" ],
+            [ "Pommy" ],
+            [ "Pierced" ]
+        ],
+        "LocationPoint": [
+            [ "Chief" ],
+            [ "Dexter" ],
+            [ "Sinister" ],
+            [ "Base" ],
+            [ "Dexter", "Chief" ],
+            [ "Middle", "Chief" ],
+            [ "Sinister", "Chief" ],
+            [ "Honour" ],
+            [ "Center" ],
+            [ "Fess" ],
+            [ "Nombril" ],
+            [ "Dexter", "Base" ],
+            [ "Sinister", "Base" ],
+            [ "Middle", "Base" ]
+        ],
+        "FieldVariationName": [
+            [ "Barruly" ],
+            [ "BarryPily" ],
+            [ "Barry" ],
+            [ "Paly" ],
+            [ "BendySinister" ],
+            [ "Bendy" ],
+            [ "Chevronny" ],
+            [ "Chequy" ],
+            [ "Lozengy" ],
+            [ "Fusilly" ],
+            [ "Masculy" ],
+            [ "Gyronny" ],
+            [ "Fretty" ],
+            [ "Compony" ]
+        ],
+        "SemyDeterminer": [
+            [ "A" ],
+            [ "An" ]
+        ],
+        "SemyName": [
+            [ "Crusily" ],
+            [ "Billety" ],
+            [ "Annulletty" ],
+            [ "Etincelle" ],
+            [ "Goutte" ]
+        ],
+        "Semy": [
+            [ "Semy", "Of" ],
+            [ "Semy" ]
+        ],
+        "PredefinedSemy": [
+            [ "Bezanty" ],
+            [ "Hurty" ],
+            [ "Platy" ],
+            [ "Tortelly" ],
+            [ "GoutteGules" ],
+            [ "GoutteSable" ],
+            [ "GoutteArgent" ],
+            [ "GoutteAzure" ],
+            [ "GoutteVert" ]
+        ],
+        "CounterChanged": [
+            [ "CounterChanged" ],
+            [ "Counter", "Changed" ]
+        ],
+        "AllCounterChanged": [
+            [ "All", "CounterChanged" ],
+            [ "All", "Counter", "Changed" ]
+        ],
+        "SymbolNameExtension": [
+            [ "Of" ]
+        ],
+        "Quarter": [
+            [ "Quarter" ]
+        ]
+    }
+}
