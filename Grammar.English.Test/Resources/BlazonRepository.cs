@@ -887,8 +887,8 @@ namespace Grammar.English.Test.Integration.Resources
         public const string AgnewofLochnaw = "Argent, a chevron between two cinquefoils in chief Gules and a saltire couped Azure in base";
         public const string AgnewofLochryan = "Argent, a chevron between two cinquefoils in chief Gules and a saltire couped Azure in base all within a bordure Gules";
         public const string AikenheadofthatILk = "Argent, three acorns slipped Vert";
-        public const string Aikman = "Argent, a dexter arm issuing out from the sinster side of the shield holding an oak tree eradicated and broken usunder near the branches Proper between a crescent in the sinister chief point and a mullet in the dexter base point both Gules";
-        public const string AikmanofCairny = "Argent, a sinister hand in base issuing out of a cloud fessways holding an oak baton paleways with a branch sproutng out of the top thereof Proper, surmounted by a bend engrailed Gules";
+        public const string Aikman = "Argent, a dexter arm issuing out from the sinister side of the shield holding an oak tree eradicated and broken usunder near the branches Proper between a crescent in the sinister chief point and a mullet in the dexter base point both Gules";
+        public const string AikmanofCairny = "Argent, a sinister hand in base issuing out of a cloud fessways holding an oak baton paleways with a branch sprouting out of the top thereof Proper, surmounted by a bend engrailed Gules";
         public const string Airlie_Earlof_Ogilvy_ = "Argent, a lion passant guardant Gules crowned with an imperial crown and gorged with an open one both Or";
         public const string AitchisonofGosford = "Argent, a double-headed eagle displayed Sable and on a chief Vert two mullets Or";
         public const string AitchisonofSydserf = "Argent, a double-headed eagle displayed Sable and on a chief Vert two spur-rowells Or all within a bordure invected Sable";
@@ -4464,6 +4464,14 @@ namespace Grammar.English.Test.Integration.Resources
         public const string Waller = "Sable, three walnut leaves or, between two bendlets argent";
 
         public const string ChaffersOfLiverpool = "Azure, on a bend invected argent between three crescents each surmounted by a mullet of eight points or, as many chaffinch proper.";
+
+        /* Chaplets as non ordinaries */
+
+        public const string Yerburgh = "Per pale argent and azure, on a chevron between three chaplets all counterchanged, an annulet for difference.";
+
+        public const string RobertBerry = "Quarterly, 1 and 4, vert, a cross crosslet argent (for Berry); 2 and 3, parted per pale argent and sable, on a chaplet four mullets counterchanged (for Nairne), in the centre of the quarters a crescent or, for difference.";
+
+        public const string Marylebone = "Per chevron sable and barry wavy of six, argent and azure in chief, in the dexter a fleur-de-lis, and in the sinister a rose, both or.";
 
         #endregion
 

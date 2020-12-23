@@ -402,7 +402,19 @@ namespace Grammar.PluginBase.Token
         /// </summary>
         SecondDivisionNumber,
         /// <summary>
-        /// represent a group of sub parts for symbol generation
+        /// represent a valid name for a symbol sub part definition
+        /// </summary>
+        SubPartName,
+        /// <summary>
+        /// represent a list of sub part names following each others
+        /// </summary>
+        SubPartNameList,
+        /// <summary>
+        /// represent a list of independent sub parts constructs for symbol generation
+        /// </summary>
+        SymbolSubPartList,
+        /// <summary>
+        /// represent a group of dependant sub parts for symbol generation
         /// </summary>
         SymbolSubPartGroup,
         /// <summary>

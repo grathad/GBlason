@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Grammar.PluginBase.Parser;
 using Grammar.PluginBase.Parser.Contracts;
@@ -7,14 +8,13 @@ using Grammar.PluginBase.Token.Contracts;
 namespace Grammar.English.Tokens
 {
     /// <summary>
-    /// Parser for tokens that represent a <see cref="TokenNames.SymbolSubPartGroup"/>
+    /// Parser for tokens that represent a <see cref="TokenNames.SymbolSubPartGroup"/>.
+    /// This grammar represent the subpart(s) of a symbol, that are autonomous, meaning that they are completed with at least the simple tincture necessary, or even other shared properties.
+    /// At the smallest a group is only built from one part definition and one simple tincture
     /// <para>
     /// <h3>Grammar:</h3>
     /// <see cref="TokenNames.SymbolSubPartGroup"/> :=  
-    /// (<see cref="TokenNames.SymbolSubPart"/>. |<br/>
-    /// <see cref="TokenNames.SymbolSubPart"/>. 
-    /// (<see cref="TokenNames.LightSeparator"/>. <see cref="TokenNames.SymbolSubPart"/>)* <see cref="TokenNames.And"/>
-    /// <see cref="TokenNames.SymbolSubPart"/>.)
+    /// <see cref="TokenNames.SubPartNameList"/>. <see cref="TokenNames.SimpleTincture"/>
     /// </para>
     /// </summary>
     /// <remarks>The tincture is potentially the responsibility of the parent, since multiple subpart can share the same, but of course can belong to the children if they have different ones</remarks>
@@ -27,33 +27,14 @@ namespace Grammar.English.Tokens
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            if (!TryConsumeAndAttachOne(ref origin, TokenNames.SymbolSubPart)) { return null; }
+            var list = Parse(origin.Start, TokenNames.SubPartNameList);
+            if (list == null) { return null; }
 
-            //then we consume as many light seprator followed by a symbol sub part as we can
-            while (origin.Start < ParserPilot.LastPosition)
-            {
-                //trying the coma
-                if (!TryConsumeAndAttachOne(ref origin, TokenNames.LightSeparator))
-                {
-                    //no match we bail out
-                    break;
-                }
-                //it should be followed by a symbol sub part
-                if (!TryConsumeAndAttachOne(ref origin, TokenNames.SymbolSubPart)) { break; }
-            }
-            //then we try to consume the and sub part to complete
-            var pand = Parse(origin, TokenNames.And);
+            var tincture = Parse(list.Position.Start, TokenNames.SimpleTincture);
+            if (tincture == null) { return null; }
 
-            if (pand != null)
-            {
-                var p = Parse(pand.Position, TokenNames.SymbolSubPart);
-                if (p != null)
-                {
-                    AttachChild(pand.ResultToken);
-                    AttachChild(p.ResultToken);
-                    origin = p.Position;
-                }
-            }
+            AttachChildren(new List<IToken>() { list.ResultToken, tincture.ResultToken });
+            origin = tincture.Position;
 
             return CurrentToken.AsTokenResult(origin);
         }

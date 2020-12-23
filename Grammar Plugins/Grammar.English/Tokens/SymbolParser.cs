@@ -11,12 +11,13 @@ namespace Grammar.English.Tokens
     /// <summary>
     /// The symbol is the most complex element in a blazon. It is defined by the fact that its name is NOT one of the reserved keywords <see cref="Resources"/>
     /// The structure of a symbol is very fluid and the few known key words that surround a symbol might be considered part of the symbol if the name is not in the resources.
+    /// Thus most complex symbols blazon will end up in error through grammar parsers. This version of the parser focus on simple definition that covers most of the cases
     /// <para>
     /// <h3>Grammar:</h3>
     /// <see cref="TokenNames.Symbol"/> := <see cref="TokenNames.SymbolAlteration"/>? <see cref="TokenNames.SymbolName"/>. 
     /// <see cref="TokenNames.SymbolAttitude"/>* 
     /// <see cref="TokenNames.SymbolAttitudeAttribute"/>? <see cref="TokenNames.SharedProperty"/>?  <see cref="TokenNames.Tincture"/>? 
-    /// <see cref="TokenNames.SymbolSubPartGroup"/>*
+    /// <see cref="TokenNames.SymbolSubPartList"/>*
     /// </para>
     /// </summary>
     internal class SymbolParser : ContainerParser
@@ -57,7 +58,7 @@ namespace Grammar.English.Tokens
             
             while (origin.Start < ParserPilot.LastPosition)
             {
-                if (!TryConsumeAndAttachOne(ref origin, TokenNames.SymbolSubPartGroup))
+                if (!TryConsumeAndAttachOne(ref origin, TokenNames.SymbolSubPartList))
                 {
                     break;
                 }
