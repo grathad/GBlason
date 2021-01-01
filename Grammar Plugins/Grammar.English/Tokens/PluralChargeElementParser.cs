@@ -8,25 +8,26 @@ using Grammar.PluginBase.Token.Contracts;
 namespace Grammar.English.Tokens
 {
     /// <summary>
-    /// Parse a token representing a charge used for a custom semy. 
-    /// This has to be a single element, with a simple tincture (no semy or variation of the field)
+    /// Parse a token representing a simple charge. 
+    /// The simple charge is a subset of a charge that can be used to define a charge used in a semy
     /// <para>
     /// <h3>Grammar:</h3>
-    /// <see cref="SemyCharge"/> := (<see cref="TokenNames.Ordinary"/> | <see cref="TokenNames.Symbol"/> | <see cref="TokenNames.SymbolCross"/>)
+    /// <see cref="PluralChargeElement"/> := <see cref="TokenNames.PluralOrdinary"/> | <see cref="TokenNames.Symbol"/> | <see cref="TokenNames.SymbolCross"/>
     /// </para>
     /// </summary>
-    internal class SemyChargeParser : ContainerParser
+    internal class PluralChargeElementParser : ContainerParser
     {
-        public SemyChargeParser(IParserPilot factory = null)
-            : base(TokenNames.SemyCharge, factory)
+        public PluralChargeElementParser(IParserPilot factory = null)
+            : base(TokenNames.PluralChargeElement, factory)
         {
 
         }
+
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
             //it is either an ordinary or a symbol
             var result = TryConsumeOr(ref origin,
-                TokenNames.Ordinary,
+                TokenNames.PluralOrdinary,
                 TokenNames.Symbol,
                 TokenNames.SymbolCross);
             if (result == null)

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Format.Elements;
+using System.Threading.Tasks;
 using Grammar.PluginBase.Parser;
 using Grammar.PluginBase.Parser.Contracts;
 using Grammar.PluginBase.Token;
@@ -8,33 +7,31 @@ using Grammar.PluginBase.Token.Contracts;
 namespace Grammar.English.Tokens
 {
     /// <summary>
-    /// Parse a token representing a charge used for a custom semy. 
-    /// This has to be a single element, with a simple tincture (no semy or variation of the field)
+    /// Parse a token that represent an ordinary that can be a multiple instance of itself on the field
     /// <para>
     /// <h3>Grammar:</h3>
-    /// <see cref="SemyCharge"/> := (<see cref="TokenNames.Ordinary"/> | <see cref="TokenNames.Symbol"/> | <see cref="TokenNames.SymbolCross"/>)
+    /// <see cref="TokenNames.PluralOrdinary"/> := <see cref="TokenNames.PluralOrdinaryName"/> <see cref="TokenNames.LineVariationDefinition"/>
     /// </para>
     /// </summary>
-    internal class SemyChargeParser : ContainerParser
+    internal class PluralOrdinaryParser : ContainerParser
     {
-        public SemyChargeParser(IParserPilot factory = null)
-            : base(TokenNames.SemyCharge, factory)
+        public PluralOrdinaryParser(IParserPilot factory = null)
+            : base(TokenNames.PluralOrdinary, factory)
         {
 
         }
+
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            //it is either an ordinary or a symbol
             var result = TryConsumeOr(ref origin,
-                TokenNames.Ordinary,
-                TokenNames.Symbol,
-                TokenNames.SymbolCross);
+                TokenNames.PluralOrdinaryName);
             if (result == null)
             {
                 return null;
             }
             AttachChild(result.ResultToken);
-
+            origin = result.Position;
+            TryConsumeAndAttachOne(ref origin, TokenNames.LineVariationDefinition);
             return CurrentToken.AsTokenResult(result);
         }
 

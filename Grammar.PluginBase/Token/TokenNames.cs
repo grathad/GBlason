@@ -66,14 +66,41 @@ namespace Grammar.PluginBase.Token
         /// </summary>
         DivisionBy3,
         /// <summary>
-        /// A simple charge is the representation of a only object that can belong to a group of charges or be the definition of a semy
+        /// An element is a single object definition that can be used either as multiple instance or as a unique one
         /// </summary>
-        [ContainsOr(Ordinary, Symbol, SymbolCross)]
+        [ContainsOr(SingleChargeElement, PluralChargeElement)]
         ChargeElement,
+        /// <summary>
+        /// A single charge element are objects that are alone, either because their determiner is singular, or because they can't be multiple (like all honourable)
+        /// </summary>
+        //[ContainsOr(Ordinary, Symbol, SymbolCross)]
+        SingleChargeElement,
+        /// <summary>
+        /// A plural charge element are objects that are multiple, either because of their determiner is plural, or because they can only be a plural charge (like bars)
+        /// </summary>
+        //[ContainsOr(Ordinary, Symbol, SymbolCross)]
+        PluralChargeElement,
         /// <summary>
         /// A geometric shape used as a charge
         /// </summary>
+        [ContainsOr(SingleOrdinary, PluralOrdinary)]
         Ordinary,
+        /// <summary>
+        /// An ordinary that is defined alone (like a bordure)
+        /// </summary>
+        SingleOrdinary,
+        /// <summary>
+        /// Leaf representing the name of an ordinary that can only be defined alone
+        /// </summary>
+        SingleOrdinaryName,
+        /// <summary>
+        /// An ordinary that can and is defined as multiple instances of itself (like 3 chevrons)
+        /// </summary>
+        PluralOrdinary,
+        /// <summary>
+        /// Leaf representing the name of an ordinary that can be defined as multiple instances
+        /// </summary>
+        PluralOrdinaryName,
         /// <summary>
         /// A customized symbol used as a charge
         /// </summary>
@@ -102,6 +129,14 @@ namespace Grammar.PluginBase.Token
         /// Represent a number of items (can be one or more) using any type of numeric determiner
         /// </summary>
         Determiner,
+        /// <summary>
+        /// Represent a number of items (can only be one) using any type of numeric or specific determiner
+        /// </summary>
+        SingleDeterminer,
+        /// <summary>
+        /// Represent a number of items (more than one) using any type of numeric determiner
+        /// </summary>
+        PluralDeterminer,
         /// <summary>
         /// The list of attitude that a symbol can support (not all of them are supported only the most common)
         /// </summary>
@@ -220,6 +255,14 @@ namespace Grammar.PluginBase.Token
         /// Represent a charge that is the minimum object definition of a complete charge. Without edge cases like multiple or cross positionned charges with shared properties
         /// </summary>
         SimpleCharge,
+        /// <summary>
+        /// Represent a charge that is the minimum object definition of a complete charge. With a unique element (differentiated because it is used as a limitation for semy for example)
+        /// </summary>
+        SingleSimpleCharge,
+        /// <summary>
+        /// Represent a charge that is the minimum object definition of a complete charge. With a plural determiner implying multiple instance of the same element
+        /// </summary>
+        PluralSimpleCharge,
         /// <summary>
         /// Represent one of the name that can be used for a vair
         /// </summary>

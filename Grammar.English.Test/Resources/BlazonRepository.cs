@@ -859,7 +859,7 @@ namespace Grammar.English.Test.Integration.Resources
 
         public const string RefactoredSubchargesTincture = "Argent, a lion passant guardant Gules crowned with an imperial crown and gorged with an open one both Or";
 
-        public const string RefactotingOrdinaryCounterChanging = "Parted per pale Argent and Sable, a chevron between two mullets in chief and a crescent in base all counterchanged";
+        public const string RefactoringOrdinaryCounterChanging = "Parted per pale Argent and Sable, a chevron between two mullets in chief and a crescent in base all counterchanged";
         #endregion
 
         #region exhaustive list scotland
@@ -1786,6 +1786,7 @@ namespace Grammar.English.Test.Integration.Resources
         public const string ForresterofDenoven_David = "Argent, three hunting-horns Sable garnished Gules and for differnce a crescent surmounted by another";
         public const string Forrester_Alexander = "Argent, a roundel Sable (or pellet)  between three hunting-horns Sable";
         public const string Forrester_GeorgeinDundee = "Argent, a beagle (or ratch-hound) between three hunting-horns Sable";
+        public const string Rait_Dundee = "or, a cross engrailed within a bordure invecked, sable";
         public const string Forrester_Lord = "Argent, a fess Gules between three hunting-horns Sable garnished Gules";
         public const string Forrester_SirAndrew = "Argent, a chevron between three hunting-horns Sable garnished Gules";
         public const string ForsytheofNydie = "Argent, a chevron engrailed Gules between three griffins segreant Vert armed and membered Gules";
@@ -4472,6 +4473,8 @@ namespace Grammar.English.Test.Integration.Resources
         public const string RobertBerry = "Quarterly, 1 and 4, vert, a cross crosslet argent (for Berry); 2 and 3, parted per pale argent and sable, on a chaplet four mullets counterchanged (for Nairne), in the centre of the quarters a crescent or, for difference.";
 
         public const string Marylebone = "Per chevron sable and barry wavy of six, argent and azure in chief, in the dexter a fleur-de-lis, and in the sinister a rose, both or.";
+
+        public const string PeterDeDreux_EarlOfRichmond = "Chequy or and azure, a quarter ermine";
 
         #endregion
 

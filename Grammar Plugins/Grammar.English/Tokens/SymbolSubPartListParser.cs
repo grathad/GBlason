@@ -19,9 +19,9 @@ namespace Grammar.English.Tokens
     /// </summary>
     /// <remarks>A list of subpart is not responsible for any shared properties of the component of the list, thus each group define its own tincture and shared properties, if the group have only one shared tincture for example
     /// then the list will be only including one group</remarks>
-    internal class SymbolSubPartList : ContainerParser
+    internal class SymbolSubPartListParser : ContainerParser
     {
-        public SymbolSubPartList(IParserPilot factory = null)
+        public SymbolSubPartListParser(IParserPilot factory = null)
             : base(TokenNames.SymbolSubPartList, factory)
         {
         }
@@ -30,10 +30,18 @@ namespace Grammar.English.Tokens
         {
             //if no valid subpart group we stop
             var firstSubPartGroup = Parse(origin, TokenNames.SymbolSubPartGroup);
-            if (firstSubPartGroup == null) { return null; }
+            if (firstSubPartGroup == null) {
+                return null; 
+            }
+            if(firstSubPartGroup.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.SymbolSubPartGroup, origin.Start);
+                return null;
+            }
 
             var lastGroup = firstSubPartGroup;
             var tempTree = new List<IToken>();
+            origin = lastGroup.Position;
             tempTree.Add(lastGroup.ResultToken);
 
             //then we consume as many light seprator followed by a symbol sub part as we can
@@ -46,8 +54,9 @@ namespace Grammar.English.Tokens
                     //no match we bail out
                     break;
                 }
+               
                 //it should be followed by a symbol sub part
-                var nextGroup = Parse(origin, TokenNames.SymbolSubPartGroup);
+                var nextGroup = Parse(coma.Position, TokenNames.SymbolSubPartGroup);
                 if (nextGroup == null) { break; }
                 //if we get there we are good to try another iteration in the loop
                 //we attach the children so far in the temp tree

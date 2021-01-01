@@ -24,7 +24,7 @@ namespace Grammar.English.Tokens
     /// </remarks>
     internal class ShieldParser : ContainerParser
     {
-        public ShieldParser(IParserPilot pilot = null) 
+        public ShieldParser(IParserPilot pilot = null)
             : base(TokenNames.Shield, pilot)
         { }
 
@@ -36,20 +36,19 @@ namespace Grammar.English.Tokens
                 ErrorMandatoryTokenMissing(TokenNames.Field, origin.Start);
                 return null;
             }
-            
+
             //expected separator, but ok - ish if not present
             var separatorPresent = TryConsumeAndAttachOne(ref origin, TokenNames.LightSeparator);
 
             //then there are optional charges on the field
-            while (TryConsumeAndAttachOne(ref origin, TokenNames.Charge))
+            //if there is more than one charge, this will be handled in the grammar for complex charges (like list or positionned ones)
+            if (TryConsumeAndAttachOne(ref origin, TokenNames.Charge))
             {
-                if (separatorPresent)
+                if (!separatorPresent)
                 {
-                    continue;
+                    //we did not found any separator even if there were a valid charge after the field
+                    ErrorOptionalTokenMissing(TokenNames.LightSeparator, origin.Start);
                 }
-                //we did not found any separator even if there were a valid charge after the field
-                ErrorOptionalTokenMissing(TokenNames.LightSeparator, origin.Start);
-                separatorPresent = true;
             }
             TryConsumeAndAttachOne(ref origin, TokenNames.AllCounterChanged);
             return CurrentToken.AsTokenResult(origin);

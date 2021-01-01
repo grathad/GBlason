@@ -36,7 +36,7 @@ namespace Grammar.English.Tokens
             //trying the simplest, the semy name
             if (!TryConsumeAndAttachOne(ref origin, TokenNames.SemyName))
             {
-                //then it have to be the semy determiner and simple charge
+                //then it have to be the semy determiner and a semy charge (simple charge element with a simple tincture)
                 TryConsumeAndAttachOne(ref origin, TokenNames.SemyDeterminer);
                 if (!TryConsumeAndAttachOne(ref origin, TokenNames.Semy))
                 {

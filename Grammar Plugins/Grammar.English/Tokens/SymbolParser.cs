@@ -16,7 +16,7 @@ namespace Grammar.English.Tokens
     /// <h3>Grammar:</h3>
     /// <see cref="TokenNames.Symbol"/> := <see cref="TokenNames.SymbolAlteration"/>? <see cref="TokenNames.SymbolName"/>. 
     /// <see cref="TokenNames.SymbolAttitude"/>* 
-    /// <see cref="TokenNames.SymbolAttitudeAttribute"/>? <see cref="TokenNames.SharedProperty"/>?  <see cref="TokenNames.Tincture"/>? 
+    /// <see cref="TokenNames.SymbolAttitudeAttribute"/>? <see cref="TokenNames.SharedProperty"/>? (<see cref="TokenNames.Tincture"/> | <see cref="TokenNames.FieldVariation"/>)
     /// <see cref="TokenNames.SymbolSubPartList"/>*
     /// </para>
     /// </summary>
@@ -46,16 +46,20 @@ namespace Grammar.English.Tokens
             TryConsumeAndAttachOne(ref origin, TokenNames.SharedProperty);
             //we consume the tincture here, if it ends up being the last element
             //and the parent is capable of refactoring then it will be refactored
-            TryConsumeAndAttachOne(ref origin, TokenNames.Tincture);
-
-
+            var filling = TryConsumeOr(ref origin, new[] { TokenNames.Tincture, TokenNames.FieldVariation });
+            if(filling?.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.Tincture, origin.Start);
+                return null;
+            }
+            AttachChild(filling.ResultToken);
 
             //sometime a separator end up there even if it is incorrect, we do support this however
             //we only consume it if there is more to the current symbol, if not we ignore it
-            var separator= Parse(origin, TokenNames.Separator);
+            var separator = Parse(origin, TokenNames.Separator);
             var separatorPredecessor = CurrentToken.Children.LastOrDefault();
             origin = separator?.Position ?? origin;
-            
+
             while (origin.Start < ParserPilot.LastPosition)
             {
                 if (!TryConsumeAndAttachOne(ref origin, TokenNames.SymbolSubPartList))

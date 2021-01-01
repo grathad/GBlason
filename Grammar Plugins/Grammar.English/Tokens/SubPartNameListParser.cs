@@ -36,12 +36,13 @@ namespace Grammar.English.Tokens
             {
                 lastName.ResultToken
             };
+            origin = lastName.Position;
 
             //then we consume as many light separator followed by a symbol sub part name as we can
-            while (lastName.Position.Start < ParserPilot.LastPosition)
+            while (origin.Start < ParserPilot.LastPosition)
             {
                 //trying the coma
-                var coma = Parse(lastName.Position, TokenNames.LightSeparator);
+                var coma = Parse(origin, TokenNames.LightSeparator);
                 if (coma == null)
                 {
                     //no match we bail out
@@ -50,8 +51,6 @@ namespace Grammar.English.Tokens
                 //it should be followed by a symbol sub part
                 var nextName = Parse(origin, TokenNames.SubPartName);
                 if (nextName == null) { break; }
-                //if we get there we are good to try another iteration in the loop
-                lastName = nextName;
                 //we attach the children so far in the temp tree
                 tempTree.Add(coma.ResultToken);
                 tempTree.Add(nextName.ResultToken);

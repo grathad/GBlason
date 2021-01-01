@@ -9,35 +9,63 @@ using Grammar.PluginBase.Token.Contracts;
 
 namespace Grammar.English.Tokens
 {
-    internal class SimpleChargeParser : ContainerParser
+    internal class PluralSimpleChargeParser : ContainerParser
     {
         /// <summary>
         /// This is an exception, an helper to represent a charge with minimalistic content.
         /// <para>
         /// <h3>Grammar:</h3>
-        /// <see cref="TokenNames.SimpleCharge"/> := <see cref="TokenNames.SingleSimpleCharge"/> | <see cref="TokenNames.PluralSimpleCharge"/>
+        /// <see cref="TokenNames.PluralSimpleCharge"/> := <see cref="TokenNames.PluralDeterminer"/> <see cref="TokenNames.PluralChargeElement"/> <br/>
+        /// (<br/>
+        /// (<see cref="TokenNames.Tincture"/> | <see cref="TokenNames.FieldVariation"/>)? <see cref="TokenNames.SharedProperties"/> |<br/>
+        /// <see cref="TokenNames.SharedProperties"/>? (<see cref="TokenNames.Tincture"/> | <see cref="TokenNames.FieldVariation"/>)<br/>
+        /// )
         /// </para>
         /// </summary>
         /// <example>
         /// A baton Gules
         /// </example>
         /// <remarks>The tincture is not optional, if not present the charge will be considered as a complex charge</remarks> 
-        public SimpleChargeParser(IParserPilot factory = null)
-            : base(TokenNames.SimpleCharge, factory) { }
+        public PluralSimpleChargeParser(IParserPilot factory = null)
+            : base(TokenNames.PluralSimpleCharge, factory) { }
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            var result = TryConsumeOr(origin.Start, new[] { TokenNames.SingleSimpleCharge, TokenNames.PluralSimpleCharge });
-            //var result = Parse(origin, TokenNames.ChargeElement);
+            var determiner = Parse(origin, TokenNames.PluralDeterminer);
+            if(determiner?.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.PluralDeterminer, origin.Start);
+                return null;
+            }
+
+            origin = determiner.Position;
+            AttachChild(determiner.ResultToken);
+
+            //TryConsumeAndAttachOne(ref origin, TokenNames.Determiner);
+            //we try to consume everything possible and we take the solution that end up consuming the most parsed key words
+            //for simplest charge
+
+            var result = Parse(origin, TokenNames.PluralChargeElement);
             if (result?.ResultToken == null)
             {
-                ErrorNoOptionFound(origin.Start);
+                ErrorMandatoryTokenMissing(TokenNames.PluralChargeElement, origin.Start);
                 return null;
             }
             origin = result.Position;
             AttachChild(result.ResultToken);
 
-            return result;
+            var results = TryConsumeOrAll(ref origin,
+                TokenNames.LightSeparator,
+                TokenNames.FieldVariation,
+                TokenNames.Tincture,
+                TokenNames.SharedProperties);
+
+            if (results?.ResultToken != null)
+            {
+                AttachChildren(results.ResultToken);
+            }
+            
+            return CurrentToken.AsTokenResult(results?.Position ?? result.Position);
         }
 
         /// <summary>
