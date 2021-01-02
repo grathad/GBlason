@@ -289,10 +289,154 @@ namespace Grammar.PluginBase.Token
         /// </summary>
         ChargeSeparator,
         /// <summary>
-        /// token representing multiple charges listed one after the other, usually sharing some properties
+        /// token representing all of the complex multiple charges construct available on a single field
         /// </summary>
-        [ReAttemptParsingForParent(PositionnedCharges)]
+        //[ReAttemptParsingForParent(PositionnedCharges)]
         MultiCharges,
+        /// <summary>
+        /// token that contains multiple charges one after the other, in a list (usually separated by coma and "and") as well as containing a specific location for the charges in the list that are not the principal one (or all of them even)
+        /// </summary>
+        ChargesList,
+        /// <summary>
+        /// token that represent multiple charge relative position based on surmounted
+        /// </summary>
+        ChargeSurmounted,
+        /// <summary>
+        /// token that contains all the charges that can be used in a complex "between" relatively positionned list of charges
+        /// </summary>
+        ChargeBetweenPosition,
+        /// <summary>
+        /// token that represent what kind of charges can be included in a charge list
+        /// </summary>
+        AndPossibleGroup,
+        /// <summary>
+        /// token that contains all the charges that can be used in a complex "on" relatively positionned list of charges
+        /// </summary>
+        ChargeOnPosition,
+        /// <summary>
+        /// token that contains all the charges that can be used in a complex "within" relatively positionned list of charges
+        /// </summary>
+        ChargeWithin,
+        /// <summary>
+        /// token that contains all the charges that can be used in a complex "charged" relatively positionned list of charges
+        /// </summary>
+        ChargeCharged,
+        /// <summary>
+        /// token that contains all the charges that can be used in a complex "overall" relatively positionned list of charges
+        /// </summary>
+        ChargeOverall,
+        /// <summary>
+        /// Grammar for all the charges that are between for which the position key word is in the middle of the charge
+        /// </summary>
+        BetweenMiddle,
+        /// <summary>
+        /// Grammar for all the charges that are between for which the position key word is at the start of the charge
+        /// </summary>
+        BetweenStart,
+        /// <summary>
+        /// Grammar for all the charges that are On for which the position key word is in the middle of the charge
+        /// </summary>
+        OnMiddle,
+        /// <summary>
+        /// Grammar for all the charges that are On for which the position key word is at the start of the charge
+        /// </summary>
+        OnStart,
+        /// <summary>
+        /// Token for the On keywords
+        /// </summary>
+        On,
+        /// <summary>
+        /// Token for possible group of charges in relatively positionned on charge list
+        /// </summary>
+        OnPossibleGroup,
+        /// <summary>
+        /// Grammar for all the charges that can be grouped first in a between list
+        /// </summary>
+        BetweenPossibleFirstGroup,
+        /// <summary>
+        /// Grammar for all the charges that can be grouped second in a between list
+        /// </summary>
+        BetweenPossibleSecondGroup,
+        /// <summary>
+        /// Token for the between keyword
+        /// </summary>
+        Between,
+        /// <summary>
+        /// token that represent a gorup of a single charge surmounted
+        /// </summary>
+        SurmountedSingle,
+        /// <summary>
+        /// token that represent a gorup of multiple charges surmounted
+        /// </summary>
+        SurmountedPlural,
+        /// <summary>
+        /// token that represent a gorup of multiple charges surmounted
+        /// </summary>
+        SurmountedPossibleFirstPluralGroup,
+        /// <summary>
+        /// token that represent a gorup of multiple charges surmounted
+        /// </summary>
+        SurmountedPossibleFirstSingleGroup,
+        /// <summary>
+        /// token that represent a gorup of multiple charges surmounted
+        /// </summary>
+        SurmountedPossibleSecondGroup,
+        /// <summary>
+        /// token that represent the surmounted keyword
+        /// </summary>
+        Surmounted,
+        /// <summary>
+        /// token that represent the each keyword
+        /// </summary>
+        Each,
+        /// <summary>
+        /// token that contains all the charges at the start of a complex "overall" relatively positionned list of charges
+        /// </summary>
+        OverallPossibleFirstGroup,
+        /// <summary>
+        /// token that contains all the charges at the end of a complex "overall" relatively positionned list of charges
+        /// </summary>
+        OverallPossibleSecondGroup,
+        /// <summary>
+        /// token that represent the overall keywords
+        /// </summary>
+        Overall,
+        /// <summary>
+        /// token that represent the possible charge in a charged group
+        /// </summary>
+        ChargedPossibleGroup,
+        /// <summary>
+        /// the possible first group for within charges
+        /// </summary>
+        WithinPossibleFirstGroup,
+        /// <summary>
+        /// the possible first group for within charges
+        /// </summary>
+        WithinPossibleSecondGroup,
+        /// <summary>
+        /// Token for whole keyword
+        /// </summary>
+        Whole,
+        /// <summary>
+        /// Token for within keyword
+        /// </summary>
+        Within,
+        /// <summary>
+        /// Token for within keyword
+        /// </summary>
+        WithinWhole,
+        /// <summary>
+        /// Token for within keyword
+        /// </summary>
+        WithinAll,
+        /// <summary>
+        /// Token for within keyword
+        /// </summary>
+        WithinAllWhole,
+        /// <summary>
+        /// Token for All keyword
+        /// </summary>
+        All,
         /// <summary>
         /// Token representing multiple charges that are grouped together using a position link
         /// </summary>
