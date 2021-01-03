@@ -13,7 +13,7 @@ namespace Grammar.PluginBase.Parser
     /// <summary>
     /// 
     /// </summary>
-    public class LeafParser : ParserBase
+    public class LeafParser : ParserBase, ILeafParser
     {
         /// <summary>
         /// 
@@ -79,7 +79,7 @@ namespace Grammar.PluginBase.Parser
                 return null;
             }
 
-            var consumed = await Task.Run(() => FindMatchingKeywords(origin, allKeyWords));
+            var consumed = await Task.Run(() => FindMatchingKeywords(origin.Start, allKeyWords));
 
             return CreateLeaf(origin, consumed.ToArray());
         }
@@ -91,18 +91,13 @@ namespace Grammar.PluginBase.Parser
         /// <returns></returns>
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            List<IEnumerable<string>> allKeyWords;
-            try
+            var allKeyWords = GetAllRemainingKeywords(origin.Start);
+            if(allKeyWords == null || !allKeyWords.Any())
             {
-                allKeyWords = Resources.GetTokens(CurrentToken.Type).ToList();
-            }
-            catch (Exception)
-            {
-                ErrorNoTokenKeywords(origin.Start);
                 return null;
             }
 
-            var consumed = FindMatchingKeywords(origin, allKeyWords);
+            var consumed = FindMatchingKeywords(origin.Start, allKeyWords);
             if (consumed == null)
             {
                 //since we don't do "is" anymore we don't trigger grammar errors The logic for errors will need to change as well
@@ -116,10 +111,25 @@ namespace Grammar.PluginBase.Parser
             return leaf;
         }
 
-        protected List<ParsedKeyword> FindMatchingKeywords(ITokenParsingPosition origin, List<IEnumerable<string>> allKeyWords)
+        protected List<IEnumerable<string>> GetAllRemainingKeywords(int origin)
+        {
+            List<IEnumerable<string>> allKeyWords;
+            try
+            {
+                allKeyWords = Resources.GetTokens(CurrentToken.Type).ToList();
+            }
+            catch (Exception)
+            {
+                ErrorNoTokenKeywords(origin);
+                return null;
+            }
+            return allKeyWords;
+        }
+
+        protected List<ParsedKeyword> FindMatchingKeywords(int origin, List<IEnumerable<string>> allKeyWords)
         {
             //Figure out if we have a match (we only take the potential match that have less or as many words as the rest of the blazon to parse)
-            var kw = ParserPilot.GetRemainingKeywords(origin.Start);
+            var kw = ParserPilot.GetRemainingKeywords(origin);
             var maxLength = kw.Count;
             var potentialMatches = new List<List<ParsedKeyword>>();
             foreach (var keyword in allKeyWords.Where(k => k.Count() <= maxLength))
@@ -146,5 +156,14 @@ namespace Grammar.PluginBase.Parser
             return consumed;
         }
 
+        public bool Exist(int position)
+        {
+            var allKeyWords = GetAllRemainingKeywords(position);
+            if (allKeyWords == null || !allKeyWords.Any())
+            {
+                return false;
+            }
+            return FindMatchingKeywords(position, allKeyWords) != null;
+        }
     }
 }

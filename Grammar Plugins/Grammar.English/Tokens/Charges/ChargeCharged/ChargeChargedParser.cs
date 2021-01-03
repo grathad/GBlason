@@ -25,7 +25,7 @@ namespace Grammar.English.Tokens
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
 

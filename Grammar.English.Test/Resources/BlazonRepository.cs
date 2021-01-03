@@ -4476,6 +4476,31 @@ namespace Grammar.English.Test.Integration.Resources
 
         public const string PeterDeDreux_EarlOfRichmond = "Chequy or and azure, a quarter ermine";
 
+        public const string EarlyCoA_Lion = "Azure, a lion rampant-guardant argent, its feet or.";
+
+        public const string Wildenvels = "Per pale argent and sable, in the first a demi-lion statant-guardant issuant from the dividing line.";
+
+        public const string Tannenvels = "Azure, a lion rampant or, queué argent.";
+
+        public const string Rinach = "Or, a lion rampant gules, headed azure.";
+
+        //French so not for the current version
+        //Here the ombre du lion is properly represented by a darker shade of the tincture (either of or or of azure), but often the artist contents himself with simply drawing the outline of the animal in a neutral tint.
+        //public const string Trasegnies = "Bandé d'or et d'azur, à l'ombre du lion brochant sur le tout, à la bordure engrêlée d'or.";
+
+        //will do a english version from the original
+        //public const string Boissiau = "De gueules, semé de lions d'argent.";
+        public const string Boissiau = "Gules, semy of lion argent.";
+
+        public const string Minutoli = "Gules, a lion rampant vair, the head and feet or.";
+
+        public const string Loen = "Azure, a decapitated lion rampant argent, three jets of blood spurting from the neck proper.";
+
+        public const string Papacoda = "Sable, a lion rampant or, its tail turned over its head and held by its teeth.";
+
+        public const string The_Counts_Reinach_Franconia = "Or, a lion rampant gules, hooded and masked azure (see above).";
+
+
         #endregion
 
         #region general armory burke 1884

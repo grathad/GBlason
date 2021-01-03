@@ -31,6 +31,7 @@ namespace Grammar.English.Tokens
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
+            var tempColl = new List<IToken>();
             var determiner = Parse(origin, TokenNames.SingleDeterminer);
             if(determiner?.ResultToken == null)
             {
@@ -39,7 +40,8 @@ namespace Grammar.English.Tokens
             }
 
             origin = determiner.Position;
-            AttachChild(determiner.ResultToken);
+            tempColl.Add(determiner.ResultToken);
+            //AttachChild(determiner.ResultToken);
 
             //we try to consume everything possible and we take the solution that end up consuming the most parsed key words
             //for simplest charge
@@ -51,7 +53,8 @@ namespace Grammar.English.Tokens
                 return null;
             }
             origin = result.Position;
-            AttachChild(result.ResultToken);
+            tempColl.Add(result.ResultToken);
+            //AttachChild(result.ResultToken);
 
             var results = TryConsumeOrAll(ref origin,
                 TokenNames.LightSeparator,
@@ -61,9 +64,10 @@ namespace Grammar.English.Tokens
 
             if (results?.ResultToken != null)
             {
-                AttachChildren(results.ResultToken);
+                tempColl.AddRange(results.ResultToken);
+                //AttachChildren(results.ResultToken);
             }
-            
+            AttachChildren(tempColl);
             return CurrentToken.AsTokenResult(results?.Position ?? result.Position);
         }
 

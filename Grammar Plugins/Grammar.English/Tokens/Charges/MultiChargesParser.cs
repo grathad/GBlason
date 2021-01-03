@@ -13,7 +13,7 @@ namespace Grammar.English.Tokens
     /// <h3>Grammar:</h3>
     /// <see cref="TokenNames.MultiCharges"/> := 
     /// <see cref="TokenNames.ChargesList"/> | <see cref="TokenNames.ChargeBetweenPosition"/> | 
-    /// <see cref="TokenNames.ChargeOnPosition"/> | <see cref="TokenNames.ChargeWithinPosition"/> | 
+    /// <see cref="TokenNames.ChargeOnPosition"/> | <see cref="TokenNames.ChargeWithin"/> | 
     /// <see cref="TokenNames.ChargeSurmounted"/> | <see cref="TokenNames.ChargeOverall"/> | <see cref="TokenNames.ChargeCharged"/>
     /// </para>
     /// </summary>

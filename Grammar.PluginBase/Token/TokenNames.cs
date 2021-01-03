@@ -292,6 +292,7 @@ namespace Grammar.PluginBase.Token
         /// token representing all of the complex multiple charges construct available on a single field
         /// </summary>
         //[ReAttemptParsingForParent(PositionnedCharges)]
+        [ContainsOr(ChargesList, ChargeBetweenPosition, ChargeOnPosition, ChargeWithin, ChargeSurmounted, ChargeOverall, ChargeCharged)]
         MultiCharges,
         /// <summary>
         /// token that contains multiple charges one after the other, in a list (usually separated by coma and "and") as well as containing a specific location for the charges in the list that are not the principal one (or all of them even)
@@ -304,6 +305,7 @@ namespace Grammar.PluginBase.Token
         /// <summary>
         /// token that contains all the charges that can be used in a complex "between" relatively positionned list of charges
         /// </summary>
+        [ContainsOr(BetweenStart, BetweenMiddle)]
         ChargeBetweenPosition,
         /// <summary>
         /// token that represent what kind of charges can be included in a charge list
@@ -352,10 +354,12 @@ namespace Grammar.PluginBase.Token
         /// <summary>
         /// Grammar for all the charges that can be grouped first in a between list
         /// </summary>
+        [ContainsOr(SimpleCharge, ChargesList, Surmounted, ChargeCharged)]
         BetweenPossibleFirstGroup,
         /// <summary>
         /// Grammar for all the charges that can be grouped second in a between list
         /// </summary>
+        [ContainsOr(PluralSimpleCharge, ChargesList, SurmountedPlural, ChargeCharged)]
         BetweenPossibleSecondGroup,
         /// <summary>
         /// Token for the between keyword

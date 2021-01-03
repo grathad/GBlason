@@ -607,6 +607,11 @@
         "LocationBefore": [
             [ "In" ]
         ],
+
+        "Between": [
+            [ "Between" ]
+        ],
+
         "PositionBetween": [
             [ "Within" ],
             [ "Between" ],

@@ -388,7 +388,7 @@
                                         <TextBlock.ToolTip>
                                             <StackPanel Orientation="Vertical">
                                                 <TextBlock Text="{Binding ResultText}"/>
-                                                <TextBlock FontStyle="Italic" FontWeight="Bold" Foreground="DarkGreen" Text="{Binding TextUsed}"/>
+                                                <TextBlock FontStyle="Italic" FontWeight="Bold" Text="{Binding Outcome}"/>
                                                 <TextBlock Text="{Binding StatusText}"/>
                                             </StackPanel>
                                         </TextBlock.ToolTip>

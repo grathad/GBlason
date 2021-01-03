@@ -83,6 +83,31 @@ namespace Grammar.PluginBase.Parser
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
+        public bool Exist(int origin, TokenNames token)
+        {
+            var parserNode = GetFromMemory(token);
+            var leafParserInstance = parserNode?.Parser as ILeafParser;
+            if (leafParserInstance == null)
+            {
+                var parserInstance = NewParserInstance(token);
+                if (parserInstance is ILeafParser parser)
+                {
+                    leafParserInstance = parser;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            var exist = false;
+            for (var i = origin; i < KeyWords.Count || exist; i++)
+            {
+                exist = leafParserInstance.Exist(i);
+            }
+            return exist;
+        }
+
         /// <inheritdoc cref="Parse(ITokenParsingPosition,ParserBase,TokenNames)"/>
         ///  <summary>
         ///  Create the tree and return the element asked as the root.
@@ -366,6 +391,21 @@ namespace Grammar.PluginBase.Parser
                     && p.Position.Start == positionStart;
             }
 
+            return CallTree.GetFirstOrDefault(MemoryMatchLogic);
+        }
+
+        /// <summary>
+        /// Find a parser for the given token, no matter the position (useful for using the validation logic for existance of leaves which are not altering the nodes and independent of the position)
+        /// </summary>
+        /// <param name="name">the name of the token</param>
+        /// <returns>the matching memory token or null if none already created</returns>
+        protected virtual ParserNode GetFromMemory(TokenNames name)
+        {
+            bool MemoryMatchLogic(ParserNode p)
+            {
+                return p?.Parser != null
+                    && p.Parser.Type == name;
+            }
             return CallTree.GetFirstOrDefault(MemoryMatchLogic);
         }
 

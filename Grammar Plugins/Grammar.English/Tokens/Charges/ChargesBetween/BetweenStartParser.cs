@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Grammar.PluginBase.Parser;
 using Grammar.PluginBase.Parser.Contracts;
@@ -12,7 +13,8 @@ namespace Grammar.English.Tokens
     /// <para>
     /// <h3>Grammar:</h3>
     /// <see cref="TokenNames.BetweenStart"/> := 
-    /// <see cref="TokenNames.Between"/> <see cref="TokenNames.BetweenPossibleFirstGroup"/> <see cref="TokenNames.BetweenPossibleSecondGroup"/> (<see cref="TokenNames.Between"/> <see cref="TokenNames.BetweenPossibleSecondGroup"/>)*
+    /// <see cref="TokenNames.Between"/> <see cref="TokenNames.BetweenPossibleFirstGroup"/> <see cref="TokenNames.BetweenPossibleSecondGroup"/>
+    /// (<see cref="TokenNames.Between"/> <see cref="TokenNames.BetweenPossibleSecondGroup"/>)*
     /// </para>
     /// </summary>
     /// <example>
@@ -28,7 +30,40 @@ namespace Grammar.English.Tokens
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            throw new NotImplementedException();
+            var tempColl = new List<IToken>();
+            //the mandatory between keyword
+            var btwn = Parse(origin, TokenNames.Between);
+            if(btwn?.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.Between, origin.Start);
+                return null;
+            }
+            origin = btwn.Position;
+            tempColl.Add(btwn.ResultToken);
+
+            var firstGroup = Parse(origin, TokenNames.BetweenPossibleFirstGroup);
+            if(firstGroup?.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.BetweenPossibleFirstGroup, origin.Start);
+                return null;
+            }
+            origin = firstGroup.Position;
+            tempColl.Add(firstGroup.ResultToken);
+
+            var secondGroup = Parse(origin, TokenNames.BetweenPossibleSecondGroup);
+            if (secondGroup?.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.BetweenPossibleSecondGroup, origin.Start);
+                return null;
+            }
+            origin = secondGroup.Position;
+            tempColl.Add(secondGroup.ResultToken);
+
+            //Todo: multiple between (need an example first)
+
+            //we found our matching grammar, the token return positively
+            AttachChildren(tempColl);
+            return CurrentToken.AsTokenResult(origin);
         }
 
 

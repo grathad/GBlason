@@ -183,7 +183,7 @@ namespace Format_Debugger
                     {
                         strBuilder.Append(keyWords.ElementAt(i).Value).Append(' ');
                     }
-                    TextUsed = strBuilder.ToString();
+                    Outcome = strBuilder.ToString();
                 }
                 else
                 {
@@ -191,7 +191,7 @@ namespace Format_Debugger
                     ResultText = NoResultText;
                     if (currentRoot.Errors?.Any() ?? false)
                     {
-                        FirstError = currentRoot.Errors.First().Explanation;
+                        Outcome = currentRoot.Errors.First().Explanation;
                     }
                 }
             }
@@ -237,15 +237,15 @@ namespace Format_Debugger
             }
         }
 
-        private string _textUsed;
+        private string _outcome;
 
-        public string TextUsed
+        public string Outcome
         {
-            get { return _textUsed; }
+            get { return _outcome; }
             set
             {
-                _textUsed = value;
-                NotifiyPropertyChanged(nameof(TextUsed));
+                _outcome = value;
+                NotifiyPropertyChanged(nameof(Outcome));
             }
         }
 
