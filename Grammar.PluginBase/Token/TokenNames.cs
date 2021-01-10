@@ -306,6 +306,7 @@ namespace Grammar.PluginBase.Token
         /// <summary>
         /// token that represent multiple charge relative position based on surmounted
         /// </summary>
+        [ContainsOr(SurmountedSingle, SurmountedPlural)]
         ChargeSurmounted,
         /// <summary>
         /// token that contains all the charges that can be used in a complex "between" relatively positionned list of charges
@@ -357,18 +358,18 @@ namespace Grammar.PluginBase.Token
         /// <summary>
         /// Token for possible group of charges in relatively positionned on charge list
         /// </summary>
-        [ContainsOr(SimpleCharge, ChargeBetweenPosition, Surmounted, ChargeCharged)]
+        [ContainsOr(SimpleCharge, ChargeBetweenPosition, ChargeSurmounted, ChargeCharged)]
         OnPossibleGroup,
         /// <summary>
         /// Grammar for all the charges that can be grouped first in a between list
         /// </summary>
-        [ContainsOr(SimpleCharge, ChargesList, Surmounted, ChargeCharged)]
-        BetweenPossibleFirstGroup,
+        [ContainsOr(SimpleCharge, ChargesList, ChargeSurmounted, ChargeCharged)]
+        BetweenInsideGroup,
         /// <summary>
         /// Grammar for all the charges that can be grouped second in a between list
         /// </summary>
         [ContainsOr(PluralSimpleCharge, ChargesList, SurmountedPlural, ChargeCharged)]
-        BetweenPossibleSecondGroup,
+        BetweenSurroundingGroup,
         /// <summary>
         /// Token for the between keyword
         /// </summary>
@@ -384,14 +385,17 @@ namespace Grammar.PluginBase.Token
         /// <summary>
         /// token that represent a gorup of multiple charges surmounted
         /// </summary>
+        [ContainsOr(PluralSimpleCharge, PluralChargeCharged)]
         SurmountedPossibleFirstPluralGroup,
         /// <summary>
         /// token that represent a gorup of multiple charges surmounted
         /// </summary>
+        [ContainsOr(SingleSimpleCharge, SingleChargeCharged)]
         SurmountedPossibleFirstSingleGroup,
         /// <summary>
         /// token that represent a gorup of multiple charges surmounted
         /// </summary>
+        [ContainsOr(SimpleCharge, BetweenMiddle, ChargeCharged)]
         SurmountedPossibleSecondGroup,
         /// <summary>
         /// token that represent the surmounted keyword
@@ -416,7 +420,16 @@ namespace Grammar.PluginBase.Token
         /// <summary>
         /// token that represent the possible charge in a charged group
         /// </summary>
+        [ContainsOr(SimpleCharge, ChargesList, BetweenMiddle, ChargeSurmounted)]
         ChargedPossibleGroup,
+        /// <summary>
+        /// token that represent the possible charge in a charged group
+        /// </summary>
+        PluralChargeCharged,
+        /// <summary>
+        /// token that represent the possible charge in a charged group
+        /// </summary>
+        SingleChargeCharged,
         /// <summary>
         /// the possible first group for within charges
         /// </summary>

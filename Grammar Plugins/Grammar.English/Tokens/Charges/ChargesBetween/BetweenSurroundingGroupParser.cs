@@ -11,17 +11,17 @@ namespace Grammar.English.Tokens
     /// This represent multiple charges that are listed together, and optionally share a property
     /// <para>
     /// <h3>Grammar:</h3>
-    /// <see cref="TokenNames.BetweenPossibleFirstGroup"/> := 
-    /// (<see cref="TokenNames.SimpleCharge"/> | <see cref="TokenNames.ChargesList"/> | <see cref="TokenNames.ChargeSurmounted"/> | <see cref="TokenNames.Charged"/>)
+    /// <see cref="TokenNames.BetweenSurroundingGroup"/> := 
+    /// (<see cref="TokenNames.PluralSimpleCharge"/> | <see cref="TokenNames.ChargesList"/> | <see cref="TokenNames.PluralSurmounted"/> | <see cref="TokenNames.PluralCharged"/>)
     /// </para>
     /// </summary>
     /// <example>
     /// OR, A CROSS BETWEEN FOUR KEYS GULES
     /// </example>
-    internal class BetweenPossibleFirstGroupParser : ContainerParser
+    internal class BetweenSurroundingGroupParser : ContainerParser
     {
-        public BetweenPossibleFirstGroupParser(IParserPilot factory = null)
-            : base(TokenNames.BetweenMiddle, factory)
+        public BetweenSurroundingGroupParser(IParserPilot factory = null)
+            : base(TokenNames.BetweenSurroundingGroup, factory)
         {
 
         }

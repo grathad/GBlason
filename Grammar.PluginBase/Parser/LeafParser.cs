@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Grammar.PluginBase.Keyword;
@@ -113,6 +114,10 @@ namespace Grammar.PluginBase.Parser
 
         protected List<IEnumerable<string>> GetAllRemainingKeywords(int origin)
         {
+            if(origin < 0 || CurrentToken == null)
+            {
+                return null;
+            }
             List<IEnumerable<string>> allKeyWords;
             try
             {
@@ -120,6 +125,7 @@ namespace Grammar.PluginBase.Parser
             }
             catch (Exception)
             {
+                Trace.TraceInformation($"{origin} Impossible to get tokens for the type {CurrentToken.Type}");
                 ErrorNoTokenKeywords(origin);
                 return null;
             }

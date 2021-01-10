@@ -13,9 +13,9 @@ namespace Grammar.English.Tokens
     /// <para>
     /// <h3>Grammar:</h3>
     /// <see cref="TokenNames.BetweenMiddle"/> := 
-    /// <see cref="TokenNames.BetweenPossibleFirstGroup"/>
-    /// <see cref="TokenNames.LightSeparator"/>? <see cref="TokenNames.Between"/> <see cref="TokenNames.BetweenPossibleSecondGroup"/> 
-    /// (<see cref="TokenNames.Between"/> <see cref="TokenNames.BetweenPossibleSecondGroup"/>)* 
+    /// <see cref="TokenNames.BetweenInsideGroup"/>
+    /// <see cref="TokenNames.LightSeparator"/>? <see cref="TokenNames.Between"/> <see cref="TokenNames.BetweenSurroundingGroup"/> 
+    /// (<see cref="TokenNames.Between"/> <see cref="TokenNames.BetweenSurroundingGroup"/>)* 
     /// </para>
     /// </summary>
     /// <example>
@@ -33,10 +33,10 @@ namespace Grammar.English.Tokens
         {
             var tempColl = new List<IToken>();
             //the mandatory between keyword
-            var firstGroup = Parse(origin, TokenNames.BetweenPossibleFirstGroup);
+            var firstGroup = Parse(origin, TokenNames.BetweenInsideGroup);
             if (firstGroup?.ResultToken == null)
             {
-                ErrorMandatoryTokenMissing(TokenNames.BetweenPossibleFirstGroup, origin.Start);
+                ErrorMandatoryTokenMissing(TokenNames.BetweenInsideGroup, origin.Start);
                 return null;
             }
             origin = firstGroup.Position;
@@ -59,36 +59,36 @@ namespace Grammar.English.Tokens
             origin = btwn.Position;
             tempColl.Add(btwn.ResultToken);
 
-            var secondGroup = Parse(origin, TokenNames.BetweenPossibleSecondGroup);
+            var secondGroup = Parse(origin, TokenNames.BetweenSurroundingGroup);
             if (secondGroup?.ResultToken == null)
             {
-                ErrorMandatoryTokenMissing(TokenNames.BetweenPossibleSecondGroup, origin.Start);
+                ErrorMandatoryTokenMissing(TokenNames.BetweenSurroundingGroup, origin.Start);
                 return null;
             }
             origin = secondGroup.Position;
             tempColl.Add(secondGroup.ResultToken);
 
             //Todo: multiple between (need an example first)
-            //like this one: GULES; A CHEVRON ERMINE, BETWEEN TWO COUPLE CLOSES OR, BETWEEN THREE ESCALLOPS ERMINE
+            //this one is wrong, since the couple closes are just an extension of the chevron: GULES; A CHEVRON ERMINE, BETWEEN TWO COUPLE CLOSES OR, BETWEEN THREE ESCALLOPS ERMINE
 
-            int i = 0;
-            while (i < Configurations.GrammarMaxLoop)
-            {
+            //int i = 0;
+            //while (i < Configurations.GrammarMaxLoop)
+            //{
                 
-                btwn = Parse(origin, TokenNames.Between);
-                if (btwn?.ResultToken == null)
-                {
-                    break;
-                }
-                secondGroup = Parse(btwn.Position, TokenNames.BetweenPossibleSecondGroup);
-                if (secondGroup?.ResultToken == null)
-                {
-                    break;
-                }
-                tempColl.AddRange(new[] { btwn.ResultToken, secondGroup.ResultToken });
-                origin = secondGroup.Position;
-                i++;
-            }
+            //    btwn = Parse(origin, TokenNames.Between);
+            //    if (btwn?.ResultToken == null)
+            //    {
+            //        break;
+            //    }
+            //    secondGroup = Parse(btwn.Position, TokenNames.BetweenSurroundingGroup);
+            //    if (secondGroup?.ResultToken == null)
+            //    {
+            //        break;
+            //    }
+            //    tempColl.AddRange(new[] { btwn.ResultToken, secondGroup.ResultToken });
+            //    origin = secondGroup.Position;
+            //    i++;
+            //}
 
             //we found our matching grammar, the token return positively
             AttachChildren(tempColl);

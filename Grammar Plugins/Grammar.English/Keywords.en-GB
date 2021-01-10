@@ -543,6 +543,11 @@
             [ "All" ],
             [ "Each" ]
         ],
+
+        "Each": [
+            [ "Each" ]
+        ],
+
         "SharedObjectReference": [
             [ "of", "the", "last" ],
             [ "of", "the", "first" ],
@@ -614,6 +619,12 @@
 
         "On": [
             [ "On" ]
+        ],
+
+        "Surmounted": [
+            [ "Surmounted", "By" ],
+            [ "Surmounted", "Of" ],
+            [ "Surmounted" ]
         ],
 
         "PositionBetween": [

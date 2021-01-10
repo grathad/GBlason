@@ -13,8 +13,7 @@ namespace Grammar.English.Tokens
     /// <para>
     /// <h3>Grammar:</h3>
     /// <see cref="TokenNames.BetweenStart"/> := 
-    /// <see cref="TokenNames.Between"/> <see cref="TokenNames.BetweenPossibleFirstGroup"/> <see cref="TokenNames.BetweenPossibleSecondGroup"/>
-    /// (<see cref="TokenNames.Between"/> <see cref="TokenNames.BetweenPossibleSecondGroup"/>)*
+    /// <see cref="TokenNames.Between"/> <see cref="TokenNames.BetweenSurroundingGroup"/> <see cref="TokenNames.BetweenInsideGroup"/>
     /// </para>
     /// </summary>
     /// <example>
@@ -41,25 +40,23 @@ namespace Grammar.English.Tokens
             origin = btwn.Position;
             tempColl.Add(btwn.ResultToken);
 
-            var firstGroup = Parse(origin, TokenNames.BetweenPossibleFirstGroup);
+            var firstGroup = Parse(origin, TokenNames.BetweenSurroundingGroup);
             if(firstGroup?.ResultToken == null)
             {
-                ErrorMandatoryTokenMissing(TokenNames.BetweenPossibleFirstGroup, origin.Start);
+                ErrorMandatoryTokenMissing(TokenNames.BetweenSurroundingGroup, origin.Start);
                 return null;
             }
             origin = firstGroup.Position;
             tempColl.Add(firstGroup.ResultToken);
 
-            var secondGroup = Parse(origin, TokenNames.BetweenPossibleSecondGroup);
+            var secondGroup = Parse(origin, TokenNames.BetweenInsideGroup);
             if (secondGroup?.ResultToken == null)
             {
-                ErrorMandatoryTokenMissing(TokenNames.BetweenPossibleSecondGroup, origin.Start);
+                ErrorMandatoryTokenMissing(TokenNames.BetweenInsideGroup, origin.Start);
                 return null;
             }
             origin = secondGroup.Position;
             tempColl.Add(secondGroup.ResultToken);
-
-            //Todo: multiple between (need an example first)
 
             //we found our matching grammar, the token return positively
             AttachChildren(tempColl);

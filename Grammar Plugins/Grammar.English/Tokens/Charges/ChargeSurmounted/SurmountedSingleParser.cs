@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Grammar.PluginBase.Parser;
 using Grammar.PluginBase.Parser.Contracts;
@@ -28,7 +29,42 @@ namespace Grammar.English.Tokens
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            throw new NotImplementedException();
+            if (!Exist(origin.Start, TokenNames.Surmounted))
+            {
+                ErrorMandatoryTokenMissing(TokenNames.Surmounted, origin.Start);
+                return null;
+            }
+
+            var tempColl = new List<IToken>();
+            var firstGroup = Parse(origin, TokenNames.SurmountedPossibleFirstSingleGroup);
+            if (firstGroup?.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.SurmountedPossibleFirstSingleGroup, origin.Start);
+                return null;
+            }
+            tempColl.Add(firstGroup.ResultToken);
+            origin = firstGroup.Position;
+
+            var surmounted = Parse(origin, TokenNames.Surmounted);
+            if (surmounted?.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.Surmounted, origin.Start);
+                return null;
+            }
+            tempColl.Add(surmounted.ResultToken);
+            origin = surmounted.Position;
+
+            var secondGroup = Parse(origin, TokenNames.SurmountedPossibleSecondGroup);
+            if (secondGroup?.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.SurmountedPossibleSecondGroup, origin.Start);
+                return null;
+            }
+            tempColl.Add(secondGroup.ResultToken);
+            origin = secondGroup.Position;
+
+            AttachChildren(tempColl);
+            return CurrentToken.AsTokenResult(origin);
         }
 
 
