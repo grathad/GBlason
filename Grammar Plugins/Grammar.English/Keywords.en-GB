@@ -612,6 +612,10 @@
             [ "Between" ]
         ],
 
+        "On": [
+            [ "On" ]
+        ],
+
         "PositionBetween": [
             [ "Within" ],
             [ "Between" ],
@@ -853,6 +857,11 @@
         ],
 
         "ChargeSeparator": [
+            [ "SemiColon" ]
+        ],
+
+        "FieldSeparator": [
+            [ "Coma" ],
             [ "SemiColon" ]
         ],
 

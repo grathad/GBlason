@@ -101,7 +101,7 @@ namespace Grammar.PluginBase.Parser
                 }
             }
             var exist = false;
-            for (var i = origin; i < KeyWords.Count || exist; i++)
+            for (var i = origin; i < KeyWords.Count && !exist; i++)
             {
                 exist = leafParserInstance.Exist(i);
             }

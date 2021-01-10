@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grammar.PluginBase.Keyword;
@@ -30,52 +31,91 @@ namespace Grammar.English.Tokens
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            //IEnumerable<ParsedKeyword> ckw;
-            //a potential symbol alteration (if the alteration can be applied to ordinaries as well we need to pull it out at the charge level)
-            TryConsumeAndAttachOne(ref origin, TokenNames.SymbolAlteration);
-            if (!TryConsumeAndAttachOne(ref origin, TokenNames.SymbolName))
+
+            var tempColl = new List<IToken>();
+
+            var symbolAlteration = Parse(origin, TokenNames.SymbolAlteration);
+            if (symbolAlteration?.ResultToken != null)
+            {
+                origin = symbolAlteration.Position;
+                tempColl.Add(symbolAlteration.ResultToken);
+            }
+
+            //the main name, attitudes and tincture
+            var symbolName = Parse(origin, TokenNames.SymbolName);
+            if (symbolName?.ResultToken == null)
             {
                 ErrorMandatoryTokenMissing(TokenNames.SymbolName, origin.Start);
                 return null;
             }
+            origin = symbolName.Position;
+            tempColl.Add(symbolName.ResultToken);
 
-            //the main name, attitudes and tincture
-            while (TryConsumeAndAttachOne(ref origin, TokenNames.SymbolAttitude)) { }
-            TryConsumeAndAttachOne(ref origin, TokenNames.SymbolAttitudeAttribute);
+            int i = 0;
+            ITokenResult symbolAttitude;
+            while (i < Configurations.GrammarMaxLoop)
+            {
+                i++;
+                symbolAttitude = Parse(origin, TokenNames.SymbolAttitude);
+                if (symbolAttitude?.ResultToken == null)
+                {
+                    break;
+                }
+                origin = symbolAttitude.Position;
+                tempColl.Add(symbolAttitude.ResultToken);
+            }
+            var symbolAttitudeAttribute = Parse(origin, TokenNames.SymbolAttitudeAttribute);
+            if (symbolAttitudeAttribute?.ResultToken != null)
+            {
+                origin = symbolAttitudeAttribute.Position;
+                tempColl.Add(symbolAttitudeAttribute.ResultToken);
+            }
+            var sharedProperty = Parse(origin, TokenNames.SharedProperty);
+            if (sharedProperty?.ResultToken != null)
+            {
+                origin = sharedProperty.Position;
+                tempColl.Add(sharedProperty.ResultToken);
+            }
 
-            TryConsumeAndAttachOne(ref origin, TokenNames.SharedProperty);
-            //we consume the tincture here, if it ends up being the last element
-            //and the parent is capable of refactoring then it will be refactored
+            //The symbol handle its own tincture, for more complex collection with shared tinctures (like "all") a different grammar handle those
             var filling = TryConsumeOr(ref origin, new[] { TokenNames.Tincture, TokenNames.FieldVariation });
-            if(filling?.ResultToken == null)
+            if (filling?.ResultToken == null)
             {
                 ErrorMandatoryTokenMissing(TokenNames.Tincture, origin.Start);
                 return null;
             }
-            AttachChild(filling.ResultToken);
+            //origin = filling.Position; since I use the tryconsume the origin is altered within
+            tempColl.Add(filling.ResultToken);
 
             //sometime a separator end up there even if it is incorrect, we do support this however
             //we only consume it if there is more to the current symbol, if not we ignore it
             var separator = Parse(origin, TokenNames.Separator);
-            var separatorPredecessor = CurrentToken.Children.LastOrDefault();
-            origin = separator?.Position ?? origin;
+            var tempPos = separator?.Position ?? origin;
 
-            while (origin.Start < ParserPilot.LastPosition)
+            //symbol subpart list potential
+            i = 0;
+            while (tempPos.Start < ParserPilot.LastPosition && i < Configurations.GrammarMaxLoop)
             {
-                if (!TryConsumeAndAttachOne(ref origin, TokenNames.SymbolSubPartList))
+                i++;
+                var subpartList = Parse(tempPos, TokenNames.SymbolSubPartList);
+                if (subpartList?.ResultToken == null)
                 {
                     break;
                 }
-                if (separator == null)
+                if (separator != null)
                 {
-                    continue;
+                    //we insert the separator since the follow up items are part of this token (it would be the same as splitting the grammar between separator (mandatory) with subpartlist or subpartlist)
+                    tempColl.Add(separator.ResultToken);
+                    separator = null;
                 }
-                //we insert the separator since the follow up items are part of this token
-                AttachChildAfter(separator.ResultToken, separatorPredecessor);
-                ErrorOptionalTokenMissing(TokenNames.Separator, origin.Start);
-                separator = null;
+                tempPos = subpartList.Position;
+                //we only update the origin with the current position here IF there is a subpart list, no need to change the position while consuming the separator
+                //if the separator is not meant to be consumed.
+                origin = tempPos;
+                tempColl.Add(subpartList.ResultToken);
             }
 
+            AttachChildren(tempColl);
             return new TokenResult(CurrentToken, origin);
         }
 

@@ -33,9 +33,10 @@ namespace Grammar.English.Tokens
             //if there are no And available in the following token, then it is not worth trying to parse a and group
             if(!Exist(origin.Start, TokenNames.And))
             {
-                //ErrorMandatoryTokenMissing(TokenNames.And, origin.Start);
+                ErrorMandatoryTokenMissing(TokenNames.And, origin.Start);
                 return null;
             }
+
             var tempColl = new List<IToken>();
             var and = Parse(origin, TokenNames.AndPossibleGroup);
             if (and?.ResultToken == null)
@@ -47,7 +48,8 @@ namespace Grammar.English.Tokens
 
             origin = and.Position;
 
-            while (true)
+            int i = 0;
+            while (i < Configurations.GrammarMaxLoop)
             {
                 var separator = Parse(origin, TokenNames.Separator);
                 if(separator?.ResultToken == null)
@@ -61,6 +63,7 @@ namespace Grammar.English.Tokens
                 }
                 tempColl.AddRange(new[] { separator.ResultToken, newand.ResultToken });
                 origin = newand.Position;
+                i++;
             }
 
             var finalAnd = Parse(origin, TokenNames.And);
@@ -68,7 +71,7 @@ namespace Grammar.English.Tokens
             {
                 return null;
             }
-            var finalGroup = Parse(and.Position, TokenNames.AndPossibleGroup);
+            var finalGroup = Parse(finalAnd.Position, TokenNames.AndPossibleGroup);
             if(finalGroup?.ResultToken == null)
             {
                 return null;

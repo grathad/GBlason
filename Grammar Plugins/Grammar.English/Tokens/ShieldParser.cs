@@ -13,7 +13,7 @@ namespace Grammar.English.Tokens
     /// <para>
     /// <h3>Grammar: </h3>
     /// <see cref="Shield"/> := <see cref="Field"/>. |
-    /// <see cref="Field"/>. <see cref="TokenNames.LightSeparator"/>! (<see cref="TokenNames.Charge"/>)+
+    /// <see cref="Field"/>. <see cref="TokenNames.FieldSeparator"/>! (<see cref="TokenNames.Charge"/>)+
     /// <see cref="TokenNames.AllCounterChanged"/>? Cadency?
     /// </para>
     /// </summary>
@@ -38,7 +38,7 @@ namespace Grammar.English.Tokens
             }
 
             //expected separator, but ok - ish if not present
-            var separatorPresent = TryConsumeAndAttachOne(ref origin, TokenNames.LightSeparator);
+            var separatorPresent = TryConsumeAndAttachOne(ref origin, TokenNames.FieldSeparator);
 
             //then there are optional charges on the field
             //if there is more than one charge, this will be handled in the grammar for complex charges (like list or positionned ones)
@@ -47,7 +47,7 @@ namespace Grammar.English.Tokens
                 if (!separatorPresent)
                 {
                     //we did not found any separator even if there were a valid charge after the field
-                    ErrorOptionalTokenMissing(TokenNames.LightSeparator, origin.Start);
+                    ErrorOptionalTokenMissing(TokenNames.FieldSeparator, origin.Start);
                 }
             }
             TryConsumeAndAttachOne(ref origin, TokenNames.AllCounterChanged);

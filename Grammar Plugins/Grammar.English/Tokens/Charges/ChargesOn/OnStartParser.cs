@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Grammar.PluginBase.Parser;
 using Grammar.PluginBase.Parser.Contracts;
@@ -12,12 +13,9 @@ namespace Grammar.English.Tokens
     /// <para>
     /// <h3>Grammar:</h3>
     /// <see cref="TokenNames.OnStart"/> := 
-    /// <see cref="TokenNames.On"/> <see cref="TokenNames.OnPossibleGroup"/> <see cref="TokenNames.OnPossibleGroup"/>
+    /// <see cref="TokenNames.On"/> <see cref="TokenNames.OnPossibleGroup"/> <see cref="TokenNames.LightSeparator"/>? <see cref="TokenNames.OnPossibleGroup"/>
     /// </para>
     /// </summary>
-    /// <example>
-    /// <i>a chevron between </i>two cinquefoils in chief <b>and</b> a hunting-horn in base Or
-    /// </example>
     internal class OnStartParser : ContainerParser
     {
         public OnStartParser(IParserPilot factory = null)
@@ -28,7 +26,49 @@ namespace Grammar.English.Tokens
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            throw new NotImplementedException();
+            var tempColl = new List<IToken>();
+            //the mandatory between keyword
+            
+            var on = Parse(origin, TokenNames.On);
+            if (on?.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.On, origin.Start);
+                return null;
+            }
+
+            origin = on.Position;
+            tempColl.Add(on.ResultToken);
+
+            var onGroup = Parse(origin, TokenNames.OnPossibleGroup);
+            if (onGroup?.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.OnPossibleGroup, origin.Start);
+                return null;
+            }
+
+            origin = onGroup.Position;
+            tempColl.Add(onGroup.ResultToken);
+
+            //potential separator
+            var ls = Parse(origin, TokenNames.LightSeparator);
+            if(ls?.ResultToken != null)
+            {
+                origin = ls.Position;
+                tempColl.Add(ls.ResultToken);
+            }
+
+            onGroup = Parse(origin, TokenNames.OnPossibleGroup);
+            if (onGroup?.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.OnPossibleGroup, origin.Start);
+                return null;
+            }
+
+            origin = onGroup.Position;
+            tempColl.Add(onGroup.ResultToken);
+
+            AttachChildren(tempColl);
+            return CurrentToken.AsTokenResult(origin);
         }
 
 

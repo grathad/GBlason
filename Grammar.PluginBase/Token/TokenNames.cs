@@ -285,6 +285,11 @@ namespace Grammar.PluginBase.Token
         /// </summary>
         LightSeparator,
         /// <summary>
+        /// Token representing a light separator, usually optional since this is not respected. Used to accept grammar that might not be perfect but are not invalid
+        /// The light separator is not a charge separator
+        /// </summary>
+        FieldSeparator,
+        /// <summary>
         /// Token representing a separator for charges using the ;
         /// </summary>
         ChargeSeparator,
@@ -310,10 +315,12 @@ namespace Grammar.PluginBase.Token
         /// <summary>
         /// token that represent what kind of charges can be included in a charge list
         /// </summary>
+        [ContainsOr(SimpleCharge, ChargeOnPosition, ChargeBetweenPosition, ChargeCharged)]
         AndPossibleGroup,
         /// <summary>
         /// token that contains all the charges that can be used in a complex "on" relatively positionned list of charges
         /// </summary>
+        [ContainsOr(OnStart, OnMiddle)]
         ChargeOnPosition,
         /// <summary>
         /// token that contains all the charges that can be used in a complex "within" relatively positionned list of charges
@@ -350,6 +357,7 @@ namespace Grammar.PluginBase.Token
         /// <summary>
         /// Token for possible group of charges in relatively positionned on charge list
         /// </summary>
+        [ContainsOr(SimpleCharge, ChargeBetweenPosition, Surmounted, ChargeCharged)]
         OnPossibleGroup,
         /// <summary>
         /// Grammar for all the charges that can be grouped first in a between list
