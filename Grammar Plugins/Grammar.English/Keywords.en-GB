@@ -485,6 +485,31 @@
             [ "As", "Many" ]
         ],
 
+        "SingleDeterminer": [
+            [ "A" ],
+            [ "An" ],
+            [ "The" ],
+            [ "One" ]
+        ],
+
+        "PluralDeterminer": [
+            [ "Two" ],
+            [ "Three" ],
+            [ "Four" ],
+            [ "Five" ],
+            [ "Six" ],
+            [ "Seven" ],
+            [ "Eight" ],
+            [ "Nine" ],
+            [ "Ten" ],
+            [ "Eleven" ],
+            [ "Twelve" ],
+            [ "Fifteen" ],
+            [ "Sixteen" ],
+            [ "Twenty" ],
+            [ "As", "Many" ]
+        ],
+
         "FieldVariationNumber": [
             [ "Two" ],
             [ "Three" ],
@@ -518,6 +543,11 @@
             [ "All" ],
             [ "Each" ]
         ],
+
+        "Each": [
+            [ "Each" ]
+        ],
+
         "SharedObjectReference": [
             [ "of", "the", "last" ],
             [ "of", "the", "first" ],
@@ -582,6 +612,21 @@
         "LocationBefore": [
             [ "In" ]
         ],
+
+        "Between": [
+            [ "Between" ]
+        ],
+
+        "On": [
+            [ "On" ]
+        ],
+
+        "Surmounted": [
+            [ "Surmounted", "By" ],
+            [ "Surmounted", "Of" ],
+            [ "Surmounted" ]
+        ],
+
         "PositionBetween": [
             [ "Within" ],
             [ "Between" ],
@@ -609,6 +654,71 @@
         ],
         "Cadency": [
             [ "For", "Difference" ]
+        ],
+
+        "SingleOrdinaryName": [
+            [ "Quarter" ],
+            [ "Canton" ],
+            [ "Inescutcheon" ],
+            [ "Bordure" ],
+            [ "Fret" ],
+            [ "Label" ],
+            [ "Gyron" ],
+            [ "Gore" ],
+            [ "Chief" ]
+        ],
+
+        "PluralOrdinaryName": [
+            [ "Cross" ],
+            [ "Pale" ],
+            [ "Fess" ],
+            [ "Bar" ],
+            [ "Bend" ],
+            [ "BendSinister" ],
+            [ "Chevron" ],
+            [ "Saltire" ],
+            [ "Pile" ],
+            [ "Flaunches" ],
+            [ "Orle" ],
+            [ "Pall" ],
+            [ "Tressure" ],
+            [ "Lozenge" ],
+            [ "Fusil" ],
+            [ "Mascle" ],
+            [ "Rustre" ],
+            [ "Roundel" ],
+            [ "Annulet" ],
+            [ "Billet" ],
+            [ "Mullet" ],
+            [ "Escutcheon" ],
+            [ "Star" ],
+            [ "Crescent" ],
+            [ "Demi" ],
+            [ "Bezant" ],
+            [ "Plate" ],
+            [ "Hurt" ],
+            [ "Torteau" ],
+            [ "Pellet" ],
+            [ "Pomme" ],
+            [ "Golpe" ],
+            [ "Guze" ],
+            [ "Pallet" ],
+            [ "Endorse" ],
+            [ "Barrulet" ],
+            [ "Gemel" ],
+            [ "Hamade" ],
+            [ "Bendlet" ],
+            [ "Ribbon" ],
+            [ "Baton" ],
+            [ "Chevronel" ],
+            [ "Comble" ],
+            [ "BendletSinister" ],
+            [ "BatonSinister" ],
+            [ "FilletCross" ],
+            [ "Fillet" ],
+            [ "FilletSaltire" ],
+            [ "Saltorel" ],
+            [ "Cotice" ]
         ],
 
         "OrdinaryHonourable": [
@@ -639,6 +749,7 @@
             [ "Orle" ],
             [ "Tressure" ]
         ],
+
         "OrdinaryMobile": [
             [ "Escutcheon" ],
             [ "Lozenge" ],
@@ -682,6 +793,7 @@
             [ "Saltorel" ],
             [ "Cotice" ]
         ],
+
         "OrdinaryAlteration": [
             [ "Half" ],
             [ "Quarter" ],
@@ -757,6 +869,11 @@
         ],
 
         "ChargeSeparator": [
+            [ "SemiColon" ]
+        ],
+
+        "FieldSeparator": [
+            [ "Coma" ],
             [ "SemiColon" ]
         ],
 

@@ -9,13 +9,13 @@ using Grammar.PluginBase.Token.Contracts;
 
 namespace Grammar.English.Tokens
 {
-    internal class SimpleChargeParser : ContainerParser
+    internal class SingleSimpleChargeParser : ContainerParser
     {
         /// <summary>
         /// This is an exception, an helper to represent a charge with minimalistic content.
         /// <para>
         /// <h3>Grammar:</h3>
-        /// <see cref="TokenNames.SimpleCharge"/> := <see cref="TokenNames.Determiner"/>? <see cref="TokenNames.ChargeElement"/>. <br/>
+        /// <see cref="TokenNames.SingleSimpleCharge"/> := <see cref="TokenNames.SingleDeterminer"/> <see cref="TokenNames.SingleChargeElement"/> <br/> 
         /// (<br/>
         /// (<see cref="TokenNames.Tincture"/> | <see cref="TokenNames.FieldVariation"/>)? <see cref="TokenNames.SharedProperties"/> |<br/>
         /// <see cref="TokenNames.SharedProperties"/>? (<see cref="TokenNames.Tincture"/> | <see cref="TokenNames.FieldVariation"/>)<br/>
@@ -25,25 +25,36 @@ namespace Grammar.English.Tokens
         /// <example>
         /// A baton Gules
         /// </example>
-        /// <remarks>The tincture is not optional, if not present the charge will be considered as a complex charge</remarks> 
-        public SimpleChargeParser(IParserPilot factory = null)
-            : base(TokenNames.SimpleCharge, factory) { }
+        /// <remarks>The tincture is not optional, if not present the charge will be considered as a complex charge, with refactored tincture, or a different grammar for known ordinary (that implies their tincture)</remarks> 
+        public SingleSimpleChargeParser(IParserPilot factory = null)
+            : base(TokenNames.SingleSimpleCharge, factory) { }
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
+            var tempColl = new List<IToken>();
+            var determiner = Parse(origin, TokenNames.SingleDeterminer);
+            if(determiner?.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.SingleDeterminer, origin.Start);
+                return null;
+            }
 
-            TryConsumeAndAttachOne(ref origin, TokenNames.Determiner);
+            origin = determiner.Position;
+            tempColl.Add(determiner.ResultToken);
+            //AttachChild(determiner.ResultToken);
+
             //we try to consume everything possible and we take the solution that end up consuming the most parsed key words
             //for simplest charge
 
-            var result = Parse(origin, TokenNames.ChargeElement);
+            var result = Parse(origin, TokenNames.SingleChargeElement);
             if (result?.ResultToken == null)
             {
-                ErrorMandatoryTokenMissing(TokenNames.ChargeElement, origin.Start);
+                ErrorMandatoryTokenMissing(TokenNames.SingleChargeElement, origin.Start);
                 return null;
             }
             origin = result.Position;
-            AttachChild(result.ResultToken);
+            tempColl.Add(result.ResultToken);
+            //AttachChild(result.ResultToken);
 
             var results = TryConsumeOrAll(ref origin,
                 TokenNames.LightSeparator,
@@ -53,9 +64,10 @@ namespace Grammar.English.Tokens
 
             if (results?.ResultToken != null)
             {
-                AttachChildren(results.ResultToken);
+                tempColl.AddRange(results.ResultToken);
+                //AttachChildren(results.ResultToken);
             }
-            
+            AttachChildren(tempColl);
             return CurrentToken.AsTokenResult(results?.Position ?? result.Position);
         }
 

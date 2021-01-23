@@ -66,14 +66,41 @@ namespace Grammar.PluginBase.Token
         /// </summary>
         DivisionBy3,
         /// <summary>
-        /// A simple charge is the representation of a only object that can belong to a group of charges or be the definition of a semy
+        /// An element is a single object definition that can be used either as multiple instance or as a unique one
         /// </summary>
-        [ContainsOr(Ordinary, Symbol, SymbolCross)]
+        [ContainsOr(SingleChargeElement, PluralChargeElement)]
         ChargeElement,
+        /// <summary>
+        /// A single charge element are objects that are alone, either because their determiner is singular, or because they can't be multiple (like all honourable)
+        /// </summary>
+        //[ContainsOr(Ordinary, Symbol, SymbolCross)]
+        SingleChargeElement,
+        /// <summary>
+        /// A plural charge element are objects that are multiple, either because of their determiner is plural, or because they can only be a plural charge (like bars)
+        /// </summary>
+        //[ContainsOr(Ordinary, Symbol, SymbolCross)]
+        PluralChargeElement,
         /// <summary>
         /// A geometric shape used as a charge
         /// </summary>
+        [ContainsOr(SingleOrdinary, PluralOrdinary)]
         Ordinary,
+        /// <summary>
+        /// An ordinary that is defined alone (like a bordure)
+        /// </summary>
+        SingleOrdinary,
+        /// <summary>
+        /// Leaf representing the name of an ordinary that can only be defined alone
+        /// </summary>
+        SingleOrdinaryName,
+        /// <summary>
+        /// An ordinary that can and is defined as multiple instances of itself (like 3 chevrons)
+        /// </summary>
+        PluralOrdinary,
+        /// <summary>
+        /// Leaf representing the name of an ordinary that can be defined as multiple instances
+        /// </summary>
+        PluralOrdinaryName,
         /// <summary>
         /// A customized symbol used as a charge
         /// </summary>
@@ -102,6 +129,14 @@ namespace Grammar.PluginBase.Token
         /// Represent a number of items (can be one or more) using any type of numeric determiner
         /// </summary>
         Determiner,
+        /// <summary>
+        /// Represent a number of items (can only be one) using any type of numeric or specific determiner
+        /// </summary>
+        SingleDeterminer,
+        /// <summary>
+        /// Represent a number of items (more than one) using any type of numeric determiner
+        /// </summary>
+        PluralDeterminer,
         /// <summary>
         /// The list of attitude that a symbol can support (not all of them are supported only the most common)
         /// </summary>
@@ -142,6 +177,15 @@ namespace Grammar.PluginBase.Token
         /// A sub Ordinary of fixed type
         /// </summary>
         OrdinaryFixed,
+        /// <summary>
+        /// Represent a grammar that is used to define a "charged" group keyword where all of the previously stated charges element are individually charged by the following element
+        /// </summary>
+        EachCharged,
+        /// <summary>
+        /// Represent a grammar that is used to define a "charged" group keyword
+        /// </summary>
+        [ContainsOr(EachCharged, Charged)]
+        ChargedKeyword,
         /// <summary>
         /// Represent a word that specify that the previous element is charged with the following element (a charge)
         /// </summary>
@@ -221,6 +265,14 @@ namespace Grammar.PluginBase.Token
         /// </summary>
         SimpleCharge,
         /// <summary>
+        /// Represent a charge that is the minimum object definition of a complete charge. With a unique element (differentiated because it is used as a limitation for semy for example)
+        /// </summary>
+        SingleSimpleCharge,
+        /// <summary>
+        /// Represent a charge that is the minimum object definition of a complete charge. With a plural determiner implying multiple instance of the same element
+        /// </summary>
+        PluralSimpleCharge,
+        /// <summary>
         /// Represent one of the name that can be used for a vair
         /// </summary>
         VairName,
@@ -242,14 +294,183 @@ namespace Grammar.PluginBase.Token
         /// </summary>
         LightSeparator,
         /// <summary>
+        /// Token representing a light separator, usually optional since this is not respected. Used to accept grammar that might not be perfect but are not invalid
+        /// The light separator is not a charge separator
+        /// </summary>
+        FieldSeparator,
+        /// <summary>
         /// Token representing a separator for charges using the ;
         /// </summary>
         ChargeSeparator,
         /// <summary>
-        /// token representing multiple charges listed one after the other, usually sharing some properties
+        /// token representing all of the complex multiple charges construct available on a single field
         /// </summary>
-        [ReAttemptParsingForParent(PositionnedCharges)]
+        //[ReAttemptParsingForParent(PositionnedCharges)]
+        [ContainsOr(ChargesList, ChargeBetweenPosition, ChargeOnPosition, ChargeWithin, ChargeSurmounted, ChargeOverall, ChargeCharged)]
         MultiCharges,
+        /// <summary>
+        /// token that contains multiple charges one after the other, in a list (usually separated by coma and "and") as well as containing a specific location for the charges in the list that are not the principal one (or all of them even)
+        /// </summary>
+        ChargesList,
+        /// <summary>
+        /// token that represent multiple charge relative position based on surmounted
+        /// </summary>
+        [ContainsOr(SurmountedSingle, SurmountedPlural)]
+        ChargeSurmounted,
+        /// <summary>
+        /// token that contains all the charges that can be used in a complex "between" relatively positionned list of charges
+        /// </summary>
+        [ContainsOr(BetweenStart, BetweenMiddle)]
+        ChargeBetweenPosition,
+        /// <summary>
+        /// token that represent what kind of charges can be included in a charge list
+        /// </summary>
+        [ContainsOr(SimpleCharge, ChargeOnPosition, ChargeBetweenPosition, ChargeCharged)]
+        AndPossibleGroup,
+        /// <summary>
+        /// token that contains all the charges that can be used in a complex "on" relatively positionned list of charges
+        /// </summary>
+        [ContainsOr(OnStart, OnMiddle)]
+        ChargeOnPosition,
+        /// <summary>
+        /// token that contains all the charges that can be used in a complex "within" relatively positionned list of charges
+        /// </summary>
+        ChargeWithin,
+        /// <summary>
+        /// token that contains all the charges that can be used in a complex "charged" relatively positionned list of charges
+        /// </summary>
+        ChargeCharged,
+        /// <summary>
+        /// token that contains all the charges that can be used in a complex "overall" relatively positionned list of charges
+        /// </summary>
+        ChargeOverall,
+        /// <summary>
+        /// Grammar for all the charges that are between for which the position key word is in the middle of the charge
+        /// </summary>
+        BetweenMiddle,
+        /// <summary>
+        /// Grammar for all the charges that are between for which the position key word is at the start of the charge
+        /// </summary>
+        BetweenStart,
+        /// <summary>
+        /// Grammar for all the charges that are On for which the position key word is in the middle of the charge
+        /// </summary>
+        OnMiddle,
+        /// <summary>
+        /// Grammar for all the charges that are On for which the position key word is at the start of the charge
+        /// </summary>
+        OnStart,
+        /// <summary>
+        /// Token for the On keywords
+        /// </summary>
+        On,
+        /// <summary>
+        /// Token for possible group of charges in relatively positionned on charge list
+        /// </summary>
+        [ContainsOr(SimpleCharge, ChargeBetweenPosition, ChargeSurmounted, ChargeCharged)]
+        OnPossibleGroup,
+        /// <summary>
+        /// Grammar for all the charges that can be grouped first in a between list
+        /// </summary>
+        [ContainsOr(SimpleCharge, ChargesList, ChargeSurmounted, ChargeCharged)]
+        BetweenInsideGroup,
+        /// <summary>
+        /// Grammar for all the charges that can be grouped second in a between list
+        /// </summary>
+        [ContainsOr(PluralSimpleCharge, ChargesList, SurmountedPlural, ChargeCharged)]
+        BetweenSurroundingGroup,
+        /// <summary>
+        /// Token for the between keyword
+        /// </summary>
+        Between,
+        /// <summary>
+        /// token that represent a gorup of a single charge surmounted
+        /// </summary>
+        SurmountedSingle,
+        /// <summary>
+        /// token that represent a gorup of multiple charges surmounted
+        /// </summary>
+        SurmountedPlural,
+        /// <summary>
+        /// token that represent a gorup of multiple charges surmounted
+        /// </summary>
+        [ContainsOr(PluralSimpleCharge, PluralChargeCharged)]
+        SurmountedPossibleFirstPluralGroup,
+        /// <summary>
+        /// token that represent a gorup of multiple charges surmounted
+        /// </summary>
+        [ContainsOr(SingleSimpleCharge, SingleChargeCharged)]
+        SurmountedPossibleFirstSingleGroup,
+        /// <summary>
+        /// token that represent a gorup of multiple charges surmounted
+        /// </summary>
+        [ContainsOr(SimpleCharge, BetweenMiddle, ChargeCharged)]
+        SurmountedPossibleSecondGroup,
+        /// <summary>
+        /// token that represent the surmounted keyword
+        /// </summary>
+        Surmounted,
+        /// <summary>
+        /// token that represent the each keyword
+        /// </summary>
+        Each,
+        /// <summary>
+        /// token that contains all the charges at the start of a complex "overall" relatively positionned list of charges
+        /// </summary>
+        OverallPossibleFirstGroup,
+        /// <summary>
+        /// token that contains all the charges at the end of a complex "overall" relatively positionned list of charges
+        /// </summary>
+        OverallPossibleSecondGroup,
+        /// <summary>
+        /// token that represent the overall keywords
+        /// </summary>
+        Overall,
+        /// <summary>
+        /// token that represent the possible charge in a charged group
+        /// </summary>
+        [ContainsOr(SimpleCharge, ChargesList, BetweenMiddle, ChargeSurmounted)]
+        ChargedPossibleGroup,
+        /// <summary>
+        /// token that represent the possible charge in a charged group
+        /// </summary>
+        PluralChargeCharged,
+        /// <summary>
+        /// token that represent the possible charge in a charged group
+        /// </summary>
+        SingleChargeCharged,
+        /// <summary>
+        /// the possible first group for within charges
+        /// </summary>
+        WithinPossibleFirstGroup,
+        /// <summary>
+        /// the possible first group for within charges
+        /// </summary>
+        WithinPossibleSecondGroup,
+        /// <summary>
+        /// Token for whole keyword
+        /// </summary>
+        Whole,
+        /// <summary>
+        /// Token for within keyword
+        /// </summary>
+        Within,
+        /// <summary>
+        /// Token for within keyword
+        /// </summary>
+        WithinWhole,
+        /// <summary>
+        /// Token for within keyword
+        /// </summary>
+        WithinAll,
+        /// <summary>
+        /// Token for within keyword
+        /// </summary>
+        WithinAllWhole,
+        /// <summary>
+        /// Token for All keyword
+        /// </summary>
+        All,
         /// <summary>
         /// Token representing multiple charges that are grouped together using a position link
         /// </summary>
@@ -402,7 +623,19 @@ namespace Grammar.PluginBase.Token
         /// </summary>
         SecondDivisionNumber,
         /// <summary>
-        /// represent a group of sub parts for symbol generation
+        /// represent a valid name for a symbol sub part definition
+        /// </summary>
+        SubPartName,
+        /// <summary>
+        /// represent a list of sub part names following each others
+        /// </summary>
+        SubPartNameList,
+        /// <summary>
+        /// represent a list of independent sub parts constructs for symbol generation
+        /// </summary>
+        SymbolSubPartList,
+        /// <summary>
+        /// represent a group of dependant sub parts for symbol generation
         /// </summary>
         SymbolSubPartGroup,
         /// <summary>

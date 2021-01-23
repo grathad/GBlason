@@ -16,21 +16,8 @@ namespace Grammar.English.Tokens
     /// <para>
     /// <h3>Grammar:</h3> 
     /// <code>
-    /// Charge := Location ? 
-    /// (
-    ///     SimplestCharge |
-    ///     (PositionnedCharges | MultiCharges) LightSeparator?
-    ///     (
-    ///         (Tincture | FieldVariation)? LightSeparator? SharedProperties |
-    ///         SharedProperties LightSeparator? (Tincture | FieldVariation) ?
-    ///     )?
-    /// ) Cadency ?
+    /// Charge := (<see cref="TokenNames.SimpleCharge"/> | LocatedCharge | <see cref="TokenNames.MultiCharges"/>). <see cref="TokenNames.LightSeparator"/>?
     /// </code>
-    /// <see cref="TokenNames.Location"/>, <see cref="TokenNames.SimplestCharge"/>,
-    /// <see cref="TokenNames.PositionnedCharges"/>, <see cref="TokenNames.MultiCharges"/>,
-    /// <see cref="TokenNames.LightSeparator"/>, <see cref="TokenNames.Tincture"/>,
-    /// <see cref="TokenNames.FieldVariation"/>, <see cref="TokenNames.SharedProperties"/>
-    /// , <see cref="TokenNames.Cadency"/>
     /// </para>
     /// </summary>
     /// <remarks>
@@ -51,79 +38,12 @@ namespace Grammar.English.Tokens
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            //optional location
-            TryConsumeAndAttachOne(ref origin, TokenNames.Location);
-
-            //this is common to all the choices ahead, so we do not include them in the options either for counting the number of token 
-            //or to store the tokens consumed, we aggregate at the end
-            //we try to consume everything possible and we take the solution that end up consuming the most parsed key words
-
-            ITokenResultBase longestOption = null;
-
-            #region multi charges
-
-            var multiCharges = TryConsumeOption(TokenNames.MultiCharges, origin);
-            if (multiCharges != null)
+            var result = TryConsumeOr(ref origin, new[] { TokenNames.SimpleCharge, TokenNames.MultiCharges });
+            if(result?.ResultToken == null)
             {
-                //it can't be a multi charges, if the multi charge second charge have a location and we have too...
-                //but the fact that the logic is to be put here seems wrong, need more time to think this through
-                longestOption = multiCharges;
+                return null;
             }
-
-            #endregion
-
-            #region positionned charges
-
-            var positionnedCharges = TryConsumeOption(TokenNames.PositionnedCharges, origin);
-            if (positionnedCharges != null)
-            {
-                if (longestOption == null ||
-                    longestOption.Position.Start < positionnedCharges.Position.Start)
-                {
-                    longestOption = positionnedCharges;
-                }
-            }
-
-            #endregion
-
-            #region simple charge
-
-            var sc = Parse(origin, TokenNames.SimpleCharge);
-            if (sc?.ResultToken != null)
-            {
-                //because we "remember" the result from one call to another, we can't "fake" a call to a charge and return the result of a "simplestcharge"
-                //all calls have to be uniquely defined relatively to the choice available
-                //if not when trying to recover the latest result we will use the one for the "wrong" type
-                //in this case the memory was saving the result from the simplestcharge parsing with the type "charge"
-                //this means that the tree will be less clean to read (the simplest charge will be the child of a charge)
-                if (longestOption == null ||
-                    longestOption.Position.Start < sc.Position.Start)
-                {
-                    longestOption = sc;
-                    origin = sc.Position;
-                }
-            }
-            #endregion
-
-            switch (longestOption)
-            {
-                case null:
-                    ErrorNotEnoughChildren(origin.Start);
-                    return null;
-                case TokenResult str:
-                    AttachChild(str.ResultToken);
-                    break;
-                case MultiTokenResult mstr:
-                    AttachChildren(mstr.ResultToken);
-                    break;
-                default:
-                    throw new InvalidCastException(nameof(TokenResult));
-            }
-            origin = longestOption.Position;
-
-            //now we try to consume what is after the main part (optional mark of cadency)
-            TryConsumeAndAttachOne(ref origin, TokenNames.Cadency);
-
+            AttachChild(result.ResultToken);
             return CurrentToken.AsTokenResult(origin);
         }
 

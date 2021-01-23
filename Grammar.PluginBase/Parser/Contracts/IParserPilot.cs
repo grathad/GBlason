@@ -21,6 +21,15 @@ namespace Grammar.PluginBase.Parser.Contracts
         int LastPosition { get; }
 
         /// <summary>
+        /// Check if the token exist in the list of remaining tokens after the given position.
+        /// Only support leaf parsers
+        /// </summary>
+        /// <param name="origin">the position from which to start looking (included)</param>
+        /// <param name="token">the token to look for</param>
+        /// <returns>true if the token is present otherwise false</returns>
+        bool Exist(int origin, TokenNames token);
+
+        /// <summary>
         /// Create the tree and return the element asked as the root.
         /// </summary>
         /// <param name="currentPosition">The current position in the source. Default to null (when it is starting as it is the root)</param>

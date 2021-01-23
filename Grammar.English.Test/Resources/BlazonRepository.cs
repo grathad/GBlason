@@ -859,7 +859,7 @@ namespace Grammar.English.Test.Integration.Resources
 
         public const string RefactoredSubchargesTincture = "Argent, a lion passant guardant Gules crowned with an imperial crown and gorged with an open one both Or";
 
-        public const string RefactotingOrdinaryCounterChanging = "Parted per pale Argent and Sable, a chevron between two mullets in chief and a crescent in base all counterchanged";
+        public const string RefactoringOrdinaryCounterChanging = "Parted per pale Argent and Sable, a chevron between two mullets in chief and a crescent in base all counterchanged";
         #endregion
 
         #region exhaustive list scotland
@@ -887,8 +887,8 @@ namespace Grammar.English.Test.Integration.Resources
         public const string AgnewofLochnaw = "Argent, a chevron between two cinquefoils in chief Gules and a saltire couped Azure in base";
         public const string AgnewofLochryan = "Argent, a chevron between two cinquefoils in chief Gules and a saltire couped Azure in base all within a bordure Gules";
         public const string AikenheadofthatILk = "Argent, three acorns slipped Vert";
-        public const string Aikman = "Argent, a dexter arm issuing out from the sinster side of the shield holding an oak tree eradicated and broken usunder near the branches Proper between a crescent in the sinister chief point and a mullet in the dexter base point both Gules";
-        public const string AikmanofCairny = "Argent, a sinister hand in base issuing out of a cloud fessways holding an oak baton paleways with a branch sproutng out of the top thereof Proper, surmounted by a bend engrailed Gules";
+        public const string Aikman = "Argent, a dexter arm issuing out from the sinister side of the shield holding an oak tree eradicated and broken usunder near the branches Proper between a crescent in the sinister chief point and a mullet in the dexter base point both Gules";
+        public const string AikmanofCairny = "Argent, a sinister hand in base issuing out of a cloud fessways holding an oak baton paleways with a branch sprouting out of the top thereof Proper, surmounted by a bend engrailed Gules";
         public const string Airlie_Earlof_Ogilvy_ = "Argent, a lion passant guardant Gules crowned with an imperial crown and gorged with an open one both Or";
         public const string AitchisonofGosford = "Argent, a double-headed eagle displayed Sable and on a chief Vert two mullets Or";
         public const string AitchisonofSydserf = "Argent, a double-headed eagle displayed Sable and on a chief Vert two spur-rowells Or all within a bordure invected Sable";
@@ -1786,6 +1786,7 @@ namespace Grammar.English.Test.Integration.Resources
         public const string ForresterofDenoven_David = "Argent, three hunting-horns Sable garnished Gules and for differnce a crescent surmounted by another";
         public const string Forrester_Alexander = "Argent, a roundel Sable (or pellet)  between three hunting-horns Sable";
         public const string Forrester_GeorgeinDundee = "Argent, a beagle (or ratch-hound) between three hunting-horns Sable";
+        public const string Rait_Dundee = "or, a cross engrailed within a bordure invecked, sable";
         public const string Forrester_Lord = "Argent, a fess Gules between three hunting-horns Sable garnished Gules";
         public const string Forrester_SirAndrew = "Argent, a chevron between three hunting-horns Sable garnished Gules";
         public const string ForsytheofNydie = "Argent, a chevron engrailed Gules between three griffins segreant Vert armed and membered Gules";
@@ -4464,6 +4465,41 @@ namespace Grammar.English.Test.Integration.Resources
         public const string Waller = "Sable, three walnut leaves or, between two bendlets argent";
 
         public const string ChaffersOfLiverpool = "Azure, on a bend invected argent between three crescents each surmounted by a mullet of eight points or, as many chaffinch proper.";
+
+        /* Chaplets as non ordinaries */
+
+        public const string Yerburgh = "Per pale argent and azure, on a chevron between three chaplets all counterchanged, an annulet for difference.";
+
+        public const string RobertBerry = "Quarterly, 1 and 4, vert, a cross crosslet argent (for Berry); 2 and 3, parted per pale argent and sable, on a chaplet four mullets counterchanged (for Nairne), in the centre of the quarters a crescent or, for difference.";
+
+        public const string Marylebone = "Per chevron sable and barry wavy of six, argent and azure in chief, in the dexter a fleur-de-lis, and in the sinister a rose, both or.";
+
+        public const string PeterDeDreux_EarlOfRichmond = "Chequy or and azure, a quarter ermine";
+
+        public const string EarlyCoA_Lion = "Azure, a lion rampant-guardant argent, its feet or.";
+
+        public const string Wildenvels = "Per pale argent and sable, in the first a demi-lion statant-guardant issuant from the dividing line.";
+
+        public const string Tannenvels = "Azure, a lion rampant or, queué argent.";
+
+        public const string Rinach = "Or, a lion rampant gules, headed azure.";
+
+        //French so not for the current version
+        //Here the ombre du lion is properly represented by a darker shade of the tincture (either of or or of azure), but often the artist contents himself with simply drawing the outline of the animal in a neutral tint.
+        //public const string Trasegnies = "Bandé d'or et d'azur, à l'ombre du lion brochant sur le tout, à la bordure engrêlée d'or.";
+
+        //will do a english version from the original
+        //public const string Boissiau = "De gueules, semé de lions d'argent.";
+        public const string Boissiau = "Gules, semy of lion argent.";
+
+        public const string Minutoli = "Gules, a lion rampant vair, the head and feet or.";
+
+        public const string Loen = "Azure, a decapitated lion rampant argent, three jets of blood spurting from the neck proper.";
+
+        public const string Papacoda = "Sable, a lion rampant or, its tail turned over its head and held by its teeth.";
+
+        public const string The_Counts_Reinach_Franconia = "Or, a lion rampant gules, hooded and masked azure (see above).";
+
 
         #endregion
 

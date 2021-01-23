@@ -59,9 +59,9 @@ namespace Grammar.PluginBase.Test.Parser
             {
                 _mock.SetupGet(m => m.Position).Returns(default(TokenParsingPosition));
                 _mock.SetupGet(m => m.Parser).Returns(default(ParserBase));
-                _mock.SetupGet(m => m.Executed).Returns(false);
+                _mock.SetupGet(m => m.Status).Returns(NodeParserStatus.Created);
                 _mock.Object.ToString().Should()
-                    .Be($"{ParserNode.NoPositionText},{ParserNode.NoTypeText},{ParserNode.NotExecutedText}");
+                    .Be($"{ParserNode.NoPositionText},{ParserNode.NoTypeText},{ParserNode.Created}");
             }
 
             [Fact]
@@ -70,7 +70,7 @@ namespace Grammar.PluginBase.Test.Parser
                 _mock.SetupGet(m => m.Position).Returns(TokenParsingPosition.DefaultStartingPosition);
                 _parserBase.SetupGet(m => m.Type).Returns(TokenNames.Undefined);
                 _mock.SetupGet(m => m.Parser).Returns(_parserBase.Object);
-                _mock.SetupGet(m => m.Executed).Returns(true);
+                _mock.SetupGet(m => m.Status).Returns(NodeParserStatus.Executed);
                 var token = new Mock<PluginBase.Token.Token>();
                 var tokenResult = new Mock<TokenResult>(
                     token.Object,
@@ -88,7 +88,7 @@ namespace Grammar.PluginBase.Test.Parser
                 _mock.SetupGet(m => m.Position).Returns(TokenParsingPosition.DefaultStartingPosition);
                 _parserBase.SetupGet(m => m.Type).Returns(TokenNames.Undefined);
                 _mock.SetupGet(m => m.Parser).Returns(_parserBase.Object);
-                _mock.SetupGet(m => m.Executed).Returns(true);
+                _mock.SetupGet(m => m.Status).Returns(NodeParserStatus.Executed);
                 var tokenResult = new Mock<TokenResult>(
                     default(PluginBase.Token.Token),
                     TokenParsingPosition.DefaultStartingPosition);
@@ -104,7 +104,7 @@ namespace Grammar.PluginBase.Test.Parser
                 _mock.SetupGet(m => m.Position).Returns(TokenParsingPosition.DefaultStartingPosition);
                 _parserBase.SetupGet(m => m.Type).Returns(TokenNames.Undefined);
                 _mock.SetupGet(m => m.Parser).Returns(_parserBase.Object);
-                _mock.SetupGet(m => m.Executed).Returns(true);
+                _mock.SetupGet(m => m.Status).Returns(NodeParserStatus.Executed);
                 var tokenResult = new Mock<TokenResult>(
                     default(PluginBase.Token.Token),
                     TokenParsingPosition.DefaultStartingPosition);

@@ -263,7 +263,7 @@ namespace Grammar.PluginBase.Test.Parser
                     ItExpr.IsAny<ParserBase>(),
                     ItExpr.IsAny<ParserBase>(),
                     ItExpr.IsAny<int>());
-                newNode.Executed.Should().BeTrue();
+                newNode.Status.Should().Be(NodeParserStatus.Executed);
                 newNode.Result.Should().Be(_tokenResult.Object);
             }
         }
@@ -378,7 +378,7 @@ namespace Grammar.PluginBase.Test.Parser
             [Fact]
             public void NodeNotExecuted_ReturnFalse()
             {
-                _node.SetupGet(m => m.Executed).Returns(false);
+                _node.SetupGet(m => m.Status).Returns(NodeParserStatus.Created);
                 var tR = _tokenResult.Object;
                 _pilotMock.Object.ParserAlreadyExistAndExecutedNoReRun(_parent.Object, _node.Object, out tR).Should().BeFalse();
                 tR.Should().BeNull();
@@ -392,7 +392,7 @@ namespace Grammar.PluginBase.Test.Parser
                         ItExpr.IsAny<ParserNode>())
                     .Returns(false)
                     .Verifiable();
-                _node.SetupGet(m => m.Executed).Returns(true);
+                _node.SetupGet(m => m.Status).Returns(NodeParserStatus.Executed);
                 var tR = _tokenResult.Object;
                 _pilotMock.Object.ParserAlreadyExistAndExecutedNoReRun(_parent.Object, _node.Object, out tR).Should().BeFalse();
                 tR.Should().BeNull();
@@ -410,7 +410,7 @@ namespace Grammar.PluginBase.Test.Parser
                         ItExpr.IsAny<ParserNode>())
                     .Returns(true)
                     .Verifiable();
-                _node.SetupGet(m => m.Executed).Returns(true);
+                _node.SetupGet(m => m.Status).Returns(NodeParserStatus.Executed);
                 _tree.Setup(m => m.Get(It.IsAny<ParserBase>()))
                     .Returns(_node.Object)
                     .Verifiable();
@@ -427,7 +427,7 @@ namespace Grammar.PluginBase.Test.Parser
                     "RunTreeMemory",
                     Times.Once(),
                     ItExpr.Is<ParserNode>(p => p == _node.Object));
-                _node.VerifyGet(m => m.Executed, Times.Once);
+                _node.VerifyGet(m => m.Status, Times.Once);
                 _node.VerifyGet(m => m.Result, Times.Once);
                 _node.VerifyGet(m => m.Parent, Times.Once);
                 _tree.Verify(m => m.Get(_parent.Object), Times.Once);

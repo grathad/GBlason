@@ -73,6 +73,11 @@ namespace Grammar.PluginBase.Parser
             return ParserPilot.Parse(clonedPosition, this, token);
         }
 
+        protected virtual bool Exist(int origin, TokenNames token)
+        {
+            return ParserPilot.Exist(origin, token);
+        }
+
         /// <summary>
         /// Parse the given <paramref name="token"/> at the given <paramref name="currentPosition"/> using the currently defined <see cref="ParserPilot"/>
         /// </summary>
