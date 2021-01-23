@@ -178,6 +178,15 @@ namespace Grammar.PluginBase.Token
         /// </summary>
         OrdinaryFixed,
         /// <summary>
+        /// Represent a grammar that is used to define a "charged" group keyword where all of the previously stated charges element are individually charged by the following element
+        /// </summary>
+        EachCharged,
+        /// <summary>
+        /// Represent a grammar that is used to define a "charged" group keyword
+        /// </summary>
+        [ContainsOr(EachCharged, Charged)]
+        ChargedKeyword,
+        /// <summary>
         /// Represent a word that specify that the previous element is charged with the following element (a charge)
         /// </summary>
         Charged,
