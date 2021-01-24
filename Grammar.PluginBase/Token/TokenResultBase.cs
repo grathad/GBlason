@@ -26,5 +26,9 @@ namespace Grammar.PluginBase.Token
             get => _position;
             protected set => _position = value;
         }
+
+        public TokenState State { get; set; } = TokenState.Optional;
+
+        public bool Failed { get; set; } = false;
     }
 }

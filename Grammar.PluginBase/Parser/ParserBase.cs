@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Format.Elements;
 using Grammar.PluginBase.Keyword;
 using Grammar.PluginBase.Parser.Contracts;
 using Grammar.PluginBase.Token;
@@ -120,6 +121,103 @@ namespace Grammar.PluginBase.Parser
         {
             ITokenParsingPosition pos = new TokenParsingPosition { Start = origin };
             return TryConsume(ref pos);
+        }
+
+        protected List<IToken> CurrentCollection = new List<IToken>();
+
+        protected ITokenParsingPosition LastPosition { get; set; } = new TokenParsingPosition();
+
+        public void Start(int position)
+        {
+            LastPosition.Start = position;
+        }
+
+        protected abstract ITokenResult End();
+
+        /// <summary>
+        /// .
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="origin"></param>
+        /// <returns></returns>
+        public virtual bool ParseMandatory(TokenNames token, ITokenParsingPosition origin = null)
+        {
+            if (origin != null)
+            {
+                LastPosition = origin;
+            }
+            var result = Parse(LastPosition, token);
+            if (result?.ResultToken == null)
+            {
+                ErrorMandatoryTokenMissing(TokenNames.Between, origin.Start);
+            }
+            LastPosition = result.Position;
+            CurrentCollection.Add(result.ResultToken);
+            return true;
+        }
+
+        /// <summary>
+        /// ?
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="origin"></param>
+        /// <returns></returns>
+        public virtual bool ParseOptional(TokenNames token, ITokenParsingPosition origin = null)
+        {
+            if (origin != null)
+            {
+                LastPosition = origin;
+            }
+            var result = Parse(LastPosition, token);
+            if (result?.ResultToken == null)
+            {
+                return false;
+            }
+            LastPosition = result.Position;
+            CurrentCollection.Add(result.ResultToken);
+            return true;
+        }
+
+        /// <summary>
+        /// *
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="origin"></param>
+        /// <returns></returns>
+        public virtual bool ParseOptionalList(TokenNames token, ITokenParsingPosition origin = null)
+        {
+            if (origin != null)
+            {
+                LastPosition = origin;
+            }
+
+            int i = 0;
+            //will need configuration later
+            while (i < 10)
+            {
+                var result = Parse(origin, token);
+                if (result?.ResultToken == null)
+                {
+                    break;
+                }
+                var newand = Parse(separator.Position, TokenNames.AndPossibleGroup);
+                if (newand?.ResultToken == null)
+                {
+                    break;
+                }
+                tempColl.AddRange(new[] { separator.ResultToken, newand.ResultToken });
+                origin = newand.Position;
+                i++;
+            }
+
+            var result = Parse(LastPosition, token);
+            if (result?.ResultToken == null)
+            {
+                return false;
+            }
+            LastPosition = result.Position;
+            CurrentCollection.Add(result.ResultToken);
+            return true;
         }
 
         #endregion
@@ -267,5 +365,6 @@ namespace Grammar.PluginBase.Parser
             Error?.Invoke(this, e);
         }
         #endregion
+
     }
 }

@@ -24,11 +24,13 @@ namespace Grammar.English.Tokens
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            TryConsumeAndAttachOne(ref origin, TokenNames.SharedKeyWord);
+            Start(origin.Start);
+            ParseOptional(TokenNames.SharedKeyWord);
 
-            while (origin.Start < ParserPilot.LastPosition)
+            int safety = 0;
+            while (LastPosition.Start < ParserPilot.LastPosition && safety++ < Configurations.GrammarMaxLoop)
             {
-                var result = TryConsumeOr(origin.Start,
+                var result = TryConsumeOr(LastPosition.Start,
                     TokenNames.SharedObjectReference,
                     TokenNames.SharedPropertyAdverb);
 
@@ -36,27 +38,13 @@ namespace Grammar.English.Tokens
                 {
                     break;
                 }
-                origin = result.Position;
-                AttachChild(result.ResultToken);
+                LastPosition = result.Position;
+                CurrentCollection.Add(result.ResultToken);
             }
 
-            var atleastOne = false;
-            while (origin.Start < ParserPilot.LastPosition)
-            {
-                var result = Parse(origin, TokenNames.SharedProperty);
-                if (result == null && !atleastOne)
-                {
-                    return null;
-                }
-                if (result == null)
-                {
-                    break;
-                }
-                atleastOne = true;
-                AttachChild(result.ResultToken);
-                origin = result.Position;
-            }
-            return CurrentToken.AsTokenResult(origin);
+            ParseOneOrMore(TokenNames.SharedProperty);
+
+            return End();
         }
 
         /// <inheritdoc/>

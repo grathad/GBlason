@@ -251,6 +251,7 @@ namespace Grammar.PluginBase.Token
         /// <summary>
         /// Represent only one property that can be shared
         /// </summary>
+        [ContainsOr(Direction, Location)]
         SharedProperty,
         /// <summary>
         /// Represent a property defining a direction for an object, a line, a charge etc ...
@@ -299,9 +300,9 @@ namespace Grammar.PluginBase.Token
         /// </summary>
         FieldSeparator,
         /// <summary>
-        /// Token representing a separator for charges using the ;
+        /// Token representing a separator using the ;
         /// </summary>
-        ChargeSeparator,
+        DivisionSeparator,
         /// <summary>
         /// token representing all of the complex multiple charges construct available on a single field
         /// </summary>
@@ -699,4 +700,5 @@ namespace Grammar.PluginBase.Token
         /// </summary>
         Cadency
     }
+
 }
