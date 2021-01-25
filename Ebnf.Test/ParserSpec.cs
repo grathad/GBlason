@@ -50,38 +50,6 @@ name02    ");
 rule05
 ");
             }
-
-            [Fact]
-            public void ValidAllRuleParsing()
-            {
-                var parser = new Parser();
-
-                var inputTest = @"Shield =  Field | (Field , [FieldSeparator] , Charge , [AllCounterChanged] , [Cadency]) ;
-
-Field = Tincture | Division | FieldVariation;
-
-
-(* Field Variation region *)
-
-FieldVariation = FieldVariation2Tinctures | FieldVariationSemy | FieldVariationKnownSemy;
-
-FieldVariation2Tinctures =  FieldVariationName , [Orientation] , [Of , FieldVariationNumber] , Tincture , And , Tincture 
-                            | Tincture , FieldVariationName , [Orientation] , Tincture;
-
-FieldVariationKnownSemy = SimpleTincture , PredefinedSemy;
-
-FieldVariationSemy = SimpleTincture , (( [SemyDeterminer] , Semy , SemyCharge) | SemyName);
-
-SemyCharge = (Ordinary | Symbol | TokenNames.SymbolCross) [SimpleTincture] ;";
-
-                List<TreeElement> result = null;
-                using (var str = new MemoryStream(Encoding.UTF8.GetBytes(inputTest)))
-                {
-                    result = parser.Parse(str);
-                }
-
-
-            }
         }
     }
 
@@ -373,24 +341,6 @@ SemyCharge = (Ordinary | Symbol | TokenNames.SymbolCross) [SimpleTincture] ;";
                 testTe.Children[2].Children.Should().BeEmpty();
             }
 
-            [Fact]
-            public void AlternativeSequenceEndWithGroup()
-            {
-                // 1 | (2)
-                // 1 | (2 , 3)
-                //var testTe = new TreeElement { RulesContent = $" 1 | 2 , 3 | 4" };
-                //testTe.ParseInternalRules(null).Should().HaveCount(4);
-                //testTe.Children.Should().HaveCount(2);
-                //testTe.Children[0].Children.Should().HaveCount(2);
-                //testTe.Children[1].Children.Should().HaveCount(2);
-
-                //testTe = new TreeElement { RulesContent = $" 1 , 2 | 3 , 4" };
-                //testTe.ParseInternalRules(null).Should().HaveCount(4);
-                //testTe.Children.Should().HaveCount(3);
-                //testTe.Children[0].Children.Should().BeEmpty();
-                //testTe.Children[1].Children.Should().HaveCount(2);
-                //testTe.Children[2].Children.Should().BeEmpty();
-            }
 
             [Fact]
             public void OperatorWithoutermThrow()
