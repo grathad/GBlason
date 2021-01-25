@@ -1,4 +1,4 @@
-﻿Shield =  Field | Field , [FieldSeparator] , Charge , [AllCounterChanged] , [Cadency] ;
+﻿Shield =  Field | (Field , [FieldSeparator] , Charge , [AllCounterChanged] , [Cadency] );
 
 Field = Tincture | Division | FieldVariation;
 
@@ -64,8 +64,8 @@ Charge = (SimpleCharge | LocatedSimpleCharge | MultiCharges) , [LightSeparator] 
 SimpleCharge = SingleSimpleCharge | PluralSimpleCharge;
 SingleSimpleCharge = SingleDeterminer , SingleChargeElement , (Tincture | FieldVariation);
 PluralSimpleCharge = PluralDeterminer , PluralChargeElement , 
-                    ( [(Tincture | FieldVariation)] , SharedProperties |
-                    [SharedProperties] , ( Tincture | FieldVariation ) );
+                    ( ([(Tincture | FieldVariation)] , SharedProperties) |
+                    ([SharedProperties] , ( Tincture | FieldVariation )) );
 
 SingleChargeElement = SingleOrdinary | Symbol | SymbolCross;
 (* Need rework to differentiate the single and plural shares and assign it to the correct grammar rule *)
@@ -93,7 +93,7 @@ BetweenSurroundingGroup = PluralSimpleCharge | ChargesList | SurmountedPlural | 
 
 ChargeOnPosition= OnStart | OnMiddle;
 OnMiddle = ( SimpleCharge | Division ) , On , OnPossibleGroup;
-OnStart= On , OnPossibleGroup , [LightSeparator]? , OnPossibleGroup;
+OnStart= On , OnPossibleGroup , [LightSeparator] , OnPossibleGroup;
 OnPossibleGroup=SimpleCharge | ChargeBetweenPosition | ChargeSurmounted | ChargeCharged;
 
 ChargeWithin = WithinWhole | WithinAll | WithinAllWhole;
