@@ -17,5 +17,6 @@ namespace Grammar.PluginBase.Token
 
         /// <inheritdoc />
         public virtual IToken ResultToken { get; }
+
     }
 }

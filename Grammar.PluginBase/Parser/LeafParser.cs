@@ -171,5 +171,10 @@ namespace Grammar.PluginBase.Parser
             }
             return FindMatchingKeywords(position, allKeyWords) != null;
         }
+
+        protected override ITokenResult End()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

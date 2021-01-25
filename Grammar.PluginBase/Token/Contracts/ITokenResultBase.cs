@@ -9,5 +9,15 @@
         /// The position of the END of the current result
         /// </summary>
         ITokenParsingPosition Position { get; }
+
+        TokenState State { get; set; }
+
+        bool Failed { get; set; }
+    }
+
+    public enum TokenState
+    {
+        Mandatory,
+        Optional
     }
 }

@@ -40,6 +40,38 @@ namespace Grammar.PluginBase.Parser
         
         #region container helpers
 
+        protected override ITokenResult End()
+        {
+            if ((CurrentCollection?.Count ?? 0) == 0)
+            {
+                return null;
+            }
+            AttachChildren(CurrentCollection);
+            return CurrentToken.AsTokenResult(LastPosition);
+        }
+
+        protected bool ParseOneOrMore(TokenNames token)
+        {
+            var atleastOne = false;
+            while (LastPosition.Start < ParserPilot.LastPosition)
+            {
+                var result = Parse(LastPosition, token);
+                if (result == null && !atleastOne)
+                {
+                    ErrorMandatoryTokenMissing(token, LastPosition.Start);
+                    return false;
+                }
+                if (result == null)
+                {
+                    break;
+                }
+                atleastOne = true;
+                CurrentCollection.Add(result.ResultToken);
+                LastPosition = result.Position;
+            }
+            return atleastOne;
+        }
+
         /// <summary>
         /// Attach a Token as the next child to this container (always attach as the last child).
         /// This is a neutral action that does not edit anything else than the list of children for this container

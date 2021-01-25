@@ -30,16 +30,8 @@ namespace Grammar.English.Tokens
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            var result = TryConsumeOr(ref origin,
-                TokenNames.Direction,
-                TokenNames.Location);
-
-            if (result == null)
-            {
-                return null;
-            }
-            AttachChild(result.ResultToken);
-            return CurrentToken.AsTokenResult(result);
+            //simple or grammar
+            throw new System.NotImplementedException();
         }
 
         /// <inheritdoc/>

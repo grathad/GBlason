@@ -46,5 +46,32 @@ namespace Utils.LinqHelper
             }
             return toReturn;
         }
+
+        /// <summary>
+        /// Add an element to the list ONLY if not already present
+        /// </summary>
+        /// <typeparam name="T">The type of element in the list (and to add)</typeparam>
+        /// <param name="source">The list to add the element in</param>
+        /// <param name="elementToAdd">The element to add</param>
+        /// <returns>The element if added, otherwise null </returns>
+        public static T AddDistinct<T>(this IList<T> source, T elementToAdd)
+        {
+            if(source == null)
+            {
+                return default(T);
+            }
+            if(elementToAdd == null)
+            {
+                return default(T);
+            }
+
+            if (source.Contains(elementToAdd))
+            {
+                return default(T);
+            }
+
+            source.Add(elementToAdd);
+            return elementToAdd;
+        }
     }
 }

@@ -868,7 +868,7 @@
             [ "Coma" ]
         ],
 
-        "ChargeSeparator": [
+        "DivisionSeparator": [
             [ "SemiColon" ]
         ],
 
