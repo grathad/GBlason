@@ -9,7 +9,7 @@ namespace Grammar.English.Tokens
 {
     internal class SecondDivisionNumberParser : LeafParser
     {
-        public SecondDivisionNumberParser(IParserPilot factory = null, IResources resources = null)
+        public SecondDivisionNumberParser(IParserPilot factory = null, PluginBase.Keyword.IResources resources = null)
             : base(TokenNames.SecondDivisionNumber, factory, resources)
         {
 

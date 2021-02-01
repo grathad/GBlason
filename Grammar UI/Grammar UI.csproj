@@ -3,28 +3,18 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
-    <RootNamespace>Format_Debugger</RootNamespace>
+    <RootNamespace>Grammar_UI</RootNamespace>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="resources\search.svg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MahApps.Metro" Version="2.4.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Grammar Plugins\Grammar.English\Grammar.English.csproj" />
     <ProjectReference Include="..\Grammar\Compiler.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="FormatDebugger.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
+    <ProjectReference Include="..\WPF.Utils\WPF.Utils.csproj" />
   </ItemGroup>
 
 </Project>

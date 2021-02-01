@@ -16,7 +16,7 @@ namespace Grammar.English.Tokens
     /// </summary>
     internal class FirstDivisionNumberParser : LeafParser
     {
-        public FirstDivisionNumberParser(IParserPilot factory = null, IResources resources = null)
+        public FirstDivisionNumberParser(IParserPilot factory = null, PluginBase.Keyword.IResources resources = null)
             : base(TokenNames.FirstDivisionNumber, factory, resources)
         {
 

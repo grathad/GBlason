@@ -14,28 +14,6 @@ namespace Grammar
     public interface IGrammarParser
     {
         /// <summary>
-        /// Simple direct parsing method that synchronously return a <see cref="ParsingResult"/> from the given <paramref name="blazon"/> string
-        /// </summary>
-        /// <param name="blazon">the string to parse</param>
-        /// <returns>the result of the parsing</returns>
-        ParsingResult Parse(string blazon);
-
-        /// <summary>
-        /// Simple direct parsing method that synchronously return a <see cref="ParsingResult"/> from the given <paramref name="blazon"/> stream
-        /// </summary>
-        /// <param name="blazon">the stream to parse using by default a <see cref="Encoding.UTF8"/> encoding. Use the overload to define another encoding</param>
-        /// <returns>the result of the parsing</returns>
-        ParsingResult Parse(Stream blazon);
-
-        /// <summary>
-        /// Simple direct parsing method that synchronously return a <see cref="ParsingResult"/> from the given <paramref name="blazon"/> stream
-        /// </summary>
-        /// <param name="blazon">the stream to parse using the defined encoding</param>
-        /// <param name="encoding">the encoding of the stream to read</param>
-        /// <returns>the result of the parsing</returns>
-        ParsingResult Parse(Stream blazon, Encoding encoding);
-
-        /// <summary>
         /// Asynchronous parsing method that return a <see cref="ParsingResult"/> from the given <paramref name="blazon"/> string
         /// </summary>
         /// <param name="blazon">the string to parse</param>

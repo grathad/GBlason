@@ -6,19 +6,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="GrammarDefinition.en-GB.ebnf" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\Grammar.PluginBase\Grammar.PluginBase.csproj" />
-		<ProjectReference Include="..\..\Grammar\Grammar.csproj" />
+		<ProjectReference Include="..\..\Grammar\Compiler.csproj" />
 		<ProjectReference Include="..\..\Utils\Utils.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Include="GrammarDefinition.en-GB.ebnf" />
 		<EmbeddedResource Include="Keywords.en-GB" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Reference Include="GBlazon.Format">
-			<HintPath>..\..\ExternalLibraries\Format\Release\netstandard2.0\GBlazon.Format.dll</HintPath>
-		</Reference>
 	</ItemGroup>
 
 </Project>

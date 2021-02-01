@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Grammar\Grammar.csproj" />
+    <ProjectReference Include="..\Grammar\Compiler.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,7 +17,7 @@ namespace Grammar.English.Tokens
     /// </summary>
     internal class SymbolNameParser : LeafParser
     {
-        public SymbolNameParser(IParserPilot factory = null, IResources resources = null)
+        public SymbolNameParser(IParserPilot factory = null, PluginBase.Keyword.IResources resources = null)
             : base(TokenNames.SymbolName, factory, resources)
         {
         }

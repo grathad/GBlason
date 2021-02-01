@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using Grammar;
 using Grammar.English;
 using Grammar.PluginBase.Keyword;
 using Grammar.PluginBase.Parser;
@@ -57,7 +56,7 @@ namespace Format_Debugger
             Position = TokenParsingPosition.DefaultStartingPosition;
         }
 
-        protected List<ParserError> Errors { get; set; }
+        protected List<Grammar.ParserError> Errors { get; set; }
         public async void Parse(string blazon)
         {
             if (VmReference == null || string.IsNullOrEmpty(blazon))
@@ -74,7 +73,7 @@ namespace Format_Debugger
 
             var keyWords = await KeywordsDetectionAsync(source);
 
-            VmReference.ResultKeywords = new ObservableCollection<ParsedKeyword>(keyWords.ToList());
+            VmReference.ResultKeywords = new ObservableCollection<Grammar.PluginBase.Keyword.ParsedKeyword>(keyWords.ToList());
             VmReference.DetectorBenchmarkTime = Detector.BenchmarkingWatch.ElapsedTicks / (double)TimeSpan.TicksPerMillisecond;
 
             var pilot = new ParserPilot(new DefaultParserFactory(TestAssembly), VmReference.ResultKeywords);

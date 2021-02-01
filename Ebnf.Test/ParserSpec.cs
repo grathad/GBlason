@@ -37,11 +37,10 @@ rule05
 
                 var parser = new Parser();
                 parser.Parse(testInput);
-                parser.AllRules.Should().HaveCount(3);
-                parser.AllRules[0].Name.Should().Be("name01 ");
+                parser.AllRules.Should().HaveCount(11);
+                parser.AllRules[0].Name.Should().Be("name01");
                 parser.AllRules[0].RulesContent.Should().Be(" rule01");
-                parser.AllRules[1].Name.Should().Be(@"
-name02    ");
+                parser.AllRules[1].Name.Should().Be(@"name02");
                 parser.AllRules[1].RulesContent.Should().Be("  rule02 , and , (rule03 , rule04)");
                 parser.AllRules[2].Name.Should().Be("name03");
                 parser.AllRules[2].RulesContent.Should().Be(@"multiline, 
@@ -226,17 +225,19 @@ rule05
                 var thirdTest = "one , (two, three), four ";
 
                 var testTe = new TreeElement { RulesContent = $"({firstTest})" };
-                testTe.ParseInternalRules(null).Should().HaveCount(2);
-                testTe.Children.Should().HaveCount(1);
-                testTe.Children[0].RulesContent.Should().Be(firstTest);
-
-                testTe = new TreeElement { RulesContent = $"{{{secondTest}}}" };
                 testTe.ParseInternalRules(null).Should().HaveCount(3);
                 testTe.Children.Should().HaveCount(1);
+                testTe.Children[0].RulesContent.Should().Be(firstTest);
+                testTe.Children[0].IsGroup.Should().BeTrue();
+
+                testTe = new TreeElement { RulesContent = $"{{{secondTest}}}" };
+                testTe.ParseInternalRules(null).Should().HaveCount(4);
+                testTe.Children.Should().HaveCount(1);
+                testTe.Children[0].IsRepetition.Should().BeTrue();
                 testTe.Children[0].RulesContent.Should().Be(secondTest);
 
                 testTe = new TreeElement { RulesContent = $"[{thirdTest}]" };
-                testTe.ParseInternalRules(null).Should().HaveCount(4);
+                testTe.ParseInternalRules(null).Should().HaveCount(6);
                 testTe.Children.Should().HaveCount(1)
                     .And.Subject.Should().Contain(te => te.IsOptional)
                     .And.Subject.Should().ContainSingle(thirdTest);
@@ -246,16 +247,16 @@ rule05
             public void TermBeforeGroupShouldNotAddSpaceInGroup()
             {
                 var testTe = new TreeElement { RulesContent = $"zero , (first)" };
-                testTe.ParseInternalRules(null).Should().HaveCount(2);
+                testTe.ParseInternalRules(null).Should().HaveCount(3);
                 testTe.Children.Should().HaveCount(2)
                     .And.Subject.Should().Contain(te => te.RulesContent == "first"); //and not " first"
             }
 
             [Fact]
-            public void GroupThenRuleCreate2Children()
+            public void GroupThenRuleCreate3Children()
             {
                 var testTe = new TreeElement { RulesContent = $"(first) , second" };
-                testTe.ParseInternalRules(null).Should().HaveCount(2);
+                testTe.ParseInternalRules(null).Should().HaveCount(3);
                 testTe.Children.Should().HaveCount(2)
                     .And.Subject.Should().Contain(te => te.RulesContent == "second")
                     .And.Subject.Should().Contain(te => te.RulesContent == "first");
@@ -297,18 +298,20 @@ rule05
                 // 1 | (2) | 3
                 // 1 | 2 | 3 | 4
                 var testTe = new TreeElement { RulesContent = $"1 | (2) | 3" };
-                testTe.ParseInternalRules(null).Should().HaveCount(3);
+                testTe.ParseInternalRules(null).Should().HaveCount(5);
                 testTe.Children.Should().HaveCount(1)
-                    .And.Subject.Should().Contain(te => te.Children.Count == 3);
+                    .And.Subject.Should().Contain(te => te.Children.Count == 3)
+                    .And.Subject.Should().Contain(te => te.IsAlternation);
                 testTe.Children[0].Children.Should().Contain(te => te.Name == "1");
                 testTe.Children[0].Children.Should().Contain(te => te.RulesContent == "2");
                 testTe.Children[0].Children.Should().Contain(te => te.Name == "3");
 
 
                 testTe = new TreeElement { RulesContent = $"1 | 2 | 3 | 4" };
-                testTe.ParseInternalRules(null).Should().HaveCount(4);
+                testTe.ParseInternalRules(null).Should().HaveCount(5);
                 testTe.Children.Should().HaveCount(1)
-                    .And.Subject.Should().Contain(te => te.Children.Count == 4);
+                    .And.Subject.Should().Contain(te => te.Children.Count == 4)
+                    .And.Subject.Should().Contain(te => te.IsAlternation);
             }
 
             [Fact]
@@ -317,9 +320,10 @@ rule05
                 // (1) | 2 | 3 | [4]
 
                 var testTe = new TreeElement { RulesContent = $"(1) | 2 | 3 | [4]" };
-                testTe.ParseInternalRules(null).Should().HaveCount(4);
+                testTe.ParseInternalRules(null).Should().HaveCount(7);
                 testTe.Children.Should().HaveCount(1)
-                    .And.Subject.Should().Contain(te => te.Children.Count == 4);
+                    .And.Subject.Should().Contain(te => te.Children.Count == 4)
+                    .And.Subject.Should().Contain(te => te.IsAlternation);
             }
 
             [Fact]
@@ -327,9 +331,10 @@ rule05
             {
                 // 1 | (2 | 3) | (4)
                 var testTe = new TreeElement { RulesContent = $" 1 | (2 | 3) | (4)" };
-                testTe.ParseInternalRules(null).Should().HaveCount(4);
+                testTe.ParseInternalRules(null).Should().HaveCount(8);
                 testTe.Children.Should().HaveCount(1)
-                    .And.Subject.Should().Contain(te => te.Children.Count == 3);
+                    .And.Subject.Should().Contain(te => te.Children.Count == 3)
+                    .And.Subject.Should().Contain(te => te.IsAlternation);
             }
 
             [Fact]
@@ -337,10 +342,12 @@ rule05
             {
                 // 1 | (2) | 3 , (4) , 5 , 6 | 7 , 8
                 var testTe = new TreeElement { RulesContent = $"1 | (2) | 3 , (4) , 5 , 6 | 7 , 8" };
-                testTe.ParseInternalRules(null).Should().HaveCount(8);
+                testTe.ParseInternalRules(null).Should().HaveCount(12);
                 testTe.Children.Should().HaveCount(5);
                 testTe.Children[0].Children.Should().HaveCount(3);
+                testTe.Children[0].IsAlternation.Should().BeTrue();
                 testTe.Children[3].Children.Should().HaveCount(2);
+                testTe.Children[3].IsAlternation.Should().BeTrue();
             }
 
             [Fact]
@@ -349,16 +356,17 @@ rule05
                 // 1 | 2 , 3 | 4
                 // 1 , 2 | 3 , 4
                 var testTe = new TreeElement { RulesContent = $" 1 | 2 , 3 | 4" };
-                testTe.ParseInternalRules(null).Should().HaveCount(4);
-                testTe.Children.Should().HaveCount(2);
+                testTe.ParseInternalRules(null).Should().HaveCount(6);
+                testTe.Children.Should().HaveCount(2).And.Subject.Should().Contain(te => te.IsAlternation);
                 testTe.Children[0].Children.Should().HaveCount(2);
                 testTe.Children[1].Children.Should().HaveCount(2);
 
                 testTe = new TreeElement { RulesContent = $" 1 , 2 | 3 , 4" };
-                testTe.ParseInternalRules(null).Should().HaveCount(4);
+                testTe.ParseInternalRules(null).Should().HaveCount(5);
                 testTe.Children.Should().HaveCount(3);
                 testTe.Children[0].Children.Should().BeEmpty();
                 testTe.Children[1].Children.Should().HaveCount(2);
+                testTe.Children[1].IsAlternation.Should().BeTrue();
                 testTe.Children[2].Children.Should().BeEmpty();
             }
 
@@ -394,6 +402,7 @@ rule05
                 result[0].Name.Should().Be("Charged");
                 result[1].Name.Should().Be("ChargedOverGroup");
             }
+
         }
     }
 }

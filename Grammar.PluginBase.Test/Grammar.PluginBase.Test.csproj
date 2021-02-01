@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Grammar.PluginBase\Grammar.PluginBase.csproj" />
-    <ProjectReference Include="..\Grammar\Grammar.csproj" />
+    <ProjectReference Include="..\Grammar\Compiler.csproj" />
     <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
 

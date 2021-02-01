@@ -38,7 +38,7 @@ namespace Grammar.PluginBase.Test.Keyword
             public void FromNameAndAssembly_Initialization()
             {
 
-                var nr = new Resources("name", _assMock.Object);
+                var nr = new PluginBase.Keyword.Resources("name", _assMock.Object);
                 nr.ResourceName.Should().Be("name");
                 nr.Assembly.Should().BeSameAs(_assMock.Object);
                 nr.Root.Should().BeNull();

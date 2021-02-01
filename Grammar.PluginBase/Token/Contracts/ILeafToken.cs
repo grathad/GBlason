@@ -8,6 +8,6 @@ namespace Grammar.PluginBase.Token.Contracts
         /// <summary>
         /// The keywords that were used to construct this token
         /// </summary>
-        List<ParsedKeyword> OriginalKw { get; set; }
+        List<PluginBase.Keyword.ParsedKeyword> OriginalKw { get; set; }
     }
 }

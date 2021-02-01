@@ -1,0 +1,38 @@
+﻿<mah:MetroWindow  
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
+    x:Class="Grammar_UI.Compiler"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utils="clr-namespace:Converters;assembly=WPF.Utils"
+    xmlns:local="clr-namespace:Grammar_UI" 
+    d:DataContext="{d:DesignInstance Type=local:ViewModel}"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}"
+    mc:Ignorable="d"
+    Title="MainWindow" Height="450" Width="800">
+    <mah:MetroWindow.Resources>
+        <utils:NullVisibilityConverter x:Key="NullToVisibilityConverter"/>
+    </mah:MetroWindow.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Orientation="Horizontal">
+            <TextBox x:Name="fileNameText" MinWidth="200" Text="{Binding Context.FilePath}"/>
+            <Button x:Name="openFileButton" Content="Open" Click="openFileButton_Click"/>
+            <TextBlock Text="Assembly Loaded: "/>
+            <TextBlock Text="{Binding Context.AssemblyName}"/>
+            <TextBlock Text="Grammar: "/>
+            <TextBlock Text="{Binding Context.GrammarResourceName}"/>
+            <TextBlock Text="Keywords: "/>
+            <TextBlock Text="{Binding Context.KeywordResourceName}"/>
+        </WrapPanel>
+
+        <Grid Grid.Row="1">
+
+        </Grid>
+
+    </Grid>
+</mah:MetroWindow>

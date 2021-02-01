@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Format.Elements;
 using Grammar.PluginBase.Keyword;
 using Grammar.PluginBase.Parser;
 using Grammar.PluginBase.Parser.Contracts;

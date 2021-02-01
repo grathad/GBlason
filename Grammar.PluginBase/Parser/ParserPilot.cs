@@ -28,11 +28,11 @@ namespace Grammar.PluginBase.Parser
         /// <param name="keyWords">The list of keywords to use to generate the tokens. Usually a result of the call of <see cref="Detector.DetectKeywords"/></param>
         public ParserPilot(
             IParserFactory factory,
-            IList<ParsedKeyword> keyWords,
+            IList<PluginBase.Keyword.ParsedKeyword> keyWords,
             IList<ParserError> errors = null)
         {
             Errors = errors ?? new List<ParserError>();
-            KeyWords = keyWords ?? new List<ParsedKeyword>();
+            KeyWords = keyWords ?? new List<PluginBase.Keyword.ParsedKeyword>();
             Factory = factory ?? new DefaultParserFactory();
         }
 
@@ -45,7 +45,7 @@ namespace Grammar.PluginBase.Parser
         /// <summary>
         /// The list of keywords to parse, have to be provided so that the parser can work from that source
         /// </summary>
-        internal virtual IList<ParsedKeyword> KeyWords { get; }
+        internal virtual IList<PluginBase.Keyword.ParsedKeyword> KeyWords { get; }
 
         /// <inheritdoc/>
         public virtual int LastPosition => KeyWords.Count - 1;
@@ -348,7 +348,7 @@ namespace Grammar.PluginBase.Parser
         /// </summary>
         /// <param name="position"><inheritdoc cref="GetKeyword(int)"/></param>
         /// <returns><inheritdoc cref="GetKeyword(int)"/></returns>
-        public ParsedKeyword GetKeyword(int position)
+        public PluginBase.Keyword.ParsedKeyword GetKeyword(int position)
         {
             if (position < 0 || position >= KeyWords.Count)
             {
@@ -362,11 +362,11 @@ namespace Grammar.PluginBase.Parser
         /// </summary>
         /// <param name="position"><inheritdoc cref="GetRemainingKeywords(int)"/></param>
         /// <returns><inheritdoc cref="GetRemainingKeywords(int)"/></returns>
-        public IList<ParsedKeyword> GetRemainingKeywords(int position)
+        public IList<PluginBase.Keyword.ParsedKeyword> GetRemainingKeywords(int position)
         {
             if (position < 0 || position >= KeyWords.Count)
             {
-                return new List<ParsedKeyword>();
+                return new List<PluginBase.Keyword.ParsedKeyword>();
             }
             return KeyWords.Skip(position).ToList();
         }

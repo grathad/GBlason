@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Format.Elements;
 using Grammar.PluginBase.Parser;
 using Grammar.PluginBase.Parser.Contracts;
 using Grammar.PluginBase.Token;

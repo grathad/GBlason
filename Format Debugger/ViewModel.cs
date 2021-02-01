@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Grammar;
 using Grammar.PluginBase.Keyword;
 using Grammar.PluginBase.Parser;
 using Grammar.PluginBase.Token;
@@ -80,9 +79,9 @@ namespace Format_Debugger
             }
         }
 
-        private ObservableCollection<ParserError> _resultErrors = new ObservableCollection<ParserError>();
+        private ObservableCollection<Grammar.ParserError> _resultErrors = new ObservableCollection<Grammar.ParserError>();
 
-        public ObservableCollection<ParserError> ResultErrors
+        public ObservableCollection<Grammar.ParserError> ResultErrors
         {
             get => _resultErrors;
             set
