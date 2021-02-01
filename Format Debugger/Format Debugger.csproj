@@ -20,4 +20,11 @@
     <ProjectReference Include="..\Grammar\Grammar.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="FormatDebugger.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

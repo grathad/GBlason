@@ -39,7 +39,7 @@ SimpleDivisionShield = Shield , [LightSeparator] , And , Shield;
 PositionedHalves = FirstDivisionNumber , Shield , [DivisionSeparator] , SecondDivisionNumber , Shield;
 
 DivisionBy3 = DivisionBy3Name , [LightSeparator] , [LineVariationDefinition] , SimpleDivisionBy3Field;
-SimpleDivisionBy3Field = (Tincture | FieldVariation) , LightSeparator , (Tincture | FieldVariation) And (Tincture | FieldVariation);
+SimpleDivisionBy3Field = (Tincture | FieldVariation) , LightSeparator , (Tincture | FieldVariation) , And , (Tincture | FieldVariation);
 
 DivisionBy4 = DivisionBy4Name , [DivisionBy4Separator] , [LineVariationDefinition] , (SimpleDivisionBy2Field | SimpleDivisionShield | PositionedQuarters);
 PositionedQuarters = All4QuarterPositioned | FirstAndFourthThenSecondAndThird | FirstAndFourthThenAllPositioned | SecondAndThirdThenAllPositioned;
@@ -80,10 +80,10 @@ This one has to be customized AS the and possible group actually can be either a
 But there is a specific rule, that for valid grammar, at best only one of them can be non located (and possibly they can all be located)
 *)
 AndPossibleGroup = SimpleCharge | ChargeOnPosition | ChargeBetweenPosition | ChargeCharged;
-AndLocatedPossibleGroup := LocatedSimpleCharge | ChargeOnPosition | ChargeBetweenPosition | ChargeCharged ;
+AndLocatedPossibleGroup = LocatedSimpleCharge | ChargeOnPosition | ChargeBetweenPosition | ChargeCharged ;
 LocatedSimpleCharge = (Location , SimpleCharge) | (SimpleCharge , Location) | ImpliedLocationOrdinary;
-Location = ;
-ImpliedLocationOrdinary =;
+(* Location = ;
+ImpliedLocationOrdinary =; *)
 
 ChargeBetweenPosition = BetweenMiddle | BetweenStart;
 BetweenMiddle = BetweenInsideGroup , [LightSeparator] , Between , BetweenSurroundingGroup , [{ Between , BetweenSurroundingGroup }] ;
@@ -99,22 +99,22 @@ OnPossibleGroup=SimpleCharge | ChargeBetweenPosition | ChargeSurmounted | Charge
 ChargeWithin = WithinWhole | WithinAll | WithinAllWhole;
 WithinWhole = WithinInsideGroup , [ChargesList | Whole] , Within , WithinOutsideGroup;
 WithinAll = WithinInsideGroup , Within , WithinOutsideGroup , All , Within , WithinOutsideGroup; 
-WithinAllWhole := WithinInsideGroup , All , Within , WithinOutsideGroup , Whole , WithinOutsideGroup;
-WithinInsideGroup := SimpleCharge | ChargesList | ChargeBetweenPosition | ChargeSurmounted | ChargeCharged | ChargeOnPosition;
-WithinOutsideGroup := SimpleCharge | ChargesList | ChargeCharged;
+WithinAllWhole = WithinInsideGroup , All , Within , WithinOutsideGroup , Whole , WithinOutsideGroup;
+WithinInsideGroup = SimpleCharge | ChargesList | ChargeBetweenPosition | ChargeSurmounted | ChargeCharged | ChargeOnPosition;
+WithinOutsideGroup = SimpleCharge | ChargesList | ChargeCharged;
 
 ChargeSurmounted = SurmountedSingle | SurmountedPlural;
 SurmountedSingle = SurmountedUnderSingleGroup , Surmounted , SurmountedOverGroup;
 SurmountedPlural = SurmountedUnderPluralGroup , Each , Surmounted , SurmountedOverGroup;
 SurmountedUnderSingleGroup = SingleSimpleCharge | SingleCharged;
 SurmountedUnderPluralGroup = PluralSimpleCharge | PluralCharged;
-SurmountedOverGroup := SimpleCharge | BetweenMiddle | ChargeCharged;
+SurmountedOverGroup = SimpleCharge | BetweenMiddle | ChargeCharged;
 
 ChargeOverall = OverallUnderGroup , Overall , OverallOverGroup;
 OverallUnderGroup = ChargesList | ChargeBetweenPosition | ChargeOnPosition | ChargeWithin | ChargeSurmounted | ChargeCharged | SimpleCharge | DivisionOfTheField;
 OverallOverGroup = SimpleCharge | ChargeOnPosition | ChargeCharged;
 
-ChargeCharged = SingleSimpleCharge Charged ChargedOverGroup | PluralSimpleCharge , Each , Charged , ChargedOverGroup;
+ChargeCharged = SingleSimpleCharge , Charged , ChargedOverGroup | PluralSimpleCharge , Each , Charged , ChargedOverGroup;
 ChargedOverGroup = SimpleCharge | ChargesList | BetweenMiddle | ChargeSurmounted;
 
 

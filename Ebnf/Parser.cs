@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Utils.LinqHelper;
 
 namespace Ebnf
 {
@@ -21,6 +23,8 @@ namespace Ebnf
         public const char RepeatEndSign = '}';
         public const char OptionalStartSign = '[';
         public const char OptionalEndSign = ']';
+        public const char TextStartSign = '"';
+        public const char TextEndSign = '"';
         public const char SequenceSign = ',';
         public const char AlternSign = '|';
         public const char CommentStartSign = '(';
@@ -40,43 +44,54 @@ namespace Ebnf
                 encoding = Encoding.UTF8;
             }
 
+            //First step of the parsing is to read all the declared rules and assign them as a treelement (with the rawvalues of the name and the content for now)
             using (var reader = new StreamReader(input, encoding))
             {
                 //the format of a rule is: ruleName = rule ;
                 while (reader.Peek() != -1)
                 {
                     var nte = new TreeElement();
-                    nte.ExtractOneRule(reader);
-                    AllRules.Add(nte);
+                    if(nte.ExtractOneRule(reader))                    
+                    {
+                        AllRules.Add(nte);
+                        Trace.TraceInformation($"adding a rule: {nte}");
+                    }                    
                 }
             }
+
             //now we have the raw rules defined from the input.
             //we want to start parsing them a little better, with splitting their content
-            //we have one child per simple named rule (sequence)
-            //we have one rule per children that belong to the same alternation chain.
-            //we have one child per group, optional group and repetition group
+            //this part could be done in on pass for performance optimization, but perf is not important here
+            //for the sake of simplifying the coding, and reducing the size of the steps, we only consider a treeelement with its "1st degree" blocks
+            //so the next step is to detect the blocks in the rule content sequence
+            //this step create the tree element children
+
+            
             var knownRules = AllRules.ToList();
             var allRules = knownRules.ToList();
             foreach (var rule in allRules.Where(r => r != null))
             {
-                knownRules.AddRange(rule.ParseInternalRules(knownRules));
+                var newRules = rule.ParseInternalRules(knownRules);
+                Trace.TraceInformation($"internal parsing of '{rule}' with the content {rule.RulesContent}. Found {newRules?.Count ?? 0} new rule(s)");
+                knownRules.AddRange(newRules);
             }
             AllRules = knownRules;
 
             //finally we optimize the rules
             var toRemove = new List<TreeElement>();
-            foreach (var rule in AllRules.Where(r => r != null))
-            {
-                if (rule.Optimize())
-                {
-                    toRemove.Add(rule);
-                }
-            }
+            //foreach (var rule in AllRules.Where(r => r != null))
+            //{
+            //    var optimizedRule = rule.Optimize();
+            //    if (optimizedRule != null)
+            //    {
+            //        toRemove.Add(rule);
+            //    }
+            //}
 
-            foreach (var rule in toRemove)
-            {
-                AllRules.Remove(rule);
-            }
+            //foreach (var rule in toRemove)
+            //{
+            //    AllRules.Remove(rule);
+            //}
 
             return AllRules;
         }

@@ -32,6 +32,10 @@ namespace Ebnf
         /// </summary>
         public bool IsAlternation { get; set; } = false;
 
+        public bool IsGroup { get; set; } = false;
+
+        public bool IsLeaf { get; set; } = false;
+
         /// <summary>
         /// The raw content of the rule (text representation from the grammar)
         /// </summary>
@@ -52,17 +56,18 @@ namespace Ebnf
         /// If succesful assign the <see cref="Name"/> from the left side of the input and the <see cref="RulesContent"/> from the right side
         /// </summary>
         /// <param name="reader">The reader containing the input to process</param>
-        public void ExtractOneRule(StreamReader reader)
+        public bool ExtractOneRule(StreamReader reader)
         {
             if (reader == null || reader.EndOfStream)
             {
-                return;
+                return false;
             }
             int lastCode;
             char lastChar;
             var leftSideDone = false;
             var rightSideDone = false;
             var startedComment = false;
+            var started = false;
 
             //the format of a rule is: ruleName = rule ;
             while (reader.Peek() != -1)
@@ -92,6 +97,8 @@ namespace Ebnf
                     continue;
                 }
 
+                started = started || !char.IsControl(lastChar) || !char.IsWhiteSpace(lastChar);
+
                 if (!leftSideDone)
                 {
                     if (lastChar == Parser.EqualSign)
@@ -119,11 +126,20 @@ namespace Ebnf
                 }
             }
             Name = Name.Trim().Trim(Environment.NewLine.ToCharArray());
+            if (string.IsNullOrEmpty(Name))
+            {
+                return false;
+            }
+            if(!Name.All(c => char.IsLetterOrDigit(c)))
+            {
+                throw new Exception($"The rule named {Name} contains invalid characters, make sure the name is a single word");
+            }
             //if we did not get to the end, this is an error
-            if (!rightSideDone)
+            if (started && !rightSideDone)
             {
                 throw new Exception($"Reached the end of the input without proper grammar rule ending '{Parser.SemiColonSign}'");
             }
+            return true;
         }
 
         /// <summary>
@@ -144,8 +160,12 @@ namespace Ebnf
             var available = availableRules.FirstOrDefault(te => string.Equals(te.Name, cleanName));
             if (available == null)
             {
-                available = new TreeElement { Name = cleanName, RulesContent = cleanName };
-                newRules.Add(available);
+                available = newRules.FirstOrDefault(te => string.Equals(te.Name, cleanName));
+                if (available == null)
+                {
+                    available = new TreeElement { Name = cleanName, RulesContent = cleanName };
+                    newRules.Add(available);
+                }
             }
             currentRuleName = string.Empty;
             Children.Add(available);
@@ -172,6 +192,8 @@ namespace Ebnf
                 availableRules = new List<TreeElement>();
             }
 
+            //We read in order, every 1st degree term is a "child"
+            //if the child name was alread defined, then 
             //there are multiple separator, in order of priority: (again the string and final text ARE NOT in scope of this implementation
             //( ... ) neutral group
             //{ ... } repetition group
@@ -196,6 +218,7 @@ namespace Ebnf
                     switch (nextChar)
                     {
                         case Parser.GroupStartSign:
+                        case Parser.TextStartSign:
                         case Parser.RepeatStartSign:
                         case Parser.OptionalStartSign:
                             //this is the start of a group (only option) if the content is only one single group or element, this can be optimized away
@@ -230,7 +253,9 @@ namespace Ebnf
                                 currentRule = new TreeElement { Name = $"Group#{Math.Abs(currentRuleName.GetHashCode())}", RulesContent = currentRuleName };
                                 currentRule.IsRepetition = groupOpening == Parser.RepeatStartSign;
                                 currentRule.IsOptional = groupOpening == Parser.OptionalStartSign;
+                                currentRule.IsGroup = groupOpening == Parser.GroupStartSign;
                                 lastAddedRule = null;
+                                newRules.Add(currentRule);
                                 newRules.AddRange(currentRule.ParseInternalRules(newRules.Concat(availableRules).ToList()));
                                 currentRuleName = string.Empty;
                                 groupOpening = char.MinValue;
@@ -340,8 +365,10 @@ namespace Ebnf
                         //we remote the children as direct child, and attach them to the new tree element
                         if (agroup != null && agroup.Any())
                         {
-                            var alternChild = new TreeElement { Name = $"Group.Altern.{groupNumber}" };
+                            var alternChild = new TreeElement { Name = $"Group.Altern.{groupNumber}", IsAlternation = true };
+                            alternChild.Parents.Add(this);
                             var idx = Children.IndexOf(agroup.First());
+                            newRules.Add(alternChild);
                             Children.Insert(idx, alternChild);
                             //now moving the children from the parent to the alternative child
                             //because we only store the children BEFORE the | we also need to recover the one after
@@ -353,8 +380,14 @@ namespace Ebnf
                                 Children.Remove(c);
                                 c.Parents.Remove(this);
                                 alternChild.Children.Add(c);
+                                if (!string.IsNullOrEmpty(alternChild.RulesContent))
+                                {
+                                    alternChild.RulesContent += $" {Parser.AlternSign} ";
+                                }
+                                alternChild.RulesContent += c.Name;
                                 c.Parents.AddDistinct(alternChild);
                             }
+                            alternChild.Name += $"#{Math.Abs(alternChild.GetHashCode())}";
                         }
                         groupNumber++;
                     }
@@ -369,17 +402,16 @@ namespace Ebnf
         /// Optimize (mostly removing group with only one element) the tree, a rule can only optimize itself away, you need to call optimize manually on the children to continue the process
         /// </summary>
         /// <returns>The list of rules that has been deleted</returns>
-        public bool Optimize()
+        public TreeElement Optimize()
         {
-            //if the current rule has one child, and only one child (no matter if the child has children on its own)
-            //Then the child should inherit the properties (boolean) of the parent, and be attached to the parent's parent.
-            if (Children.Count != 1) { return false; }
+            if (Children.Count != 1 && Parents != null && Parents.Any(p => p.Children.Count > 1)) { return null; }
 
             var onlyChild = Children.FirstOrDefault();
 
             onlyChild.IsAlternation |= IsAlternation;
             onlyChild.IsOptional |= IsOptional;
             onlyChild.IsRepetition |= IsRepetition;
+            onlyChild.Name = Name;
             onlyChild.Parents.Remove(this);
             foreach (var parent in Parents)
             {
@@ -389,7 +421,7 @@ namespace Ebnf
                 onlyChild.Parents.AddDistinct(parent);
             }
 
-            return true;
+            return onlyChild;
         }
 
         /// <summary>

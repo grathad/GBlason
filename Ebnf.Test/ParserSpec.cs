@@ -16,7 +16,6 @@ namespace Ebnf.Test
 
             StreamReader testReader { get; set; }
 
-
             [Fact]
             public void NullOrEmptyInputReturnNull()
             {
@@ -24,7 +23,6 @@ namespace Ebnf.Test
                 parser.Parse(null).Should().BeNull();
                 parser.Parse(new MemoryStream()).Should().BeNull();
             }
-
 
             [Fact]
             public void CorrectInputReturnTree()
@@ -147,6 +145,29 @@ rule05
             public void InfiniteCommentThrowException()
             {
                 testInput = new MemoryStream(Encoding.UTF8.GetBytes($"(* a comment that does not end"));
+                testReader = new StreamReader(testInput);
+                testElement = new TreeElement();
+                Action act = () => testElement.ExtractOneRule(testReader);
+                act.Should().Throw<Exception>();
+            }
+
+            [Fact]
+            public void EmptyTextReturnNoRule()
+            {
+                testInput = new MemoryStream(Encoding.UTF8.GetBytes(@" 
+    
+
+"));
+                testReader = new StreamReader(testInput);
+                testElement = new TreeElement();
+                testElement.ExtractOneRule(testReader).Should().Be(false);
+            }
+
+            [Fact]
+            public void InvalidNameThrowException()
+            {
+                var name = "Name :";
+                testInput = new MemoryStream(Encoding.UTF8.GetBytes($"{name}= valid , content"));
                 testReader = new StreamReader(testInput);
                 testElement = new TreeElement();
                 Action act = () => testElement.ExtractOneRule(testReader);
@@ -353,6 +374,25 @@ rule05
 
                 act = () => new TreeElement { RulesContent = $"| 1 " }.ParseInternalRules(null);
                 act.Should().Throw<Exception>();
+            }
+
+            [Fact]
+            public void SameRuleTwiceConsideredNewOnce()
+            {
+                //SingleSimpleCharge , Charged , ChargedOverGroup | PluralSimpleCharge , Each , Charged , ChargedOverGroup
+                //should only return one charged and one chargedovergroup in the new rules returned by the parseinternalrules
+
+                var alreadyInRules = new List<TreeElement> {
+                    new TreeElement { Name = "SingleSimpleCharge" },
+                    new TreeElement { Name = "PluralSimpleCharge" },
+                    new TreeElement { Name = "Each" }
+                };
+
+                var result = new TreeElement { RulesContent = $"SingleSimpleCharge , Charged , ChargedOverGroup | PluralSimpleCharge , Each , Charged , ChargedOverGroup " }.ParseInternalRules(alreadyInRules);
+                result.Should().HaveCount(3);
+
+                result[0].Name.Should().Be("Charged");
+                result[1].Name.Should().Be("ChargedOverGroup");
             }
         }
     }

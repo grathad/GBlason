@@ -40,6 +40,11 @@ namespace Grammar.PluginBase.Test.Parser
             {
                 return Parse(currentPosition, token);
             }
+
+            protected override ITokenResult End()
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public class Constructor

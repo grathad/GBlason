@@ -295,6 +295,11 @@ namespace Grammar.PluginBase.Test.Parser
                 {
                     throw new System.NotImplementedException();
                 }
+
+                protected override ITokenResult End()
+                {
+                    throw new NotImplementedException();
+                }
             }
 
             [Fact]

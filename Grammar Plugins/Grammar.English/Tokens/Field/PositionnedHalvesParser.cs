@@ -27,7 +27,7 @@ namespace Grammar.English.Tokens
         {
             if (!TryConsumeAndAttachOne(ref origin, TokenNames.FirstDivisionNumber)) { return null; }
             if (!TryConsumeAndAttachOne(ref origin, TokenNames.Shield)) { return null; }
-            TryConsumeAndAttachOne(ref origin, TokenNames.ChargeSeparator);
+            TryConsumeAndAttachOne(ref origin, TokenNames.DivisionSeparator);
 
             if (!TryConsumeAndAttachOne(ref origin, TokenNames.SecondDivisionNumber)) { return null; }
             if (!TryConsumeAndAttachOne(ref origin, TokenNames.Shield)) { return null; }
