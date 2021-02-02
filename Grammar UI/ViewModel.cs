@@ -11,25 +11,58 @@ namespace Grammar_UI
 {
     public class ViewModel : INotifyPropertyChanged
     {
-        private string _filePath;
+        #region fileNames
+        private string _rootGrammarFilePath;
 
-        public string FilePath
+        public string RootGrammarFilePath
         {
             get
             {
-                return _filePath;
+                return _rootGrammarFilePath;
             }
             set
             {
-                _filePath = value;
+                _rootGrammarFilePath = value;
 
-                NotifiyPropertyChanged(nameof(FilePath));
+                NotifiyPropertyChanged(nameof(RootGrammarFilePath));
             }
         }
 
-        private Resources _resources;
+        private string _keywordsFilePath;
 
-        public Resources Resources
+        public string KeywordsFilePath
+        {
+            get
+            {
+                return _keywordsFilePath;
+            }
+            set
+            {
+                _keywordsFilePath = value;
+
+                NotifiyPropertyChanged(nameof(KeywordsFilePath));
+            }
+        }
+        private string _customGrammarFilePath;
+
+        public string CustomGrammarFilePath
+        {
+            get
+            {
+                return _customGrammarFilePath;
+            }
+            set
+            {
+                _customGrammarFilePath = value;
+
+                NotifiyPropertyChanged(nameof(CustomGrammarFilePath));
+            }
+        }
+        #endregion
+
+        private ResourcesViewModel _resources = new ResourcesViewModel(new Resources());
+
+        public ResourcesViewModel Resources
         {
             get
             {
@@ -43,64 +76,18 @@ namespace Grammar_UI
             }
         }
 
-        private string _assemblyName;
-
-        public string AssemblyName
-        {
-            get
-            {
-                return _assemblyName;
-            }
-            set
-            {
-                _assemblyName = value;
-
-                NotifiyPropertyChanged(nameof(AssemblyName));
-            }
-        }
-
-        private string _keywordResourceName;
-
-        public string KeywordResourceName
-        {
-            get
-            {
-                return _keywordResourceName;
-            }
-            set
-            {
-                _keywordResourceName = value;
-
-                NotifiyPropertyChanged(nameof(KeywordResourceName));
-            }
-        }
-
-        private string _grammarResourceName;
-
-        public string GrammarResourceName
-        {
-            get
-            {
-                return _grammarResourceName;
-            }
-            set
-            {
-                _grammarResourceName = value;
-
-                NotifiyPropertyChanged(nameof(GrammarResourceName));
-            }
-        }
-
         public void LoadFromFile(string fileName)
         {
             try
             {
-                var assembly = Assembly.LoadFrom(fileName);
-                Resources = new Resources(assembly);
-                AssemblyName = Resources.Assembly.GetName()?.Name ?? "Error while attempting to get the assembly name";
-                KeywordResourceName = Resources.KeywordResourceName;
-                GrammarResourceName = Resources.GrammarResourceName;
+                //var assembly = Assembly.LoadFrom(fileName);
+                //Resources = new Resources(assembly);
+                //AssemblyName = Resources.Assembly.GetName()?.Name ?? "Error while attempting to get the assembly name";
+                //KeywordResourceName = Resources.KeywordResourceName;
+                //GrammarResourceName = Resources.GrammarResourceName;
 
+                //EbnfParser.CreateFromSource(Resources.GetGrammar());
+                //EbnfParser.CreateFromKeywords(Resources.GetKeywords());
             }
             catch (Exception e)
             {

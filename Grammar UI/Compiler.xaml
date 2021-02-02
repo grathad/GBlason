@@ -19,16 +19,36 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <WrapPanel Orientation="Horizontal">
-            <TextBox x:Name="fileNameText" MinWidth="200" Text="{Binding Context.FilePath}"/>
-            <Button x:Name="openFileButton" Content="Open" Click="openFileButton_Click"/>
-            <TextBlock Text="Assembly Loaded: "/>
-            <TextBlock Text="{Binding Context.AssemblyName}"/>
-            <TextBlock Text="Grammar: "/>
-            <TextBlock Text="{Binding Context.GrammarResourceName}"/>
-            <TextBlock Text="Keywords: "/>
-            <TextBlock Text="{Binding Context.KeywordResourceName}"/>
-        </WrapPanel>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" x:Name="rootGrammarLabel" Content="Root Grammar:"/>
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="rootGrammarFilePath" Text="{Binding Context.RootGrammarFilePath}"/>
+            <Button Grid.Row="0" Grid.Column="2" x:Name="openRootGrammarFile" Content="Open" Click="openFileButton_Click"/>
+            <Label Grid.Row="0" Grid.Column="3" Content="{Binding Context.Resources.EbnfParser.ParsedRules.Count}"/>
+
+            <Label Grid.Row="1" x:Name="keywordGrammarLabel" Content="Keywords:"/>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="keywordsFilePath" Text="{Binding Context.KeywordsFilePath}"/>
+            <Button Grid.Row="1" Grid.Column="2" x:Name="openKeywordsFile" Content="Open" Click="openFileButton_Click"/>
+            <Label Grid.Row="1" Grid.Column="3" Content="{Binding Context.Resources.FinalTokens.Count}"/>
+
+            <Label Grid.Row="2" x:Name="customGrammarLabel" Content="Custom Grammar:"/>
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="customGrammarFilePath" Text="{Binding Context.CustomGrammarFilePath}"/>
+            <Button Grid.Row="2" Grid.Column="2" x:Name="openCustomGrammarFile" Content="Open" Click="openFileButton_Click"/>
+            <Label Grid.Row="2" Grid.Column="3" Content="{Binding Context.Resources.CustomRules.Count}"/>
+
+            <Button Grid.Column="4" Grid.RowSpan="3" Content="Compile"/>
+        </Grid>
 
         <Grid Grid.Row="1">
 

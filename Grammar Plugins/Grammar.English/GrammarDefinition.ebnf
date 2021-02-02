@@ -1,4 +1,4 @@
-﻿Shield =  Field | (Field , [FieldSeparator] , Charge , [AllCounterChanged] , [Cadency] );
+Shield =  Field | (Field , [FieldSeparator] , Charge , [AllCounterChanged] , [Cadency] );
 
 Field = Tincture | Division | FieldVariation;
 

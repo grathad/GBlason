@@ -32,13 +32,28 @@ namespace Grammar_UI
         private void openFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            var button = sender as Button;
             if (openFileDialog.ShowDialog() == true)
             {
-                Context.FilePath = openFileDialog.FileName;
-                if (File.Exists(Context.FilePath))
+                if (button.Name.Contains("Root"))
                 {
-                    Context.LoadFromFile(Context.FilePath);
+                    Context.RootGrammarFilePath = openFileDialog.FileName;
+                    Context.Resources.LoadRoot(openFileDialog.FileName);
                 }
+                else if (button.Name.Contains("Keywords"))
+                {
+                    Context.KeywordsFilePath = openFileDialog.FileName;
+                    Context.Resources.LoadKeywords(openFileDialog.FileName);
+                }
+                else if (button.Name.Contains("Custom"))
+                {
+                    Context.CustomGrammarFilePath = openFileDialog.FileName;
+                }
+                //Context.FilePath = openFileDialog.FileName;
+                //if (File.Exists(Context.FilePath))
+                //{
+                //    Context.LoadFromFile(Context.FilePath);
+                //}
             }
         }
     }

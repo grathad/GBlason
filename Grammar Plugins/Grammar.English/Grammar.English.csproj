@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
@@ -6,7 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="GrammarDefinition.en-GB.ebnf" />
+	  <None Remove="GrammarDefinition.enbf" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -16,8 +16,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="GrammarDefinition.en-GB.ebnf" />
-		<EmbeddedResource Include="Keywords.en-GB" />
+		<EmbeddedResource Include="GrammarDefinition.enbf" />
+		<EmbeddedResource Include="Keywords.json" />
 	</ItemGroup>
 
 </Project>

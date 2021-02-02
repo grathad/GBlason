@@ -15,16 +15,17 @@ namespace Grammar
     /// </summary>
     public class Resources : IResources
     {
-        internal virtual Format Keywords { get; private set; }
-        internal virtual Ebnf.Parser RootGrammar { get; private set; }
+        public Format Keywords { get; private set; }
+        public Ebnf.Parser RootGrammar { get; private set; }
 
-        public readonly string KeywordResourceName;
-        public readonly string GrammarResourceName;
-        public readonly Assembly Assembly;
+        public string KeywordResourceName { get; private set; }
+        public string GrammarResourceName { get; private set; }
+        public Assembly Assembly { get; private set; }
 
         public const string DefaultKeywordsFileName = "Keywords";
         public const string DefaultGrammarFileName = "GrammarDefinition";
         public const string DefaultGrammarFileFormatExtension = "ebnf";
+        public const string DefaultKeywordFileFormatExtension = "json";
 
         /// <summary>
         /// Internal helper to load all the resources from the assembly itself
@@ -115,6 +116,19 @@ namespace Grammar
         /// <exception cref="NullReferenceException">If the calling assembly does not have a defined <see cref="NeutralResourcesLanguageAttribute"/></exception>
         public Resources(Assembly assembly)
         {
+            Init(assembly);
+        }
+
+        /// <summary>
+        /// Create an empty resource object, not initializing it
+        /// </summary>
+        public Resources()
+        {
+            
+        }
+
+        protected void Init(Assembly assembly)
+        {
             NeutralResourcesLanguageAttribute currentCulture;
             try
             {
@@ -131,27 +145,8 @@ namespace Grammar
             }
             Assembly = assembly;
             var assemblyName = Assembly.Assembly().GetName().Name;
-            KeywordResourceName = $"{assemblyName}.{DefaultKeywordsFileName}.{currentCulture.CultureName}";
-            GrammarResourceName = $"{assemblyName}.{DefaultGrammarFileName}.{currentCulture.CultureName}.{DefaultGrammarFileFormatExtension}";
-        }
-
-        /// <summary>
-        /// Create a new instance of resources for the calling assembly
-        /// </summary>
-        /// <exception cref="NullReferenceException">
-        /// If the calling assembly does not have a defined <see cref="NeutralResourcesLanguageAttribute"/>
-        /// </exception>
-        public Resources()
-        {
-            Assembly = Assembly.GetCallingAssembly();
-            var currentCulture = Assembly.Assembly().GetCustomAttributes<NeutralResourcesLanguageAttribute>().FirstOrDefault();
-            if (currentCulture == null)
-            {
-                throw new NullReferenceException("The assembly needs to contain a NeutralResourcesLanguageAttribute");
-            }
-            var assemblyName = Assembly.Assembly().GetName().Name;
-            KeywordResourceName = $"{assemblyName}.{DefaultKeywordsFileName}.{currentCulture.CultureName}";
-            GrammarResourceName = $"{assemblyName}.{DefaultGrammarFileName}.{currentCulture.CultureName}.{DefaultGrammarFileFormatExtension}";
+            KeywordResourceName = $"{assemblyName}.{DefaultKeywordsFileName}.{DefaultKeywordFileFormatExtension}";
+            GrammarResourceName = $"{assemblyName}.{DefaultGrammarFileName}.{DefaultGrammarFileFormatExtension}";
         }
 
         /// <inheritdoc />
