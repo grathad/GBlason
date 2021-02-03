@@ -44,6 +44,41 @@ namespace Grammar_UI
                 {
                     Context.KeywordsFilePath = openFileDialog.FileName;
                     Context.Resources.LoadKeywords(openFileDialog.FileName);
+
+                    var outcome = new StringBuilder();
+                    foreach (var key in Context.Resources.FinalTokens)
+                    {
+                        outcome.Append(key.Key).Append(" = ");
+                        bool first = false;
+                        foreach (var val in Context.Resources.FinalTokens[key.Key])
+                        {
+                            if (first)
+                            {
+                                outcome.Append(" | ");
+                            }
+                            bool rfirst = false;
+                            if (val.Count() > 1)
+                            {
+                                outcome.Append("( ");
+                            }
+                            foreach (var r in val)
+                            {
+                                if (rfirst)
+                                {
+                                    outcome.Append($" , KeywordSeparator , ");
+                                }
+                                outcome.Append($"{r}");
+                                rfirst = true;
+                            }
+                            if (val.Count() > 1)
+                            {
+                                outcome.Append(" )");
+                            }
+                            first = true;
+                        }
+                        outcome.Append($";").Append(Environment.NewLine);
+                    }
+                    var result = outcome.ToString();
                 }
                 else if (button.Name.Contains("Custom"))
                 {
@@ -55,6 +90,25 @@ namespace Grammar_UI
                 //    Context.LoadFromFile(Context.FilePath);
                 //}
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            //D:\Projects\GblasonGithub\Grammar Plugins\Grammar.English\Keywords.json
+        }
+
+        private void searchRulesButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void searchEraseButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void GrammarContentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

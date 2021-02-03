@@ -1,4 +1,4 @@
-Shield =  Field | (Field , [FieldSeparator] , Charge , [AllCounterChanged] , [Cadency] );
+﻿Shield =  Field | (Field , [FieldSeparator] , Charge , [AllCounterChanged] , [Cadency] );
 
 Field = Tincture | Division | FieldVariation;
 
@@ -7,12 +7,12 @@ Field = Tincture | Division | FieldVariation;
 
 FieldVariation = FieldVariation2Tinctures | FieldVariationSemy | FieldVariationKnownSemy;
 
-FieldVariation2Tinctures =  FieldVariationName , [Orientation] , [Of , FieldVariationNumber] , Tincture , And , Tincture 
+FieldVariation2Tinctures =  FieldVariationName , [Orientation] , [Of , FieldVariationNumber] , Tincture , AndWord , Tincture 
                             | Tincture , FieldVariationName , [Orientation] , Tincture;
 
 FieldVariationKnownSemy = SimpleTincture , PredefinedSemy;
 
-FieldVariationSemy = SimpleTincture , (( [SemyDeterminer] , Semy , SemyCharge) | SemyName);
+FieldVariationSemy = SimpleTincture , (( [SemyDeterminer] , SemyWord , SemyCharge) | SemyName);
 
 SemyCharge = (Ordinary | Symbol | TokenNames.SymbolCross) [SimpleTincture] ;
 
@@ -23,8 +23,8 @@ Tincture = SimpleTincture | TinctureFur | CounterChanged;
 
 SimpleTincture = TinctureColour | TinctureMetal | TinctureReference | TinctureProper;
 TinctureFur = SimpleFur | Vair | Vaire;
-Vair = [Counter] , VairName , [([SymbolStateDeterminer] , FurOrientationName)];
-Vaire = [Counter] , VaireName , [([SymbolStateDeterminer] , FurOrientationName)] , SimpleTincture , And , SimpleTincture 
+Vair = [CounterWord] , VairName , [([SymbolStateDeterminer] , FurOrientationName)];
+Vaire = [CounterWord] , VaireName , [([SymbolStateDeterminer] , FurOrientationName)] , SimpleTincture , AndWord , SimpleTincture 
         | SimpleTincture , VaireBetweenName , SimpleTincture;
 
 
@@ -33,29 +33,29 @@ Vaire = [Counter] , VaireName , [([SymbolStateDeterminer] , FurOrientationName)]
 Division = DivisionBy2 | DivisionBy3 | DivisionBy4 | ComplexDivision;
 
 DivisionBy2 = DivisionBy2Name , [LightSeparator] , [LineVariationDefinition] , (SimpleDivisionBy2Field | SimpleDivisionShield | PositionedHalves);
-LineVariationDefinition = LineVariation , [Counter , LineVariation];
-SimpleDivisionBy2Field = (Tincture | FieldVariation) , And , (Tincture | FieldVariation);
-SimpleDivisionShield = Shield , [LightSeparator] , And , Shield;
+LineVariationDefinition = LineVariation , [CounterWord , LineVariation];
+SimpleDivisionBy2Field = (Tincture | FieldVariation) , AndWord , (Tincture | FieldVariation);
+SimpleDivisionShield = Shield , [LightSeparator] , AndWord , Shield;
 PositionedHalves = FirstDivisionNumber , Shield , [DivisionSeparator] , SecondDivisionNumber , Shield;
 
 DivisionBy3 = DivisionBy3Name , [LightSeparator] , [LineVariationDefinition] , SimpleDivisionBy3Field;
-SimpleDivisionBy3Field = (Tincture | FieldVariation) , LightSeparator , (Tincture | FieldVariation) , And , (Tincture | FieldVariation);
+SimpleDivisionBy3Field = (Tincture | FieldVariation) , LightSeparator , (Tincture | FieldVariation) , AndWord , (Tincture | FieldVariation);
 
 DivisionBy4 = DivisionBy4Name , [DivisionBy4Separator] , [LineVariationDefinition] , (SimpleDivisionBy2Field | SimpleDivisionShield | PositionedQuarters);
 PositionedQuarters = All4QuarterPositioned | FirstAndFourthThenSecondAndThird | FirstAndFourthThenAllPositioned | SecondAndThirdThenAllPositioned;
 
-All4QuarterPositioned = FirstDivisionNumber , [Quarter] , Shield , DivisionSeparator , 
-                        SecondDivisionNumber , [Quarter] , Shield , DivisionSeparator ,
-                        ThirdDivisionNumber , [Quarter] , Shield , DivisionSeparator ,
-                        FourthDivisionNumber , [Quarter] , Shield , [Separator];
-FirstAndFourthThenSecondAndThird =  FirstAndFourthDivisionNumber , [Quarter] , Shield , DivisionSeparator , 
-                                    SecondAndThirdDivisionNumber , [Quarter] , Shield , [Separator];
-FirstAndFourthThenAllPositioned =   FirstAndFourthDivisionNumber , [Quarter] , Shield , DivisionSeparator ,
-                                    SecondDivisionNumber , [Quarter] , Shield , DivisionSeparator , 
-                                    ThirdDivisionNumber , [Quarter] , Shield , [Separator];
-SecondAndThirdThenAllPositioned =   FirstDivisionNumber , [Quarter] , Shield , DivisionSeparator , 
-                                    SecondAndThirdDivisionNumber , [Quarter] , Shield , DivisionSeparator ,
-                                    FourthDivisionNumber , [Quarter] , Shield , [Separator];
+All4QuarterPositioned = FirstDivisionNumber , [QuarterWord] , Shield , DivisionSeparator , 
+                        SecondDivisionNumber , [QuarterWord] , Shield , DivisionSeparator ,
+                        ThirdDivisionNumber , [QuarterWord] , Shield , DivisionSeparator ,
+                        FourthDivisionNumber , [QuarterWord] , Shield , [Separator];
+FirstAndFourthThenSecondAndThird =  FirstAndFourthDivisionNumber , [QuarterWord] , Shield , DivisionSeparator , 
+                                    SecondAndThirdDivisionNumber , [QuarterWord] , Shield , [Separator];
+FirstAndFourthThenAllPositioned =   FirstAndFourthDivisionNumber , [QuarterWord] , Shield , DivisionSeparator ,
+                                    SecondDivisionNumber , [QuarterWord] , Shield , DivisionSeparator , 
+                                    ThirdDivisionNumber , [QuarterWord] , Shield , [Separator];
+SecondAndThirdThenAllPositioned =   FirstDivisionNumber , [QuarterWord] , Shield , DivisionSeparator , 
+                                    SecondAndThirdDivisionNumber , [QuarterWord] , Shield , DivisionSeparator ,
+                                    FourthDivisionNumber , [QuarterWord] , Shield , [Separator];
 
 
 (* Charge region *)
@@ -86,14 +86,14 @@ LocatedSimpleCharge = (Location , SimpleCharge) | (SimpleCharge , Location) | Im
 ImpliedLocationOrdinary =; *)
 
 ChargeBetweenPosition = BetweenMiddle | BetweenStart;
-BetweenMiddle = BetweenInsideGroup , [LightSeparator] , Between , BetweenSurroundingGroup , [{ Between , BetweenSurroundingGroup }] ;
-BetweenStart = Between , BetweenSurroundingGroup , BetweenInsideGroup ;
+BetweenMiddle = BetweenInsideGroup , [LightSeparator] , BetweenWord , BetweenSurroundingGroup , [{ BetweenWord , BetweenSurroundingGroup }] ;
+BetweenStart = BetweenWord , BetweenSurroundingGroup , BetweenInsideGroup ;
 BetweenInsideGroup = SimpleCharge | ChargesList | ChargeSurmounted | ChargeCharged;
 BetweenSurroundingGroup = PluralSimpleCharge | ChargesList | SurmountedPlural | ChargeCharged;
 
 ChargeOnPosition= OnStart | OnMiddle;
-OnMiddle = ( SimpleCharge | Division ) , On , OnPossibleGroup;
-OnStart= On , OnPossibleGroup , [LightSeparator] , OnPossibleGroup;
+OnMiddle = ( SimpleCharge | Division ) , OnWord , OnPossibleGroup;
+OnStart= OnWord , OnPossibleGroup , [LightSeparator] , OnPossibleGroup;
 OnPossibleGroup=SimpleCharge | ChargeBetweenPosition | ChargeSurmounted | ChargeCharged;
 
 ChargeWithin = WithinWhole | WithinAll | WithinAllWhole;
@@ -104,8 +104,8 @@ WithinInsideGroup = SimpleCharge | ChargesList | ChargeBetweenPosition | ChargeS
 WithinOutsideGroup = SimpleCharge | ChargesList | ChargeCharged;
 
 ChargeSurmounted = SurmountedSingle | SurmountedPlural;
-SurmountedSingle = SurmountedUnderSingleGroup , Surmounted , SurmountedOverGroup;
-SurmountedPlural = SurmountedUnderPluralGroup , Each , Surmounted , SurmountedOverGroup;
+SurmountedSingle = SurmountedUnderSingleGroup , SurmountedWord , SurmountedOverGroup;
+SurmountedPlural = SurmountedUnderPluralGroup , EachWord , SurmountedWord , SurmountedOverGroup;
 SurmountedUnderSingleGroup = SingleSimpleCharge | SingleCharged;
 SurmountedUnderPluralGroup = PluralSimpleCharge | PluralCharged;
 SurmountedOverGroup = SimpleCharge | BetweenMiddle | ChargeCharged;
@@ -114,7 +114,374 @@ ChargeOverall = OverallUnderGroup , Overall , OverallOverGroup;
 OverallUnderGroup = ChargesList | ChargeBetweenPosition | ChargeOnPosition | ChargeWithin | ChargeSurmounted | ChargeCharged | SimpleCharge | DivisionOfTheField;
 OverallOverGroup = SimpleCharge | ChargeOnPosition | ChargeCharged;
 
-ChargeCharged = SingleSimpleCharge , Charged , ChargedOverGroup | PluralSimpleCharge , Each , Charged , ChargedOverGroup;
+ChargeCharged = SingleSimpleCharge , ChargedWord , ChargedOverGroup | PluralSimpleCharge , EachWord , ChargedWord , ChargedOverGroup;
 ChargedOverGroup = SimpleCharge | ChargesList | BetweenMiddle | ChargeSurmounted;
 
 
+(* ----------------------------------------------- *)
+(* Leaf Tokens - elements containing only keywords *)
+(* ----------------------------------------------- *)
+
+TinctureColour = Azure | Gules | Sable | Vert | Carnation | Purpure | Sanguine | Orange | Murrey;
+TinctureMetal = Or | Argent;
+Determiner = A | An | The | One | Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten | Eleven | Twelve | Fifteen | Sixteen | Twenty | ( As , KeywordSeparator , Many );
+SingleDeterminer = A | An | The | One;
+PluralDeterminer = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten | Eleven | Twelve | Fifteen | Sixteen | Twenty | ( As , KeywordSeparator , Many );
+FieldVariationNumber = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten | Eleven | Twelve | Fifteen | Sixteen | Twenty;
+SymbolAlteration = Half | Double | Quarter;
+SymbolSubPartPossession = With;
+AndWord = And;
+SharedKeyWord = All | Each;
+EachWord = Each;
+SharedObjectReference = ( of , KeywordSeparator , the , KeywordSeparator , last ) | ( of , KeywordSeparator , the , KeywordSeparator , first ) | ( of , KeywordSeparator , them ) | pair;
+SharedPropertyAdverb = Devouring | ( Charged , KeywordSeparator , With ) | Charged | ( Consisting , KeywordSeparator , Of ) | With | Conjoined | Carrying;
+SymbolAttitude = Affronte | Guardant | Rampant | Passant | Sejant | Couchant | Courant | Coward | Dormant | Salient | Statant | Pascuant | Displayed | Addorsed | Endorsed | Overt | Rising | Volant | Recursant | Vigilant | Vulning | Segreant | Combatant | Naiant | Hauriant | Urinant | Glissant | Nowed;
+SymbolAttitudeAttribute = Contourne | EnArriere | Regardant | InTrianAspect | Erect | Expanded | Lowered | Elevated;
+SymbolStateDeterminer = In;
+PointWord = Point;
+LocationBefore = In;
+BetweenWord = Between;
+OnWord = On;
+SurmountedWord = ( Surmounted , KeywordSeparator , By ) | ( Surmounted , KeywordSeparator , Of ) | Surmounted;
+PositionBetween = Within | Between | ( And , KeywordSeparator , Overall ) | Overall | In | Above | Perched | Below | ( Surmounted , KeywordSeparator , By ) | ( Surmounted , KeywordSeparator , Of );
+PositionOverall = ( And , KeywordSeparator , Overall ) | Overall;
+PositionBefore = Within | Between | Over | Above | ( Perched , KeywordSeparator , On ) | Below | On;
+Cadency = ( For , KeywordSeparator , Difference );
+SingleOrdinaryName = Quarter | Canton | Inescutcheon | Bordure | Fret | Label | Gyron | Gore | Chief;
+PluralOrdinaryName = Cross | Pale | Fess | Bar | Bend | BendSinister | Chevron | Saltire | Pile | Flaunches | Orle | Pall | Tressure | Lozenge | Fusil | Mascle | Rustre | Roundel | Annulet | Billet | Mullet | Escutcheon | Star | Crescent | Demi | Bezant | Plate | Hurt | Torteau | Pellet | Pomme | Golpe | Guze | Pallet | Endorse | Barrulet | Gemel | Hamade | Bendlet | Ribbon | Baton | Chevronel | Comble | BendletSinister | BatonSinister | FilletCross | Fillet | FilletSaltire | Saltorel | Cotice;
+OrdinaryHonourable = Cross | Pale | Fess | Bar | Bend | BendSinister | Chevron | Saltire | Bordure | Pile | Pall | Chief;
+CrossWord = Cross;
+OrdinaryFixed = Canton | Flaunches | Fret | Gore | Gyron | Orle | Tressure;
+OrdinaryMobile = Escutcheon | Lozenge | Fusil | Mascle | Rustre | Roundel | Annulet | Billet | Mullet | Star | Crescent | Demi | Bezant | Plate | Hurt | Torteau | Pellet | Pomme | Golpe | Guze;
+OrdinaryDiminutive = Label | Pallet | Endorse | Barrulet | Gemel | Hamade | Bendlet | Ribbon | Baton | Chevronel | Comble | BendletSinister | BatonSinister | FilletCross | Fillet | FilletSaltire | Saltorel | Cotice;
+OrdinaryAlteration = Half | Quarter | Double;
+ChargedWord = ( Charged , KeywordSeparator , With ) | Charged;
+TinctureReference = ( Of , KeywordSeparator , The , KeywordSeparator , Last ) | ( Of , KeywordSeparator , The , KeywordSeparator , Field ) | ( Of , KeywordSeparator , The , KeywordSeparator , First ) | ( Of , KeywordSeparator , The , KeywordSeparator , Second ) | ( Of , KeywordSeparator , The , KeywordSeparator , Third ) | ( Of , KeywordSeparator , The , KeywordSeparator , Fourth );
+OfWord = Of;
+TinctureProper = Proper;
+DivisionBy4Name = Quarterly | ( Party , KeywordSeparator , Per , KeywordSeparator , Cross ) | ( Party , KeywordSeparator , Per , KeywordSeparator , Saltire ) | ( Party , KeywordSeparator , Per , KeywordSeparator , Quarter ) | ( Per , KeywordSeparator , Cross ) | ( Per , KeywordSeparator , Saltire ) | ( Per , KeywordSeparator , Quarter );
+DivisionBy2Name = ( Party , KeywordSeparator , Per , KeywordSeparator , Fess ) | ( Party , KeywordSeparator , Per , KeywordSeparator , Pale ) | ( Party , KeywordSeparator , Per , KeywordSeparator , Bend ) | ( Party , KeywordSeparator , Per , KeywordSeparator , BendSinister ) | ( Party , KeywordSeparator , Per , KeywordSeparator , Chevron ) | ( Per , KeywordSeparator , Fess ) | ( Per , KeywordSeparator , Pale ) | ( Per , KeywordSeparator , Bend ) | ( Per , KeywordSeparator , BendSinister ) | ( Per , KeywordSeparator , Chevron );
+DivisionBy3Name = ( Tierced , KeywordSeparator , Per , KeywordSeparator , Fess ) | ( Tierced , KeywordSeparator , Per , KeywordSeparator , Pale ) | ( Tierced , KeywordSeparator , Per , KeywordSeparator , Bend ) | ( Tierced , KeywordSeparator , Per , KeywordSeparator , BendSinister ) | ( Tierced , KeywordSeparator , Per , KeywordSeparator , Pall ) | ( Per , KeywordSeparator , Pall );
+Separator = Coma | Dot | Colon | SemiColon;
+DivisionBy4Separator = Coma | Colon | SemiColon;
+LightSeparator = Coma;
+DivisionSeparator = SemiColon;
+FieldSeparator = Coma | SemiColon;
+ComplexPositionnedChargeSeparator = SemiColon | All;
+FirstDivisionNumber = One | First | A;
+SecondDivisionNumber = Two | Second | B;
+ThirdDivisionNumber = Three | Third | C;
+FourthDivisionNumber = Four | Fourth | D;
+SimpleFur = Ermines | Erminois | Ermine | Pean;
+CounterWord = Counter;
+VairName = Vair | Potent | Beffroi | ( Menu , KeywordSeparator , Vair );
+VaireName = Vaire | Potente | Plumete | ( Menu , KeywordSeparator , Vaire );
+VaireBetweenName = Papelonne | Masoned;
+Direction = Paleways | Fessways | Bendways | Saltirewise | Crosswise | Pallwise | ( In , KeywordSeparator , Pale ) | ( In , KeywordSeparator , Fess ) | ( In , KeywordSeparator , Bend ) | ( In , KeywordSeparator , Saltire ) | ( In , KeywordSeparator , Cross ) | ( In , KeywordSeparator , Pall );
+FurOrientationName = Pale | Fess | BendSinister | Bend | Point;
+LineVariation = Indented | Dancetty | Dentilly | Rayonny | Wavy | Undy | Nebuly | Engrailed | Invected | Embattled | Potenty | Embowed | Nowy | Bretesse | Flory | Urdy;
+CrossVariation = Moline | Botonny | Crosslet | Flory | Maltese | Patee | Patonce | Potent | Avelane | Barby | Cercelee | Erminee | Fitchy | Fourchy | Jerusalem | Patriarchal | Pommy | Pierced;
+LocationPoint = Chief | Dexter | Sinister | Base | ( Dexter , KeywordSeparator , Chief ) | ( Middle , KeywordSeparator , Chief ) | ( Sinister , KeywordSeparator , Chief ) | Honour | Center | Fess | Nombril | ( Dexter , KeywordSeparator , Base ) | ( Sinister , KeywordSeparator , Base ) | ( Middle , KeywordSeparator , Base );
+FieldVariationName = Barruly | BarryPily | Barry | Paly | BendySinister | Bendy | Chevronny | Chequy | Lozengy | Fusilly | Masculy | Gyronny | Fretty | Compony;
+SemyDeterminer = A | An;
+SemyName = Crusily | Billety | Annulletty | Etincelle | Goutte;
+SemyWord = ( Semy , KeywordSeparator , Of ) | Semy;
+PredefinedSemy = Bezanty | Hurty | Platy | Tortelly | GoutteGules | GoutteSable | GoutteArgent | GoutteAzure | GoutteVert;
+CounterChanged = CounterChanged | ( Counter , KeywordSeparator , Changed );
+AllCounterChanged = ( All , KeywordSeparator , CounterChanged ) | ( All , KeywordSeparator , Counter , KeywordSeparator , Changed );
+SymbolNameExtension = Of;
+QuarterWord = Quarter;
+
+
+(* Keywords - complex and composed keywords *)
+
+Charged = "charged" | "ch.";
+Field = "field";
+Azure = "azure";
+Gules = "gules";
+Sable = "sable";
+Vert = "vert";
+Carnation = "carnation";
+Purpure = "purpure";
+Sanguine = "sanguine";
+Orange = "orange";
+Murrey = "murrey";
+Or = "or";
+Argent = "argent";
+Ermine = "ermine";
+Ermines = "ermines";
+Erminois = "erminois";
+Pean = "pean";
+Vair = "vair";
+Counter = "counter";
+Menu = "menu";
+Beffroi = "beffroi";
+Potent = "potent";
+Plumete = "plumete" | "plumeté" | "plumetty";
+Papelonne = "papelonne" | "papelonné" | "papellony";
+Masoned = "masoned" | "masonry";
+Vaire = "vaire" | "vairé";
+Potente = "potente" | "potenté" | "potenty";
+Proper = "proper";
+Counterchanged = "counterchanged" | "counterchanging";
+Changed = "changed";
+DigitOne = "1";
+DigitTwo = "2";
+A = "a";
+An = "an";
+Many = "many";
+The = "the";
+One = "one" | "i";
+Two = "two" | "ii";
+Three = "three" | "iii";
+Four = "four" | "iv";
+Five = "five" | "v";
+Six = "six" | "vi";
+Seven = "seven" | "vii";
+Eight = "eight" | "viii";
+Nine = "nine" | "ix";
+Ten = "ten" | "x";
+Eleven = "eleven" | "xi";
+Twelve = "twelve" | "xii";
+Fifteen = "fifteen" | "xv";
+Sixteen = "sixteen" | "xvi";
+Twenty = "twenty" | "xx";
+First = "first" | "1st";
+Second = "second" | "2nd";
+Third = "third" | "3rd";
+Fourth = "fourth" | "4th";
+NumberRanking = "th";
+Quarter = "quarter" | "quarters";
+Half = "half";
+Part = "part";
+Double = "double";
+Triple = "triple";
+Last = "last";
+B = "b";
+C = "c";
+D = "d";
+Of = "of" | "de";
+Same = "same";
+On = "on";
+In = "in";
+At = "at";
+By = "by";
+As = "as";
+With = "with";
+Within = "within";
+Between = "between";
+Over = "over";
+To = "to";
+Consisting = "consisting";
+Conjoined = "conjoined";
+And = "and";
+All = "all";
+Per = "per";
+Each = "each";
+Pair = "pair";
+For = "for";
+Dexter = "dexter";
+Sinister = "sinister";
+Middle = "middle";
+Chief = "chief";
+Base = "base";
+Point = "point";
+Flank = "flank";
+Flanks = "flanks";
+Nombril = "nombril";
+Honour = "honour";
+Navel = "navel";
+Center = "center" | "centre";
+Top = "top";
+Surmounted = "surmounted" | "surmonte" | "surmonté" | "debruised";
+Surtout = "sur-le-tout" | "sur le tout" | "en surtout" | "en-surtout";
+Overall = "overall" | "over all";
+Above = "above";
+Below = "below";
+Perched = "perched";
+Issuing = "issuant" | "issuing";
+Wise = "wise" | "ways";
+Paleways = "palewise" | "paleways" | "pale wise";
+Fessways = "fesswise" | "fessways" | "fess wise";
+Bendways = "bendwise" | "bendways" | "bend wise";
+Saltirewise = "saltire wise";
+Crosswise = "cross wise";
+Pallwise = "pall wise";
+Barruly = "barruly";
+BarryPily = "barry pily";
+Barry = "barry";
+Paly = "paly";
+BendySinister = "bendy sinister";
+Bendy = "bendy";
+Chevronny = "chevronny";
+Chequy = "chequy" | "checky";
+Lozengy = "lozengy";
+Fusilly = "fusilly";
+Masculy = "masculy";
+Gyronny = "gyronny";
+Fretty = "fretty";
+Compony = "compony" | "componé" | "gobony" | "gobonne";
+Bezanty = "bezanty" | "bezanté" | "bezantée" | "bezantie" | "bezante" | "bezantee";
+Hurty = "hurty" | "hurté" | "hurte";
+Crusily = "crusily" | "crusilé" | "crusile";
+Platy = "platy" | "platé";
+Billety = "billety" | "billeté" | "billete";
+Annulletty = "annulletty" | "annulletté" | "annullette";
+Etincelle = "etincellé" | "etincelle";
+Goutte = "gutté" | "gutte" | "guttée" | "guttee" | "goutté" | "goutte" | "gouttée" | "gouttee";
+GoutteGules = "de sang" | "de-sang";
+GoutteSable = "de poix" | "de-poix";
+GoutteArgent = "d'eau" | "de eau" | "de-eau";
+GoutteAzure = "de larmes" | "de-larmes";
+GoutteVert = "d'olives" | "d'huile" | "d'olive";
+GoutteOr = "d'or" | "auré";
+Tortelly = "tortelly";
+Semy = "semy" | "seme" | "semee" | "semé" | "semée";
+Voided = "voided";
+Fimbriated = "fimbriated";
+Reversed = "reversed";
+Inverted = "inverted";
+Enhanced = "enhanced";
+Abased = "abased";
+Cotticed = "coticed" | "cotised" | "cottised" | "cotticed" | "cotized" | "cotoye";
+Doubly = "doubly";
+Endorsed = "endorsed";
+CoupleClosed = "couple closed" | "couple closes";
+Rompu = "rompu";
+Indented = "indented";
+Dancetty = "dancetty";
+Dentilly = "dentilly";
+Rayonny = "rayonny" | "rayonné" | "rayonne";
+Wavy = "wavy";
+Undy = "undy";
+Nebuly = "nebuly";
+Engrailed = "engrailed";
+Invected = "invected";
+Embattled = "embattled";
+Embowed = "embowed";
+Nowy = "nowy";
+Bretesse = "bretessé" | "bretesse";
+Urdy = "urdy";
+Triangular = "triangular";
+Enarched = "enarched";
+DoubleArched = "double arched";
+Difference = "difference";
+Cross = "cross" | "crosses";
+Pale = "pale";
+Fess = "fess" | "fesse";
+Bar = "bars";
+Bend = "bend" | "bends";
+BendSinister = "bend sinister" | "bends sinister";
+Chevron = "chevron" | "chevrons";
+Saltire = "saltire" | "saltires";
+Bordure = "bordure" | "border";
+Pile = "pile" | "piles";
+Pall = "pall";
+Canton = "canton";
+Flaunches = "flaunches";
+Fret = "fret";
+Gore = "gore";
+Gyron = "gyron";
+Orle = "orle";
+Tressure = "tressure";
+Escutcheon = "escutcheon" | "escutcheons";
+Lozenge = "lozenge" | "lozenges";
+Fusil = "fusil" | "fusils";
+Mascle = "mascle" | "mascles";
+Rustre = "rustre" | "rustres";
+Roundel = "roundel" | "roundels";
+Annulet = "annulet" | "annulets";
+Billet = "billet" | "billets";
+Mullet = "mullet" | "mullets";
+Star = "star" | "stars";
+Crescent = "crescent" | "crescents" | "increscent" | "increscents" | "decrescent" | "decrescents";
+Demi = "demi";
+Bezant = "bezant" | "bezants";
+Plate = "plate" | "plates";
+Hurt = "hurt" | "hurts";
+Torteau = "torteau" | "torteaux";
+Pellet = "pellet" | "pellets" | "ogresse" | "ogresses";
+Pomme = "pomme" | "pommes";
+Golpe = "golpe, golpes";
+Guze = "guze" | "guzes";
+Label = "label";
+Pallet = "pallet" | "pallets";
+Endorse = "endorse" | "endorses";
+Barrulet = "barrulet" | "barrulets";
+Gemel = "gemel";
+Hamade = "hamade" | "hamaide" | "hamades" | "hamaides" | "hummet" | "hummets";
+Bendlet = "bendlet" | "bendlets";
+Ribbon = "cost" | "ribbon" | "ribband";
+Baton = "baton" | "batons";
+Chevronel = "chevronel" | "chevronels";
+Comble = "comble";
+BendletSinister = "bendlet sinister" | "bendlets sinister" | "scarpe";
+BatonSinister = "baton sinister" | "batons sinister";
+FilletCross = "fillet cross" | "cross fillet";
+Fillet = "fillet" | "fillets";
+FilletSaltire = "fillet saltire";
+Saltorel = "saltorel" | "saltorels";
+Cotice = "cotice" | "couste" | "cottise" | "cottize";
+Affronte = "affronte" | "affronté";
+Guardant = "guardant" | "in full aspect" | "gardant";
+Rampant = "rampant";
+Passant = "passant";
+Sejant = "sejant";
+Couchant = "couchant" | "lodged";
+Courant = "courant" | "at speed" | "in full charge";
+Coward = "coward";
+Dormant = "dormant";
+Salient = "salient" | "springing" | "saltant";
+Statant = "statant" | "at bay";
+Pascuant = "pascuant";
+Displayed = "displayed";
+Addorsed = "addorsed";
+Overt = "overt" | "closed" | "trussed";
+Rising = "rising" | "rousant";
+Volant = "volant";
+Recursant = "recursant";
+Vigilant = "vigilant" | "in its vigilance";
+Vulning = "vulning" | "in her piety";
+Segreant = "segreant";
+Combatant = "combatant" | "respectant";
+Naiant = "naiant";
+Hauriant = "hauriant";
+Urinant = "urinant";
+Glissant = "glissant";
+Nowed = "nowed";
+Contourne = "contourne" | "coutourné";
+EnArriere = "en arriere" | "en arrière";
+Regardant = "regardant";
+InTrianAspect = "in trian aspect";
+Erect = "erect";
+Expanded = "expanded" | "espanie" | "epandre" | "épandre";
+Lowered = "lowered" | "abaise" | "abaisé";
+Elevated = "elevated";
+Moline = "moline" | "anchory";
+Botonny = "botonny" | "trefly";
+Crosslet = "crosslet";
+Flory = "flory" | "fleury";
+Maltese = "maltese";
+Patee = "patee" | "patée" | "formy" | "formee" | "formée";
+Patonce = "patonce" | "patoncé";
+Avelane = "avellane";
+Barby = "barby";
+Cercelee = "cercelee" | "cercelée" | "recercely";
+Erminee = "erminee" | "erminée";
+Fitchy = "fitchy" | "fitchée" | "fitchee";
+Fourchy = "fourchy" | "fourchee" | "fourchée";
+Jerusalem = "jerusalem";
+Patriarchal = "patriarchal";
+Pommy = "pommy";
+Pierced = "pierced";
+Party = "party" | "parted";
+Pairle = "pairle";
+Quarterly = "quarterly";
+Chausse = "chausse" | "chaussé";
+Chape = "chapee" | "chapée";
+Tierced = "tierced";
+Coma = ",";
+SemiColon = ";";
+Dot = ".";
+Colon = ":";
+KeywordSeparator= " " | "-";

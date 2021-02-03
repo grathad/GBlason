@@ -47,11 +47,90 @@
             <Button Grid.Row="2" Grid.Column="2" x:Name="openCustomGrammarFile" Content="Open" Click="openFileButton_Click"/>
             <Label Grid.Row="2" Grid.Column="3" Content="{Binding Context.Resources.CustomRules.Count}"/>
 
-            <Button Grid.Column="4" Grid.RowSpan="3" Content="Compile"/>
+            <Button Grid.Column="4" Grid.RowSpan="3" Content="Compile" Click="Button_Click"/>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
+                <TextBox Grid.Row="0" Width="50" x:Name="searchRulesText" />
+                <Button Grid.Row="0" Grid.Column="1" x:Name="searchEraseButton" Content="X" Click="searchEraseButton_Click"/>
+                <Button Grid.Row="0" Grid.Column="2" x:Name="searchRulesButton" Content="Search" Click="searchRulesButton_Click"/>
+
+                <Label Content="Grammar Rules" Grid.Row="1" Grid.ColumnSpan="3"/>
+                
+                <ListView Grid.ColumnSpan="3" 
+                          MinHeight="50" 
+                          Grid.Row="2" 
+                          ItemsSource="{Binding Context.EbnfParser.FilteredRules}" 
+                          SelectedItem="{Binding Context.EbnfParser.SelectedItem}"
+                          x:Name="ParsedRules">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Label Content="Keywords" Grid.Row="3" Grid.ColumnSpan="3"/>
+                
+                <ListView Grid.ColumnSpan="3" 
+                          MinHeight="50" 
+                          Grid.Row="4" 
+                          ItemsSource="{Binding Context.EbnfParser.FilteredRules}" 
+                          SelectedItem="{Binding Context.EbnfParser.SelectedItem}"
+                          x:Name="Keywords">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding Context.EbnfParser.SelectedItem.Name}"/>
+                <ListView Grid.Row="1" x:Name="GrammarContentList" ItemsSource="{Binding Context.EbnfParser.SelectedItem.Children}"
+                          SelectionChanged="GrammarContentList_SelectionChanged">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}">
+                                <TextBlock.ToolTip>
+                                    <ToolTip Content="{Binding RealElement.RulesContent}"/>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
         </Grid>
 
     </Grid>

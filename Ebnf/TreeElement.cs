@@ -67,6 +67,7 @@ namespace Ebnf
             var leftSideDone = false;
             var rightSideDone = false;
             var startedComment = false;
+            var startedString = false;
             var started = false;
 
             //the format of a rule is: ruleName = rule ;
@@ -99,6 +100,11 @@ namespace Ebnf
 
                 started = started || !char.IsControl(lastChar) || !char.IsWhiteSpace(lastChar);
 
+                if (lastChar == Parser.TextStartSign)
+                {
+                    startedString = !startedString;
+                }
+
                 if (!leftSideDone)
                 {
                     if (lastChar == Parser.EqualSign)
@@ -116,7 +122,7 @@ namespace Ebnf
                 }
                 else
                 {
-                    if (lastChar == Parser.SemiColonSign)
+                    if (lastChar == Parser.SemiColonSign && !startedString)
                     {
                         //the rawelement is done, we move to the next one
                         rightSideDone = true;
@@ -217,6 +223,18 @@ namespace Ebnf
                     var nextChar = (char)reader.Read();
                     switch (nextChar)
                     {
+                        case Parser.TextEndSign when groupOpening == Parser.TextStartSign:
+                            groupVal--;
+                            if (groupVal == 0)
+                            {
+                                //everything before this is the subgroup we create a child
+                                currentRule = new TreeElement { Name = currentRuleName, RulesContent = currentRuleName, IsLeaf = true };
+                                lastAddedRule = null;
+                                newRules.Add(currentRule);
+                                currentRuleName = string.Empty;
+                                groupOpening = char.MinValue;
+                            }
+                            break;
                         case Parser.GroupStartSign:
                         case Parser.TextStartSign:
                         case Parser.RepeatStartSign:

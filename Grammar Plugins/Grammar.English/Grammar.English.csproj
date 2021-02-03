@@ -6,7 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="GrammarDefinition.enbf" />
+	  <None Remove="GrammarDefinition.ebnf" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -16,7 +16,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="GrammarDefinition.enbf" />
+		<EmbeddedResource Include="GrammarDefinition.ebnf" />
 		<EmbeddedResource Include="Keywords.json" />
 	</ItemGroup>
 

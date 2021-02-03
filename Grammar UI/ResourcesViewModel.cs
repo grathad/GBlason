@@ -46,6 +46,21 @@ namespace Grammar_UI
             }
         }
 
+        private Dictionary<string, IEnumerable<string>> _keywords;
+
+        public Dictionary<string, IEnumerable<string>> Keywords
+        {
+            get
+            {
+                return _keywords;
+            }
+            set
+            {
+                _keywords = value;
+                NotifiyPropertyChanged(nameof(Keywords));
+            }
+        }
+
         //still do not know the format of the custom rule objects, so for now they will be objects
         private IEnumerable<object> _customRules;
 
@@ -83,6 +98,7 @@ namespace Grammar_UI
             {
                 _resources.LoadKeywords(st);
                 FinalTokens = _resources.GetTokens();
+                Keywords = _resources.GetKeywords();
             }
         }
 
