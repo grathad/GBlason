@@ -68,7 +68,7 @@ namespace Grammar.English.Tokens
             if (positionBeforeCase)
             {
                 //we have an optional semicolon
-                TryConsumeAndAttachOne(ref origin, TokenNames.ChargeSeparator);
+                TryConsumeAndAttachOne(ref origin, TokenNames.DivisionSeparator);
             }
             else
             {

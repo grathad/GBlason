@@ -9,7 +9,7 @@ namespace Grammar.English.Tokens
 {
     internal class DeterminerParser : LeafParser
     {
-        public DeterminerParser(IParserPilot factory = null, IResources resources = null)
+        public DeterminerParser(IParserPilot factory = null, PluginBase.Keyword.IResources resources = null)
             : base(TokenNames.Determiner, factory, resources)
         {
 

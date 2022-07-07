@@ -59,14 +59,14 @@ namespace Grammar.PluginBase.Parser.Contracts
         /// <param name="position">The position of the keyword to return</param>
         /// <returns>The keyword</returns>
         /// <exception cref="IndexOutOfRangeException">If the position is not within the collection range</exception>
-        ParsedKeyword GetKeyword(int position);
+        PluginBase.Keyword.ParsedKeyword GetKeyword(int position);
 
         /// <summary>
         /// Return the list of key words that are located after the start position
         /// </summary>
         /// <param name="position">the position to look from</param>
         /// <returns>the remaining list of keywords, an empty list if the position is invalid</returns>
-        IList<ParsedKeyword> GetRemainingKeywords(int position);
+        IList<PluginBase.Keyword.ParsedKeyword> GetRemainingKeywords(int position);
 
         /// <summary>
         /// Store and make the tree of calls readable to the pilot user (for debug purpose)

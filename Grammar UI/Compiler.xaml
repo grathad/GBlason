@@ -1,0 +1,137 @@
+﻿<mah:MetroWindow  
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
+    x:Class="Grammar_UI.Compiler"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utils="clr-namespace:Converters;assembly=WPF.Utils"
+    xmlns:local="clr-namespace:Grammar_UI" 
+    d:DataContext="{d:DesignInstance Type=local:ViewModel}"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}"
+    mc:Ignorable="d"
+    Title="MainWindow" Height="450" Width="800">
+    <mah:MetroWindow.Resources>
+        <utils:NullVisibilityConverter x:Key="NullToVisibilityConverter"/>
+    </mah:MetroWindow.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" x:Name="rootGrammarLabel" Content="Root Grammar:"/>
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="rootGrammarFilePath" Text="{Binding Context.RootGrammarFilePath}"/>
+            <Button Grid.Row="0" Grid.Column="2" x:Name="openRootGrammarFile" Content="Open" Click="openFileButton_Click"/>
+            <Label Grid.Row="0" Grid.Column="3" Content="{Binding Context.Resources.EbnfParser.ParsedRules.Count}"/>
+
+            <Label Grid.Row="1" x:Name="keywordGrammarLabel" Content="Keywords:"/>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="keywordsFilePath" Text="{Binding Context.KeywordsFilePath}"/>
+            <Button Grid.Row="1" Grid.Column="2" x:Name="openKeywordsFile" Content="Open" Click="openFileButton_Click"/>
+            <Label Grid.Row="1" Grid.Column="3" Content="{Binding Context.Resources.FinalTokens.Count}"/>
+
+            <Label Grid.Row="2" x:Name="customGrammarLabel" Content="Custom Grammar:"/>
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="customGrammarFilePath" Text="{Binding Context.CustomGrammarFilePath}"/>
+            <Button Grid.Row="2" Grid.Column="2" x:Name="openCustomGrammarFile" Content="Open" Click="openFileButton_Click"/>
+            <Label Grid.Row="2" Grid.Column="3" Content="{Binding Context.Resources.CustomRules.Count}"/>
+
+            <Button Grid.Column="4" Grid.RowSpan="3" Content="Compile" Click="Button_Click"/>
+        </Grid>
+
+        <Grid  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Row="0" Width="50" x:Name="searchRulesText" />
+                <Button Grid.Row="0" Grid.Column="1" x:Name="searchEraseButton" Content="X" Click="searchEraseButton_Click"/>
+                <Button Grid.Row="0" Grid.Column="2" x:Name="searchRulesButton" Content="Search" Click="searchRulesButton_Click"/>
+
+                <Label Content="Grammar Rules" Grid.Row="1" Grid.ColumnSpan="3"/>
+                
+                <ListView Grid.ColumnSpan="3" 
+                          MinHeight="50" 
+                          Grid.Row="2" 
+                          ItemsSource="{Binding Context.EbnfParser.FilteredRules}" 
+                          SelectedItem="{Binding Context.EbnfParser.SelectedItem}"
+                          x:Name="ParsedRules">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Label Content="Keywords" Grid.Row="3" Grid.ColumnSpan="3"/>
+                
+                <ListView Grid.ColumnSpan="3" 
+                          MinHeight="50" 
+                          Grid.Row="4" 
+                          ItemsSource="{Binding Context.EbnfParser.FilteredRules}" 
+                          SelectedItem="{Binding Context.EbnfParser.SelectedItem}"
+                          x:Name="Keywords">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding Context.EbnfParser.SelectedItem.Name}"/>
+                <ListView Grid.Row="1" x:Name="GrammarContentList" ItemsSource="{Binding Context.EbnfParser.SelectedItem.Children}"
+                          SelectionChanged="GrammarContentList_SelectionChanged">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}">
+                                <TextBlock.ToolTip>
+                                    <ToolTip Content="{Binding RealElement.RulesContent}"/>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</mah:MetroWindow>

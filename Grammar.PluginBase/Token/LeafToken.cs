@@ -12,7 +12,7 @@ namespace Grammar.PluginBase.Token
     public class LeafToken : Token, ILeafToken
     {
         /// <inheritdoc/>
-        public virtual List<ParsedKeyword> OriginalKw { get; set; } = new List<ParsedKeyword>();
+        public virtual List<PluginBase.Keyword.ParsedKeyword> OriginalKw { get; set; } = new List<PluginBase.Keyword.ParsedKeyword>();
 
         /// <summary>
         /// Debugger help to read the name of the token

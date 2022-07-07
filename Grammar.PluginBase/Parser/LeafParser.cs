@@ -24,7 +24,7 @@ namespace Grammar.PluginBase.Parser
         /// <summary>
         /// 
         /// </summary>
-        public IResources Resources { get; }
+        public PluginBase.Keyword.IResources Resources { get; }
 
         /// <summary>
         /// Create a new leaf parser, used to extract a token as a final leaf in our tree of tokens.
@@ -33,7 +33,7 @@ namespace Grammar.PluginBase.Parser
         /// <param name="type">The type of token that this leaf represent</param>
         /// <param name="factory">[Optional] The injected factory used to pilot and optimize the parsing <see cref="ParserPilot"/></param>
         /// <param name="resources">[Optional] The resource contract to get the information on the key words and term to use in parsing the leaf. Default to <see cref="Keyword.Resources"/> when not specified</param>
-        public LeafParser(TokenNames type, IParserPilot factory = null, IResources resources = null) :
+        public LeafParser(TokenNames type, IParserPilot factory = null, PluginBase.Keyword.IResources resources = null) :
             base(type, factory)
         {
             CurrentToken = new LeafToken { Type = type };
@@ -46,7 +46,7 @@ namespace Grammar.PluginBase.Parser
         /// <param name="original"></param>
         /// <param name="keywordsUsed"></param>
         /// <returns></returns>
-        protected ITokenResult CreateLeaf(ITokenParsingPosition original, params ParsedKeyword[] keywordsUsed)
+        protected ITokenResult CreateLeaf(ITokenParsingPosition original, params PluginBase.Keyword.ParsedKeyword[] keywordsUsed)
         {
             if (keywordsUsed == null || !keywordsUsed.Any())
             {
@@ -132,17 +132,17 @@ namespace Grammar.PluginBase.Parser
             return allKeyWords;
         }
 
-        protected List<ParsedKeyword> FindMatchingKeywords(int origin, List<IEnumerable<string>> allKeyWords)
+        protected List<PluginBase.Keyword.ParsedKeyword> FindMatchingKeywords(int origin, List<IEnumerable<string>> allKeyWords)
         {
             //Figure out if we have a match (we only take the potential match that have less or as many words as the rest of the blazon to parse)
             var kw = ParserPilot.GetRemainingKeywords(origin);
             var maxLength = kw.Count;
-            var potentialMatches = new List<List<ParsedKeyword>>();
+            var potentialMatches = new List<List<PluginBase.Keyword.ParsedKeyword>>();
             foreach (var keyword in allKeyWords.Where(k => k.Count() <= maxLength))
             {
                 var potentialMatch = keyword as IList<string> ?? keyword.ToList();
-                var wordToCheck = new Stack<ParsedKeyword>(kw.Take(potentialMatch.Count).Reverse().ToList());
-                var wordToReturn = new List<ParsedKeyword>();
+                var wordToCheck = new Stack<PluginBase.Keyword.ParsedKeyword>(kw.Take(potentialMatch.Count).Reverse().ToList());
+                var wordToReturn = new List<PluginBase.Keyword.ParsedKeyword>();
 
                 //we check if the words in the reality match the order in the potential match
                 wordToReturn.AddRange(potentialMatch
@@ -170,6 +170,11 @@ namespace Grammar.PluginBase.Parser
                 return false;
             }
             return FindMatchingKeywords(position, allKeyWords) != null;
+        }
+
+        protected override ITokenResult End()
+        {
+            throw new NotImplementedException();
         }
     }
 }

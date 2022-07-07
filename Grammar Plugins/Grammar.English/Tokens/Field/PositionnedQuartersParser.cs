@@ -59,7 +59,7 @@ namespace Grammar.English.Tokens
             //ok so we have the first position, now we should get a shield
             if (!TryConsumeAndAttachOne(ref origin, TokenNames.Shield)) { return null; }
             //and a charge separator
-            if (!TryConsumeAndAttachOne(ref origin, TokenNames.ChargeSeparator)) { return null; }
+            if (!TryConsumeAndAttachOne(ref origin, TokenNames.DivisionSeparator)) { return null; }
 
             //now it is either the second or the second and third definition
             //trying to see if we start with the first division number (2 cases would be working this way)
@@ -79,7 +79,7 @@ namespace Grammar.English.Tokens
             }
             TryConsumeAndAttachOne(ref origin, TokenNames.Quarter);
             if (!TryConsumeAndAttachOne(ref origin, TokenNames.Shield)) { return null; }
-            if (!TryConsumeAndAttachOne(ref origin, TokenNames.ChargeSeparator) &&
+            if (!TryConsumeAndAttachOne(ref origin, TokenNames.DivisionSeparator) &&
                 expectedRemainingPosition != 0) { return null; }
 
             if (expectedRemainingPosition == 0)
@@ -102,7 +102,7 @@ namespace Grammar.English.Tokens
             TryConsumeAndAttachOne(ref origin, TokenNames.Quarter);
             if (!TryConsumeAndAttachOne(ref origin, TokenNames.Shield)) { return null; }
 
-            if (!TryConsumeAndAttachOne(ref origin, TokenNames.ChargeSeparator) &&
+            if (!TryConsumeAndAttachOne(ref origin, TokenNames.DivisionSeparator) &&
                 expectedRemainingPosition != 0) { return null; }
 
             if (expectedRemainingPosition == 0)

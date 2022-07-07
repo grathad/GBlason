@@ -31,26 +31,26 @@ namespace Grammar.English
         /// <summary>
         /// The detector used for the grammar parser
         /// </summary>
-        public virtual IDetector Detector { get; }
+        public virtual PluginBase.Keyword.IDetector Detector { get; }
 
         /// <summary>
         /// Default constructor initializing the <see cref="Detector"/> with a new empty <see cref="PluginBase.Keyword.Detector"/>
         /// </summary>
         public EnglishGrammar()
         {
-            Detector = new Detector(new List<ParserError>(), new Resources());
+            Detector = new PluginBase.Keyword.Detector(new List<ParserError>(), new PluginBase.Keyword.Resources());
         }
 
         /// <summary>
         /// Constructor that initialize the <see cref="Detector"/> wih the givent parameter
         /// </summary>
         /// <param name="detector">the detector to use when parsing</param>
-        public EnglishGrammar(IDetector detector)
+        public EnglishGrammar(PluginBase.Keyword.IDetector detector)
         {
             Detector = detector;
         }
 
-        internal virtual IParserPilot CreateParser(IParserFactory factory, IList<ParsedKeyword> keywords)
+        internal virtual IParserPilot CreateParser(IParserFactory factory, IList<PluginBase.Keyword.ParsedKeyword> keywords)
         {
             return new ParserPilot(factory, keywords);
         }

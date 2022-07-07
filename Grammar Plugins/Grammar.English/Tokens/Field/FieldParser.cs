@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Format.Elements;
 using Grammar.PluginBase.Parser;
 using Grammar.PluginBase.Parser.Contracts;
 using Grammar.PluginBase.Token;
@@ -23,18 +22,8 @@ namespace Grammar.English.Tokens
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            //we try to consume everything possible and we take the solution that end up consuming the most parsed key words
-            //for simplest charge
-            var result = TryConsumeOr(ref origin,
-                    TokenNames.Tincture,
-                    TokenNames.Division,
-                    TokenNames.FieldVariation);
-            if (result == null)
-            {
-                return null;
-            }
-            AttachChild(result.ResultToken);
-            return CurrentToken.AsTokenResult(result);
+            //Generic Or grammar
+            throw new System.NotImplementedException();
         }
 
         /// <inheritdoc/>

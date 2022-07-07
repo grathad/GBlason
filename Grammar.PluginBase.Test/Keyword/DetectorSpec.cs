@@ -19,7 +19,7 @@ namespace Grammar.PluginBase.Test.Keyword
             [Fact]
             public void NullInput_Initialize()
             {
-                var test = new Detector(null, null);
+                var test = new PluginBase.Keyword.Detector(null, null);
                 test.Errors.Should().BeNull();
                 test.AllKeywords.Should().BeNull();
                 test.AllMergeableWords.Should().BeNull();
@@ -30,13 +30,13 @@ namespace Grammar.PluginBase.Test.Keyword
             public void Initialize()
             {
                 var i1 = new List<ParserError>();
-                var i2 = new Mock<IResources>();
+                var i2 = new Mock<PluginBase.Keyword.IResources>();
                 var i3 = new List<string>();
                 var i4 = new Dictionary<string, IEnumerable<string>>();
                 i2.Setup(m => m.GetMergeableWords()).Returns(i3);
                 i2.Setup(m => m.GetKeywords()).Returns(i4);
 
-                var test = new Detector(i1, i2.Object);
+                var test = new PluginBase.Keyword.Detector(i1, i2.Object);
                 test.Errors.Should().BeSameAs(i1);
                 test.Resources.Should().BeSameAs(i2.Object);
                 test.AllMergeableWords.Should().BeSameAs(i3);
@@ -59,7 +59,7 @@ namespace Grammar.PluginBase.Test.Keyword
             {
                 Action t = () => new Detector(null, null).DetectKeywords(new MemoryStream());
 
-                t.Should().Throw<ArgumentException>().Which.ParamName.Should().Be(nameof(Detector.AllKeywords));
+                t.Should().Throw<ArgumentException>().Which.ParamName.Should().Be(nameof(PluginBase.Keyword.Detector.AllKeywords));
             }
 
 
@@ -126,32 +126,32 @@ namespace Grammar.PluginBase.Test.Keyword
             [Fact]
             public void NullWord_ReturnNull()
             {
-                new Detector(null, null).TryGetKvp(null, " ").Should().BeNull();
+                new PluginBase.Keyword.Detector(null, null).TryGetKvp(null, " ").Should().BeNull();
             }
 
             [Fact]
             public void NullList_ReturnNull()
             {
-                new Detector(null, null).TryGetKvp(" ", " ").Should().BeNull();
+                new PluginBase.Keyword.Detector(null, null).TryGetKvp(" ", " ").Should().BeNull();
             }
 
 
             [Fact]
             public void EmptyList_ReturnNull()
             {
-                var resMock = new Mock<IResources>();
+                var resMock = new Mock<PluginBase.Keyword.IResources>();
                 resMock.Setup(m => m.GetKeywords())
                     .Returns(new Dictionary<string, IEnumerable<string>>());
-                new Detector(null, resMock.Object).TryGetKvp(null, " ").Should().BeNull();
+                new PluginBase.Keyword.Detector(null, resMock.Object).TryGetKvp(null, " ").Should().BeNull();
             }
 
             [Fact]
             public void NoMatch_ReturnNull()
             {
-                var resMock = new Mock<IResources>();
+                var resMock = new Mock<PluginBase.Keyword.IResources>();
                 resMock.Setup(m => m.GetKeywords())
                     .Returns(new Dictionary<string, IEnumerable<string>>());
-                var test = new Detector(null, resMock.Object);
+                var test = new PluginBase.Keyword.Detector(null, resMock.Object);
                 test.TryGetKvp(" ", " ").Should().BeNull();
             }
 
@@ -164,7 +164,7 @@ namespace Grammar.PluginBase.Test.Keyword
                     {
                         {"key", new []{"value"} }
                     });
-                var test = new Detector(null, resMock.Object);
+                var test = new PluginBase.Keyword.Detector(null, resMock.Object);
                 var kvp = test.TryGetKvp("value", "raw");
                 kvp.Value.Should().Be("value");
                 kvp.Key.Should().Be("key");
@@ -174,7 +174,7 @@ namespace Grammar.PluginBase.Test.Keyword
             [Fact]
             public void MultipleMatch_ReturnFirstMatch()
             {
-                var resMock = new Mock<IResources>();
+                var resMock = new Mock<PluginBase.Keyword.IResources>();
                 resMock.Setup(m => m.GetKeywords())
                     .Returns(new Dictionary<string, IEnumerable<string>>
                     {
@@ -182,7 +182,7 @@ namespace Grammar.PluginBase.Test.Keyword
                         {"last key", new []{"another", "value"} },
                         {"key", new []{"value"} }
                     });
-                var test = new Detector(null, resMock.Object);
+                var test = new PluginBase.Keyword.Detector(null, resMock.Object);
                 var kvp = test.TryGetKvp("value", "raw");
                 kvp.Value.Should().Be("value");
                 kvp.Key.Should().Be("last key");
@@ -192,7 +192,7 @@ namespace Grammar.PluginBase.Test.Keyword
             [Fact]
             public void MultipleWordMatch_ReturnFirstMatch()
             {
-                var resMock = new Mock<IResources>();
+                var resMock = new Mock<PluginBase.Keyword.IResources>();
                 resMock.Setup(m => m.GetKeywords())
                     .Returns(new Dictionary<string, IEnumerable<string>>
                     {
@@ -200,7 +200,7 @@ namespace Grammar.PluginBase.Test.Keyword
                         {"key", new []{"value another"} },
                         {"last key", new []{"value", "another" } }
                     });
-                var test = new Detector(null, resMock.Object);
+                var test = new PluginBase.Keyword.Detector(null, resMock.Object);
                 var kvp = test.TryGetKvp("value another", "raw");
                 kvp.Value.Should().Be("value another");
                 kvp.Key.Should().Be("key");
@@ -210,7 +210,7 @@ namespace Grammar.PluginBase.Test.Keyword
             [Fact]
             public void MultipleWordMatch_ReturnNoMatch()
             {
-                var resMock = new Mock<IResources>();
+                var resMock = new Mock<PluginBase.Keyword.IResources>();
                 resMock.Setup(m => m.GetKeywords())
                     .Returns(new Dictionary<string, IEnumerable<string>>
                     {
@@ -218,7 +218,7 @@ namespace Grammar.PluginBase.Test.Keyword
                         {"key", new []{"value", "another"} },
                         {"last key", new []{"another", "value"} }
                     });
-                var test = new Detector(null, resMock.Object);
+                var test = new PluginBase.Keyword.Detector(null, resMock.Object);
                 var kvp = test.TryGetKvp("value another, next", "raw");
                 kvp.Should().Be(null);
             }
@@ -229,17 +229,17 @@ namespace Grammar.PluginBase.Test.Keyword
             [Fact]
             public void OriginalTextNullOrEmpty_Throw()
             {
-                var detector = new Detector(null, null);
-                Action t = () => detector.GetBestMatch(null, new List<KeyWordMatch>(), new List<string>(), out var _);
+                var detector = new PluginBase.Keyword.Detector(null, null);
+                Action t = () => detector.GetBestMatch(null, new List<PluginBase.Keyword.KeyWordMatch>(), new List<string>(), out var _);
                 t.Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("originalText");
-                t = () => detector.GetBestMatch("", new List<KeyWordMatch>(), new List<string>(), out var _);
+                t = () => detector.GetBestMatch("", new List<PluginBase.Keyword.KeyWordMatch>(), new List<string>(), out var _);
                 t.Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("originalText");
             }
 
             [Fact]
             public void NullCurrentMatches_Throw()
             {
-                var detector = new Detector(null, null);
+                var detector = new PluginBase.Keyword.Detector(null, null);
                 Action t = () => detector.GetBestMatch(" ", null, null, out var _).Should().BeNull();
                 t.Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("currentMatches");
             }
@@ -247,20 +247,20 @@ namespace Grammar.PluginBase.Test.Keyword
             [Fact]
             public void EmptyCurrentMatches_ReturnNull()
             {
-                var detector = new Detector(null, null);
+                var detector = new PluginBase.Keyword.Detector(null, null);
                 string raw = null;
-                detector.GetBestMatch(" ", new List<KeyWordMatch>(), null, out raw).Should().BeNull();
+                detector.GetBestMatch(" ", new List<PluginBase.Keyword.KeyWordMatch>(), null, out raw).Should().BeNull();
                 raw.Should().BeEmpty();
             }
 
             [Fact]
             public void NoValidMatches_ReturnWildCard()
             {
-                var detector = new Detector(null, null);
+                var detector = new PluginBase.Keyword.Detector(null, null);
                 var source = "  x";
                 var wildCard = detector.GetBestMatch(
                     source,
-                    Array.Empty<KeyWordMatch>(),
+                    Array.Empty<PluginBase.Keyword.KeyWordMatch>(),
                     null,
                     out var raw);
                 wildCard.Key.Should().Be(ParsedKeyword.NoKeyword);
@@ -272,13 +272,13 @@ namespace Grammar.PluginBase.Test.Keyword
             [Fact]
             public void HappyPathMultipleValidMatch_ReturnBest()
             {
-                var detector = new Detector(null, null);
+                var detector = new PluginBase.Keyword.Detector(null, null);
                 var wildCard = detector.GetBestMatch(
                     "short", //only used for separator analysis, no need to mean anything, the length need to be under or equal the value though
                     new[]
                     {
-                        new KeyWordMatch("key", "value", "raw"),
-                        new KeyWordMatch("key2", "value2", "raw2")
+                        new PluginBase.Keyword.KeyWordMatch("key", "value", "raw"),
+                        new PluginBase.Keyword.KeyWordMatch("key2", "value2", "raw2")
                     },
                     null,
                     out var raw);

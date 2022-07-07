@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Format.Elements;
 using Grammar.PluginBase.Parser;
 using Grammar.PluginBase.Parser.Contracts;
 using Grammar.PluginBase.Token;
@@ -13,7 +12,7 @@ namespace Grammar.English.Tokens
     /// <para>
     /// <h3>Grammar: </h3>
     /// <see cref="Shield"/> := <see cref="Field"/>. |
-    /// <see cref="Field"/>. <see cref="TokenNames.FieldSeparator"/>! (<see cref="TokenNames.Charge"/>)+
+    /// <see cref="Field"/>. <see cref="TokenNames.FieldSeparator"/>! (<see cref="TokenNames.Charge"/>).
     /// <see cref="TokenNames.AllCounterChanged"/>? Cadency?
     /// </para>
     /// </summary>
@@ -30,28 +29,33 @@ namespace Grammar.English.Tokens
 
         public override ITokenResult TryConsume(ref ITokenParsingPosition origin)
         {
-            //mandatory field
-            if (!TryConsumeAndAttachOne(ref origin, TokenNames.Field))
+            Start(origin?.Start ?? 0);
+            if (!ParseMandatory(TokenNames.Field))
             {
-                ErrorMandatoryTokenMissing(TokenNames.Field, origin.Start);
-                return null;
+                return null; //to replace with smart chaining later, but I need to include the notion of "OR" in the list of result, or the token result, while the tree is in the parser pilot
             }
 
-            //expected separator, but ok - ish if not present
-            var separatorPresent = TryConsumeAndAttachOne(ref origin, TokenNames.FieldSeparator);
+            //we are in the or of the grammar, with a charge
+            var separatorPresent = ParseOptional(TokenNames.FieldSeparator);
 
             //then there are optional charges on the field
             //if there is more than one charge, this will be handled in the grammar for complex charges (like list or positionned ones)
-            if (TryConsumeAndAttachOne(ref origin, TokenNames.Charge))
+            if (!ParseMandatory(TokenNames.Charge) && separatorPresent)
             {
-                if (!separatorPresent)
-                {
-                    //we did not found any separator even if there were a valid charge after the field
-                    ErrorOptionalTokenMissing(TokenNames.FieldSeparator, origin.Start);
-                }
+                //we expect something else after the field, but nothing this is an error
+                return null;
             }
-            TryConsumeAndAttachOne(ref origin, TokenNames.AllCounterChanged);
-            return CurrentToken.AsTokenResult(origin);
+
+            if (!separatorPresent)
+            {
+                //we did not found any separator even if there were a valid charge after the field
+                ErrorOptionalTokenMissing(TokenNames.FieldSeparator, origin.Start);
+            }
+            //extra grammar optional
+            ParseOptional(TokenNames.AllCounterChanged);
+            ParseOptional(TokenNames.Cadency);
+
+            return End();
         }
 
         /// <inheritdoc/>
