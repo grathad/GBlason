@@ -46,7 +46,17 @@ namespace Ebnf_UI
 
         private void GrammarContentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedItem = (sender as ListView)?.SelectedItem as TreeElementViewModel;
+            var selectedItem = (sender as ListView)?.SelectedItem as TreeElementReferenceViewModel;
+            if (selectedItem?.RealElement != null)
+            {
+                Context.EbnfParser.SelectedItem = selectedItem;
+            }
+        }
+
+        private void GrammarContentTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            Context.EbnfParser.Filter(string.Empty);
+            var selectedItem = (sender as TreeView)?.SelectedItem as TreeElementReferenceViewModel;
             if (selectedItem?.RealElement != null)
             {
                 Context.EbnfParser.SelectedItem = selectedItem;

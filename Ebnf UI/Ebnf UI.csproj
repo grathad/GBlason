@@ -2,9 +2,10 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows7.0</TargetFramework>
     <RootNamespace>Ebnf_UI</RootNamespace>
     <UseWPF>true</UseWPF>
+    <StartupObject>Ebnf_UI.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
