@@ -46,11 +46,55 @@ namespace Ebnf_UI
 
         private void GrammarContentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedItem = (sender as ListView)?.SelectedItem as TreeElementViewModel;
+            var selectedItem = (sender as ListView)?.SelectedItem as TreeElementReferenceViewModel;
             if (selectedItem?.RealElement != null)
             {
                 Context.EbnfParser.SelectedItem = selectedItem;
             }
+        }
+
+        private void GrammarContentTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            var tv = (sender as TreeView);
+            var selectedItem = tv?.SelectedItem as TreeElementReferenceViewModel;
+
+            if (tv?.SelectedItem != null)
+            {
+                var container = FindTreeViewSelectedItemContainer(tv, tv.SelectedItem);
+                if (container != null)
+                {
+                    container.IsSelected = false;
+                }
+            }
+
+            if (selectedItem?.RealElement != null)
+            {
+                Context.EbnfParser.SelectedItem = selectedItem;
+            }
+            e.Handled = true;
+        }
+
+        private static TreeViewItem FindTreeViewSelectedItemContainer(ItemsControl root, object selection)
+        {
+            var item = root?.ItemContainerGenerator.ContainerFromItem(selection) as TreeViewItem;
+            if (item == null && root?.Items != null && root.Items.Count > 0)
+            {
+                foreach (var subItem in root.Items)
+                {
+                    var subItemControl = (TreeViewItem)root.ItemContainerGenerator.ContainerFromItem(subItem);
+                    if(subItemControl == null)
+                    {
+                        return null;
+                    }
+                    item = FindTreeViewSelectedItemContainer(subItemControl, selection);
+                    if (item != null)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return item;
         }
     }
 }

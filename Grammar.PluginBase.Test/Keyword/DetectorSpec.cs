@@ -158,7 +158,7 @@ namespace Grammar.PluginBase.Test.Keyword
             [Fact]
             public void OneMatch_ReturnMatch()
             {
-                var resMock = new Mock<IResources>();
+                var resMock = new Mock<PluginBase.Keyword.IResources>();
                 resMock.Setup(m => m.GetKeywords())
                     .Returns(new Dictionary<string, IEnumerable<string>>
                     {

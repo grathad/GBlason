@@ -33,10 +33,10 @@ namespace Grammar.PluginBase.Test.Token
             [Fact]
             public void NoKeyWords_ReturnNullString()
             {
-                _mock.SetupGet(m => m.OriginalKw).Returns(default(List<ParsedKeyword>));
+                _mock.SetupGet(m => m.OriginalKw).Returns(default(List<PluginBase.Keyword.ParsedKeyword>));
                 _mock.Object.ToString().Should().NotBeEmpty();
 
-                _mock.SetupGet(m => m.OriginalKw).Returns(new List<ParsedKeyword>());
+                _mock.SetupGet(m => m.OriginalKw).Returns(new List<PluginBase.Keyword.ParsedKeyword>());
                 _mock.Object.ToString().Should().NotBeEmpty();
 
                 _mock.VerifyGet(m => m.OriginalKw, Times.Exactly(3));
@@ -45,13 +45,13 @@ namespace Grammar.PluginBase.Test.Token
             [Fact]
             public void MultipleKeywords_ReturnProperString()
             {
-                var pkw = new Mock<ParsedKeyword>();
+                var pkw = new Mock<PluginBase.Keyword.ParsedKeyword>();
                 pkw.SetupSequence(m => m.Value)
                     .Returns("1")
                     .Returns("2")
                     .Returns("3");
                 _mock.SetupGet(m => m.OriginalKw).Returns(
-                    new List<ParsedKeyword>
+                    new List<PluginBase.Keyword.ParsedKeyword>
                     {
                         pkw.Object,
                         pkw.Object,

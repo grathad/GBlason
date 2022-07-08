@@ -44,7 +44,7 @@ namespace Grammar.PluginBase.Test.Parser
                 //need to check with valid inputs
                 var parser = new ParserPilot(
                     new DefaultParserFactory(typeof(ParserPilot).GetTypeInfo().Assembly),
-                    new[] { new ParsedKeyword() }, new[] { new ParserError(0, "explanation") });
+                    new[] { new PluginBase.Keyword.ParsedKeyword() }, new[] { new ParserError(0, "explanation") });
 
                 parser.Should().NotBeNull().And.Subject
                     .As<ParserPilot>().Errors.Should().NotBeNull().And.Subject
@@ -478,11 +478,11 @@ namespace Grammar.PluginBase.Test.Parser
             [Fact]
             public void KeywordsNullOrEmpty_ReturnFalse()
             {
-                _pilotMock.SetupGet(m => m.KeyWords).Returns(default(IList<ParsedKeyword>));
+                _pilotMock.SetupGet(m => m.KeyWords).Returns(default(IList<PluginBase.Keyword.ParsedKeyword>));
                 _pilotMock.Object.IsInputValid(ref _position, TokenNames.Undefined).Should().BeFalse();
                 _position.Should().Be(TokenParsingPosition.DefaultStartingPosition);
 
-                _pilotMock.SetupGet(m => m.KeyWords).Returns(new List<ParsedKeyword>());
+                _pilotMock.SetupGet(m => m.KeyWords).Returns(new List<PluginBase.Keyword.ParsedKeyword>());
                 _pilotMock.Object.IsInputValid(ref _position, TokenNames.Undefined).Should().BeFalse();
                 _position.Should().Be(TokenParsingPosition.DefaultStartingPosition);
             }
@@ -490,7 +490,7 @@ namespace Grammar.PluginBase.Test.Parser
             [Fact]
             public void PositionStartOverLastPosition_ReturnFalse()
             {
-                _pilotMock.SetupGet(m => m.KeyWords).Returns(new List<ParsedKeyword> { new ParsedKeyword() });
+                _pilotMock.SetupGet(m => m.KeyWords).Returns(new List<PluginBase.Keyword.ParsedKeyword> { new PluginBase.Keyword.ParsedKeyword() });
                 _pilotMock.SetupGet(m => m.LastPosition).Returns(-1);
                 _position = null;
                 _pilotMock.Object.IsInputValid(ref _position, TokenNames.Undefined).Should().BeFalse();
@@ -500,7 +500,7 @@ namespace Grammar.PluginBase.Test.Parser
             [Fact]
             public void FactoryParserNull_ReturnFalse()
             {
-                _pilotMock.SetupGet(m => m.KeyWords).Returns(new List<ParsedKeyword> { new ParsedKeyword() });
+                _pilotMock.SetupGet(m => m.KeyWords).Returns(new List<PluginBase.Keyword.ParsedKeyword> { new PluginBase.Keyword.ParsedKeyword() });
                 _factory.Setup(m => m.GetParser(It.IsAny<TokenNames>()))
                     .Returns(default(TypeInfo));
                 _pilotMock.Object.IsInputValid(ref _position, TokenNames.Undefined).Should().BeFalse();
@@ -510,7 +510,7 @@ namespace Grammar.PluginBase.Test.Parser
             [Fact]
             public void AllInputValid_ReturnTrue()
             {
-                _pilotMock.SetupGet(m => m.KeyWords).Returns(new List<ParsedKeyword> { new ParsedKeyword() });
+                _pilotMock.SetupGet(m => m.KeyWords).Returns(new List<PluginBase.Keyword.ParsedKeyword> { new PluginBase.Keyword.ParsedKeyword() });
                 _factory.Setup(m => m.GetParser(It.IsAny<TokenNames>()))
                     .Returns(typeof(object).GetTypeInfo);
                 _pilotMock.Object.IsInputValid(ref _position, TokenNames.Undefined).Should().BeTrue();
@@ -536,7 +536,7 @@ namespace Grammar.PluginBase.Test.Parser
                 return GetFromMemory(name, positionStart);
             }
 
-            public ParserPilotOverride(IParserFactory factory, IList<ParsedKeyword> keyWords, IList<ParserError> errors = null) : base(factory, keyWords, errors)
+            public ParserPilotOverride(IParserFactory factory, IList<PluginBase.Keyword.ParsedKeyword> keyWords, IList<ParserError> errors = null) : base(factory, keyWords, errors)
             {
             }
         }
@@ -779,11 +779,11 @@ namespace Grammar.PluginBase.Test.Parser
         public class GetKeyword
         {
             private readonly Mock<ParserPilot> _mock;
-            private readonly Mock<IList<ParsedKeyword>> _keyWords;
+            private readonly Mock<IList<PluginBase.Keyword.ParsedKeyword>> _keyWords;
 
             public GetKeyword()
             {
-                _keyWords = new Mock<IList<ParsedKeyword>>();
+                _keyWords = new Mock<IList<PluginBase.Keyword.ParsedKeyword>>();
                 _mock = new Mock<ParserPilot>(
                     new Mock<IParserFactory>().Object,
                     _keyWords.Object,
@@ -814,10 +814,10 @@ namespace Grammar.PluginBase.Test.Parser
             [Fact]
             public void ReturnKeywordAtPosition()
             {
-                var result = new Mock<ParsedKeyword>();
-                _mock.SetupGet(m => m.KeyWords).Returns(new List<ParsedKeyword>
+                var result = new Mock<PluginBase.Keyword.ParsedKeyword>();
+                _mock.SetupGet(m => m.KeyWords).Returns(new List<PluginBase.Keyword.ParsedKeyword>
                     {
-                        new Mock<ParsedKeyword>().Object,
+                        new Mock<PluginBase.Keyword.ParsedKeyword>().Object,
                         result.Object
                     });
                 _mock.Object.GetKeyword(1).Should().Be(result.Object);
@@ -827,11 +827,11 @@ namespace Grammar.PluginBase.Test.Parser
         public class GetRemainingKeywords
         {
             private readonly Mock<ParserPilot> _mock;
-            private readonly Mock<IList<ParsedKeyword>> _keyWords;
+            private readonly Mock<IList<PluginBase.Keyword.ParsedKeyword>> _keyWords;
 
             public GetRemainingKeywords()
             {
-                _keyWords = new Mock<IList<ParsedKeyword>>();
+                _keyWords = new Mock<IList<PluginBase.Keyword.ParsedKeyword>>();
                 _mock = new Mock<ParserPilot>(
                         new Mock<IParserFactory>().Object,
                         _keyWords.Object,
@@ -859,10 +859,10 @@ namespace Grammar.PluginBase.Test.Parser
             [Fact]
             public void ReturnRemainingKeyWordsFromPosition()
             {
-                var result = new Mock<ParsedKeyword>();
-                _mock.SetupGet(m => m.KeyWords).Returns(new List<ParsedKeyword>
+                var result = new Mock<PluginBase.Keyword.ParsedKeyword>();
+                _mock.SetupGet(m => m.KeyWords).Returns(new List<PluginBase.Keyword.ParsedKeyword>
                 {
-                    new Mock<ParsedKeyword>().Object,
+                    new Mock<PluginBase.Keyword.ParsedKeyword>().Object,
                     result.Object
                 });
 

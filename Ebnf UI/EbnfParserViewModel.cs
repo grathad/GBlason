@@ -12,7 +12,9 @@ namespace Ebnf_UI
 {
     public class EbnfParserViewModel : INotifyPropertyChanged
     {
-        private Parser _ebnfParser = new Parser();
+        private readonly Parser _ebnfParser = new();
+
+        #region VM Properties
 
         private bool _parsingNotInProgress = true;
 
@@ -29,9 +31,12 @@ namespace Ebnf_UI
             }
         }
 
-        private ObservableCollection<TreeElementViewModel> _parsedRules = new ObservableCollection<TreeElementViewModel>();
+        private ObservableCollection<TreeElementReferenceViewModel> _parsedRules = new ObservableCollection<TreeElementReferenceViewModel>();
 
-        public ObservableCollection<TreeElementViewModel> ParsedRules
+        /// <summary>
+        /// The total flatten list of all the rules parsed, not in a tree
+        /// </summary>
+        public ObservableCollection<TreeElementReferenceViewModel> ParsedRules
         {
             get
             {
@@ -44,9 +49,12 @@ namespace Ebnf_UI
             }
         }
 
-        private ObservableCollection<TreeElementViewModel> _filteredRules = new ObservableCollection<TreeElementViewModel>();
+        private ObservableCollection<TreeElementReferenceViewModel> _filteredRules = new ObservableCollection<TreeElementReferenceViewModel>();
 
-        public ObservableCollection<TreeElementViewModel> FilteredRules
+        /// <summary>
+        /// The sublist of rules available flattened as used by the list view
+        /// </summary>
+        public ObservableCollection<TreeElementReferenceViewModel> FilteredRules
         {
             get
             {
@@ -59,9 +67,12 @@ namespace Ebnf_UI
             }
         }
 
-        private TreeElementViewModel _selectedItem;
+        private TreeElementReferenceViewModel _selectedItem;
 
-        public TreeElementViewModel SelectedItem
+        /// <summary>
+        /// The currently selected item in either the list or the filtered list
+        /// </summary>
+        public TreeElementReferenceViewModel SelectedItem
         {
             get
             {
@@ -74,6 +85,14 @@ namespace Ebnf_UI
             }
         }
 
+        #endregion
+
+        #region Operations
+
+        /// <summary>
+        /// Filter the flat list to only show the corresponding elements
+        /// </summary>
+        /// <param name="text"></param>
         public void Filter(string text)
         {
             if (FilteredRules == null
@@ -82,7 +101,7 @@ namespace Ebnf_UI
                 return;
             }
 
-            IList<TreeElementViewModel> filteredList;
+            IList<TreeElementReferenceViewModel> filteredList;
 
             if (string.IsNullOrEmpty(text))
             {
@@ -100,22 +119,28 @@ namespace Ebnf_UI
             }
         }
 
+        /// <summary>
+        /// Creating all the rules from the input file and creating the corresponding viewmodels out of the parsing for debugging purpose
+        /// </summary>
+        /// <param name="input"></param>
         public void Parse(FileStream input)
         {
             try
             {
                 ParsingNotInProgress = false;
                 _ebnfParser.Parse(input);
-                foreach (var rule in _ebnfParser.AllRules)
+                var itemsRef = new Collection<TreeElementReferenceViewModel>();
+
+                foreach (var rootRule in _ebnfParser.AllRules)
                 {
-                    ParsedRules.Add(new TreeElementViewModel(rule));
+                    TreeElementReferenceViewModel.BuildCyclicSafeSubtree(rootRule, itemsRef);
                 }
-                //creating tree for all the children for all the rules                
-                foreach (var rule in ParsedRules)
+                foreach(var r in itemsRef.Distinct())
                 {
-                    rule.BuildLinks(ParsedRules);
-                    FilteredRules.Add(rule);
+                    ParsedRules.Add(r);
                 }
+                FilteredRules = ParsedRules;
+                SelectedItem = ParsedRules.FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -127,6 +152,8 @@ namespace Ebnf_UI
                 ParsingNotInProgress = true;
             }
         }
+
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
 
