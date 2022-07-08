@@ -58,7 +58,7 @@ namespace Ebnf_UI
             var tv = (sender as TreeView);
             var selectedItem = tv?.SelectedItem as TreeElementReferenceViewModel;
 
-            if (tv.SelectedItem != null)
+            if (tv?.SelectedItem != null)
             {
                 var container = FindTreeViewSelectedItemContainer(tv, tv.SelectedItem);
                 if (container != null)
@@ -76,12 +76,17 @@ namespace Ebnf_UI
 
         private static TreeViewItem FindTreeViewSelectedItemContainer(ItemsControl root, object selection)
         {
-            var item = root.ItemContainerGenerator.ContainerFromItem(selection) as TreeViewItem;
-            if (item == null)
+            var item = root?.ItemContainerGenerator.ContainerFromItem(selection) as TreeViewItem;
+            if (item == null && root?.Items != null && root.Items.Count > 0)
             {
                 foreach (var subItem in root.Items)
                 {
-                    item = FindTreeViewSelectedItemContainer((TreeViewItem)root.ItemContainerGenerator.ContainerFromItem(subItem), selection);
+                    var subItemControl = (TreeViewItem)root.ItemContainerGenerator.ContainerFromItem(subItem);
+                    if(subItemControl == null)
+                    {
+                        return null;
+                    }
+                    item = FindTreeViewSelectedItemContainer(subItemControl, selection);
                     if (item != null)
                     {
                         break;

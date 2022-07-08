@@ -78,14 +78,15 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="{Binding Context.EbnfParser.SelectedItem.DisplayName}" HorizontalAlignment="Center"/>
 
-                <TreeView x:Name="GrammarContentList" ItemsSource="{Binding Context.EbnfParser.SelectedItem.Children}" Grid.Row="1"
+
+                <!--<TreeView x:Name="GrammarContentList" ItemsSource="{Binding Context.EbnfParser.SelectedItem.Children}" Grid.Row="1"
                           SelectedItemChanged="GrammarContentTree_SelectedItemChanged">
                     <TreeView.ItemContainerStyle>
                         <Style TargetType="{x:Type TreeViewItem}">
                             <Setter Property="ItemsPanel">
                                 <Setter.Value>
                                     <ItemsPanelTemplate>
-                                        <StackPanel VerticalAlignment="Stretch" IsItemsHost="True" Orientation="Horizontal"  />
+                                        <StackPanel HorizontalAlignment="Stretch" IsItemsHost="True" Orientation="Horizontal"  />
                                     </ItemsPanelTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -116,7 +117,29 @@
                             <Grid HorizontalAlignment="Center" IsItemsHost="True" />
                         </ItemsPanelTemplate>
                     </TreeView.ItemsPanel>
+                </TreeView>-->
+
+                <TreeView x:Name="GrammarContentList" ItemsSource="{Binding Context.EbnfParser.SelectedItem.Children}" Grid.Row="1"
+                          SelectedItemChanged="GrammarContentTree_SelectedItemChanged">
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="{x:Type TreeViewItem}">
+                            <Setter Property="IsExpanded" Value="True"/>
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type local:TreeElementReferenceViewModel}" ItemsSource="{Binding Children}">
+
+                            <Border BorderThickness="1" BorderBrush="#44000000" Margin="4" HorizontalAlignment="Left">
+                                <TextBlock Text="{Binding DisplayName}" Padding="4" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <Border.ToolTip>
+                                    <TextBlock Text="{Binding RealElement.RulesContent}"/>
+                                </Border.ToolTip>
+                            </Border>
+
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
                 </TreeView>
+
             </Grid>
         </Grid>
     </Grid>

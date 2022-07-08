@@ -140,6 +140,7 @@ namespace Ebnf_UI
                     ParsedRules.Add(r);
                 }
                 FilteredRules = ParsedRules;
+                SelectedItem = ParsedRules.FirstOrDefault();
             }
             catch (Exception e)
             {
