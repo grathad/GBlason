@@ -55,12 +55,41 @@ namespace Ebnf_UI
 
         private void GrammarContentTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            Context.EbnfParser.Filter(string.Empty);
-            var selectedItem = (sender as TreeView)?.SelectedItem as TreeElementReferenceViewModel;
+            var tv = (sender as TreeView);
+            var selectedItem = tv?.SelectedItem as TreeElementReferenceViewModel;
+
+            if (tv.SelectedItem != null)
+            {
+                var container = FindTreeViewSelectedItemContainer(tv, tv.SelectedItem);
+                if (container != null)
+                {
+                    container.IsSelected = false;
+                }
+            }
+
             if (selectedItem?.RealElement != null)
             {
                 Context.EbnfParser.SelectedItem = selectedItem;
             }
+            e.Handled = true;
+        }
+
+        private static TreeViewItem FindTreeViewSelectedItemContainer(ItemsControl root, object selection)
+        {
+            var item = root.ItemContainerGenerator.ContainerFromItem(selection) as TreeViewItem;
+            if (item == null)
+            {
+                foreach (var subItem in root.Items)
+                {
+                    item = FindTreeViewSelectedItemContainer((TreeViewItem)root.ItemContainerGenerator.ContainerFromItem(subItem), selection);
+                    if (item != null)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return item;
         }
     }
 }

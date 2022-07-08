@@ -129,19 +129,17 @@ namespace Ebnf_UI
             {
                 ParsingNotInProgress = false;
                 _ebnfParser.Parse(input);
+                var itemsRef = new Collection<TreeElementReferenceViewModel>();
 
-                foreach (var rootRule in _ebnfParser.AllRules.Where(r => !r.Parents.Any()))
+                foreach (var rootRule in _ebnfParser.AllRules)
                 {
-                    var itemsRef = new Collection<TreeElementReferenceViewModel>();
-                    FilteredRules.Add(new TreeElementReferenceViewModel(rootRule, itemsRef));
-                    foreach (var r in itemsRef)
-                    {
-                        if (ParsedRules.All(rul => rul != r))
-                        {
-                            ParsedRules.Add(r);
-                        }
-                    }
+                    TreeElementReferenceViewModel.BuildCyclicSafeSubtree(rootRule, itemsRef);
                 }
+                foreach(var r in itemsRef.Distinct())
+                {
+                    ParsedRules.Add(r);
+                }
+                FilteredRules = ParsedRules;
             }
             catch (Exception e)
             {

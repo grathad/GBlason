@@ -11,6 +11,8 @@ namespace Ebnf_UI
     /// </summary>
     public class TreeElementReferenceViewModel : INotifyPropertyChanged
     {
+        public TreeElementReferenceViewModel() { }
+
         public TreeElementReferenceViewModel(TreeElement source, Collection<TreeElementReferenceViewModel> itemsRef = null)
         {
             RealElement = source;
@@ -28,9 +30,28 @@ namespace Ebnf_UI
             }
         }
 
-        public TreeElementReferenceViewModel()
+        public static TreeElementReferenceViewModel BuildCyclicSafeSubtree(TreeElement root, Collection<TreeElementReferenceViewModel> itemRefs)
         {
+            if (root == null) { return null; }
 
+            TreeElementReferenceViewModel refElement;
+            //here we only continue to build the tree IF the current element is NOT in the references
+            var alreadyR = itemRefs.FirstOrDefault(r => r.RealElement == root);
+            if (alreadyR != null)
+            {
+                //we already have the root in the tree, let's use a reference to it instead (not including the children)
+                refElement = new TreeElementReferenceViewModel
+                {
+                    Reference = alreadyR,
+                    RealElement = root
+                };
+                //we return an element with a reference and NO (direct) children
+                return refElement;
+            }
+            //here this is the first time we cross path with that element
+            //adding this element to the list for later potential redetection
+            refElement = new TreeElementReferenceViewModel(root, itemRefs);
+            return refElement;
         }
 
         public TreeElementReferenceViewModel FirstOrDefault(Func<TreeElementReferenceViewModel, bool> filter)
@@ -41,10 +62,10 @@ namespace Ebnf_UI
             {
                 return null;
             }
-            foreach(var child in Children)
+            foreach (var child in Children)
             {
                 var finding = child.FirstOrDefault(filter);
-                if(finding != null)
+                if (finding != null)
                 {
                     return finding;
                 }
@@ -89,30 +110,6 @@ namespace Ebnf_UI
                 _children = value;
                 NotifiyPropertyChanged(nameof(Children));
             }
-        }
-
-        public static TreeElementReferenceViewModel BuildCyclicSafeSubtree(TreeElement root, Collection<TreeElementReferenceViewModel> itemRefs)
-        {
-            if (root == null) { return null; }
-
-            TreeElementReferenceViewModel refElement;
-            //here we only continue to build the tree IF the current element is NOT in the references
-            var alreadyR = itemRefs.FirstOrDefault(r => r.RealElement == root);
-            if (alreadyR != null)
-            {
-                //we already have the root in the tree, let's use a reference to it instead (not including the children)
-                refElement = new TreeElementReferenceViewModel
-                {
-                    Reference = alreadyR,
-                    RealElement = root
-                };
-                //we return an element with a reference and NO (direct) children
-                return refElement;
-            }
-            //here this is the first time we cross path with that element
-            //adding this element to the list for later potential redetection
-            refElement = new TreeElementReferenceViewModel(root, itemRefs);
-            return refElement;
         }
 
         public string DisplayName

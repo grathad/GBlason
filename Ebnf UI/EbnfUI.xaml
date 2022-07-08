@@ -57,7 +57,6 @@
                           MinHeight="50" 
                           Grid.Row="2" 
                           ItemsSource="{Binding Context.EbnfParser.FilteredRules}" 
-                          SelectedItem="{Binding Context.EbnfParser.SelectedItem}"
                           SelectionChanged="GrammarContentList_SelectionChanged"
                           x:Name="ParsedRules">
                     <ListView.ItemTemplate>
@@ -86,11 +85,12 @@
                             <Setter Property="ItemsPanel">
                                 <Setter.Value>
                                     <ItemsPanelTemplate>
-                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Stretch" IsItemsHost="True" Orientation="Horizontal"  />
+                                        <StackPanel VerticalAlignment="Stretch" IsItemsHost="True" Orientation="Horizontal"  />
                                     </ItemsPanelTemplate>
                                 </Setter.Value>
                             </Setter>
                             <Setter Property="IsExpanded" Value="True"/>
+                            <Setter Property="IsSelected" Value="False"/>
                         </Style>
                     </TreeView.ItemContainerStyle>
                     <TreeView.Resources>
