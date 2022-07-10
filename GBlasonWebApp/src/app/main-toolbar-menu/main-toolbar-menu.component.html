@@ -1,17 +1,17 @@
-<mat-toolbar>
-  <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu" aria-label="Main application menu button">
+<mat-toolbar color="primary">
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Main application menu button">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>Welcome</button>
-    <button mat-menu-item>EBNF</button>
+    <button mat-menu-item (click) = "navigate('welcome')">Welcome</button>
+    <button mat-menu-item (click) = "navigate('ebnf')">EBNF</button>
   </mat-menu>
   <span>{{title}}</span>
   <span class="main-menu-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+  <button mat-icon-button class="favorite-icon" aria-label="Example icon-button with heart icon">
     <mat-icon>favorite</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+  <button mat-icon-button aria-label="Example icon-button with share icon">
     <mat-icon>share</mat-icon>
   </button>
 </mat-toolbar>

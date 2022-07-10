@@ -1,0 +1,17 @@
+.content-card {
+  max-width: 80em;
+  margin: 0 auto;
+}
+
+.parent-horizontal-card{
+  display: flex;
+  flex-direction: row;
+}
+
+.parent-horizontal-card>.content-card{
+  width: 29%;
+}
+
+.first-block {
+  margin: 1em auto;
+}

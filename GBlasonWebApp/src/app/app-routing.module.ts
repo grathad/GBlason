@@ -5,9 +5,10 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { EbnfComponent } from './ebnf/ebnf.component';
 
 const routes: Routes = [
-
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
-  { path: 'welcome', component: WelcomeComponent }
+  { path: 'welcome', component: WelcomeComponent },
+  { path: 'ebnf', component: EbnfComponent },
+  { path: '**', component: WelcomeComponent }
 ];
 
 @NgModule({
