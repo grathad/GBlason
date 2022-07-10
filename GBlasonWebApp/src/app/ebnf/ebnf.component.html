@@ -2,7 +2,6 @@
   <mat-tab label="Raw EBNF">
     <div *ngIf="rawEbnfSuccess; else elseBlock" class="main-display-area"><pre>{{rawEbnf}}</pre></div>
     <ng-template #elseBlock><app-http-error [error]="requestError"></app-http-error></ng-template>
-
   </mat-tab>
   <mat-tab label="Tree View">
 
