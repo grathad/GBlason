@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,18 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  // public forecasts?: WeatherForecast[];
+  constructor() {
 
-  constructor(http: HttpClient) {
-    // http.get<WeatherForecast[]>('/weatherforecast').subscribe(result => {
-    //   this.forecasts = result;
-    // }, error => console.error(error));
   }
-}
-
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
 }

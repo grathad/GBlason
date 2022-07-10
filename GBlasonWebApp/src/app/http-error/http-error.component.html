@@ -1,0 +1,16 @@
+<div class="content-card">
+  <mat-card class="first-block">
+    <mat-card-subtitle>{{error.url}}</mat-card-subtitle>
+    <mat-card-title>{{error.message}}</mat-card-title>
+    <mat-card-content>
+      <p>{{error.status}} {{error.statusText}}</p>
+      <p class="content-margin">{{error.error.error.message}}</p>
+      <p>{{error.error.error.stack}}</p>
+    </mat-card-content>
+    <mat-divider inset></mat-divider>
+    <mat-card-actions align="end">
+      <button mat-button>Retry</button>
+      <button mat-button>Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

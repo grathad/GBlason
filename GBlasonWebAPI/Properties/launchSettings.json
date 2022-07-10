@@ -1,23 +1,28 @@
 {
+  "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:50627",
-      "sslPort": 0
+      "applicationUrl": "http://localhost:44983",
+      "sslPort": 44367
     }
   },
   "profiles": {
     "GBlasonWebAPI": {
       "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5230",
+      "applicationUrl": "https://localhost:7204;http://localhost:5230",
       "dotnetRunMessages": true
     },
     "IIS Express": {
       "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
