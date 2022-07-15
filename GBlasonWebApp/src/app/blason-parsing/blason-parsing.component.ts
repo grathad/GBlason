@@ -13,7 +13,8 @@ export class TreeViewUINode {
 
   readonly treeNode: TreeViewNode;
   isVisible: boolean = true;
-  domObject: ElementRef | null = null;
+  domObject: any | null = null;
+  xTransform: number = 0;
   position: Point | null = null;
   depth: number = 0;
   isLeaf: boolean = true;
@@ -69,8 +70,8 @@ export class BlasonParsingComponent implements OnInit, AfterViewInit, OnChanges 
   private _optional_icon: string = "M10.6 16q0-2.025.363-2.913.362-.887 1.537-1.937 1.025-.9 1.562-1.563.538-.662.538-1.512 0-1.025-.687-1.7Q13.225 5.7 12 5.7q-1.275 0-1.938.775-.662.775-.937 1.575L6.55 6.95q.525-1.6 1.925-2.775Q9.875 3 12 3q2.625 0 4.038 1.463 1.412 1.462 1.412 3.512 0 1.25-.537 2.138-.538.887-1.688 2.012Q14 13.3 13.738 13.912q-.263.613-.263 2.088Zm1.4 6q-.825 0-1.412-.587Q10 20.825 10 20q0-.825.588-1.413Q11.175 18 12 18t1.413.587Q14 19.175 14 20q0 .825-.587 1.413Q12.825 22 12 22Z";
   private _group_icon: string = "M8 16q.825 0 1.413-.588Q10 14.825 10 14t-.587-1.413Q8.825 12 8 12q-.825 0-1.412.587Q6 13.175 6 14q0 .825.588 1.412Q7.175 16 8 16Zm8 0q.825 0 1.413-.588Q18 14.825 18 14t-.587-1.413Q16.825 12 16 12q-.825 0-1.412.587Q14 13.175 14 14q0 .825.588 1.412Q15.175 16 16 16Zm-4-6q.825 0 1.413-.588Q14 8.825 14 8t-.587-1.412Q12.825 6 12 6q-.825 0-1.412.588Q10 7.175 10 8t.588 1.412Q11.175 10 12 10Zm0 12q-2.075 0-3.9-.788-1.825-.787-3.175-2.137-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175 1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138 1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4 8.65 4 6.325 6.325 4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Z";
   private _leaf_icon: string = "M5.4 19.6Q4.275 18.475 3.638 17 3 15.525 3 13.95q0-1.575.6-3.113Q4.2 9.3 5.55 7.95q.875-.875 2.163-1.5Q9 5.825 10.762 5.462q1.763-.362 4.026-.437 2.262-.075 5.062.175.2 2.65.125 4.875-.075 2.225-.413 4.012-.337 1.788-.949 3.125Q18 18.55 17.1 19.45q-1.325 1.325-2.812 1.937Q12.8 22 11.25 22q-1.625 0-3.175-.637-1.55-.638-2.675-1.763Zm2.8-.4q.725.425 1.488.612.762.188 1.562.188 1.15 0 2.275-.462 1.125-.463 2.15-1.488.45-.45.912-1.262.463-.813.801-2.126.337-1.312.512-3.174.175-1.863.05-4.438-1.225-.05-2.762-.038-1.538.013-3.063.238-1.525.225-2.9.725T6.975 9.35q-1.125 1.125-1.55 2.225Q5 12.675 5 13.7q0 1.475.562 2.587.563 1.113.988 1.563 1.05-2 2.775-3.838Q11.05 12.175 13.35 11q-1.8 1.575-3.137 3.562Q8.875 16.55 8.2 19.2Zm0 0Zm0 0Z";
-  private _expand_less_icon: string = "m12 15.375-6-6 1.4-1.4 4.6 4.6 4.6-4.6 1.4 1.4Z";
-  private _expand_more_icon: string = "m7.4 15.375-1.4-1.4 6-6 6 6-1.4 1.4-4.6-4.6Z";
+  private _expand_less_icon: string = "M5 13v-2h14v2Z";
+  private _expand_more_icon: string = "M11 19v-6H5v-2h6V5h2v6h6v2h-6v6Z";
 
   private _startDragPoint: Point = { x: 0, y: 0 };
   private _offset: Point = { x: 0, y: 0 };
@@ -125,13 +126,32 @@ export class BlasonParsingComponent implements OnInit, AfterViewInit, OnChanges 
 
   onStopDrag(event: any) {
     //the new general position of the frame is the final offset
-    if(!this._dragStarted){
+    if (!this._dragStarted) {
       return;
     }
     this._offset = this.offsetCalc(event);
     this._dragStarted = false;
   }
 
+  onCenterClick() {
+    //we center the svg element so that the head is at the top of the screen, and at the center of the horizon
+    //y is 0
+
+    //let's find the current position of the element compared to its parent
+    if (this.rootNodeUi?.domObject == null) {
+      return;
+    }
+    //to get the size of the header to really hit the center of the screen horizontally
+    var headerRect = this.rootNodeUi.domObject.getBoundingClientRect();
+    //then the exact target middle of the screen is calculated here
+    var targetLocationX = this.svgDom?.nativeElement.getBoundingClientRect().width / 2 - headerRect.width / 2;
+    //we need to consider that the header node has its own x transition that we need to remove in order to be really centered
+    targetLocationX -= this.rootNodeUi.xTransform;
+    //we save it to the offset as it will be used later if scrolling again
+    this._offset.y = 0;
+    this._offset.x = targetLocationX;
+    this.renderer.setAttribute(this.canvasDom?.nativeElement, "transform", `translate(${this._offset.x},${this._offset.y})`);
+  }
 
   /**
    * Calculates the x axis positions for all the nodes in the tree
@@ -321,6 +341,7 @@ export class BlasonParsingComponent implements OnInit, AfterViewInit, OnChanges 
     this.renderer.appendChild(fingerprint_icon, tooltip);
 
     this.renderer.setAttribute(nodeGroup, "transform", `translate(${xPos},${yPos})`);
+    node.xTransform = xPos;
     node.domObject = nodeGroup;
 
     return nodeGroup;

@@ -117,7 +117,7 @@ namespace GBlasonWebAPI.Controllers
             }
             try
             {
-                //build up the normal infinitly cycling tree of nodes for the grammar
+                //build up the normal infinity cycling tree of nodes for the grammar
                 if (!rawEbnf.CanRead)
                 {
                     BuildTreeStream();

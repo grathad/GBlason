@@ -1,3 +1,17 @@
+<mat-toolbar class="tree-toolbar">
+  <button mat-icon-button class="toolbar-icon" aria-label="center button" (click)="onCenterClick()">
+    <mat-icon>center_focus_weak</mat-icon>
+  </button>
+  <button mat-icon-button class="toolbar-icon" aria-label="center button" disabled>
+    <mat-icon>unfold_more_double</mat-icon>
+  </button>
+  <button mat-icon-button class="toolbar-icon" aria-label="center button" disabled>
+    <mat-icon>unfold_less_double</mat-icon>
+  </button>
+  <button mat-icon-button class="toolbar-icon" aria-label="center button" disabled>
+    <mat-icon>fit_screen</mat-icon>
+  </button>
+</mat-toolbar>
 <div class="canvas">
   <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" class="svg-content"
     (pointerdown)="onStartDrag($event)" (pointermove)="onDrag($event)" (pointerup)="onStopDrag($event)"
