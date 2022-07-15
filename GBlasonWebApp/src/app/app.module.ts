@@ -13,6 +13,7 @@ import { EbnfComponent } from './ebnf/ebnf.component';
 import { BlasonParsingComponent } from './blason-parsing/blason-parsing.component';
 import { CoatOfArmEditorComponent } from './coat-of-arm-editor/coat-of-arm-editor.component';
 import { HttpErrorComponent } from './http-error/http-error.component';
+import { TreeViewComponent } from './tree-view/tree-view.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { HttpErrorComponent } from './http-error/http-error.component';
     BlasonParsingComponent,
     CoatOfArmEditorComponent,
     HttpErrorComponent,
+    TreeViewComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,

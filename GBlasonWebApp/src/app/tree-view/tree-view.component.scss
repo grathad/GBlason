@@ -1,0 +1,54 @@
+
+.treeview-layer{
+  display: flex;
+  flex-direction: column;
+}
+
+.node {
+  display: inline-flex;
+  margin: 1em auto;
+  flex-direction: column;
+  max-width: 14em;
+}
+
+.node>mat-card-footer{
+  max-height: 2em;
+}
+
+.node>.node-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.node-header>h3{
+  margin: auto 0 auto 0.3em;
+}
+
+.node>.node-content {
+  display: flex;
+  font-style: italic;
+  margin-bottom: 0px;
+}
+
+.node-content>p{
+  margin: .2em;
+}
+
+.node>.node-content>:only-child {
+  display: inline-block;
+}
+
+.node>.node-icons{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0px;
+}
+
+.node-icon{
+  margin: 0.2em;
+}
+
+.node-expand{
+  display: block;
+  margin: 0.2em auto;
+}

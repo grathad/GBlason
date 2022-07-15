@@ -20,11 +20,16 @@ namespace GBlasonWebAPI.Controllers
 
         private readonly ILogger<EbnfController> _logger;
 
-        private readonly Collection<TreeElementReference> memoryTree = new Collection<TreeElementReference>();
+        private static readonly Collection<TreeElementReference> memoryTree = new Collection<TreeElementReference>();
 
         public EbnfController(ILogger<EbnfController> logger)
         {
             _logger = logger;
+            BuildTreeStream();
+        }
+
+        private void BuildTreeStream()
+        {
             var assembly = Assembly.GetExecutingAssembly();
             try
             {
@@ -45,6 +50,10 @@ namespace GBlasonWebAPI.Controllers
             }
             else
             {
+                if (!rawEbnf.CanRead)
+                {
+                    BuildTreeStream();
+                }
                 using (StreamReader reader = new StreamReader(rawEbnf))
                 {
                     return reader.ReadToEnd();
@@ -83,7 +92,7 @@ namespace GBlasonWebAPI.Controllers
                 }
             }
 
-            if(headElement == null)
+            if (headElement == null)
             {
                 return $"Could not find the element requested {head}";
             }
@@ -109,6 +118,10 @@ namespace GBlasonWebAPI.Controllers
             try
             {
                 //build up the normal infinitly cycling tree of nodes for the grammar
+                if (!rawEbnf.CanRead)
+                {
+                    BuildTreeStream();
+                }
                 var elements = parsedEbnf.Parse(rawEbnf);
                 if (elements == null)
                 {

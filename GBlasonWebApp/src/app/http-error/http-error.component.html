@@ -1,11 +1,11 @@
 <div class="content-card">
   <mat-card class="first-block">
-    <mat-card-subtitle>{{error.url}}</mat-card-subtitle>
-    <mat-card-title>{{error.message}}</mat-card-title>
+    <mat-card-subtitle>{{error?.url || "no URL"}}</mat-card-subtitle>
+    <mat-card-title>{{error?.message || "no Message"}}</mat-card-title>
     <mat-card-content>
-      <p>{{error.status}} {{error.statusText}}</p>
-      <p class="content-margin">{{error.error.error.message}}</p>
-      <p>{{error.error.error.stack}}</p>
+      <p>{{error.status}} {{error?.statusText || "no status text"}}</p>
+      <p class="content-margin">{{error?.error?.error?.message || "no message"}}</p>
+      <p>{{error?.error?.error?.stack || "no stack"}}</p>
     </mat-card-content>
     <mat-divider inset></mat-divider>
     <mat-card-actions align="end">

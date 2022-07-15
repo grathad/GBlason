@@ -1,9 +1,22 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Raw EBNF">
-    <div *ngIf="rawEbnfSuccess; else elseBlock" class="main-display-area"><pre>{{rawEbnf}}</pre></div>
-    <ng-template #elseBlock><app-http-error [error]="requestError"></app-http-error></ng-template>
+    <div *ngIf="requestRawInProgress">
+      <mat-progress-bar mode="query"></mat-progress-bar>
+    </div>
+    <div *ngIf="rawEbnfSuccess; else elseBlock" class="main-display-area">
+      <pre>{{rawEbnf}}</pre>
+    </div>
+    <ng-template #elseBlock>
+      <app-http-error [error]="requestError"></app-http-error>
+    </ng-template>
   </mat-tab>
   <mat-tab label="Tree View">
-
+    <div *ngIf="requestTreeInProgress">
+      <mat-progress-bar mode="query"></mat-progress-bar>
+    </div>
+    <app-tree-view [treeHead]="treeEbnf" class="full-tree-view"></app-tree-view>
+  </mat-tab>
+  <mat-tab class="tab-no-scroll" label="Debug - Tests">
+    <app-blason-parsing [treeHead]="treeEbnf"></app-blason-parsing>
   </mat-tab>
 </mat-tab-group>

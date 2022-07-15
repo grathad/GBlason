@@ -1,0 +1,36 @@
+<div class="treeview-layer">
+  <mat-card class="node">
+    <mat-card-title class="node-header">
+      <mat-icon aria-hidden="false" matTooltip="{{treeHead?.ElementId}}" aria-label="node guid icon" class="node-icon">
+        fingerprint</mat-icon>
+      <h3> {{treeHead?.RealElement?.Name || "No name"}}</h3>
+    </mat-card-title>
+    <mat-card-subtitle class="node-content">
+      <p>{{treeHead?.RealElement?.RulesContent || "No rules"}}</p>
+    </mat-card-subtitle>
+    <mat-card-actions class="node-icons">
+      <button mat-icon-button [disabled]="treeHead?.RealElement?.IsOptional || true">
+        <mat-icon aria-hidden="false" aria-label="optional icon" class="node-icon">emergency</mat-icon>
+      </button>
+      <button mat-icon-button [disabled]="treeHead?.RealElement?.IsRepetition || true">
+        <mat-icon aria-hidden="false" aria-label="repeat icon" class="node-icon">restart_alt</mat-icon>
+      </button>
+      <button mat-icon-button [disabled]="treeHead?.RealElement?.IsGroup || true">
+        <mat-icon aria-hidden="false" aria-label="group icon" class="node-icon">group_work</mat-icon>
+      </button>
+      <button mat-icon-button [disabled]="treeHead?.RealElement?.IsAlternation || true">
+        <mat-icon aria-hidden="false" aria-label="exclusive or icon" class="node-icon">alt_route</mat-icon>
+      </button>
+      <button mat-icon-button [disabled]="treeHead?.RealElement?.IsLeaf || true">
+        <mat-icon aria-hidden="false" aria-label="leaf icon" class="node-icon">eco</mat-icon>
+      </button>
+    </mat-card-actions>
+    <mat-divider *ngIf="treeHead?.HasChildren || false" inset></mat-divider>
+    <mat-card-footer>
+      <button *ngIf="treeHead?.HasChildren || false" aria-hidden="false" mat-mini-fab color="basic"
+        aria-label="Expand button" class="node-expand">
+        <mat-icon aria-label="expand icon">expand_more</mat-icon>
+      </button>
+    </mat-card-footer>
+  </mat-card>
+</div>
