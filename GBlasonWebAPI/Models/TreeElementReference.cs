@@ -40,7 +40,55 @@ namespace GBlasonWebAPI.Models
         [JsonIgnore]
         public TreeElementReference? Reference { get; set; }
 
-        public TreeElementReference()
+        public static TreeElementReference? CreateNew(TreeElement source, Collection<TreeElementReference> itemsRef = null)
+        {
+            if (source == null) { return null; }
+            if (itemsRef == null) { itemsRef = new Collection<TreeElementReference>(); }
+            var alreadyIn = itemsRef.FirstOrDefault(t => t.RealElement == source);
+
+            if (alreadyIn != null) { 
+                return alreadyIn;
+            }
+
+            var toReturn = new TreeElementReference();
+            itemsRef.Add(toReturn);
+
+            toReturn.RealElement = source;           
+            
+            if (source.Children == null || !source.Children.Any())
+            {
+                return toReturn;
+            }
+            foreach (var child in source.Children)
+            {
+                var childRef = BuildCyclicSafeSubtree(child, itemsRef);
+                if (childRef != null)
+                {
+                    toReturn.Children.Add(childRef);
+                    toReturn.HasChildren = true;
+                }
+            }
+            return toReturn;
+        }
+
+        public static TreeElementReference CreateCopy(TreeElementReference toCopy, int depth = 1)
+        {
+            var toReturn = new TreeElementReference();
+            toReturn.ElementId = toCopy.ElementId;
+            toReturn.RealElement = toCopy.RealElement;
+            toReturn.Reference = toCopy.Reference;
+            toReturn.HasChildren = toCopy.HasChildren;
+            if (depth > 0)
+            {
+                foreach (var child in toCopy.Children)
+                {
+                    toReturn.Children.Add(new TreeElementReference(child, depth - 1));
+                }
+            }
+            return toReturn;
+        }
+
+        protected TreeElementReference()
         {
 
         }
@@ -51,44 +99,17 @@ namespace GBlasonWebAPI.Models
         /// </summary>
         /// <param name="toCopy">The element to copy</param>
         /// <param name="depth">The number of generation of children to attach to the copy</param>
-        public TreeElementReference(TreeElementReference toCopy, int depth = 1)
+        protected TreeElementReference(TreeElementReference toCopy, int depth = 1)
         {
             ElementId = toCopy.ElementId;
             RealElement = toCopy.RealElement;
             Reference = toCopy.Reference;
             HasChildren = toCopy.HasChildren;
-            if(depth > 0)
+            if (depth > 0)
             {
-                foreach(var child in toCopy.Children)
+                foreach (var child in toCopy.Children)
                 {
                     Children.Add(new TreeElementReference(child, depth - 1));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Constructor of the wrapper that is used to factorially generate the children wrapper as well
-        /// </summary>
-        /// <param name="source">the original real parent in the infinite tree</param>
-        /// <param name="itemsRef">the list of all the reference created so far (flatten)</param>
-        public TreeElementReference(TreeElement source, Collection<TreeElementReference> itemsRef)
-        {
-            RealElement = source;
-            if (RealElement == null) { return; }
-            if (itemsRef == null) { itemsRef = new Collection<TreeElementReference>(); }
-            var alreadyIn = itemsRef.Any(t => t.RealElement == source);
-            if (!alreadyIn) { itemsRef.Add(this); }
-            if (source.Children == null || !source.Children.Any())
-            {
-                return;
-            }
-            foreach (var child in source.Children)
-            {
-                var childRef = BuildCyclicSafeSubtree(child, itemsRef);
-                if (childRef != null)
-                {
-                    Children.Add(childRef);
-                    HasChildren = true;
                 }
             }
         }
@@ -97,7 +118,7 @@ namespace GBlasonWebAPI.Models
         {
             if (root == null) { return null; }
 
-            TreeElementReference refElement;
+            TreeElementReference? refElement;
             //here we only continue to build the tree IF the current element is NOT in the references
             var alreadyR = itemRefs.FirstOrDefault(r => r.RealElement == root);
             if (alreadyR != null)
@@ -115,8 +136,13 @@ namespace GBlasonWebAPI.Models
             }
             //here this is the first time we cross path with that element
             //adding this element to the list for later potential redetection
-            refElement = new TreeElementReference(root, itemRefs);
+            refElement = CreateNew(root, itemRefs);
             return refElement;
+        }
+
+        public override string ToString()
+        {
+            return this?.RealElement?.Name ?? "Null";
         }
     }
 }

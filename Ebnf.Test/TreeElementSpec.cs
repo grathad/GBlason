@@ -361,6 +361,59 @@ namespace Ebnf.Test
             }
 
         }
+        public class Optimize
+        {
+            [Fact]
+            public void NoOptimizationPossibleReturnSameElement()
+            {
+                //multiple cases
+                //no children
+                //childrens are null
+                //multiple children
+                //parent has multiple children
+            }
+
+            [Fact]
+            public void OptimizationPossibleReturnNewTree()
+            {
+                //happy path optimization:
+                //          A
+                //          B
+                //          C
+                //Becomes
+                //          C (but named A, the rules content will be the last child though)
+
+                var treeNodeA = new TreeElement() { Name = "A", IsRepetition=true, RulesContent = "[B]" };
+                var treeNodeB = new TreeElement() { Name = "B", IsOptional = true, RulesContent = "(C)" };
+                var treeNodeC = new TreeElement() { Name = "C", IsLeaf = true, RulesContent = "Leaf Content for C" };
+                treeNodeA.Children.Add(treeNodeB);
+                treeNodeB.Children.Add(treeNodeC);
+
+                var resultA = treeNodeA.Optimize(); //result A will be the B instance, with the name of A and the OR property of both nodes
+                var resultB = treeNodeB.Optimize(); //result B will be the C instance, with the name of A (only because of the prior optimization) and an OR property
+                //var resultC = treeNodeC.Optimize(); //useless call since C has no children (already tested in prior tests)
+
+                resultA.Should().Be(treeNodeB);
+                resultB.Should().Be(treeNodeC);
+
+                treeNodeA.Children.Should().BeEmpty();
+                treeNodeB.Children.Should().BeEmpty();
+                treeNodeB.Parents.Should().BeEmpty();
+
+                treeNodeC.RulesContent.Should().Be("Leaf Content for C");
+                treeNodeC.IsRepetition.Should().BeTrue();
+                treeNodeC.IsOptional.Should().BeTrue();
+                treeNodeC.IsLeaf.Should().BeTrue();
+                treeNodeC.Children.Should().BeEmpty();
+                treeNodeC.Parents.Should().BeEmpty();
+            }
+
+            [Fact]
+            public void OptimizationImpactAllParents()
+            {
+
+            }
+        }
     }
 
 }

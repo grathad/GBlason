@@ -27,7 +27,7 @@ export class EbnfComponent implements OnInit {
   }
 
   getTreeEbnf(id: string = ""): void {
-    var httpRequest = new HttpRequest("GET", "api/ebnf/tree/" + id, { responseType: "text" });
+    var httpRequest = new HttpRequest("GET", "api/ebnf/tree?head=" + id, { responseType: "text" });
     var request = this.http.request<string>(httpRequest);
 
     this.requestTreeInProgress = true;

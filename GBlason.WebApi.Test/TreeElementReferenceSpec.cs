@@ -10,19 +10,11 @@ namespace GBlason.WebApi.Test
     {
         public class BuildSubTree
         {
-            [Fact]
-            public void EmptyCtrReturnNullProperties()
-            {
-                var newReferenceT = new TreeElementReference();
-                newReferenceT.RealElement.Should().BeNull();
-                newReferenceT.Reference.Should().BeNull();
-            }
-
 
             [Fact]
             public void NullParamsCtrReturnNullProperties()
             {
-                var newReferenceT = new TreeElementReference(null, null);
+                var newReferenceT = TreeElementReference.CreateNew(null, null);
                 newReferenceT.RealElement.Should().BeNull();
                 newReferenceT.Reference.Should().BeNull();
             }
@@ -32,7 +24,7 @@ namespace GBlason.WebApi.Test
             {
                 var root = new TreeElement();
 
-                var newReferenceT = new TreeElementReference(source: root, null);
+                var newReferenceT = TreeElementReference.CreateNew(source: root, null);
                 newReferenceT.RealElement.Should().Be(root);
                 newReferenceT.Reference.Should().BeNull();
             }
@@ -47,7 +39,7 @@ namespace GBlason.WebApi.Test
                 root.Children.Add(child);
                 child.Children.Add(grandchild);
 
-                var newReferenceT = new TreeElementReference(source: root, null);
+                var newReferenceT = TreeElementReference.CreateNew(source: root, null);
                 newReferenceT.RealElement.Should().Be(root);
                 newReferenceT.Reference.Should().BeNull();
                 newReferenceT.Children.Should().NotBeEmpty();
@@ -68,7 +60,7 @@ namespace GBlason.WebApi.Test
 
                 var memory = new Collection<TreeElementReference>();
 
-                var newReferenceT = new TreeElementReference(root, memory);
+                var newReferenceT =  TreeElementReference.CreateNew(root, memory);
                 newReferenceT.RealElement.Should().Be(root);
                 newReferenceT.Reference.Should().BeNull();
                 newReferenceT.Children.Should().NotBeEmpty();
@@ -89,7 +81,7 @@ namespace GBlason.WebApi.Test
 
                 var memory = new Collection<TreeElementReference>();
 
-                var newReferenceT = new TreeElementReference(root, memory);
+                var newReferenceT =  TreeElementReference.CreateNew(root, memory);
                 //cyclic setup for test
                 newReferenceT.Reference = newReferenceT;
 

@@ -1,3 +1,4 @@
+import { HttpClient, HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { AfterViewInit, Component, Renderer2, ElementRef, Input, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { TreeViewNode } from '../ebnf/ebnf.component';
 
@@ -20,7 +21,8 @@ export class TreeViewUINode {
   isLeaf: boolean = true;
   xPosition: number = 0;
   children: TreeViewUINode[] = [];
-  isExpanded: boolean = true;
+  isExpanded: boolean = false;
+  expansionIcon: any | null = null;
 
   /**
    *
@@ -29,7 +31,6 @@ export class TreeViewUINode {
     this.treeNode = treeNode;
     if (treeNode != null && (treeNode.Children?.length ?? 0) > 0) {
       this.isLeaf = false;
-      this.isExpanded = false;
     }
     if (parent != null) {
       this.depth = parent.depth + 1;
@@ -45,7 +46,7 @@ export class TreeViewUINode {
 export class BlasonParsingComponent implements OnInit, AfterViewInit, OnChanges {
 
 
-  constructor(private renderer: Renderer2) { }
+  constructor(private http: HttpClient, private renderer: Renderer2) { }
 
   @ViewChild('canvas')
   canvasDom: ElementRef | null = null;
@@ -84,14 +85,14 @@ export class BlasonParsingComponent implements OnInit, AfterViewInit, OnChanges 
   ngOnChanges(changes: SimpleChanges) {
     //the data arrived in we need to reset the whole content
     this._dataReady = this.treeHead != null;
-    this.updateUi(null, this.treeHead);
+    if (this.treeHead != null) { this.updateUi(null, [this.treeHead]); }
   }
 
   ngAfterViewInit(): void {
     //first rendering of pure svg
     //we need to unblock or start the promise to initialize the content
     this._renderingReady = true
-    this.updateUi(null, this.treeHead);
+    if (this.treeHead != null) { this.updateUi(null, [this.treeHead]); }
   }
 
   offsetCalc(evt: PointerEvent): Point {
@@ -154,6 +155,90 @@ export class BlasonParsingComponent implements OnInit, AfterViewInit, OnChanges 
   }
 
   /**
+   * Handle the click on the expand button in the node card.
+   * @param event the event sent by the UI
+   */
+  onNodeExpandClick(node: TreeViewUINode) {
+
+    if (node == null) {
+      return;
+    }
+    //(if this is a tree leaf, then we do nothing)
+    if (node.treeNode.RealElement?.IsLeaf ?? false) {
+      return;
+    }
+    //there are 2 options, this is either an expand or a collapse
+    //expand
+    if (!node.isExpanded) {
+      //this is complex
+      //if the children have already been requested
+      if (node.children?.length ?? 0 > 0) {
+        //we only make them visible
+        for (var i = 0; i < node.children.length; i++) {
+          this.renderer.setAttribute(node.children[i].domObject, "class", "node");
+        }
+        //finally we change the icon for the - (collapse)
+        this.renderer.setAttribute(node.expansionIcon, "d", this._expand_less_icon);
+        node.isExpanded = true;
+      }
+      //else we need to request for the children
+      else {
+        node.isExpanded = true;
+        this.getMoreNode(node);
+      }
+    }
+    //collapse
+    else {
+      //this is the easier, we first hide all the children recursively
+      for (var i = 0; i < node.children.length; i++) {
+        this.hideNode(node.children[i]);
+      }
+      //then change the UI of the button to the + icon
+      this.renderer.setAttribute(node.expansionIcon, "d", this._expand_more_icon);
+      node.isExpanded = false;
+    }
+  }
+
+  getMoreNode(head: TreeViewUINode) {
+    var httpRequest = new HttpRequest("GET", "api/ebnf/tree?head=" + head.treeNode.ElementId, { responseType: "text" });
+    var request = this.http.request<string>(httpRequest);
+
+    //ideally we should add an animated SVG to replace the button while the request is in progress (for later)
+    request.subscribe({
+      next: (data: HttpEvent<string>) => {
+        var result = data as HttpResponse<string>;
+        if (result !== null && result.body !== null && result.body !== undefined) {
+          //we received new raw data, we need to parse and add them to the tree
+          var replacement = JSON.parse(result.body);
+          //we should receive the tree with the current head as the subtree head
+          if (replacement.ElementId === head.treeNode.ElementId) {
+            //we are good, and the object to update is not the parent we received but its children
+            this.updateUi(head, replacement.Children);
+          } else {
+            throw new Error(`the received head ${replacement.ElementId} is different than the expected one ${head.treeNode.ElementId}`);
+          }
+        }
+      },
+      error: (err) => { },
+      complete: () => {
+        //finally we change the icon for the - (collapse)
+        this.renderer.setAttribute(head.expansionIcon, "d", this._expand_less_icon);
+        head.isExpanded = true;
+      }
+    });
+  }
+
+  hideNode(node: TreeViewUINode) {
+    if (node == null) {
+      return;
+    }
+    this.renderer.setAttribute(node.domObject, "class", "node hidden");
+    for (var i = 0; i < node.children.length; i++) {
+      this.hideNode(node.children[i]);
+    }
+  }
+
+  /**
    * Calculates the x axis positions for all the nodes in the tree
    */
   calculateXPositions(): void {
@@ -184,52 +269,66 @@ export class BlasonParsingComponent implements OnInit, AfterViewInit, OnChanges 
     }
   }
 
-  updateUi(parent: TreeViewUINode | null, node: TreeViewNode | null): void {
-    this.buildUiTree(parent, node);
+  updateUi(parent: TreeViewUINode | null, children: TreeViewNode[]): void {
+    var newHeads = this.buildUiTree(parent, children);
     this.calculateXPositions();
-    this.renderTree(parent, this.rootNodeUi);
+    this.renderTree(parent, newHeads);
   }
 
-  buildUiTree(parent: TreeViewUINode | null, node: TreeViewNode | null): void {
-    if (node === null || this._renderingReady === false || this._dataReady === false) {
-      return;
+  /**
+   * Build the tree of logical nodes by attaching the node subtree to the parent node
+   * @param parent the node that should receive the new subtree
+   * @param node the head or heads of the new subtree
+   * @returns the TreeViewUINode generated by the tree building call or null if the creation could not happen
+   */
+  buildUiTree(parent: TreeViewUINode | null, node: TreeViewNode[] | null): TreeViewUINode[] {
+    if (node === null || node.length === 0 || this._renderingReady === false || this._dataReady === false) {
+      return [];
     }
-    var nodeUi: TreeViewUINode;
+    var nodeUi: TreeViewUINode[] = [];
     if (parent == null) {
+      //special unique case !
       //if the current parent node has no parent, it is a root, and we set it at the center
-      nodeUi = this.rootNodeUi = new TreeViewUINode(node);
+      this.rootNodeUi = new TreeViewUINode(node[0]);
+      nodeUi.push(this.rootNodeUi);
+      //and execute the same for the child of the current node
+      if (node[0].Children !== null && (node[0].Children?.length ?? 0) > 0) {
+        this.buildUiTree(this.rootNodeUi, node[0].Children);
+      }
     } else {
-      //if it does however, we need to "attach" it as the "descendent" from a tree view representation perspective of the current parent
-      var nodeUi = new TreeViewUINode(node, parent);
-      parent.children.push(nodeUi);
-    }
-    //and execute the same for the child of the current node
-    if (node.Children !== null && (node.Children?.length ?? 0) > 0) {
-      for (var i = 0; i < node.Children.length; i++) {
-        var child = node.Children[i];
-        this.buildUiTree(nodeUi, child);
+      //if it does however, we need to "attach" all of the nodes as the "descendent" from a tree view representation perspective of the current parent
+      for (var i = 0; i < node.length; i++) {
+        var newNodeUi = new TreeViewUINode(node[i], parent);
+        parent.children.push(newNodeUi);
+        nodeUi.push(newNodeUi);
       }
     }
+    return nodeUi;
   }
 
-  renderTree(parent: TreeViewUINode | null, node: TreeViewUINode | null): void {
-    if (node === null || this._renderingReady === false || this._dataReady === false) {
+  renderTree(parent: TreeViewUINode | null, node: TreeViewUINode[]): void {
+    if (node === null || node.length === 0 || this._renderingReady === false || this._dataReady === false) {
       return;
     }
 
     if (parent == null) {
       //if the current parent node has no parent, it is a root, and we set it at the center
-      this.renderer.appendChild(this.canvasDom?.nativeElement, this.addOneNode(node));
+      this.renderer.appendChild(this.canvasDom?.nativeElement, this.addOneNode(node[0]));
     } else {
       //if it does however, we need to "attach" it as the "descendent" from a tree view representation perspective of the current parent
       //we append the child against the same parent canvas, but change its position
-      this.renderer.appendChild(this.canvasDom?.nativeElement, this.addOneNode(node));
+      for (var i = 0; i < node.length; i++) {
+        var newNode = this.addOneNode(node[i]);
+        this.renderer.appendChild(this.canvasDom?.nativeElement, newNode);
+        if (!parent.isExpanded || !parent.isVisible) {
+          this.renderer.setAttribute(newNode, "class", "node hidden");
+        }
+      }
     }
     //and execute the same for the child of the current node
-    if (node.children !== null && node.children.length > 0 && node.isExpanded) {
-      for (var i = 0; i < node.children.length; i++) {
-        var child = node.children[i];
-        this.renderTree(node, child);
+    for (var i = 0; i < node.length; i++) {
+      if (node[i].children !== null && node[i].children.length > 0) {
+        this.renderTree(node[i], node[i].children);
       }
     }
   }
@@ -256,18 +355,13 @@ export class BlasonParsingComponent implements OnInit, AfterViewInit, OnChanges 
     var nameContent = this.renderer.createElement("foreignObject", "svg");
     var rulesContent = this.renderer.createElement("foreignObject", "svg");
     var nameText = this.renderer.createElement("div");
-    //this.renderer.createText(node.treeNode.RealElement?.Name ?? "Null");
     var rulesText = this.renderer.createElement("div");
-    //this.renderer.createText(node.treeNode.RealElement?.RulesContent ?? "Null");
     var tooltip = this.renderer.createElement("title", "svg");
     var guid = this.renderer.createText(node.treeNode.ElementId);
-    var expand_button = this.renderer.createElement("circle", "svg");
 
     var internalMargin = 20;
     var iconSize = 24;
 
-    // <foreignObject width="120" height="26"><div>Text here<div></foreignObject>
-    // then class for text ellipsis, and title for tooltip
     this.renderer.setAttribute(nodeGroup, "class", "node");
 
     this.renderer.setAttribute(nodeCard, "d", this._node_card_shape);
@@ -307,20 +401,6 @@ export class BlasonParsingComponent implements OnInit, AfterViewInit, OnChanges 
     this.renderer.setAttribute(leaf_icon, "class", `${(node.treeNode.RealElement?.IsLeaf ?? false) ? "active-icon" : "passive-icon"}`);
     this.renderer.setAttribute(leaf_icon, "transform", `translate(${iconMargin + iconSpace * 4},${iconVertical})`);
 
-    var buttonRadius = 16;
-    this.renderer.setAttribute(expand_button, "r", `${buttonRadius}px`);
-    this.renderer.setAttribute(expand_button, "cx", `${(width - roundAngle) / 2}px`);
-    this.renderer.setAttribute(expand_button, "cy", `${iconVertical + iconSpace + internalMargin}`);
-    this.renderer.setAttribute(expand_button, "class", "node-card node-expand-button");
-
-    var lastIconX = ((width - roundAngle) / 2) - (iconSize / 2);
-    var lastIconY = iconVertical + iconSpace + internalMargin - iconSize / 2;
-    this.renderer.setAttribute(expand_icon, "class", `active-icon`);
-    this.renderer.setAttribute(expand_icon, "transform", `translate(${lastIconX},${lastIconY})`);
-
-    if (node.isExpanded) { this.renderer.setAttribute(expand_icon, "d", this._expand_less_icon); }
-    else { this.renderer.setAttribute(expand_icon, "d", this._expand_more_icon); }
-
     this.renderer.appendChild(nodeGroup, nodeCard);
     this.renderer.appendChild(nodeGroup, fingerprint_icon);
     this.renderer.appendChild(nodeGroup, nameContent);
@@ -334,8 +414,28 @@ export class BlasonParsingComponent implements OnInit, AfterViewInit, OnChanges 
     this.renderer.appendChild(nodeGroup, group_icon);
     this.renderer.appendChild(nodeGroup, branch_icon);
     this.renderer.appendChild(nodeGroup, leaf_icon);
-    this.renderer.appendChild(nodeGroup, expand_button);
-    this.renderer.appendChild(nodeGroup, expand_icon);
+
+    if (!node.treeNode.RealElement?.IsLeaf) {
+      var expand_button = this.renderer.createElement("circle", "svg");
+      var buttonRadius = 16;
+      this.renderer.setAttribute(expand_button, "r", `${buttonRadius}px`);
+      this.renderer.setAttribute(expand_button, "cx", `${(width - roundAngle) / 2}px`);
+      this.renderer.setAttribute(expand_button, "cy", `${iconVertical + iconSpace + internalMargin}`);
+      this.renderer.setAttribute(expand_button, "class", "node-card node-expand-button");
+
+      var lastIconX = ((width - roundAngle) / 2) - (iconSize / 2);
+      var lastIconY = iconVertical + iconSpace + internalMargin - iconSize / 2;
+      this.renderer.setAttribute(expand_icon, "class", `active-icon`);
+      this.renderer.setAttribute(expand_icon, "transform", `translate(${lastIconX},${lastIconY})`);
+
+      node.expansionIcon = expand_icon;
+
+      this.renderer.setAttribute(expand_icon, "d", this._expand_more_icon);
+      this.renderer.appendChild(nodeGroup, expand_button);
+      this.renderer.appendChild(nodeGroup, expand_icon);
+
+      expand_button.addEventListener("click", this.onNodeExpandClick.bind(this, node));
+    }
 
     this.renderer.appendChild(tooltip, guid);
     this.renderer.appendChild(fingerprint_icon, tooltip);

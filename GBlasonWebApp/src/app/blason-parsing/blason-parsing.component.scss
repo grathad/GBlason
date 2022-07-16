@@ -13,7 +13,7 @@
   display: flex;
 }
 
-.tree-toolbar{
+.tree-toolbar {
   height: 2.4em;
   padding: 0.3em;
 }
@@ -28,15 +28,22 @@
   width: 180px;
 }
 
+.node.hidden {
+  visibility: hidden;
+}
+
 .node-card {
   fill: #424242;
 }
 
 .active-icon {
   fill: #fff;
+  pointer-events: none;
 }
+
 .passive-icon {
-  fill:rgba(255, 255, 255, .25);
+  fill: rgba(255, 255, 255, .25);
+  pointer-events: none;
 }
 
 .node-text {
@@ -54,7 +61,7 @@
   font-style: italic;
 }
 
-.node-expand-button{
+.node-expand-button {
   stroke: black;
   stroke-width: 1pt;
   stroke-opacity: 0.25;
