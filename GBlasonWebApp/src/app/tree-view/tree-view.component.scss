@@ -1,54 +1,75 @@
-
-.treeview-layer{
+:host {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+.canvas {
+  position: absolute;
+  bottom: 0;
+  top: 3em;
+  left: 0;
+  right: 0;
+  display: flex;
+}
+
+.tree-toolbar {
+  height: 2.1em;
+  padding: 0.3em;
+}
+
+.svg-content {
+  width: 100%;
+  height: 100%;
 }
 
 .node {
-  display: inline-flex;
-  margin: 1em auto;
-  flex-direction: column;
-  max-width: 14em;
+  height: 132px;
+  width: 180px;
 }
 
-.node>mat-card-footer{
-  max-height: 2em;
+.node.hidden {
+  visibility: hidden;
 }
 
-.node>.node-header {
-  display: flex;
-  flex-direction: row;
+.node-card {
+  fill: #424242;
 }
 
-.node-header>h3{
-  margin: auto 0 auto 0.3em;
+.active-icon {
+  fill: #fff;
+  pointer-events: none;
 }
 
-.node>.node-content {
-  display: flex;
+.passive-icon {
+  fill: rgba(255, 255, 255, .25);
+  pointer-events: none;
+  stroke-width: 1px;
+}
+
+.node-text {
+  fill: #fff;
+  font: 400 16px/28px Roboto, "Helvetica Neue", sans-serif;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.node-subtext {
+  fill: rgba(255, 255, 255, .7);
+  font: 400 12px/16px Roboto, "Helvetica Neue", sans-serif;
   font-style: italic;
-  margin-bottom: 0px;
 }
 
-.node-content>p{
-  margin: .2em;
+.node-expand-button {
+  stroke: black;
+  stroke-width: 1pt;
+  stroke-opacity: 0.25;
 }
 
-.node>.node-content>:only-child {
-  display: inline-block;
-}
-
-.node>.node-icons{
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 0px;
-}
-
-.node-icon{
-  margin: 0.2em;
-}
-
-.node-expand{
-  display: block;
-  margin: 0.2em auto;
+.node-link {
+  stroke: #fff;
+  stroke-opacity: 0.25;
+  stroke-width: 0.1em;
 }
