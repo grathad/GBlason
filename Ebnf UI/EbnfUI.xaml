@@ -64,7 +64,10 @@
                             <WrapPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding RealElement.Name}" />
                                 <WrapPanel.ToolTip>
-                                    <TextBlock Text="{Binding RealElement.RulesContent}"/>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding DisplayName}"/>
+                                        <TextBlock Text="{Binding RealElement.RulesContent}"/>
+                                    </StackPanel>
                                 </WrapPanel.ToolTip>
                             </WrapPanel>
                         </DataTemplate>

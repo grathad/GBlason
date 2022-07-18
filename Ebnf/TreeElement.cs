@@ -10,37 +10,8 @@ namespace Ebnf
     /// <summary>
     /// Represent one of the node of the grammar, either as a parent of subnode, or as a final one with a simple rule
     /// </summary>
-    public class TreeElement
+    public class TreeElement : TreeElementBase
     {
-        /// <summary>
-        /// The representation of the rule, either the given name in the grammar or a constructed one for groups
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// If the rules included in this node are optional
-        /// </summary>
-        public bool IsOptional { get; set; } = false;
-
-        /// <summary>
-        /// If the rules included in this node are meant to be repeated more than once (compatible with optional)
-        /// </summary>
-        public bool IsRepetition { get; set; } = false;
-
-        /// <summary>
-        /// If only one of the rules included in this node is meant to be resolved
-        /// </summary>
-        public bool IsAlternation { get; set; } = false;
-
-        public bool IsGroup { get; set; } = false;
-
-        public bool IsLeaf { get; set; } = false;
-
-        /// <summary>
-        /// The raw content of the rule (text representation from the grammar)
-        /// </summary>
-        public string RulesContent { get; set; }
-
         /// <summary>
         /// The actual rules that are to be applied when encountering that node
         /// </summary>
@@ -136,7 +107,7 @@ namespace Ebnf
             {
                 return false;
             }
-            if(!Name.All(c => char.IsLetterOrDigit(c)))
+            if (!Name.All(c => char.IsLetterOrDigit(c)))
             {
                 throw new Exception($"The rule named {Name} contains invalid characters, make sure the name is a single word");
             }
@@ -416,30 +387,94 @@ namespace Ebnf
 
         }
 
+        public bool Optimized { get; set; } = false;
+
         /// <summary>
-        /// Optimize (mostly removing group with only one element) the tree, a rule can only optimize itself away, you need to call optimize manually on the children to continue the process
+        /// Optimize (mostly removing group with only one element) the tree from the starting element, 
+        /// this call is ALTERING the treeElement and its descendent as well as its descendent's parents !
+        /// If the return is non NULL then the element on which this method was called on was optimized AWAY and should not be used anymore (not part of the tree anymore)
+        /// The nodes that have been optimized away should have been removed from their parents
         /// </summary>
-        /// <returns>The list of rules that has been deleted</returns>
+        /// <returns>the current instance if it was optimized and replaced it's only child, or null if not optimizable</returns>
         public TreeElement Optimize()
         {
-            if (Children.Count != 1 && Parents != null && Parents.Any(p => p.Children.Count > 1)) { return null; }
+            if (Optimized)
+            {
+                if (!Parents.Any() && !Children.Any())
+                {
+                    return null;
+                }
+                return this;
+            }
+            Optimized = true;
+            //we are either in a node that need to be optimized, a node that need its children to be optimized or a node with no children that can't be optimized
+            //a node with no children that can't be optimized should return
+            if (IsLeaf || !Children.Any())
+            {
+                return this;
+            }
+            //a node that can't be optimized, but has children should try to optimize its children
+            if (Children.Count > 1)
+            {
+                //we can't edit the content of a list we iterate on, so we need to copy sadly
+                //we recopy everything, but the one that return null (they are dead nodes)
+                var colCopy = Children.ToList();
+                foreach (var child in colCopy)
+                {
+                    child.Optimize();
+                }
+                return this;
+            }
+            //a node that can be optimized, would fit that definition
+            //only one child 
 
+            //the onlychild instance will be REPLACED by the current instance
             var onlyChild = Children.FirstOrDefault();
 
-            onlyChild.IsAlternation |= IsAlternation;
-            onlyChild.IsOptional |= IsOptional;
-            onlyChild.IsRepetition |= IsRepetition;
-            onlyChild.Name = Name;
-            onlyChild.Parents.Remove(this);
-            foreach (var parent in Parents)
+            if (onlyChild == null)
             {
-                var myIndex = parent.Children.IndexOf(this);
-                parent.Children.Insert(myIndex, onlyChild);
-                parent.Children.Remove(this);
-                onlyChild.Parents.AddDistinct(parent);
+                return null;
             }
 
-            return onlyChild;
+            //for optimization reason, since we want to recurse on the tree, we will make sure we optimize the child before optimizing ourselves
+            onlyChild.Optimize();
+
+            //we also stop if the only child as more than one type of parent (too hard to find so more than one parent will kill it)
+            //(if the onlychild instance has one parent that isOptional and one parent that is not, optimizing it away will create a discrepancy in the rule,
+            //in this case, we need to keep the node, with its specificity as unique
+            //since we tested for no child and more than one before as well as not more than one parent we should be good
+            if (onlyChild.Parents.Count > 1)
+            {
+                return this;
+            }
+
+            //we merge the rules of the only child with the current instance (inheriting the properties of both the nodes)
+            IsAlternation |= onlyChild.IsAlternation;
+            IsOptional |= onlyChild.IsOptional;
+            IsRepetition |= onlyChild.IsRepetition;
+            IsGroup |= onlyChild.IsGroup;
+            IsLeaf |= onlyChild.IsLeaf;
+            //we keep the parent name though and rules content though
+            //now that the parent can replace its only child, we do just that, replace all instances of the onlychild with a link to the parent
+            //first stop, mapping the parent children directly to its grandchildren
+            Children = onlyChild.Children.ToList();
+
+            //now for all the instances of onlyChild present, the parent need to map to the current node instead (unless it is this instance, we do not need to map to ourselves)
+            foreach (var parent in onlyChild.Parents.Where(p => p != this))
+            {
+                var myIndex = parent.Children.IndexOf(onlyChild);
+                if (myIndex < 0) { continue; }
+                parent.Children.Insert(myIndex, this);
+                parent.Children.Remove(onlyChild);
+                Parents.AddDistinct(parent);
+            }
+
+            onlyChild.Parents.Clear();
+            onlyChild.Children.Clear();
+            onlyChild.Optimized = true;
+            onlyChild.Name += $", Optimized by '{Name}'";
+
+            return this;
         }
 
         /// <summary>
