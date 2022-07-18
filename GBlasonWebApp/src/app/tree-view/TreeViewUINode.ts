@@ -9,6 +9,7 @@ export interface Point {
 interface IconInfo {
   path: string;
   active: boolean;
+  tooltip: string;
 }
 
 /**
