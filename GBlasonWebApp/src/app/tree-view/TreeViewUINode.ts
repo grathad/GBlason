@@ -68,9 +68,9 @@ export class TreeViewUINode {
 
   renderNode(parent: TreeViewUINode | null): TreeViewNodeSVG | null {
     console.log(`TreeViewUINode.renderNode(this: ${this.treeNode.RealElement?.Name} ,parent: ${parent?.treeNode.RealElement?.Name})`);
-    this.svgNode?.render(this, parent);
+    var newNode = this.svgNode?.render(this, parent);
     this.placeNode();
-    return this.svgNode;
+    return newNode ? this.svgNode : null;
   }
 
   renderLinks(): TreeViewNodeSVG | null {
