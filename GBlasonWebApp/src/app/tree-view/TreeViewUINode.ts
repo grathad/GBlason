@@ -62,22 +62,20 @@ export class TreeViewUINode {
   }
 
   placeNode() {
-    this.transformation = this.svgNode?.placeNode(this.xPosition, this.depth) ?? { x: 0, y: 0 };
-    //console.log(`Placed the node ${this.treeNode.RealElement?.Name} x index: (${this.xPosition}), depth: (${this.depth}) at x coordinate: ${this.xTransform}`);
+    this.transformation = this.svgNode?.placeNode(this) ?? { x: 0, y: 0 };
+    console.log(`TreeViewUINode.placeNode for ${this.treeNode.RealElement?.Name} returned: x index: (${this.xPosition}), depth: (${this.depth}) at coordinates: (${this.transformation.x},${this.transformation.y})`);
   }
 
   renderNode(parent: TreeViewUINode | null): TreeViewNodeSVG | null {
-    this.svgNode?.render(this, parent);
+    console.log(`TreeViewUINode.renderNode(this: ${this.treeNode.RealElement?.Name} ,parent: ${parent?.treeNode.RealElement?.Name})`);
+    var newNode = this.svgNode?.render(this, parent);
     this.placeNode();
-    return this.svgNode;
+    return newNode ? this.svgNode : null;
   }
 
   renderLinks(): TreeViewNodeSVG | null {
-    if (this.svgNode?.linksObject != null) {
-      return null;
-    }
+    console.log(`TreeViewUINode.renderLinks(parent: ${this.treeNode.RealElement?.Name})`);
     this.svgNode?.createLinks(this);
-    this.placeNode();
     return this.svgNode?.linksObject;
   }
 }
@@ -106,6 +104,8 @@ export class TreeViewNodeSVG extends EventTarget {
   domObject: any | null = null;
   expansionIcon: any | null = null;
   linksObject: any | null = null;
+  linkHorizontalLine: any | null = null;
+  linkChildrenVertices: any[] = [];
 
   private _expandClick: Event = new Event('expandButtonClick');
 
@@ -122,33 +122,47 @@ export class TreeViewNodeSVG extends EventTarget {
     }
     if (expansion) {
       this.renderer.setAttribute(this.expansionIcon, "d", this._expand_less_icon);
+      if (this.linksObject != null) {
+        this.renderer.setAttribute(this.linksObject, "class", "node-link");
+      }
     }
     else {
       this.renderer.setAttribute(this.expansionIcon, "d", this._expand_more_icon);
+      if (this.linksObject != null) {
+        this.renderer.setAttribute(this.linksObject, "class", "node-link hidden");
+      }
     }
   }
 
   setVisibility(visible: boolean) {
-    if (this.domObject == null) {
-      return;
+    if (this.domObject != null) {
+      if (visible) { this.renderer.setAttribute(this.domObject, "class", "node"); }
+      else { this.renderer.setAttribute(this.domObject, "class", "node hidden"); }
     }
-    if (visible) {
-      this.renderer.setAttribute(this.domObject, "class", "node");
-    } else {
-      this.renderer.setAttribute(this.domObject, "class", "node hidden");
+    if (this.linksObject != null) {
+      if (visible) {
+        this.renderer.setAttribute(this.linksObject, "class", "node-link");
+      } else {
+        this.renderer.setAttribute(this.linksObject, "class", "node-link hidden");
+      }
     }
+    return;
   }
 
-  placeNode(xPosition: number, depth: number): Point {
+  placeNode(currentNodeInfo: TreeViewUINode): Point {
     if (this.domObject == null) {
       return { x: 0, y: 0 };
     }
     var actualWidth = this._node_width + this._node_roundAngle * 2;
     var actualHeight = this._node_height + this._node_roundAngle * 2;
-    var xPos = xPosition * (actualWidth + this._node_margin) + this._node_margin;
-    var yPos = depth * (actualHeight + this._node_margin) + this._node_margin;
+    var xPos = currentNodeInfo.xPosition * (actualWidth + this._node_margin) + this._node_margin;
+    var yPos = currentNodeInfo.depth * (actualHeight + this._node_margin) + this._node_margin;
     this.renderer.setAttribute(this.domObject, "transform", `translate(${xPos},${yPos})`);
-    if (this.linksObject != null) { this.renderer.setAttribute(this.linksObject, "transform", `translate(${xPos},${yPos})`); }
+    if (this.linksObject != null) {
+      //the problem with the links is that the place only is not enough, they might need to expand or shrink based on visibility of the children nodes
+      this.placeLinks(currentNodeInfo);
+      this.renderer.setAttribute(this.linksObject, "transform", `translate(${xPos},${yPos})`);
+    }
     return { x: xPos, y: yPos };
   }
 
@@ -160,10 +174,8 @@ export class TreeViewNodeSVG extends EventTarget {
       newObject = true;
       if (parentNode !== null && (!parentNode.isExpanded || !parentNode.isVisible)) {
         this.renderer.setAttribute(this.domObject, "class", "node hidden");
-        console.log(`rendering node ${currentNodeInfo.treeNode.RealElement?.Name} hidden`);
-      } else {
-        console.log(`rendering node ${currentNodeInfo.treeNode.RealElement?.Name}`);
       }
+      console.log(`TreeViewNodeSVG.render(node: ${currentNodeInfo.treeNode.RealElement?.Name}, parentNode: ${parentNode?.treeNode.RealElement?.Name}) at ${currentNodeInfo.transformation.x},${currentNodeInfo.transformation.y}`);
     }
     return newObject;
   }
@@ -177,49 +189,104 @@ export class TreeViewNodeSVG extends EventTarget {
     if (currentNodeInfo == null || currentNodeInfo.children.length == 0) {
       return;
     }
-    this.linksObject = this.renderer.createElement("g", "svg");
-    var coordinates = [];
+    if (this.linksObject == null) {
+      this.linksObject = this.renderer.createElement("g", "svg");
+
+      if (currentNodeInfo.isVisible && currentNodeInfo.isExpanded) {
+        this.renderer.setAttribute(this.linksObject, "class", "node-link");
+      } else {
+        this.renderer.setAttribute(this.linksObject, "class", "node-link hidden");
+      }
+
+      var parentBranch = this.renderer.createElement("line", "svg");
+      this.linkHorizontalLine = this.renderer.createElement("line", "svg");
+
+      var currentCenter = this._node_width / 2;
+      var currentHeight = this._node_height + this._node_roundAngle * 2;
+      var widthYAxis = (currentHeight + this._node_margin / 2);
+
+      //the first one is the line going out of the node never moving outside of the parent, so no need to recalculate
+      this.renderer.setAttribute(parentBranch, "x1", currentCenter.toString());
+      this.renderer.setAttribute(parentBranch, "y1", currentHeight.toString());
+      this.renderer.setAttribute(parentBranch, "x2", currentCenter.toString());
+      this.renderer.setAttribute(parentBranch, "y2", (widthYAxis - this._node_line_thickness_center_delta).toString());
+
+      this.renderer.appendChild(this.linksObject, parentBranch);
+      this.renderer.appendChild(this.linksObject, this.linkHorizontalLine);
+
+      for (var i = 0; i < currentNodeInfo.children.length; i++) {
+        if (currentNodeInfo.children.length > 1 && i == 0 || i == currentNodeInfo.children.length - 1) {
+          var newKid = this.renderer.createElement("path", "svg");
+        }
+        else {
+          var newKid = this.renderer.createElement("line", "svg");
+        }
+        this.linkChildrenVertices.push(newKid);
+        this.renderer.appendChild(this.linksObject, newKid);
+      }
+    }
+    this.placeLinks(currentNodeInfo);
+  }
+
+  private placeLinks(currentNodeInfo: TreeViewUINode) {
+
+    this.renderer.setAttribute(this.linksObject, "transform", `translate(${currentNodeInfo.transformation.x},${currentNodeInfo.transformation.y})`);
+
+    var coordinates: number[] = [];
     for (var i = 0; i < currentNodeInfo.children.length; i++) {
       coordinates[i] = currentNodeInfo.children[i].transformation.x;
     }
     //current center of the current node
-    var currentCenter = this._node_width / 2 - this._node_roundAngle;
     var currentHeight = this._node_height + this._node_roundAngle * 2;
+
     var leftChildX = coordinates[0] - currentNodeInfo.transformation.x + this._node_width / 2;
-    var leftChildY = (coordinates[coordinates.length - 1] - coordinates[0]) + leftChildX;
+    var rightChildX = (coordinates[coordinates.length - 1] - coordinates[0]) + leftChildX;
+    var roundedCorners = false;
+    if (currentNodeInfo.children.length > 1) {
+      leftChildX += 2 * this._node_roundAngle;
+      rightChildX -= this._node_roundAngle;
+      roundedCorners = true;
+    }
     var widthYAxis = (currentHeight + this._node_margin / 2);
 
-    //the first one is the line going out of the node
-    //<line x1="0" y1="80" x2="100" y2="20" stroke="black" />
-    var parentBranch = this.renderer.createElement("line", "svg");
-    this.renderer.setAttribute(parentBranch, "x1", currentCenter.toString());
-    this.renderer.setAttribute(parentBranch, "y1", currentHeight.toString());
-    this.renderer.setAttribute(parentBranch, "x2", currentCenter.toString());
-    this.renderer.setAttribute(parentBranch, "y2", (widthYAxis - this._node_line_thickness_center_delta).toString());
-    this.renderer.setAttribute(parentBranch, "class", "node-link");
+    //the line can extend or shrink, need some savings
+    this.renderer.setAttribute(this.linkHorizontalLine, "x1", leftChildX.toString());
+    this.renderer.setAttribute(this.linkHorizontalLine, "y1", widthYAxis.toString());
+    this.renderer.setAttribute(this.linkHorizontalLine, "x2", rightChildX.toString());
+    this.renderer.setAttribute(this.linkHorizontalLine, "y2", widthYAxis.toString());
+    //this.renderer.setAttribute(this.linkHorizontalLine, "class", "node-link");
+    console.log(`TreeViewNodeSVG.placeLinks(${currentNodeInfo.treeNode.RealElement?.Name}) width total is ${rightChildX - leftChildX} left is ${leftChildX} top is ${widthYAxis}`)
 
-    var widthLine = this.renderer.createElement("line", "svg");
-    this.renderer.setAttribute(widthLine, "x1", leftChildX.toString());
-    this.renderer.setAttribute(widthLine, "y1", widthYAxis.toString());
-    this.renderer.setAttribute(widthLine, "x2", leftChildY.toString());
-    this.renderer.setAttribute(widthLine, "y2", widthYAxis.toString());
-    this.renderer.setAttribute(widthLine, "class", "node-link");
-
-    this.renderer.appendChild(this.linksObject, parentBranch);
-    this.renderer.appendChild(this.linksObject, widthLine);
-
-    var childYTop = (widthYAxis + this._node_line_thickness_center_delta);
-    var childYBottom = childYTop + this._node_margin / 2;
-    //one line per child
+    //one line per child, they also need to move later on, so we need to save them as well
     for (var i = 0; i < coordinates.length; i++) {
       var kidX = coordinates[i] - currentNodeInfo.transformation.x + this._node_width / 2;
-      var kidLine = this.renderer.createElement("line", "svg");
-      this.renderer.setAttribute(kidLine, "x1", kidX.toString());
-      this.renderer.setAttribute(kidLine, "y1", childYTop.toString());
-      this.renderer.setAttribute(kidLine, "x2", kidX.toString());
-      this.renderer.setAttribute(kidLine, "y2", childYBottom.toString());
-      this.renderer.setAttribute(kidLine, "class", "node-link");
-      this.renderer.appendChild(this.linksObject, kidLine);
+      var newKid = this.linkChildrenVertices[i];
+      this.linkChildrenVertices.push(newKid);
+
+      var childYTop = (widthYAxis + this._node_line_thickness_center_delta);
+      var childYBottom = childYTop + this._node_margin / 2;
+
+      //this.renderer.setAttribute(newKid, "class", "node-link");
+
+
+      if (roundedCorners && i == 0) {
+        childYTop--;
+        //this is the left corner
+        this.renderer.setAttribute(newKid, "transform", `translate(${kidX},${childYTop})`);
+        this.renderer.setAttribute(newKid, "d", `M0,${childYBottom - childYTop} v-${childYBottom - childYTop - 2 * this._node_roundAngle} a${2 * this._node_roundAngle},${2 * this._node_roundAngle} 0 0 1 ${2 * this._node_roundAngle},-${2 * this._node_roundAngle}`);
+      } else if (roundedCorners && i == coordinates.length - 1) {
+        childYTop--;
+        kidX -= this._node_roundAngle;
+        //this is the right corner
+        //<path _ngcontent-xod-c308="" transform="translate(-18,158)" d="M0,0 a4,4 0 0 1 4,-4" class="node-link"></path>
+        this.renderer.setAttribute(newKid, "transform", `translate(${kidX},${childYTop})`);
+        this.renderer.setAttribute(newKid, "d", `M0,0 a${2 * this._node_roundAngle},${2 * this._node_roundAngle} 0 0 1 ${2 * this._node_roundAngle},${2 * this._node_roundAngle} v${childYBottom - childYTop - 2 * this._node_roundAngle}`);
+      } else {
+        this.renderer.setAttribute(newKid, "x1", kidX.toString());
+        this.renderer.setAttribute(newKid, "y1", childYTop.toString());
+        this.renderer.setAttribute(newKid, "x2", kidX.toString());
+        this.renderer.setAttribute(newKid, "y2", childYBottom.toString());
+      }
     }
   }
 
@@ -272,7 +339,7 @@ export class TreeViewNodeSVG extends EventTarget {
     var iconMargin = 14;
     var iconVertical = internalMargin * 2 + 28 + 16;
     var iconSpace = (this._node_width + (this._node_roundAngle * 2) - (iconMargin * 2)) / 5;
-    var firstStep = iconMargin - this._node_roundAngle;
+    var firstStep = iconMargin;
     var i = 0;
     var icons: IconInfo[] = [
       {
@@ -303,11 +370,11 @@ export class TreeViewNodeSVG extends EventTarget {
       var expand_button = this.renderer.createElement("circle", "svg");
       var buttonRadius = 16;
       this.renderer.setAttribute(expand_button, "r", `${buttonRadius}px`);
-      this.renderer.setAttribute(expand_button, "cx", `${(this._node_width / 2) - this._node_roundAngle}px`);
+      this.renderer.setAttribute(expand_button, "cx", `${this._node_width / 2}px`);
       this.renderer.setAttribute(expand_button, "cy", `${iconVertical + iconSpace + internalMargin}`);
       this.renderer.setAttribute(expand_button, "class", "node-card node-expand-button");
 
-      var lastIconX = (this._node_width / 2) - this._node_roundAngle - (iconSize / 2);
+      var lastIconX = (this._node_width / 2) - (iconSize / 2);
       var lastIconY = iconVertical + iconSpace + internalMargin - iconSize / 2;
       this.renderer.setAttribute(expand_icon, "class", `active-icon`);
       this.renderer.setAttribute(expand_icon, "transform", `translate(${lastIconX},${lastIconY})`);

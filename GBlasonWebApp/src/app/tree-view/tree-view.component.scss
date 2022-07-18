@@ -34,6 +34,9 @@
 
 .node-card {
   fill: #424242;
+  stroke-width: 1px;
+  stroke: black;
+  stroke-opacity: 0.2;
 }
 
 .active-icon {
@@ -69,7 +72,12 @@
 }
 
 .node-link {
-  stroke: #fff;
-  stroke-opacity: 0.25;
+  stroke: #424242;
+  // stroke-opacity: 0.25;
   stroke-width: 0.1em;
+  fill-opacity: 0%;
+}
+
+.node-link.hidden{
+  visibility: hidden;
 }

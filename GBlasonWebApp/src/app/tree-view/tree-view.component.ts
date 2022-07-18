@@ -1,7 +1,7 @@
 import { HttpClient, HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { AfterViewInit, Component, Renderer2, ElementRef, Input, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { TreeViewNode } from '../ebnf/ebnf.component';
-import { Point, TreeViewUINode } from './TreeViewUINode';
+import { Point, TreeViewNodeSVG, TreeViewUINode } from './TreeViewUINode';
 
 @Component({
   selector: 'app-tree-view',
@@ -135,6 +135,9 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     if (node.treeNode.RealElement?.IsLeaf ?? false) {
       return;
     }
+
+    console.log(`tree-view-component.onNodeExpandClick(node: ${node.treeNode.RealElement?.Name})`);
+
     //there are 2 options, this is either an expand or a collapse
     //if there are no children and this is not a lead, then we likely need to request the children
     if (node.children.length == 0 && !node.treeNode.RealElement?.IsLeaf) {
@@ -220,7 +223,8 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     var newHeads = this.buildUiTree(parent, children);
     this.calculateXPositions();
     if (this.rootNodeUi != null) {
-      this.renderTree(parent, [this.rootNodeUi]);
+      console.log(`tree-view-component.updateUi(parent: ${parent?.treeNode.RealElement?.Name}, children: [${children.length}])`);
+      this.renderTree(null, [this.rootNodeUi]);
     }
   }
 
@@ -265,34 +269,35 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     if (node === null || node.length === 0 || this._renderingReady === false || this._dataReady === false) {
       return;
     }
-    var renderedNode = null;
-    if (parent == null) {
-      //if the current parent node has no parent, it is a root, and we set it at the center
-      //like every addition we make sure the node is not already added
-      renderedNode = node[0].renderNode(parent);
-      renderedNode?.addEventListener("expandButtonClick", this.onNodeExpandClick.bind(this, node[0]));
+    var log = `tree-view-component.renderTree(parent: ${parent?.treeNode.RealElement?.Name}, node[]:{${node[0].treeNode.RealElement?.Name}`;
+    for (var i = 1; i < node.length; i++) {
+      log += ", " + node[i].treeNode.RealElement?.Name;
+    }
+    log += "})";
+    console.log(log);
+
+    var renderedNode: TreeViewNodeSVG | null = null;
+    //we attach all the nodes in the tree, trying to render the new ones and update the existing ones
+    for (var i = 0; i < node.length; i++) {
+      renderedNode = node[i].renderNode(parent);
       if (renderedNode != null) {
+        console.log(`tree-view-component.renderTree.addEventListener(node: ${node[i].treeNode.RealElement?.Name})`);
+        renderedNode.addEventListener("expandButtonClick", this.onNodeExpandClick.bind(this, node[i]));
         this.renderer.appendChild(this.canvasDom?.nativeElement, renderedNode.domObject);
-      }
-    } else {
-      //if it does however, we need to "attach" it as the "descendent" from a tree view representation perspective of the current parent
-      //we append the child against the same parent canvas, but change its position
-      for (var i = 0; i < node.length; i++) {
-        renderedNode = node[i].renderNode(parent);
-        renderedNode?.addEventListener("expandButtonClick", this.onNodeExpandClick.bind(this, node[0]));
-        if (renderedNode != null) {
-          this.renderer.appendChild(this.canvasDom?.nativeElement, renderedNode.domObject);
-        }
       }
     }
     //and execute the same for the child of the current node and after the children are created we do the parent links
     for (var i = 0; i < node.length; i++) {
       if (node[i].children !== null && node[i].children.length > 0) {
+        console.log(`tree-view-component.renderTree -SubCall - (parent: ${node[i]?.treeNode.RealElement?.Name}, children: [${node[i].children.length}])`);
         this.renderTree(node[i], node[i].children);
       }
+    }
+    //we need to place all the children before we calculate the positions of the links
+    for (var i = 0; i < node.length; i++) {
       var linkResult = node[i].renderLinks();
       if (linkResult != null) {
-        this.renderer.appendChild(this.canvasDom?.nativeElement, linkResult);
+        this.renderer.insertBefore(this.canvasDom?.nativeElement, linkResult, node[i].svgNode?.domObject);
       }
     }
   }
