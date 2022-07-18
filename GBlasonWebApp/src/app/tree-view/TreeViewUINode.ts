@@ -345,23 +345,28 @@ export class TreeViewNodeSVG extends EventTarget {
     var icons: IconInfo[] = [
       {
         path: this._optional_icon,
-        active: currentNodeInfo.treeNode.RealElement?.IsOptional ?? false
+        active: currentNodeInfo.treeNode.RealElement?.IsOptional ?? false,
+        tooltip: "Optional content even if within a group or repeatable"
       },
       {
         path: this._repeat_icon,
-        active: currentNodeInfo.treeNode.RealElement?.IsRepetition ?? false
+        active: currentNodeInfo.treeNode.RealElement?.IsRepetition ?? false,
+        tooltip: "Content can be repeated more than once at the same level"
       },
       {
         path: this._group_icon,
-        active: currentNodeInfo.treeNode.RealElement?.IsGroup ?? false
+        active: currentNodeInfo.treeNode.RealElement?.IsGroup ?? false,
+        tooltip: "All child node are meant to be present (as a group)"
       },
       {
         path: this._branch_icon,
-        active: currentNodeInfo.treeNode.RealElement?.IsAlternation ?? false
+        active: currentNodeInfo.treeNode.RealElement?.IsAlternation ?? false,
+        tooltip: "Only one of the available child can be chosen"
       },
       {
         path: this._leaf_icon,
-        active: currentNodeInfo.treeNode.RealElement?.IsLeaf ?? false
+        active: currentNodeInfo.treeNode.RealElement?.IsLeaf ?? false,
+        tooltip: "Final node actual text / token from the source text"
       }];
     for (var i = 0; i < icons.length; i++) {
       this.insertIcon(nodeGroup, firstStep + iconSpace * i, iconVertical, icons[i]);
