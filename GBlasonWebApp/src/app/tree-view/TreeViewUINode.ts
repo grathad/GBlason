@@ -185,7 +185,7 @@ export class TreeViewNodeSVG extends EventTarget {
       var parentBranch = this.renderer.createElement("line", "svg");
       this.linkHorizontalLine = this.renderer.createElement("line", "svg");
 
-      var currentCenter = this._node_width / 2 - this._node_roundAngle;
+      var currentCenter = this._node_width / 2;
       var currentHeight = this._node_height + this._node_roundAngle * 2;
       var widthYAxis = (currentHeight + this._node_margin / 2);
 
@@ -293,7 +293,7 @@ export class TreeViewNodeSVG extends EventTarget {
     var iconMargin = 14;
     var iconVertical = internalMargin * 2 + 28 + 16;
     var iconSpace = (this._node_width + (this._node_roundAngle * 2) - (iconMargin * 2)) / 5;
-    var firstStep = iconMargin - this._node_roundAngle;
+    var firstStep = iconMargin;
     var i = 0;
     var icons: IconInfo[] = [
       {
@@ -324,11 +324,11 @@ export class TreeViewNodeSVG extends EventTarget {
       var expand_button = this.renderer.createElement("circle", "svg");
       var buttonRadius = 16;
       this.renderer.setAttribute(expand_button, "r", `${buttonRadius}px`);
-      this.renderer.setAttribute(expand_button, "cx", `${(this._node_width / 2) - this._node_roundAngle}px`);
+      this.renderer.setAttribute(expand_button, "cx", `${this._node_width / 2}px`);
       this.renderer.setAttribute(expand_button, "cy", `${iconVertical + iconSpace + internalMargin}`);
       this.renderer.setAttribute(expand_button, "class", "node-card node-expand-button");
 
-      var lastIconX = (this._node_width / 2) - this._node_roundAngle - (iconSize / 2);
+      var lastIconX = (this._node_width / 2) - (iconSize / 2);
       var lastIconY = iconVertical + iconSpace + internalMargin - iconSize / 2;
       this.renderer.setAttribute(expand_icon, "class", `active-icon`);
       this.renderer.setAttribute(expand_icon, "transform", `translate(${lastIconX},${lastIconY})`);
