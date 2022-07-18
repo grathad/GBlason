@@ -297,7 +297,7 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     for (var i = 0; i < node.length; i++) {
       var linkResult = node[i].renderLinks();
       if (linkResult != null) {
-        this.renderer.appendChild(this.canvasDom?.nativeElement, linkResult);
+        this.renderer.insertBefore(this.canvasDom?.nativeElement, linkResult, node[i].svgNode?.domObject);
       }
     }
   }
