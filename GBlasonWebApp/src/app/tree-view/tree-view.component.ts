@@ -122,6 +122,32 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     console.log(`translated the canvas to (${this._offset.x},${this._offset.y})`);
   }
 
+  onExpandAllClick() {
+    //in this version we only expand the nodes that have already gotten their children
+
+    if (this.rootNodeUi == null || this.rootNodeUi.svgNode == null) {
+      return;
+    }
+    this.expandFrom(this.rootNodeUi);
+  }
+
+  private expandFrom(node: TreeViewUINode, expand: boolean = true) {
+    if (node == null || node.children.length == 0) {
+      return;
+    }
+    node.expand(expand);
+    for (var i = 0; i < node.children.length; i++) {
+      this.expandFrom(node.children[i], expand);
+    }
+  }
+
+  onCollapseAllClick() {
+    if (this.rootNodeUi == null || this.rootNodeUi.svgNode == null) {
+      return;
+    }
+    this.expandFrom(this.rootNodeUi, false);
+  }
+
   /**
    * Handle the click on the expand button in the node card.
    * @param event the event sent by the UI
