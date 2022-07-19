@@ -122,16 +122,12 @@ export class TreeViewNodeSVG extends EventTarget {
       return;
     }
     if (expansion) {
-      this.renderer.setAttribute(this.expansionIcon, "d", this._expand_less_icon);
-      if (this.linksObject != null) {
-        this.renderer.setAttribute(this.linksObject, "class", "node-link");
-      }
+      if (this.expansionIcon != null) { this.renderer.setAttribute(this.expansionIcon, "d", this._expand_less_icon); }
+      if (this.linksObject != null) { this.renderer.setAttribute(this.linksObject, "class", "node-link"); }
     }
     else {
-      this.renderer.setAttribute(this.expansionIcon, "d", this._expand_more_icon);
-      if (this.linksObject != null) {
-        this.renderer.setAttribute(this.linksObject, "class", "node-link hidden");
-      }
+      if (this.expansionIcon != null) { this.renderer.setAttribute(this.expansionIcon, "d", this._expand_more_icon); }
+      if (this.linksObject != null) { this.renderer.setAttribute(this.linksObject, "class", "node-link hidden"); }
     }
   }
 
