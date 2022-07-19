@@ -15,9 +15,9 @@
 <div class="canvas">
   <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" class="svg-content"
     (pointerdown)="onStartDrag($event)" (pointermove)="onDrag($event)" (pointerup)="onStopDrag($event)"
-    (pointerleave)="onStopDrag($event)" #svg>
+    (pointerleave)="onStopDrag($event)" (wheel)="onWheel($event)" #svg>
 
-    <g #canvas transform="translate(0,0)"></g>
+    <g #canvas></g>
 
   </svg>
 </div>

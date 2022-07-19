@@ -44,6 +44,10 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
   private _offset: Point = { x: 0, y: 0 };
   private _dragStarted: boolean = false;
 
+  private _canvasMatrix = [1, 0, 0, 1, 0, 0];
+
+  //#region event handlers
+
   ngOnInit(): void {
 
   }
@@ -61,13 +65,6 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.treeHead != null) { this.updateUi(null, [this.treeHead]); }
   }
 
-  offsetCalc(evt: PointerEvent): Point {
-    return {
-      x: evt.clientX - this._startDragPoint.x + this._offset.x,
-      y: evt.clientY - this._startDragPoint.y + this._offset.y
-    };
-  }
-
   onStartDrag(event: PointerEvent) {
     if (event == null) {
       return;
@@ -82,12 +79,10 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     }
     event.preventDefault();
 
-    //we calculate the difference of the current position vs the start position
-    //the start position is also including the original offset of the frame position (within the _offset object)
-    var currentOffset = this.offsetCalc(event);
-
-    //we now add the current offset to the transform (including the natural current position or offset of the frame)
-    this.renderer.setAttribute(this.canvasDom?.nativeElement, "transform", `translate(${currentOffset.x},${currentOffset.y})`);
+    //we calculate the difference of the current position vs the last position and pan by that much
+    this.pan(event.clientX - this._startDragPoint.x, event.clientY - this._startDragPoint.y);
+    //refresh the start position to the last event (this one)
+    this._startDragPoint = { x: event.clientX, y: event.clientY };
   }
 
   onStopDrag(event: any) {
@@ -95,31 +90,27 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     if (!this._dragStarted) {
       return;
     }
-    this._offset = this.offsetCalc(event);
     this._dragStarted = false;
   }
 
-  onCenterClick() {
-    //we center the svg element so that the head is at the top of the screen, and at the center of the horizon
-    //y is 0
+  onWheel(event: any) {
+    if (event == null) {
+      return;
+    }
+    //we try to zoom out or in depending on the event
+    var delta = event.wheelDelta;
+    this.zoomFactor(delta);
+  }
 
-    //let's find the current position of the element compared to its parent
+  /**
+   * Handle the click on the center button, by placing the head (root) node at the y axis top and x axis center
+   * @returns nothing
+   */
+  onCenterClick() {
     if (this.rootNodeUi == null || this.rootNodeUi.svgNode == null) {
       return;
     }
-    //to get the size of the header to really hit the center of the screen horizontally
-    var headerRect = this.rootNodeUi.svgNode.domObject.getBoundingClientRect();
-    //then the exact target middle of the screen is calculated here
-    var targetLocationX = this.svgDom?.nativeElement.getBoundingClientRect().width / 2 - headerRect.width / 2;
-    console.log(`the X axis center of the screen minus the 1/2 width of the node is (${targetLocationX})`);
-    //we need to consider that the header node has its own x transition that we need to remove in order to be really centered
-    targetLocationX -= this.rootNodeUi.transformation.x;
-    console.log(`the header node is currently located on the x Axis in (${this.rootNodeUi.transformation.x})`);
-    //we save it to the offset as it will be used later if scrolling again
-    this._offset.y = 0;
-    this._offset.x = targetLocationX;
-    this.renderer.setAttribute(this.canvasDom?.nativeElement, "transform", `translate(${this._offset.x},${this._offset.y})`);
-    console.log(`translated the canvas to (${this._offset.x},${this._offset.y})`);
+    this.centerToNode(this.rootNodeUi);
   }
 
   onExpandAllClick() {
@@ -131,13 +122,30 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     this.expandFrom(this.rootNodeUi);
   }
 
-  private expandFrom(node: TreeViewUINode, expand: boolean = true) {
-    if (node == null || node.children.length == 0) {
+  /**
+   * Handle the click on the expand button in the node card.
+   * @param event the event sent by the UI
+   */
+  onNodeExpandClick(node: TreeViewUINode) {
+
+    if (node == null) {
       return;
     }
-    node.expand(expand);
-    for (var i = 0; i < node.children.length; i++) {
-      this.expandFrom(node.children[i], expand);
+    //(if this is a tree leaf, then we do nothing)
+    if (node.treeNode.RealElement?.IsLeaf ?? false) {
+      return;
+    }
+
+    console.log(`tree-view-component.onNodeExpandClick(node: ${node.treeNode.RealElement?.Name})`);
+
+    //there are 2 options, this is either an expand or a collapse
+    //if there are no children and this is not a lead, then we likely need to request the children
+    if (node.children.length == 0 && !node.treeNode.RealElement?.IsLeaf) {
+      this.getMoreNode(node);
+    }
+    else {
+      //just a play on the button states and the visibility of the nodes
+      node.expand(!node.isExpanded);
     }
   }
 
@@ -165,31 +173,36 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     var ratioWidth = svgInfo.width / canvasInfo.width;
     var ratioHeight = svgInfo.height / canvasInfo.height;
   }
-  /**
-   * Handle the click on the expand button in the node card.
-   * @param event the event sent by the UI
-   */
-  onNodeExpandClick(node: TreeViewUINode) {
 
-    if (node == null) {
-      return;
-    }
-    //(if this is a tree leaf, then we do nothing)
-    if (node.treeNode.RealElement?.IsLeaf ?? false) {
+  //#endregion
+
+  centerToNode(node: TreeViewUINode) {
+
+    if (node.svgNode == null) {
       return;
     }
 
-    console.log(`tree-view-component.onNodeExpandClick(node: ${node.treeNode.RealElement?.Name})`);
+    //we just need the distance between the current location of the node, and the actual dead middle
+    var currentNodeLocation = node.svgNode.domObject.getCTM();
+    var currentNodeSize = node.svgNode.domObject.getBoundingClientRect();
 
-    //there are 2 options, this is either an expand or a collapse
-    //if there are no children and this is not a lead, then we likely need to request the children
-    if (node.children.length == 0 && !node.treeNode.RealElement?.IsLeaf) {
-      this.getMoreNode(node);
-    }
-    else {
-      //just a play on the button states and the visibility of the nodes
-      node.expand(!node.isExpanded);
-    }
+    var currentSvgSize = this.svgDom?.nativeElement.getBoundingClientRect();
+
+    //the ideal (centered) position of the head should be
+
+    var targetPosition: Point = {
+      x: currentSvgSize.width / 2 - currentNodeSize.width / 2,
+      y: node.svgNode._node_margin //we could add a small padding for the sake of UI comfort rather than 0 ...
+    };
+
+    var log = `tree-view-component.centerToNode(node: ${node.treeNode.RealElement?.Name})`;
+    log += `\n\t> current node location: (${currentNodeLocation.e},${currentNodeLocation.f})`;
+    log += `\n\t> current svg size: (${currentSvgSize.width},${currentSvgSize.height})`;
+    log += `\n\t> current target: (${targetPosition.x},${targetPosition.y})`;
+
+    console.log(log);
+    //we pass the difference in location to the pan to move the node within the expected position
+    this.pan(targetPosition.x - currentNodeLocation.e, targetPosition.y - currentNodeLocation.f);
   }
 
   getMoreNode(head: TreeViewUINode) {
@@ -220,6 +233,32 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   /**
+   * Pans the SVG canvas to the direction given by the dx and dy
+   * @param dx the distance to move on the x axis
+   * @param dy the distance to move on the y axis
+   */
+  private pan(dx: number, dy: number) {
+    this._canvasMatrix[4] += dx;
+    this._canvasMatrix[5] += dy;
+
+    this._offset.x += dx;
+    this._offset.y += dy;
+
+    var newMatrix = `matrix(${this._canvasMatrix.join(' ')})`;
+    this.renderer.setAttribute(this.canvasDom?.nativeElement, "transform", newMatrix);
+  }
+
+  /**
+   * Zooms factor
+   * @param factor
+   */
+  private zoomFactor(factor: number) {
+    console.log(`tree-view-component.zoomFactor(factor: ${factor})`);
+  }
+
+
+
+  /**
    * Calculates the x axis positions for all the nodes in the tree
    */
   calculateXPositions(): void {
@@ -230,6 +269,16 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     }
     this._xCounter = 0;
     this.calculateXPositionsStep(this.rootNodeUi);
+  }
+
+  private expandFrom(node: TreeViewUINode, expand: boolean = true) {
+    if (node == null || node.children.length == 0) {
+      return;
+    }
+    node.expand(expand);
+    for (var i = 0; i < node.children.length; i++) {
+      this.expandFrom(node.children[i], expand);
+    }
   }
 
   /**
@@ -268,6 +317,7 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.rootNodeUi != null) {
       console.log(`tree-view-component.updateUi(parent: ${parent?.treeNode.RealElement?.Name}, children: [${children.length}])`);
       this.renderTree(null, [this.rootNodeUi]);
+      var canvasInfo = this.canvasDom?.nativeElement.getBoundingClientRect();
     }
   }
 
