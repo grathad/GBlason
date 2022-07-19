@@ -148,6 +148,23 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     this.expandFrom(this.rootNodeUi, false);
   }
 
+  onZoomToFitClick() {
+    if (this.rootNodeUi == null || this.rootNodeUi.svgNode == null) {
+      return;
+    }
+    //finding out what is the current size of the canvas
+    var canvasInfo = this.canvasDom?.nativeElement.getBoundingClientRect();
+    //finding out what is the current container size
+    var svgInfo = this.svgDom?.nativeElement.getBoundingClientRect();
+
+    //I just need to set the svg viewbox to the height and width of the canvasdom element
+    //only when the size of the canvasDom in absolute unit is bigger (either height or width) than the svg
+    //so the svg size is the minimum
+    //and with a predefined maximum width based on how small it gets from pratical experience
+
+    var ratioWidth = svgInfo.width / canvasInfo.width;
+    var ratioHeight = svgInfo.height / canvasInfo.height;
+  }
   /**
    * Handle the click on the expand button in the node card.
    * @param event the event sent by the UI
