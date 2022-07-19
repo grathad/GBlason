@@ -41,6 +41,7 @@
 
 .active-icon {
   fill: #fff;
+  //necessary to let the click go through to the element behind
   pointer-events: none;
 }
 
@@ -80,4 +81,9 @@
 
 .node-link.hidden{
   visibility: hidden;
+}
+
+.node-tooltip-area{
+  fill-opacity: 0;
+  pointer-events: all;
 }

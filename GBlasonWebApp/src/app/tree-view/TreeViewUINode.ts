@@ -297,13 +297,18 @@ export class TreeViewNodeSVG extends EventTarget {
     var nodeCard = this.renderer.createElement("path", "svg");
 
     var fingerprint_icon = this.renderer.createElement("path", "svg");
+    var fingerprint_tooltip_area = this.renderer.createElement("rect", "svg");
     var expand_icon = this.renderer.createElement("path", "svg");
 
     var nameContent = this.renderer.createElement("foreignObject", "svg");
+    var nameContent_tooltip_area = this.renderer.createElement("rect", "svg");
+    var nameContent_tooltip = this.renderer.createElement("title", "svg");
     var rulesContent = this.renderer.createElement("foreignObject", "svg");
+    var rulesContent_tooltip_area = this.renderer.createElement("rect", "svg");
+    var rulesContent_tooltip = this.renderer.createElement("title", "svg");
     var nameText = this.renderer.createElement("div");
     var rulesText = this.renderer.createElement("div");
-    var tooltip = this.renderer.createElement("title", "svg");
+    var tooltip_guid = this.renderer.createElement("title", "svg");
     var guid = this.renderer.createText(currentNodeInfo.treeNode.ElementId);
 
     var internalMargin = 20;
@@ -318,24 +323,49 @@ export class TreeViewNodeSVG extends EventTarget {
     this.renderer.setAttribute(nodeCard, "class", "node-card");
     this.renderer.setAttribute(fingerprint_icon, "class", "active-icon");
     this.renderer.setAttribute(fingerprint_icon, "transform", `translate(${internalMargin - this._node_roundAngle},${internalMargin})`);
+    this.renderer.setAttribute(fingerprint_tooltip_area, "class", "node-tooltip-area");
+    this.renderer.setAttribute(fingerprint_tooltip_area, "transform", `translate(${internalMargin - this._node_roundAngle},${internalMargin})`);
+    this.renderer.setAttribute(fingerprint_tooltip_area, "width", iconSize.toString());
+    this.renderer.setAttribute(fingerprint_tooltip_area, "height", iconSize.toString());
     this.renderer.setAttribute(nameContent, "transform", `translate(${internalMargin - this._node_roundAngle + iconSize + (internalMargin - this._node_roundAngle) / 2},${internalMargin - 1})`);
     this.renderer.setAttribute(nameContent, "width", `${this._node_width - (internalMargin - this._node_roundAngle + iconSize + (internalMargin - this._node_roundAngle) / 2) - internalMargin / 2 + this._node_roundAngle}`);
     this.renderer.setAttribute(nameContent, "height", "28"); //css font height style external dependency, need clean up
+
+    this.renderer.setAttribute(nameContent_tooltip_area, "transform", `translate(${internalMargin - this._node_roundAngle + iconSize + (internalMargin - this._node_roundAngle) / 2},${internalMargin - 1})`);
+    this.renderer.setAttribute(nameContent_tooltip_area, "width", `${this._node_width - (internalMargin - this._node_roundAngle + iconSize + (internalMargin - this._node_roundAngle) / 2) - internalMargin / 2 + this._node_roundAngle}`);
+    this.renderer.setAttribute(nameContent_tooltip_area, "height", "28"); //css font height style external dependency, need clean up
+    this.renderer.setAttribute(nameContent_tooltip_area, "class", "node-tooltip-area");
+
     this.renderer.setAttribute(nameText, "class", "node-text");
+    this.renderer.setAttribute(nameContent, "matTooltip", currentNodeInfo.treeNode.RealElement?.Name ?? "Null");
 
     this.renderer.setAttribute(rulesContent, "transform", `translate(${internalMargin / 2},${internalMargin + 28})`);
     this.renderer.setAttribute(rulesContent, "width", `${this._node_width - internalMargin}`);
     this.renderer.setAttribute(rulesContent, "height", "16"); //css font height style external dependency, need clean up
+
+    this.renderer.setAttribute(rulesContent_tooltip_area, "transform", `translate(${internalMargin / 2},${internalMargin + 28})`);
+    this.renderer.setAttribute(rulesContent_tooltip_area, "width", `${this._node_width - internalMargin}`);
+    this.renderer.setAttribute(rulesContent_tooltip_area, "height", "16"); //css font height style external dependency, need clean up
+    this.renderer.setAttribute(rulesContent_tooltip_area, "class", "node-tooltip-area");
+
     this.renderer.setAttribute(rulesText, "class", "node-text node-subtext");
 
     this.renderer.appendChild(nodeGroup, nodeCard);
     this.renderer.appendChild(nodeGroup, fingerprint_icon);
+    this.renderer.appendChild(nodeGroup, fingerprint_tooltip_area);
     this.renderer.appendChild(nodeGroup, nameContent);
     this.renderer.appendChild(nodeGroup, rulesContent);
     this.renderer.appendChild(nameContent, nameText);
     this.renderer.appendChild(nameText, this.renderer.createText(currentNodeInfo.treeNode.RealElement?.Name ?? "Null"));
+    this.renderer.appendChild(nameContent_tooltip, this.renderer.createText(currentNodeInfo.treeNode.RealElement?.Name ?? "Null"));
+    this.renderer.appendChild(nameContent_tooltip_area, nameContent_tooltip);
+
     this.renderer.appendChild(rulesContent, rulesText);
     this.renderer.appendChild(rulesText, this.renderer.createText(currentNodeInfo.treeNode.RealElement?.RulesContent ?? "Null"));
+    this.renderer.appendChild(rulesContent_tooltip, this.renderer.createText(currentNodeInfo.treeNode.RealElement?.RulesContent ?? "Null"));
+    this.renderer.appendChild(rulesContent_tooltip_area, rulesContent_tooltip);
+    this.renderer.appendChild(nodeGroup, rulesContent_tooltip_area);
+    this.renderer.appendChild(nodeGroup, nameContent_tooltip_area);
 
     var iconMargin = 14;
     var iconVertical = internalMargin * 2 + 28 + 16;
@@ -345,23 +375,28 @@ export class TreeViewNodeSVG extends EventTarget {
     var icons: IconInfo[] = [
       {
         path: this._optional_icon,
-        active: currentNodeInfo.treeNode.RealElement?.IsOptional ?? false
+        active: currentNodeInfo.treeNode.RealElement?.IsOptional ?? false,
+        tooltip: "Optional content even if within a group or repeatable"
       },
       {
         path: this._repeat_icon,
-        active: currentNodeInfo.treeNode.RealElement?.IsRepetition ?? false
+        active: currentNodeInfo.treeNode.RealElement?.IsRepetition ?? false,
+        tooltip: "Content can be repeated more than once at the same level"
       },
       {
         path: this._group_icon,
-        active: currentNodeInfo.treeNode.RealElement?.IsGroup ?? false
+        active: currentNodeInfo.treeNode.RealElement?.IsGroup ?? false,
+        tooltip: "All child node are meant to be present (as a group)"
       },
       {
         path: this._branch_icon,
-        active: currentNodeInfo.treeNode.RealElement?.IsAlternation ?? false
+        active: currentNodeInfo.treeNode.RealElement?.IsAlternation ?? false,
+        tooltip: "Only one of the available child can be chosen"
       },
       {
         path: this._leaf_icon,
-        active: currentNodeInfo.treeNode.RealElement?.IsLeaf ?? false
+        active: currentNodeInfo.treeNode.RealElement?.IsLeaf ?? false,
+        tooltip: "Final node actual text / token from the source text"
       }];
     for (var i = 0; i < icons.length; i++) {
       this.insertIcon(nodeGroup, firstStep + iconSpace * i, iconVertical, icons[i]);
@@ -391,8 +426,8 @@ export class TreeViewNodeSVG extends EventTarget {
       });
     }
 
-    this.renderer.appendChild(tooltip, guid);
-    this.renderer.appendChild(fingerprint_icon, tooltip);
+    this.renderer.appendChild(tooltip_guid, guid);
+    this.renderer.appendChild(fingerprint_tooltip_area, tooltip_guid);
 
     this.domObject = nodeGroup;
   }
@@ -410,8 +445,13 @@ export class TreeViewNodeSVG extends EventTarget {
     this.renderer.setAttribute(icon, "d", iconInfo.path);
     this.renderer.setAttribute(icon, "class", `${iconInfo.active ? "active-icon" : "passive-icon"}`);
 
+
+    var tooltip_icon = this.renderer.createElement("title", "svg");
+
     this.renderer.appendChild(parent, iconGroup);
     this.renderer.appendChild(iconGroup, iconContainer);
     this.renderer.appendChild(iconContainer, icon);
+    this.renderer.appendChild(iconGroup, tooltip_icon);
+    this.renderer.appendChild(tooltip_icon, this.renderer.createText(iconInfo.tooltip));
   }
 }
