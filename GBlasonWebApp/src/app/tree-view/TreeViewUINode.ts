@@ -98,7 +98,7 @@ export class TreeViewNodeSVG extends EventTarget {
   //constants of the node UI
   private _node_width = 180;
   private _node_height = 132;
-  private _node_margin = 28;
+  readonly _node_margin = 28;
   private _node_roundAngle = 4;
   private _node_line_thickness_center_delta = 1; //half of the thickness rounded down
 

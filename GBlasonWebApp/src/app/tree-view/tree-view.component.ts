@@ -41,8 +41,19 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
   private _xCounter: number = 0;
 
   private _startDragPoint: Point = { x: 0, y: 0 };
-  private _offset: Point = { x: 0, y: 0 };
   private _dragStarted: boolean = false;
+
+  private _top_left_anchor: boolean = false;
+
+  private _zoomScale: number = 100;
+  private _minZoom: number = 10;
+  private _maxZoom: number = 200;
+  private _zoomRoundingAccuracy = 4;
+
+  private _canvasMatrix = [1, 0, 0, 1, 0, 0];
+  private readonly _defaultMatrix = [1, 0, 0, 1, 0, 0];
+
+  //#region event handlers
 
   ngOnInit(): void {
 
@@ -61,13 +72,6 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.treeHead != null) { this.updateUi(null, [this.treeHead]); }
   }
 
-  offsetCalc(evt: PointerEvent): Point {
-    return {
-      x: evt.clientX - this._startDragPoint.x + this._offset.x,
-      y: evt.clientY - this._startDragPoint.y + this._offset.y
-    };
-  }
-
   onStartDrag(event: PointerEvent) {
     if (event == null) {
       return;
@@ -82,12 +86,10 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     }
     event.preventDefault();
 
-    //we calculate the difference of the current position vs the start position
-    //the start position is also including the original offset of the frame position (within the _offset object)
-    var currentOffset = this.offsetCalc(event);
-
-    //we now add the current offset to the transform (including the natural current position or offset of the frame)
-    this.renderer.setAttribute(this.canvasDom?.nativeElement, "transform", `translate(${currentOffset.x},${currentOffset.y})`);
+    //we calculate the difference of the current position vs the last position and pan by that much
+    this.pan(event.clientX - this._startDragPoint.x, event.clientY - this._startDragPoint.y);
+    //refresh the start position to the last event (this one)
+    this._startDragPoint = { x: event.clientX, y: event.clientY };
   }
 
   onStopDrag(event: any) {
@@ -95,31 +97,38 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     if (!this._dragStarted) {
       return;
     }
-    this._offset = this.offsetCalc(event);
     this._dragStarted = false;
   }
 
-  onCenterClick() {
-    //we center the svg element so that the head is at the top of the screen, and at the center of the horizon
-    //y is 0
+  onWheel(event: any) {
+    if (event == null) {
+      return;
+    }
+    //we try to zoom out or in depending on the event
+    var delta = event.wheelDelta > 0 ? 10 : -10;
 
-    //let's find the current position of the element compared to its parent
+    //not optimum ideally should be calculed once, and then on resize, but no performance issues at that stage
+    var svgLocation = this.svgDom?.nativeElement.getBoundingClientRect();
+    var canvasLocation = this.canvasDom?.nativeElement.getBoundingClientRect();
+
+    var canvasTopLeft: Point = { x: canvasLocation.top - svgLocation.top, y: canvasLocation.left - svgLocation.left };
+    console.log(`tree-view-component.onWheel => canvas top left: (${canvasTopLeft.x}, ${canvasTopLeft.y})`);
+
+    //trying at the center
+    var centerPoint = { x: event.clientX - canvasLocation.left, y: event.clientY - canvasLocation.top };
+
+    this.zoom(delta, centerPoint);
+  }
+
+  /**
+   * Handle the click on the center button, by placing the head (root) node at the y axis top and x axis center
+   * @returns nothing
+   */
+  onCenterClick() {
     if (this.rootNodeUi == null || this.rootNodeUi.svgNode == null) {
       return;
     }
-    //to get the size of the header to really hit the center of the screen horizontally
-    var headerRect = this.rootNodeUi.svgNode.domObject.getBoundingClientRect();
-    //then the exact target middle of the screen is calculated here
-    var targetLocationX = this.svgDom?.nativeElement.getBoundingClientRect().width / 2 - headerRect.width / 2;
-    console.log(`the X axis center of the screen minus the 1/2 width of the node is (${targetLocationX})`);
-    //we need to consider that the header node has its own x transition that we need to remove in order to be really centered
-    targetLocationX -= this.rootNodeUi.transformation.x;
-    console.log(`the header node is currently located on the x Axis in (${this.rootNodeUi.transformation.x})`);
-    //we save it to the offset as it will be used later if scrolling again
-    this._offset.y = 0;
-    this._offset.x = targetLocationX;
-    this.renderer.setAttribute(this.canvasDom?.nativeElement, "transform", `translate(${this._offset.x},${this._offset.y})`);
-    console.log(`translated the canvas to (${this._offset.x},${this._offset.y})`);
+    this.centerToNode(this.rootNodeUi);
   }
 
   onExpandAllClick() {
@@ -129,23 +138,6 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
       return;
     }
     this.expandFrom(this.rootNodeUi);
-  }
-
-  private expandFrom(node: TreeViewUINode, expand: boolean = true) {
-    if (node == null || node.children.length == 0) {
-      return;
-    }
-    node.expand(expand);
-    for (var i = 0; i < node.children.length; i++) {
-      this.expandFrom(node.children[i], expand);
-    }
-  }
-
-  onCollapseAllClick() {
-    if (this.rootNodeUi == null || this.rootNodeUi.svgNode == null) {
-      return;
-    }
-    this.expandFrom(this.rootNodeUi, false);
   }
 
   /**
@@ -175,32 +167,54 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  getMoreNode(head: TreeViewUINode) {
-    var httpRequest = new HttpRequest("GET", "api/ebnf/tree?head=" + head.treeNode.ElementId, { responseType: "text" });
-    var request = this.http.request<string>(httpRequest);
-
-    //ideally we should add an animated SVG to replace the button while the request is in progress (for later)
-    request.subscribe({
-      next: (data: HttpEvent<string>) => {
-        var result = data as HttpResponse<string>;
-        if (result !== null && result.body !== null && result.body !== undefined) {
-          //we received new raw data, we need to parse and add them to the tree
-          var replacement = JSON.parse(result.body);
-          //we should receive the tree with the current head as the subtree head
-          if (replacement.ElementId === head.treeNode.ElementId) {
-            //we are good, and the object to update is not the parent we received but its children
-            this.updateUi(head, replacement.Children);
-          } else {
-            throw new Error(`the received head ${replacement.ElementId} is different than the expected one ${head.treeNode.ElementId}`);
-          }
-        }
-      },
-      error: (err) => { },
-      complete: () => {
-        head.expand(true);
-      }
-    });
+  onCollapseAllClick() {
+    if (this.rootNodeUi == null || this.rootNodeUi.svgNode == null) {
+      return;
+    }
+    this.expandFrom(this.rootNodeUi, false);
   }
+
+  onZoomToFitClick() {
+    if (this.rootNodeUi == null || this.rootNodeUi.svgNode == null) {
+      return;
+    }
+    //finding out what is the current size of the canvas
+    var canvasInfo = this.canvasDom?.nativeElement.getBoundingClientRect();
+    //finding out what is the current container size
+    var svgInfo = this.svgDom?.nativeElement.getBoundingClientRect();
+
+    //I just need to set the svg viewbox to the height and width of the canvasdom element
+    //only when the size of the canvasDom in absolute unit is bigger (either height or width) than the svg
+    //so the svg size is the minimum
+    //and with a predefined maximum width based on how small it gets from pratical experience
+
+    var ratioWidth = 1 / (canvasInfo.width / svgInfo.width);
+    var ratioHeight = 1 / (canvasInfo.height / svgInfo.height);
+
+    var smallRatio = Math.min(ratioHeight, ratioWidth);
+    //we want to fit to screen, so ideally the small ratio should be 1:1 (later we can tweak it a little bit)
+    //we calculate the delta to get to 1, this is by how much we need to change the current percentage zoom
+    var zoomTarget = this._zoomScale * smallRatio;
+    //we need to apply a factor of zoom change to the CURRENT zoom factor
+    if (zoomTarget > this._maxZoom) {
+      zoomTarget = this._maxZoom;
+    } else if (zoomTarget < this._minZoom) {
+      zoomTarget = this._minZoom;
+    }
+    var zoomDelta = zoomTarget - this._zoomScale;
+    console.log(`tree-view-component.zoomToFit change zoom scale by ${zoomDelta}`);
+    this.zoom(zoomDelta, { x: svgInfo.height / 2, y: svgInfo.width / 2 });
+    //next step is to place the canvas so that it completely fits (pretty much transform it back to 0,0)
+    this._canvasMatrix[4] = 0;
+    this._canvasMatrix[5] = 0;
+
+    var newMatrix = `matrix(${this._canvasMatrix.join(' ')})`;
+    this.renderer.setAttribute(this.canvasDom?.nativeElement, "transform", newMatrix);
+  }
+
+  //#endregion
+
+  //#region matrix and math methods on the tree
 
   /**
    * Calculates the x axis positions for all the nodes in the tree
@@ -240,17 +254,163 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+  getNodeCenter(node: TreeViewUINode): Point | null {
+    if (node.svgNode == null) {
+      return null;
+    }
+    //we just need the distance between the current location of the node, and the actual dead middle
+    var currentNodeSize = node.svgNode.domObject.getBoundingClientRect();
+
+    var currentSvgSize = this.svgDom?.nativeElement.getBoundingClientRect();
+
+    //the ideal (centered) position of the head should be
+
+    return {
+      x: currentSvgSize.width / 2 - currentNodeSize.width / 2,
+      y: Math.max(node.svgNode._node_margin * this._zoomScale / 100, node.svgNode._node_margin)
+    };
+  }
+
+  centerToNode(node: TreeViewUINode) {
+
+    if (node.svgNode == null) {
+      return;
+    }
+
+    //we just need the distance between the current location of the node, and the actual dead middle
+    var currentNodeLocation = node.svgNode.domObject.getCTM();
+    var targetPosition = this.getNodeCenter(node);
+    if (targetPosition == null) {
+      return;
+    }
+
+    var log = `tree-view-component.centerToNode(node: ${node.treeNode.RealElement?.Name})`;
+    log += `\n\t> current node location: (${currentNodeLocation.e},${currentNodeLocation.f})`;
+    log += `\n\t> current target: (${targetPosition.x},${targetPosition.y})`;
+
+    console.log(log);
+    //we pass the difference in location to the pan to move the node within the expected position
+    this.pan(targetPosition.x - currentNodeLocation.e, targetPosition.y - currentNodeLocation.f);
+  }
+
   /**
-   * Refresh the whole UI by calculating the new UI tree with all nodes, recalculating their position, adding the new nodes and transforming the actual SVG nodes positions
-   * @param parent the parent from which the update needs to happen (the rendering is always from the first root)
-   * @param children the new nodes that needs to be added (rendered) into the tree
+   * Pans the SVG canvas to the direction given by the dx and dy
+   * @param dx the distance to move on the x axis
+   * @param dy the distance to move on the y axis
    */
-  updateUi(parent: TreeViewUINode | null, children: TreeViewNode[]): void {
-    var newHeads = this.buildUiTree(parent, children);
-    this.calculateXPositions();
-    if (this.rootNodeUi != null) {
-      console.log(`tree-view-component.updateUi(parent: ${parent?.treeNode.RealElement?.Name}, children: [${children.length}])`);
-      this.renderTree(null, [this.rootNodeUi]);
+  private pan(dx: number, dy: number) {
+    this._canvasMatrix[4] += dx;
+    this._canvasMatrix[5] += dy;
+
+    var newMatrix = `matrix(${this._canvasMatrix.join(' ')})`;
+    this.renderer.setAttribute(this.canvasDom?.nativeElement, "transform", newMatrix);
+    var log = `tree-view-component.pan(dx: ${dx}, dy: (${dy}))`;
+    log += `\n\t> final ${newMatrix}`;
+    console.log(log);
+  }
+
+  private roundNum(num: number, length: number) {
+    var number = Math.round(num * Math.pow(10, length)) / Math.pow(10, length);
+    return number;
+  }
+
+  /**
+   * Zooms the SVG by the given scale as a step in percentage of zoom direction, like +10 (=+10% zoom in) or -25 (=25% zoom out)
+   * @param scale the percentage by which to zoom in or out
+   * @param zoomCenter the center point from which to perform the zooming update
+   */
+  private zoom(scale: number, zoomCenter: Point) {
+    var totalPercentDelta = this._zoomScale + scale;
+    if (totalPercentDelta <= this._minZoom || totalPercentDelta > this._maxZoom) {
+      return;
+    }
+
+    //information available from our perspective
+    //The percentage increase step (scale)
+    //The total percentage increase from the origin (totalPercentDelta = this._zoomScale + scale)
+    //The previous percentage increase before the current step (this._zoomScale)
+    //The position of the cursor representing the zoom center within the reference of the canvas (zoomCenter)
+
+    var log = `tree-view-component.zoom(scale: ${scale}, zoomCenter: (${zoomCenter.x}, ${zoomCenter.y})) for a total zoom of ${totalPercentDelta}`;
+
+    //information to calculate
+    //the zoom transformation we apply to the canvas will grow or shrink the canvas, and all the points in it on the 2D axis
+    //we need to calculate the new position of the x and y point of the zoom center AFTER the zoom is applied
+    //the distance on BOTH axis will be affected by the ratio of totalPercentDelta/ this._zoomScale
+    var zoomChangeRatio = this.roundNum(totalPercentDelta / this._zoomScale, this._zoomRoundingAccuracy);
+    log += `\n\t> the current ratio of transformation is: ${zoomChangeRatio}`;
+    var newCenterX = this.roundNum(zoomChangeRatio * zoomCenter.x, this._zoomRoundingAccuracy);
+    var newCenterY = this.roundNum(zoomChangeRatio * zoomCenter.y, this._zoomRoundingAccuracy);
+    log += `\n\t> the new expected location of the point centered on the cursor will be : (${newCenterX}, ${newCenterY})`;
+    //Now that we know the future location of the zoom center point, we just need to correct the transformation to move it by as many pixels as the delta of the new and old location
+    var transformXCorrection = newCenterX - zoomCenter.x;
+    var transformYCorrection = newCenterY - zoomCenter.y;
+    log += `\n\t> corresponding to a translate correction of : (${-transformXCorrection}, ${-transformYCorrection})`;
+
+    //canvas matrix has 6 values noted from a to f matching an array [0-6]
+    //[0] = a = previous coordinate system X axis factor to apply to new X value
+    //[1] = b = previous coordinate system x axis factor to apply to new y value (always 0 in 2D)
+    //[2] = c = previous coordinate system y axis factor to apply to new x value (always 0 in 2D)
+    //[3] = d = previous coordinate system y axis factor to apply to new y value
+    //[4] = e = direct x translation (the correction to keep the zoom centered on the cursor)
+    //[5] = f = direct y translation (the correction to keep the zoom centered on the cursor)
+
+    //of course we also need to apply the new total zoom from the origin factor to the zoom matrix
+    //example if we are now at 120% we multiply the original value by 120/100 --> 1.2 (so 1 --> 1.2)
+
+    for (var i = 0; i < 4; i++) {
+      this._canvasMatrix[i] = this._defaultMatrix[i] * (totalPercentDelta / 100);
+    }
+
+    this._canvasMatrix[4] -= transformXCorrection;
+    this._canvasMatrix[5] -= transformYCorrection;
+
+    this._zoomScale = totalPercentDelta;
+
+    var newMatrix = `matrix(${this._canvasMatrix.join(' ')})`;
+    log += `\n\t> final ${newMatrix}`;
+    this.renderer.setAttribute(this.canvasDom?.nativeElement, "transform", newMatrix);
+    console.log(log);
+  }
+
+  //#endregion
+
+  //#region tree manipulation / data retrieval
+
+  getMoreNode(head: TreeViewUINode) {
+    var httpRequest = new HttpRequest("GET", "api/ebnf/tree?head=" + head.treeNode.ElementId, { responseType: "text" });
+    var request = this.http.request<string>(httpRequest);
+
+    //ideally we should add an animated SVG to replace the button while the request is in progress (for later)
+    request.subscribe({
+      next: (data: HttpEvent<string>) => {
+        var result = data as HttpResponse<string>;
+        if (result !== null && result.body !== null && result.body !== undefined) {
+          //we received new raw data, we need to parse and add them to the tree
+          var replacement = JSON.parse(result.body);
+          //we should receive the tree with the current head as the subtree head
+          if (replacement.ElementId === head.treeNode.ElementId) {
+            //we are good, and the object to update is not the parent we received but its children
+            this.updateUi(head, replacement.Children);
+          } else {
+            throw new Error(`the received head ${replacement.ElementId} is different than the expected one ${head.treeNode.ElementId}`);
+          }
+        }
+      },
+      error: (err) => { },
+      complete: () => {
+        head.expand(true);
+      }
+    });
+  }
+
+  private expandFrom(node: TreeViewUINode, expand: boolean = true) {
+    if (node == null || node.children.length == 0) {
+      return;
+    }
+    node.expand(expand);
+    for (var i = 0; i < node.children.length; i++) {
+      this.expandFrom(node.children[i], expand);
     }
   }
 
@@ -285,6 +445,25 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     return nodeUi;
   }
 
+  //#endregion
+
+  //#region Rendering methods
+
+  /**
+   * Refresh the whole UI by calculating the new UI tree with all nodes, recalculating their position, adding the new nodes and transforming the actual SVG nodes positions
+   * @param parent the parent from which the update needs to happen (the rendering is always from the first root)
+   * @param children the new nodes that needs to be added (rendered) into the tree
+   */
+  updateUi(parent: TreeViewUINode | null, children: TreeViewNode[]): void {
+    var newHeads = this.buildUiTree(parent, children);
+    this.calculateXPositions();
+    if (this.rootNodeUi != null) {
+      console.log(`tree-view-component.updateUi(parent: ${parent?.treeNode.RealElement?.Name}, children: [${children.length}])`);
+      this.renderTree(null, [this.rootNodeUi]);
+      var canvasInfo = this.canvasDom?.nativeElement.getBoundingClientRect();
+    }
+  }
+
   /**
    * Renders the tree by creating new nodes and transforming all the nodes to their new position
    * @param parent
@@ -295,6 +474,20 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     if (node === null || node.length === 0 || this._renderingReady === false || this._dataReady === false) {
       return;
     }
+
+    if (!this._top_left_anchor) {
+      //we had a 1*1 rect pixel without transformation within the group to make SURE that the 0,0 reference frame for the matrix transform
+      //is indeed the top left corner of our canvas, if not, then the actual topmost, leftmost object (dynamic) is our reference point
+      //which make the maths overly complicated for no reason
+      var anchor = this.renderer.createElement("rect", "svg");
+      this.renderer.setAttribute(anchor, "width", "1");
+      this.renderer.setAttribute(anchor, "height", "1");
+      this.renderer.setAttribute(anchor, "class", "invisible");
+      this.renderer.appendChild(this.canvasDom?.nativeElement, anchor);
+      this._top_left_anchor = true;
+    }
+
+
     var log = `tree-view-component.renderTree(parent: ${parent?.treeNode.RealElement?.Name}, node[]:{${node[0].treeNode.RealElement?.Name}`;
     for (var i = 1; i < node.length; i++) {
       log += ", " + node[i].treeNode.RealElement?.Name;
@@ -310,6 +503,27 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
         console.log(`tree-view-component.renderTree.addEventListener(node: ${node[i].treeNode.RealElement?.Name})`);
         renderedNode.addEventListener("expandButtonClick", this.onNodeExpandClick.bind(this, node[i]));
         this.renderer.appendChild(this.canvasDom?.nativeElement, renderedNode.domObject);
+
+        // if (this._crossDebugZoomg == null) {
+        //   this._crossDebugZoomg = this.renderer.createElement("g", "svg");
+        //   var crossDebugZoomh = this.renderer.createElement("line", "svg");
+        //   var crossDebugZoomv = this.renderer.createElement("line", "svg");
+        //   //center of the debug cross should be
+        //   var centerDebug: Point = { x: 164, y: 62 };
+        //   this.renderer.setAttribute(crossDebugZoomh, "x1", (centerDebug.x - 20).toString());
+        //   this.renderer.setAttribute(crossDebugZoomh, "y1", (centerDebug.y).toString());
+        //   this.renderer.setAttribute(crossDebugZoomh, "x2", (centerDebug.x + 20).toString());
+        //   this.renderer.setAttribute(crossDebugZoomh, "y2", (centerDebug.y).toString());
+        //   this.renderer.setAttribute(crossDebugZoomv, "x1", (centerDebug.x).toString());
+        //   this.renderer.setAttribute(crossDebugZoomv, "y1", (centerDebug.y - 20).toString());
+        //   this.renderer.setAttribute(crossDebugZoomv, "x2", (centerDebug.x).toString());
+        //   this.renderer.setAttribute(crossDebugZoomv, "y2", (centerDebug.y + 20).toString());
+        //   this.renderer.setAttribute(crossDebugZoomv, "class", "cross-debug");
+        //   this.renderer.setAttribute(crossDebugZoomh, "class", "cross-debug");
+        //   this.renderer.appendChild(this.svgDom?.nativeElement, this._crossDebugZoomg);
+        //   this.renderer.appendChild(this._crossDebugZoomg, crossDebugZoomh);
+        //   this.renderer.appendChild(this._crossDebugZoomg, crossDebugZoomv);
+        // }
       }
     }
     //and execute the same for the child of the current node and after the children are created we do the parent links
@@ -327,4 +541,6 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
       }
     }
   }
+
+  //#endregion
 }

@@ -1,0 +1,9 @@
+<div class="canvas">
+  <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" class="svg-content"
+    (pointerdown)="onStartDrag($event)" (pointermove)="onDrag($event)" (pointerup)="onStopDrag($event)"
+    (pointerleave)="onStopDrag($event)" (wheel)="onWheel($event)" #svg>
+
+    <g #canvas class="svg-canvas"></g>
+
+  </svg>
+</div>

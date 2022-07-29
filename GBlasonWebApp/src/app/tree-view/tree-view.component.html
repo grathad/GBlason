@@ -8,16 +8,16 @@
   <button mat-icon-button class="toolbar-icon" aria-label="center button" (click)="onCollapseAllClick()">
     <mat-icon>unfold_less</mat-icon>
   </button>
-  <button mat-icon-button class="toolbar-icon" aria-label="center button" disabled>
+  <button mat-icon-button class="toolbar-icon" aria-label="center button" (click)="onZoomToFitClick()">
     <mat-icon>fit_screen</mat-icon>
   </button>
 </mat-toolbar>
 <div class="canvas">
   <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" class="svg-content"
     (pointerdown)="onStartDrag($event)" (pointermove)="onDrag($event)" (pointerup)="onStopDrag($event)"
-    (pointerleave)="onStopDrag($event)" #svg>
+    (pointerleave)="onStopDrag($event)" (wheel)="onWheel($event)" #svg>
 
-    <g #canvas transform="translate(0,0)"></g>
+    <g #canvas></g>
 
   </svg>
 </div>
