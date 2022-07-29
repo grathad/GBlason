@@ -14,6 +14,7 @@ import { BlasonParsingComponent } from './blason-parsing/blason-parsing.componen
 import { CoatOfArmEditorComponent } from './coat-of-arm-editor/coat-of-arm-editor.component';
 import { HttpErrorComponent } from './http-error/http-error.component';
 import { TreeViewComponent } from './tree-view/tree-view.component';
+import { ZoomViewComponent } from './zoom-view/zoom-view.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { TreeViewComponent } from './tree-view/tree-view.component';
     CoatOfArmEditorComponent,
     HttpErrorComponent,
     TreeViewComponent,
+    ZoomViewComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,

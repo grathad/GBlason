@@ -1,6 +1,7 @@
 import { DataSource } from '@angular/cdk/collections';
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpParamsOptions, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { MatTab, MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-ebnf',
@@ -9,7 +10,6 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 })
 
 export class EbnfComponent implements OnInit {
-
   constructor(private http: HttpClient) { }
 
   rawEbnf: string = '';
@@ -19,11 +19,17 @@ export class EbnfComponent implements OnInit {
   requestRawInProgress = false;
   requestTreeInProgress = false;
 
+  currentTab: MatTab | null = null;
+
   treeEbnf: TreeViewNode | null = null;
 
   ngOnInit(): void {
     this.getRawEbnf();
     this.getTreeEbnf();
+  }
+
+  onTabChanged(event: MatTabChangeEvent) {
+    this.currentTab = event.tab
   }
 
   getTreeEbnf(id: string = ""): void {
