@@ -1,4 +1,4 @@
-<mat-tab-group mat-align-tabs="center">
+<mat-tab-group (selectedTabChange)="onTabChanged($event)" mat-align-tabs="center">
   <mat-tab label="Raw EBNF">
     <div *ngIf="requestRawInProgress">
       <mat-progress-bar mode="query"></mat-progress-bar>
