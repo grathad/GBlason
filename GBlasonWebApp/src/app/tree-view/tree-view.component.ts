@@ -46,6 +46,8 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
   private _top_left_anchor: boolean = false;
 
   private _zoomScale: number = 100;
+  private _minZoom: number = 10;
+  private _maxZoom: number = 200;
   private _zoomRoundingAccuracy = 4;
 
   private _canvasMatrix = [1, 0, 0, 1, 0, 0];
@@ -186,8 +188,28 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     //so the svg size is the minimum
     //and with a predefined maximum width based on how small it gets from pratical experience
 
-    var ratioWidth = svgInfo.width / canvasInfo.width;
-    var ratioHeight = svgInfo.height / canvasInfo.height;
+    var ratioWidth = 1 / (canvasInfo.width / svgInfo.width);
+    var ratioHeight = 1 / (canvasInfo.height / svgInfo.height);
+
+    var smallRatio = Math.min(ratioHeight, ratioWidth);
+    //we want to fit to screen, so ideally the small ratio should be 1:1 (later we can tweak it a little bit)
+    //we calculate the delta to get to 1, this is by how much we need to change the current percentage zoom
+    var zoomTarget = this._zoomScale * smallRatio;
+    //we need to apply a factor of zoom change to the CURRENT zoom factor
+    if (zoomTarget > this._maxZoom) {
+      zoomTarget = this._maxZoom;
+    } else if (zoomTarget < this._minZoom) {
+      zoomTarget = this._minZoom;
+    }
+    var zoomDelta = zoomTarget - this._zoomScale;
+    console.log(`tree-view-component.zoomToFit change zoom scale by ${zoomDelta}`);
+    this.zoom(zoomDelta, { x: svgInfo.height / 2, y: svgInfo.width / 2 });
+    //next step is to place the canvas so that it completely fits (pretty much transform it back to 0,0)
+    this._canvasMatrix[4] = 0;
+    this._canvasMatrix[5] = 0;
+
+    var newMatrix = `matrix(${this._canvasMatrix.join(' ')})`;
+    this.renderer.setAttribute(this.canvasDom?.nativeElement, "transform", newMatrix);
   }
 
   //#endregion
@@ -232,6 +254,23 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+  getNodeCenter(node: TreeViewUINode): Point | null {
+    if (node.svgNode == null) {
+      return null;
+    }
+    //we just need the distance between the current location of the node, and the actual dead middle
+    var currentNodeSize = node.svgNode.domObject.getBoundingClientRect();
+
+    var currentSvgSize = this.svgDom?.nativeElement.getBoundingClientRect();
+
+    //the ideal (centered) position of the head should be
+
+    return {
+      x: currentSvgSize.width / 2 - currentNodeSize.width / 2,
+      y: Math.max(node.svgNode._node_margin * this._zoomScale / 100, node.svgNode._node_margin)
+    };
+  }
+
   centerToNode(node: TreeViewUINode) {
 
     if (node.svgNode == null) {
@@ -240,20 +279,13 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
 
     //we just need the distance between the current location of the node, and the actual dead middle
     var currentNodeLocation = node.svgNode.domObject.getCTM();
-    var currentNodeSize = node.svgNode.domObject.getBoundingClientRect();
-
-    var currentSvgSize = this.svgDom?.nativeElement.getBoundingClientRect();
-
-    //the ideal (centered) position of the head should be
-
-    var targetPosition: Point = {
-      x: currentSvgSize.width / 2 - currentNodeSize.width / 2,
-      y: Math.max(node.svgNode._node_margin * this._zoomScale / 100, node.svgNode._node_margin)
-    };
+    var targetPosition = this.getNodeCenter(node);
+    if (targetPosition == null) {
+      return;
+    }
 
     var log = `tree-view-component.centerToNode(node: ${node.treeNode.RealElement?.Name})`;
     log += `\n\t> current node location: (${currentNodeLocation.e},${currentNodeLocation.f})`;
-    log += `\n\t> current svg size: (${currentSvgSize.width},${currentSvgSize.height})`;
     log += `\n\t> current target: (${targetPosition.x},${targetPosition.y})`;
 
     console.log(log);
@@ -289,7 +321,7 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
    */
   private zoom(scale: number, zoomCenter: Point) {
     var totalPercentDelta = this._zoomScale + scale;
-    if (totalPercentDelta <= 10 || totalPercentDelta > 200) {
+    if (totalPercentDelta <= this._minZoom || totalPercentDelta > this._maxZoom) {
       return;
     }
 
@@ -443,8 +475,7 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
       return;
     }
 
-    if(!this._top_left_anchor)
-    {
+    if (!this._top_left_anchor) {
       //we had a 1*1 rect pixel without transformation within the group to make SURE that the 0,0 reference frame for the matrix transform
       //is indeed the top left corner of our canvas, if not, then the actual topmost, leftmost object (dynamic) is our reference point
       //which make the maths overly complicated for no reason
