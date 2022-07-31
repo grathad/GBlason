@@ -94,6 +94,7 @@ export class TreeViewNodeSVG extends EventTarget {
   private _leaf_icon: string = "M5.4 19.6Q4.275 18.475 3.638 17 3 15.525 3 13.95q0-1.575.6-3.113Q4.2 9.3 5.55 7.95q.875-.875 2.163-1.5Q9 5.825 10.762 5.462q1.763-.362 4.026-.437 2.262-.075 5.062.175.2 2.65.125 4.875-.075 2.225-.413 4.012-.337 1.788-.949 3.125Q18 18.55 17.1 19.45q-1.325 1.325-2.812 1.937Q12.8 22 11.25 22q-1.625 0-3.175-.637-1.55-.638-2.675-1.763Zm2.8-.4q.725.425 1.488.612.762.188 1.562.188 1.15 0 2.275-.462 1.125-.463 2.15-1.488.45-.45.912-1.262.463-.813.801-2.126.337-1.312.512-3.174.175-1.863.05-4.438-1.225-.05-2.762-.038-1.538.013-3.063.238-1.525.225-2.9.725T6.975 9.35q-1.125 1.125-1.55 2.225Q5 12.675 5 13.7q0 1.475.562 2.587.563 1.113.988 1.563 1.05-2 2.775-3.838Q11.05 12.175 13.35 11q-1.8 1.575-3.137 3.562Q8.875 16.55 8.2 19.2Zm0 0Zm0 0Z";
   private _expand_less_icon: string = "M5 13v-2h14v2Z";
   private _expand_more_icon: string = "M11 19v-6H5v-2h6V5h2v6h6v2h-6v6Z";
+  private _link_icon: string = "M11 17H7q-2.075 0-3.537-1.463Q2 14.075 2 12t1.463-3.538Q4.925 7 7 7h4v2H7q-1.25 0-2.125.875T4 12q0 1.25.875 2.125T7 15h4Zm-3-4v-2h8v2Zm5 4v-2h4q1.25 0 2.125-.875T20 12q0-1.25-.875-2.125T17 9h-4V7h4q2.075 0 3.538 1.462Q22 9.925 22 12q0 2.075-1.462 3.537Q19.075 17 17 17Z";
 
   //constants of the node UI
   private _node_width = 180;
@@ -307,6 +308,8 @@ export class TreeViewNodeSVG extends EventTarget {
     var tooltip_guid = this.renderer.createElement("title", "svg");
     var guid = this.renderer.createText(currentNodeInfo.treeNode.ElementId);
 
+    var referenceClass = currentNodeInfo.treeNode.ReferenceToElement == null ? "node" : "reference";
+
     var internalMargin = 20;
     var iconSize = 24;
 
@@ -316,7 +319,7 @@ export class TreeViewNodeSVG extends EventTarget {
 
     this.renderer.setAttribute(fingerprint_icon, "d", this._finger_print_icon);
 
-    this.renderer.setAttribute(nodeCard, "class", "node-card");
+    this.renderer.setAttribute(nodeCard, "class", referenceClass + "-card");
     this.renderer.setAttribute(fingerprint_icon, "class", "active-icon");
     this.renderer.setAttribute(fingerprint_icon, "transform", `translate(${internalMargin - this._node_roundAngle},${internalMargin})`);
     this.renderer.setAttribute(fingerprint_tooltip_area, "class", "node-tooltip-area");
@@ -404,7 +407,7 @@ export class TreeViewNodeSVG extends EventTarget {
       this.renderer.setAttribute(expand_button, "r", `${buttonRadius}px`);
       this.renderer.setAttribute(expand_button, "cx", `${this._node_width / 2}px`);
       this.renderer.setAttribute(expand_button, "cy", `${iconVertical + iconSpace + internalMargin}`);
-      this.renderer.setAttribute(expand_button, "class", "node-card node-expand-button");
+      this.renderer.setAttribute(expand_button, "class", referenceClass + "-card node-expand-button");
 
       var lastIconX = (this._node_width / 2) - (iconSize / 2);
       var lastIconY = iconVertical + iconSpace + internalMargin - iconSize / 2;
@@ -413,7 +416,7 @@ export class TreeViewNodeSVG extends EventTarget {
 
       this.expansionIcon = expand_icon;
 
-      this.renderer.setAttribute(expand_icon, "d", this._expand_more_icon);
+      this.renderer.setAttribute(expand_icon, "d",  currentNodeInfo.treeNode.ReferenceToElement == null ? this._expand_more_icon : this._link_icon);
       this.renderer.appendChild(nodeGroup, expand_button);
       this.renderer.appendChild(nodeGroup, expand_icon);
 

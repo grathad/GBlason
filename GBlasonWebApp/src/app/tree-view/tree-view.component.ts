@@ -387,6 +387,7 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
         var result = data as HttpResponse<string>;
         if (result !== null && result.body !== null && result.body !== undefined) {
           //we received new raw data, we need to parse and add them to the tree
+          //for now the API does not return proper error json string, so we just do nothing on error (the parse will fail)
           var replacement = JSON.parse(result.body);
           //we should receive the tree with the current head as the subtree head
           if (replacement.ElementId === head.treeNode.ElementId) {
@@ -503,27 +504,6 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
         console.log(`tree-view-component.renderTree.addEventListener(node: ${node[i].treeNode.RealElement?.Name})`);
         renderedNode.addEventListener("expandButtonClick", this.onNodeExpandClick.bind(this, node[i]));
         this.renderer.appendChild(this.canvasDom?.nativeElement, renderedNode.domObject);
-
-        // if (this._crossDebugZoomg == null) {
-        //   this._crossDebugZoomg = this.renderer.createElement("g", "svg");
-        //   var crossDebugZoomh = this.renderer.createElement("line", "svg");
-        //   var crossDebugZoomv = this.renderer.createElement("line", "svg");
-        //   //center of the debug cross should be
-        //   var centerDebug: Point = { x: 164, y: 62 };
-        //   this.renderer.setAttribute(crossDebugZoomh, "x1", (centerDebug.x - 20).toString());
-        //   this.renderer.setAttribute(crossDebugZoomh, "y1", (centerDebug.y).toString());
-        //   this.renderer.setAttribute(crossDebugZoomh, "x2", (centerDebug.x + 20).toString());
-        //   this.renderer.setAttribute(crossDebugZoomh, "y2", (centerDebug.y).toString());
-        //   this.renderer.setAttribute(crossDebugZoomv, "x1", (centerDebug.x).toString());
-        //   this.renderer.setAttribute(crossDebugZoomv, "y1", (centerDebug.y - 20).toString());
-        //   this.renderer.setAttribute(crossDebugZoomv, "x2", (centerDebug.x).toString());
-        //   this.renderer.setAttribute(crossDebugZoomv, "y2", (centerDebug.y + 20).toString());
-        //   this.renderer.setAttribute(crossDebugZoomv, "class", "cross-debug");
-        //   this.renderer.setAttribute(crossDebugZoomh, "class", "cross-debug");
-        //   this.renderer.appendChild(this.svgDom?.nativeElement, this._crossDebugZoomg);
-        //   this.renderer.appendChild(this._crossDebugZoomg, crossDebugZoomh);
-        //   this.renderer.appendChild(this._crossDebugZoomg, crossDebugZoomv);
-        // }
       }
     }
     //and execute the same for the child of the current node and after the children are created we do the parent links

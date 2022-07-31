@@ -60,7 +60,7 @@ namespace GBlason.WebApi.Test
 
                 var memory = new Collection<TreeElementReference>();
 
-                var newReferenceT =  TreeElementReference.CreateNew(root, memory);
+                var newReferenceT = TreeElementReference.CreateNew(root, memory);
                 newReferenceT.RealElement.Should().Be(root);
                 newReferenceT.Reference.Should().BeNull();
                 newReferenceT.Children.Should().NotBeEmpty();
@@ -81,13 +81,49 @@ namespace GBlason.WebApi.Test
 
                 var memory = new Collection<TreeElementReference>();
 
-                var newReferenceT =  TreeElementReference.CreateNew(root, memory);
+                var newReferenceT = TreeElementReference.CreateNew(root, memory);
                 //cyclic setup for test
                 newReferenceT.Reference = newReferenceT;
 
                 var json = JsonSerializer.Serialize(newReferenceT);
 
                 json.Should().NotBeNullOrEmpty();
+            }
+
+
+            [Fact]
+            public void BuildingTreeReferenceWithReference()
+            {
+                //A = B | C | (B, C)
+                //B = "b"
+                //C = "c"
+                var A = new TreeElement() { Name = "A" };
+                var GroupB = new TreeElement() { Name = "Group#B" };
+                var GroupC = new TreeElement() { Name = "Group#C" };
+                var GroupBC = new TreeElement() { Name = "Group#BC" };
+                var B = new TreeElement() { Name = "B", IsLeaf = true };
+                var C = new TreeElement() { Name = "C", IsLeaf = true };
+
+                ((List<TreeElement>)A.Children).AddRange(new[] { GroupB, GroupC, GroupBC });
+                GroupB.Children.Add(B);
+                GroupC.Children.Add(C);
+                ((List<TreeElement>)GroupBC.Children).AddRange(new[] { B, C });
+                //so the test is meant to verify that the children of GroupBC (as a treeelementreference) are all references and not real elements
+
+                var itemsRef = new Collection<TreeElementReference>();
+                var newReferenceT = TreeElementReference.CreateNew(source: A, itemsRef);
+
+                newReferenceT.Should().NotBeNull();
+                itemsRef.Should().HaveCount(6);
+
+                var firstBInstance = newReferenceT.Children.First().Children.First();       //the real element wrapped
+                var secondBInstance = newReferenceT.Children.Last().Children.First();       //a reference to the real element
+
+                firstBInstance.RealElement.Should().Be(B);
+                secondBInstance.RealElement.Should().Be(B);
+
+                secondBInstance.ReferenceToElement.Should().Be(firstBInstance.ElementId);
+                secondBInstance.Reference.Should().Be(firstBInstance);
             }
         }
     }

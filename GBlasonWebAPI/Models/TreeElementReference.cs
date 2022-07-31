@@ -44,7 +44,7 @@ namespace GBlasonWebAPI.Models
         {
             if (source == null) { return null; }
             if (itemsRef == null) { itemsRef = new Collection<TreeElementReference>(); }
-            var alreadyIn = itemsRef.FirstOrDefault(t => t.RealElement == source);
+            var alreadyIn = itemsRef.FirstOrDefault(r => string.Compare(r.RealElement.Name, source.Name) == 0);
 
             if (alreadyIn != null) { 
                 return alreadyIn;
@@ -77,6 +77,7 @@ namespace GBlasonWebAPI.Models
             toReturn.ElementId = toCopy.ElementId;
             toReturn.RealElement = toCopy.RealElement;
             toReturn.Reference = toCopy.Reference;
+            toReturn.ReferenceToElement = toCopy.ReferenceToElement;
             toReturn.HasChildren = toCopy.HasChildren;
             if (depth > 0)
             {
@@ -105,6 +106,7 @@ namespace GBlasonWebAPI.Models
             RealElement = toCopy.RealElement;
             Reference = toCopy.Reference;
             HasChildren = toCopy.HasChildren;
+            ReferenceToElement = toCopy.ReferenceToElement;
             if (depth > 0)
             {
                 foreach (var child in toCopy.Children)
@@ -120,7 +122,7 @@ namespace GBlasonWebAPI.Models
 
             TreeElementReference? refElement;
             //here we only continue to build the tree IF the current element is NOT in the references
-            var alreadyR = itemRefs.FirstOrDefault(r => r.RealElement == root);
+            var alreadyR = itemRefs.FirstOrDefault(r => string.Compare(r.RealElement.Name, root.Name) == 0);
             if (alreadyR != null)
             {
                 //we already have the root in the tree, let's use a reference to it instead (not including the children)

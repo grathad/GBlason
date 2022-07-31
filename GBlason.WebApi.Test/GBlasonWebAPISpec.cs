@@ -156,6 +156,40 @@ nodeG = ""textG"";";
                 nodeA.Children.First().ElementId.Should().Be(nodeB.ElementId);
                 nodeA.Children[0].Children[2].ElementId.Should().Be(nodeE.ElementId);
             }
+
+            [Fact]
+            public void ValidTreeUidForAllNodes()
+            {
+                var testValidGrammar =
+                    @"nodeA =  nodeB | nodeC;
+nodeB = nodeD | nodeE;
+nodeC = ""textC"";
+nodeD = ""textD""; 
+nodeE = ""textE""; ";
+                var testValidTreeStream = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(testValidGrammar)));
+                bstMock.Setup(b => b.RawEbnf).Returns(testValidTreeStream.BaseStream);
+
+                var result = bstMock.Object.BuildSafeTree();
+
+                result.Should().BeEmpty();
+                var resultTree = bstMock.Object.MemoryTree;
+                resultTree.Count.Should().Be(5);
+
+                //we are checking that the links of unique ID from the nodeA all the way to the nodeE (going through B is compatible)
+
+                var resultNodeA = resultTree.First();
+                var resultNodeB = resultTree[1];
+                var resultNodeE = resultTree[4];
+                resultNodeA.RealElement.Name.Should().Be("nodeA");
+                resultNodeB.RealElement.Name.Should().Be("nodeB");
+                resultNodeE.RealElement.Name.Should().Be("nodeE");
+
+                resultNodeA.Children.Should().Contain(resultNodeB);
+                resultNodeA.Children.First().ElementId.Should().Be(resultNodeB.ElementId);
+
+                resultNodeB.Children.Should().Contain(resultNodeE);
+                resultNodeB.Children[1].ElementId.Should().Be(resultNodeE.ElementId);
+            }
         }
     }
 }
