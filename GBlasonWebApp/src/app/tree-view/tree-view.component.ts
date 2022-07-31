@@ -153,6 +153,18 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     if (node.treeNode.RealElement?.IsLeaf ?? false) {
       return;
     }
+    if (node.treeNode.ReferenceToElement != null) {
+      //this is a reference, we need to find the original node and pan to it
+      var alreadyThere = this.findNode(node.treeNode.ReferenceToElement, this.rootNodeUi);
+      if (alreadyThere == null) {
+        console.log(`tree-view-component.onNodeExpandClick(${node.treeNode.RealElement?.Name}) is a reference, and the real node has not yet been retrieved`);
+      } else {
+        //we need to pan to the existing node (and make it visible first all the way to the first visible parent if it was collapsed)
+        console.log(`tree-view-component.onNodeExpandClick(${node.treeNode.RealElement?.Name}) is a reference, we have the real element, we pan to it`);
+        this.panTo(alreadyThere);
+      }
+      return;
+    }
 
     console.log(`tree-view-component.onNodeExpandClick(node: ${node.treeNode.RealElement?.Name})`);
 
@@ -215,6 +227,28 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
   //#endregion
 
   //#region matrix and math methods on the tree
+
+  /**
+   * Finds a node from its uid, from the current tree of loaded nodes
+   * @param uid the uid of the real node to find
+   */
+  findNode(uid: string, parent: TreeViewUINode | null = this.rootNodeUi): TreeViewUINode | null {
+    if (parent == null || uid == "") {
+      return null;
+    }
+    if (parent.treeNode.ElementId === uid) {
+      return parent;
+    }
+    if (parent.children != null && parent.children?.length > 0) {
+      for (var i = 0; i < parent.children?.length; i++) {
+        var foundNode = this.findNode(uid, parent.children[i]);
+        if (foundNode != null) {
+          return foundNode;
+        }
+      }
+    }
+    return null;
+  }
 
   /**
    * Calculates the x axis positions for all the nodes in the tree
@@ -309,6 +343,25 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     console.log(log);
   }
 
+  /**
+   * Pans to the given node, and expand all the parents of the node until the first already expanded parent
+   * @param node to pan to
+   */
+  private panTo(node: TreeViewUINode) {
+    //first we check if we need to expand the parents links
+    if (!node.isVisible) {
+      //we need to expand the parent
+    } else {
+      this.centerToNode(node);
+    }
+  }
+
+  /**
+   * Basic math rounding function to combat horrible JS numeric behavior
+   * @param num the number to round
+   * @param length the # digits to keep (round to) after the floating point
+   * @returns the rounded num
+   */
   private roundNum(num: number, length: number) {
     var number = Math.round(num * Math.pow(10, length)) / Math.pow(10, length);
     return number;
