@@ -126,5 +126,91 @@ namespace GBlason.WebApi.Test
                 secondBInstance.Reference.Should().Be(firstBInstance);
             }
         }
+
+        public class FindParent
+        {
+            [Fact]
+            public void NullInputMeansUnchangedBranch()
+            {
+                /* Tests this block
+                 
+            if (this == null || root == null)
+            {
+                return;
+            }            
+                 */
+            }
+
+            [Fact]
+            public void CyclicBranchReturnsNodes()
+            {
+                /* Tests this block
+                             
+            if (cycle.Any(c => c.ElementId == ElementId))
+            {
+                //we are in a cyclic branch, returning
+                return;
+            }
+                 */
+            }
+
+            [Fact]
+            public void FindParentFromRootReturnsRoot()
+            {
+                /* Tests this block
+            cycle.Add(this);
+            if (this == root)
+            {
+                //we reached the root, we are done
+                return;
+            }
+                 */
+            }
+
+            [Fact]
+            public void NodeWithoutParentReturnsBranch()
+            {
+                /* Tests this block (with actual nodes in the branch possible, we reached a root which is not the one in the input)
+            if (Parent == null)
+            {
+                //no way to continue
+                return;
+            }
+                 */
+            }
+
+
+            [Fact]
+            public void HappyPathReturnFullBranch()
+            {
+                //here we have a simple tree,
+                // Root => [A,B]
+                // A => [Bref,C]
+                // C => D
+                // looking for the parent of C should return Root => A => C without D
+
+                var d = new TreeElement { Name = "D" };
+                var c = new TreeElement { Name = "C" };
+                c.Children.Add(d);
+                var b = new TreeElement { Name = "B" };
+                var a = new TreeElement { Name = "A" };
+                a.Children.Add(b);
+                a.Children.Add(c);
+                var treeRoot = new TreeElement { Name = "root" };
+                treeRoot.Children.Add(a);
+                treeRoot.Children.Add(b);
+
+                //if I was doing it clean, I should mock this one and only return the final version of the reference tree, but lazy
+                var referenceRoot = TreeElementReference.CreateNew(treeRoot);
+                var referenceA = referenceRoot.Children.First();
+                var referenceC = referenceA.Children[1];
+
+                var branchResult = new Collection<TreeElementReference>();
+                referenceC.FindParent(ref branchResult, referenceRoot);
+
+                branchResult.Should().HaveCount(3);
+                branchResult.Should().ContainInOrder(new[] { referenceRoot, referenceA, referenceC });
+            }
+        }
     }
 }

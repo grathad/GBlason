@@ -867,7 +867,7 @@ namespace Grammar.PluginBase.Test.Parser
                 });
 
                 _mock.Object.GetRemainingKeywords(1)
-                    .Should().HaveCount(1).And.Subject.As<IList<ParsedKeyword>>()
+                    .Should().HaveCount(1).And.Subject.As<IList<PluginBase.Keyword.ParsedKeyword>>()
                     .Should().ContainInOrder(result.Object);
             }
         }

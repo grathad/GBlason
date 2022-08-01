@@ -24,6 +24,8 @@ namespace GBlasonWebAPI.Models
         /// </summary>
         public Collection<TreeElementReference> Children { get; set; } = new Collection<TreeElementReference>();
 
+        public TreeElementReference? Parent { get; set; } = null;
+
         public bool HasChildren { get; set; } = false;
 
         /// <summary>
@@ -40,37 +42,58 @@ namespace GBlasonWebAPI.Models
         [JsonIgnore]
         public TreeElementReference? Reference { get; set; }
 
-        public static TreeElementReference? CreateNew(TreeElement source, Collection<TreeElementReference> itemsRef = null)
+        /// <summary>
+        /// Create a new <see cref="TreeElementReference"/> instance, based of the provided <paramref name="source"/>.
+        /// Will either create a real instance of reference (once) or return the previously created one if already created.
+        /// Only the first creation will attach the <see cref="Children"/> and the <see cref="Parent"/>
+        /// as to avoid infinite cycle in the tree and to only keep one single link to the parent branch to search the path to the root
+        /// </summary>
+        /// <param name="source">The source tree element from which to base this reference object</param>
+        /// <param name="itemsRef">The list of reference objects already created for this tree</param>
+        /// <returns>A new <see cref="TreeElementReference"/> or null if the source is null</returns>
+        public static TreeElementReference? CreateNew(TreeElement source, Collection<TreeElementReference>? itemsRef = null)
         {
             if (source == null) { return null; }
             if (itemsRef == null) { itemsRef = new Collection<TreeElementReference>(); }
             var alreadyIn = itemsRef.FirstOrDefault(r => string.Compare(r.RealElement.Name, source.Name) == 0);
 
-            if (alreadyIn != null) { 
+            if (alreadyIn != null)
+            {
                 return alreadyIn;
             }
 
-            var toReturn = new TreeElementReference();
-            itemsRef.Add(toReturn);
+            var thisReference = new TreeElementReference();
+            itemsRef.Add(thisReference);
 
-            toReturn.RealElement = source;           
-            
+            thisReference.RealElement = source;
+
             if (source.Children == null || !source.Children.Any())
             {
-                return toReturn;
+                return thisReference;
             }
             foreach (var child in source.Children)
             {
                 var childRef = BuildCyclicSafeSubtree(child, itemsRef);
                 if (childRef != null)
                 {
-                    toReturn.Children.Add(childRef);
-                    toReturn.HasChildren = true;
+                    thisReference.Children.Add(childRef);
+                    //if the current children being returned is not a reference, then we attach ourselves as the parent
+                    if (childRef.ReferenceToElement == null)
+                    {
+                        childRef.Parent = thisReference;
+                    }
+                    thisReference.HasChildren = true;
                 }
             }
-            return toReturn;
+            return thisReference;
         }
 
+        /// <summary>
+        /// Create a subset of the tree as a value-copy of instances
+        /// </summary>
+        /// <param name="toCopy">The original reference head of the subtree to copy</param>
+        /// <param name="depth">The number of children layers to copy (default to 1, which is the first generation of children from <paramref name="toCopy"/>)</param>
+        /// <returns>a copy of the elements within the subtree starting at toCopy, including depth generations</returns>
         public static TreeElementReference CreateCopy(TreeElementReference toCopy, int depth = 1)
         {
             var toReturn = new TreeElementReference();
@@ -116,6 +139,13 @@ namespace GBlasonWebAPI.Models
             }
         }
 
+        /// <summary>
+        /// Build a cyclicly safe tree. Recursively going through the whole tree, and only building one branch per node, every copy of the same node that have already be given a branch
+        /// is treated as a "reference" i.e. a link to the real node that was given children, and no children or parent of its own.
+        /// </summary>
+        /// <param name="root">The root of the tree from where to build the safe tree</param>
+        /// <param name="itemRefs">The list of all the real nodes that have been created so far</param>
+        /// <returns>The new root of the safe tree</returns>
         public static TreeElementReference? BuildCyclicSafeSubtree(TreeElement root, Collection<TreeElementReference> itemRefs)
         {
             if (root == null) { return null; }
@@ -133,13 +163,50 @@ namespace GBlasonWebAPI.Models
                     RealElement = root,
                     HasChildren = alreadyR.HasChildren
                 };
-                //we return an element with a reference and NO (direct) children
+                //we return an element with a reference NO parent and NO children
                 return refElement;
             }
             //here this is the first time we cross path with that element
             //adding this element to the list for later potential redetection
             refElement = CreateNew(root, itemRefs);
             return refElement;
+        }
+
+        /// <summary>
+        /// Go through the tree parent by parent until the root or a cyclic reference is found
+        /// </summary>
+        /// <param name="leaf">The start of the search</param>
+        /// <param name="cycle">The potential cyclic reference</param>
+        /// <param name="root">The root</param>
+        /// <returns>the node found, either the root or the cyclic reference</returns>
+        public void FindParent(ref Collection<TreeElementReference> cycle, TreeElementReference root)
+        {
+            //since we are using references, and not the real treenode, we should only have one parent
+            if (this == null || root == null)
+            {
+                return;
+            }
+
+            if (cycle.Any(c => c.ElementId == ElementId))
+            {
+                //we are in a cyclic branch, returning
+                return;
+            }
+            cycle.Insert(0, this);
+            if (this == root)
+            {
+                //we reached the root, we are done
+                return;
+            }
+
+            if (Parent == null)
+            {
+                //no way to continue
+                return;
+            }
+
+            //we continue the search from the parent subtree
+            Parent.FindParent(ref cycle, root);
         }
 
         public override string ToString()

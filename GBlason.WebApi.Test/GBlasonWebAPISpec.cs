@@ -118,7 +118,6 @@ namespace GBlason.WebApi.Test
             }
         }
 
-
         public class BuildSafeTree
         {
             Mock<EbnfControllerWrapper> bstMock;
@@ -189,6 +188,58 @@ nodeE = ""textE""; ";
 
                 resultNodeB.Children.Should().Contain(resultNodeE);
                 resultNodeB.Children[1].ElementId.Should().Be(resultNodeE.ElementId);
+            }
+        }
+
+        public class Branch
+        {
+            [Fact]
+            public void NonInitializedMemoryReturnError()
+            {
+                //tests this block
+                /*
+                 * var init = InitMemory();
+            if (!string.IsNullOrEmpty(init))
+            {
+                return init;
+            }
+                 */
+            }
+
+            [Fact]
+            public void NonExistingLeafreturnError()
+            {
+                /* testing this block
+                 * var leafnode = MemoryTree.FirstOrDefault(tn => tn.ElementId == leaf);
+            if (leafnode == null)
+            {
+                return $"Could not find the leaf with the ID {leaf}";
+            }
+                 */
+            }
+
+            [Fact]
+            public void BranchOfRootReturnRoot()
+            {
+                /* Testing this block
+                 * if (root == leafnode)
+            {
+                var subtree = TreeElementReference.CreateCopy(leafnode, 0);
+                return JsonSerializer.Serialize(subtree);
+            }
+                 */
+            }
+
+            [Fact]
+            public void ValidParameterCallsFindParent()
+            {
+                /* Testing this block
+                 //trying to reach the root from the leaf
+            var branch = new Collection<TreeElementReference>();
+            FindParent(leafnode, ref branch, root);
+
+            return JsonSerializer.Serialize(branch);
+                 */
             }
         }
     }
