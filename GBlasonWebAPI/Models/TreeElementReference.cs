@@ -24,6 +24,7 @@ namespace GBlasonWebAPI.Models
         /// </summary>
         public Collection<TreeElementReference> Children { get; set; } = new Collection<TreeElementReference>();
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public TreeElementReference? Parent { get; set; } = null;
 
         public bool HasChildren { get; set; } = false;

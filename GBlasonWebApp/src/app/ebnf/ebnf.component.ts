@@ -79,6 +79,7 @@ export class TreeViewNode {
   ElementId: string = "";
   RealElement: TreeElementBase | null = null;
   Children: TreeViewNode[] | null = null;
+  Parent: TreeViewNode | null = null;
   HasChildren: boolean = false;
   ReferenceToElement: string | null = null;
 }

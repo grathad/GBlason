@@ -143,7 +143,14 @@ namespace GBlasonWebAPI.Controllers
             var branch = new Collection<TreeElementReference>();
             leafnode.FindParent(ref branch, root);
 
-            return JsonSerializer.Serialize(branch);
+            var trimmedBranch = new Collection<TreeElementReference>();
+            //we create the copies to avoid cyclic references for all the level of the branch (but only against the nodes we want)
+            foreach(var node in branch)
+            {
+                trimmedBranch.Add(TreeElementReference.CreateCopy(node));
+            }
+
+            return JsonSerializer.Serialize(trimmedBranch);
         }
 
         /// <summary>

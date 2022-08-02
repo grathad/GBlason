@@ -197,7 +197,9 @@ export class TreeViewNodeSVG extends EventTarget {
       }
 
       var parentBranch = this.renderer.createElement("line", "svg");
+      this.renderer.setAttribute(parentBranch, "class", "parent-link");
       this.linkHorizontalLine = this.renderer.createElement("line", "svg");
+      this.renderer.setAttribute(this.linkHorizontalLine, "class", "horizontal-link");
 
       var currentCenter = this._node_width / 2;
       var currentHeight = this._node_height + this._node_roundAngle * 2;
@@ -213,11 +215,13 @@ export class TreeViewNodeSVG extends EventTarget {
       this.renderer.appendChild(this.linksObject, this.linkHorizontalLine);
 
       for (var i = 0; i < currentNodeInfo.children.length; i++) {
-        if (currentNodeInfo.children.length > 1 && i == 0 || i == currentNodeInfo.children.length - 1) {
+        if (currentNodeInfo.children.length > 1 && (i == 0 || i == currentNodeInfo.children.length - 1)) {
           var newKid = this.renderer.createElement("path", "svg");
+          this.renderer.setAttribute(newKid, "class", "children-link");
         }
         else {
           var newKid = this.renderer.createElement("line", "svg");
+          this.renderer.setAttribute(newKid, "class", "child-link");
         }
         this.linkChildrenVertices.push(newKid);
         this.renderer.appendChild(this.linksObject, newKid);
@@ -265,7 +269,6 @@ export class TreeViewNodeSVG extends EventTarget {
       var childYBottom = childYTop + this._node_margin / 2;
 
       //this.renderer.setAttribute(newKid, "class", "node-link");
-
 
       if (roundedCorners && i == 0) {
         childYTop--;
