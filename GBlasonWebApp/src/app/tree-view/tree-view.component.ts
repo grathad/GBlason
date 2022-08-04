@@ -162,6 +162,7 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
       } else {
         //we need to pan to the existing node (and make it visible first all the way to the first visible parent if it was collapsed)
         console.log(`tree-view-component.onNodeExpandClick(${node.treeNode.RealElement?.Name}) is a reference, we have the real element, we pan to it`);
+        this.createVisiblePath(alreadyThere);
         this.panTo(alreadyThere);
       }
       return;
@@ -246,6 +247,29 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
         if (foundNode != null) {
           return foundNode;
         }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Finds a node's parent from the node's uid or the seed if the seed is the child
+   * @param childId the unique id of the child node
+   * @param seed the parent's seed to start the subsearch from (if null will start from the root)
+   */
+  findParent(childId: string, seed: TreeViewUINode | null = null) : TreeViewUINode | null {
+    if (childId == "" || childId == null || this.rootNodeUi == null) { return null; }
+    if (seed == null) {
+      seed = this.rootNodeUi;
+    }
+    if(seed.children == null){
+      return null;
+    }
+    for (var i = 0; i < seed.children.length; i++) {
+      if (seed.children[i].treeNode.ElementId == childId) { return seed; }
+      var found = this.findParent(childId, seed.children[i]);
+      if(found != null){
+        return found;
       }
     }
     return null;
@@ -342,6 +366,20 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     var log = `tree-view-component.pan(dx: ${dx}, dy: (${dy}))`;
     log += `\n\t> final ${newMatrix}`;
     console.log(log);
+  }
+
+  /**
+   * Make sure the parents of the node are all visible and expanded so that this node can be seen
+   * @param node the node that needs to be visible
+   */
+  private createVisiblePath(node: TreeViewUINode) {
+    if (node == null || node.treeNode == null) { return; }
+    //then we want to check its parent (not optimized now, but good enough)
+    var parent = this.findParent(node.treeNode.ElementId);
+    if (parent == null) { return; }
+    //then we want to make sure this parent is displayed (and its parents as well)
+    parent.expand(true);
+    this.createVisiblePath(parent);
   }
 
   /**

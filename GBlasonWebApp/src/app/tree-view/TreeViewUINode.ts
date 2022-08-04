@@ -55,7 +55,7 @@ export class TreeViewUINode {
 
   private setVisibility(visible: boolean) {
     this.isVisible = visible;
-    this.svgNode?.setVisibility(visible);
+    this.svgNode?.setVisibility(visible, this.isExpanded);
     //we only apply the visibility to the children based on the current expansion status (or the expansion status of the parent, meaning that the visibility intent AND the expansion status of the parent matter)
     for (var i = 0; i < this.children.length; i++) {
       this.children[i].setVisibility(this.isExpanded && this.isVisible);
@@ -132,13 +132,15 @@ export class TreeViewNodeSVG extends EventTarget {
     }
   }
 
-  setVisibility(visible: boolean) {
+  setVisibility(visible: boolean, expanded: boolean) {
     if (this.domObject != null) {
       if (visible) { this.renderer.setAttribute(this.domObject, "class", "node"); }
       else { this.renderer.setAttribute(this.domObject, "class", "node hidden"); }
     }
     if (this.linksObject != null) {
-      if (visible) {
+      //we are displaying the links of the child of the current node.
+      //so of course we need the current node to be visible AND expanded to display its children links
+      if (visible && expanded) {
         this.renderer.setAttribute(this.linksObject, "class", "node-link");
       } else {
         this.renderer.setAttribute(this.linksObject, "class", "node-link hidden");
