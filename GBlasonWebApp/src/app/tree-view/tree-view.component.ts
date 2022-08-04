@@ -153,6 +153,20 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     if (node.treeNode.RealElement?.IsLeaf ?? false) {
       return;
     }
+    if (node.treeNode.ReferenceToElement != null) {
+      //this is a reference, we need to find the original node and pan to it
+      var alreadyThere = this.findNode(node.treeNode.ReferenceToElement, this.rootNodeUi);
+      if (alreadyThere == null) {
+        console.log(`tree-view-component.onNodeExpandClick(${node.treeNode.RealElement?.Name}) is a reference, and the real node has not yet been retrieved`);
+        this.getBranch(node.treeNode.ReferenceToElement);
+      } else {
+        //we need to pan to the existing node (and make it visible first all the way to the first visible parent if it was collapsed)
+        console.log(`tree-view-component.onNodeExpandClick(${node.treeNode.RealElement?.Name}) is a reference, we have the real element, we pan to it`);
+        this.createVisiblePath(alreadyThere);
+        this.panTo(alreadyThere);
+      }
+      return;
+    }
 
     console.log(`tree-view-component.onNodeExpandClick(node: ${node.treeNode.RealElement?.Name})`);
 
@@ -215,6 +229,51 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
   //#endregion
 
   //#region matrix and math methods on the tree
+
+  /**
+   * Finds a node from its uid, from the current tree of loaded nodes
+   * @param uid the uid of the real node to find
+   */
+  findNode(uid: string, parent: TreeViewUINode | null = this.rootNodeUi): TreeViewUINode | null {
+    if (parent == null || uid == "") {
+      return null;
+    }
+    if (parent.treeNode.ElementId === uid) {
+      return parent;
+    }
+    if (parent.children != null && parent.children?.length > 0) {
+      for (var i = 0; i < parent.children?.length; i++) {
+        var foundNode = this.findNode(uid, parent.children[i]);
+        if (foundNode != null) {
+          return foundNode;
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Finds a node's parent from the node's uid or the seed if the seed is the child
+   * @param childId the unique id of the child node
+   * @param seed the parent's seed to start the subsearch from (if null will start from the root)
+   */
+  findParent(childId: string, seed: TreeViewUINode | null = null) : TreeViewUINode | null {
+    if (childId == "" || childId == null || this.rootNodeUi == null) { return null; }
+    if (seed == null) {
+      seed = this.rootNodeUi;
+    }
+    if(seed.children == null){
+      return null;
+    }
+    for (var i = 0; i < seed.children.length; i++) {
+      if (seed.children[i].treeNode.ElementId == childId) { return seed; }
+      var found = this.findParent(childId, seed.children[i]);
+      if(found != null){
+        return found;
+      }
+    }
+    return null;
+  }
 
   /**
    * Calculates the x axis positions for all the nodes in the tree
@@ -309,6 +368,39 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     console.log(log);
   }
 
+  /**
+   * Make sure the parents of the node are all visible and expanded so that this node can be seen
+   * @param node the node that needs to be visible
+   */
+  private createVisiblePath(node: TreeViewUINode) {
+    if (node == null || node.treeNode == null) { return; }
+    //then we want to check its parent (not optimized now, but good enough)
+    var parent = this.findParent(node.treeNode.ElementId);
+    if (parent == null) { return; }
+    //then we want to make sure this parent is displayed (and its parents as well)
+    parent.expand(true);
+    this.createVisiblePath(parent);
+  }
+
+  /**
+   * Pans to the given node, and expand all the parents of the node until the first already expanded parent
+   * @param node to pan to
+   */
+  private panTo(node: TreeViewUINode) {
+    //first we check if we need to expand the parents links
+    if (!node.isVisible) {
+      //we need to expand the parent
+    } else {
+      this.centerToNode(node);
+    }
+  }
+
+  /**
+   * Basic math rounding function to combat horrible JS numeric behavior
+   * @param num the number to round
+   * @param length the # digits to keep (round to) after the floating point
+   * @returns the rounded num
+   */
   private roundNum(num: number, length: number) {
     var number = Math.round(num * Math.pow(10, length)) / Math.pow(10, length);
     return number;
@@ -387,6 +479,7 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
         var result = data as HttpResponse<string>;
         if (result !== null && result.body !== null && result.body !== undefined) {
           //we received new raw data, we need to parse and add them to the tree
+          //for now the API does not return proper error json string, so we just do nothing on error (the parse will fail)
           var replacement = JSON.parse(result.body);
           //we should receive the tree with the current head as the subtree head
           if (replacement.ElementId === head.treeNode.ElementId) {
@@ -414,8 +507,34 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+  getBranch(leaf: string) {
+    var httpRequest = new HttpRequest("GET", `api/ebnf/branch?leaf=${leaf}`, { responseType: "text" });
+    var request = this.http.request<string>(httpRequest);
+
+    //ideally we should add an animated SVG to replace the button while the request is in progress (for later)
+    request.subscribe({
+      next: (data: HttpEvent<string>) => {
+        var result = data as HttpResponse<string>;
+        if (result !== null && result.body !== null && result.body !== undefined) {
+          //we received new raw data, we need to parse and add them to the tree
+          //for now the API does not return proper error json string, so we just do nothing on error (the parse will fail)
+          var replacement = JSON.parse(result.body);
+          //we should receive the branch and update the UI based on that
+          this.updateBranch(replacement);
+        }
+      },
+      error: (err) => { },
+      complete: () => {
+      }
+    });
+  }
+
   /**
    * Build the tree of logical nodes by attaching the node logical subtree to the parent node (logical ui objects that are ready to render)
+   * There are multiple object to represent this tree
+   * TreeViewUINode is the object representing the SVG UX of the node it contains a reference to the treenode
+   * TreeViewNode is the object received by the backend, a pure logical representation of a node in the tree without any UX, it contains a reference to the real element (tree element base)
+   * TreeElementBase is the object representing the actual information about the tree, as loaded from the server side (outside of consideration for communications between systems), this is unsafe and cyclically infinite
    * @param parent the node that should receive the new subtree
    * @param node the head or heads of the new subtree
    * @returns the TreeViewUINode generated by the tree building call or null if the creation could not happen
@@ -425,9 +544,18 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
       return [];
     }
     var nodeUi: TreeViewUINode[] = [];
+    //we just received a collection of nodes from the server, they are not yet UI objects
+    //our job is to create the UI objects (if not already there in the tree)
+    //then to attach them to their parent
+
     if (parent == null) {
-      //special unique case !
+      //special case we received a bunch of nodes (most likely one) and it does not have a parent, if we do not have the root setup already, this is the root
       //if the current parent node has no parent, it is a root, and we set it at the center
+      if (this.rootNodeUi != null) {
+        //we are attempting to add a root when we already had one
+        console.log(`tree-view-component.buildUiTree tried to add the parent less node ${node[0].RealElement?.Name}, but the root is already set`);
+        return [];
+      }
       this.rootNodeUi = new TreeViewUINode(this.renderer, node[0]);
       nodeUi.push(this.rootNodeUi);
       //and execute the same for the child of the current node
@@ -437,12 +565,60 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
     } else {
       //if it does however, we need to "attach" all of the nodes as the "descendent" from a tree view representation perspective of the current parent
       for (var i = 0; i < node.length; i++) {
+        //if the child is already attached we skip
+        if (parent.children.some(n => n.treeNode.ElementId == node[i].ElementId)) {
+          console.log(`tree-view-component.buildUiTree stopped attempt to add the already existing child ${node[i].RealElement?.Name} to the parent ${parent.treeNode.RealElement?.Name}`)
+          continue;
+        }
         var newNodeUi = new TreeViewUINode(this.renderer, node[i], parent);
         parent.children.push(newNodeUi);
         nodeUi.push(newNodeUi);
       }
     }
     return nodeUi;
+  }
+
+  updateBranch(branch: TreeViewNode[], visible: boolean = true) {
+    //we received a collection of nodes that goes from the root to the leaf the start is the root, in theory we should have a lot of the nodes in the branch already in the treeview
+    if (branch == null || branch.length == 0) {
+      return;
+    }
+    var lastParent = null;
+    for (var i = 0; i < branch.length; i++) {
+      //do we have this node already?
+      if (branch[i] == null) {
+        continue;
+      }
+      lastParent = this.findNode(branch[i].ElementId);
+      if (lastParent) {
+        //this is expected, the ui node was added (either before the branch addition, or during a previous iteration of this exact loop)
+        //we just add the children (the build ui tree will not add an already added child)
+        console.log(`tree-view-component.updateBranch. adding the children of ${lastParent.treeNode.RealElement?.Name}`);
+        this.buildUiTree(lastParent, branch[i].Children);
+        lastParent.expand(visible);
+      }
+      else {
+        console.log(`tree-view-component.updateBranch. ${branch[i].RealElement?.Name} is a new node to add. As the child of ${branch[i].Parent?.RealElement?.Name}`);
+        //this is a new node, we should add it to the tree, this is unlikely, the branch is meant to start from the root
+        //so it would mean we just got the root, and we do not have one in the tree ...
+        //let's get its parent
+        //var parentId = branch[i].Parent?.ElementId;
+        //if it does not have any parent and was not there, it is most likely a problem, we can still however perform the action if there was no root in the tree, it will work (unlikely though)
+        // if(parentId == null){
+        //   this.buildUiTree(null, [branch[i]]);
+        //   continue;
+        // }
+        //if there is a parent, and for whatever reason it did not have the children set yet, then we need to add the node with its children as well
+        //var parent = this.findNode(parentId);
+      }
+    }
+    this.calculateXPositions();
+    if (this.rootNodeUi != null) {
+      this.renderTree(null, [this.rootNodeUi]);
+    }
+    if (lastParent != null) {
+      this.panTo(lastParent);
+    }
   }
 
   //#endregion
@@ -455,12 +631,11 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
    * @param children the new nodes that needs to be added (rendered) into the tree
    */
   updateUi(parent: TreeViewUINode | null, children: TreeViewNode[]): void {
-    var newHeads = this.buildUiTree(parent, children);
+    this.buildUiTree(parent, children);
     this.calculateXPositions();
     if (this.rootNodeUi != null) {
       console.log(`tree-view-component.updateUi(parent: ${parent?.treeNode.RealElement?.Name}, children: [${children.length}])`);
       this.renderTree(null, [this.rootNodeUi]);
-      var canvasInfo = this.canvasDom?.nativeElement.getBoundingClientRect();
     }
   }
 
@@ -503,27 +678,6 @@ export class TreeViewComponent implements OnInit, AfterViewInit, OnChanges {
         console.log(`tree-view-component.renderTree.addEventListener(node: ${node[i].treeNode.RealElement?.Name})`);
         renderedNode.addEventListener("expandButtonClick", this.onNodeExpandClick.bind(this, node[i]));
         this.renderer.appendChild(this.canvasDom?.nativeElement, renderedNode.domObject);
-
-        // if (this._crossDebugZoomg == null) {
-        //   this._crossDebugZoomg = this.renderer.createElement("g", "svg");
-        //   var crossDebugZoomh = this.renderer.createElement("line", "svg");
-        //   var crossDebugZoomv = this.renderer.createElement("line", "svg");
-        //   //center of the debug cross should be
-        //   var centerDebug: Point = { x: 164, y: 62 };
-        //   this.renderer.setAttribute(crossDebugZoomh, "x1", (centerDebug.x - 20).toString());
-        //   this.renderer.setAttribute(crossDebugZoomh, "y1", (centerDebug.y).toString());
-        //   this.renderer.setAttribute(crossDebugZoomh, "x2", (centerDebug.x + 20).toString());
-        //   this.renderer.setAttribute(crossDebugZoomh, "y2", (centerDebug.y).toString());
-        //   this.renderer.setAttribute(crossDebugZoomv, "x1", (centerDebug.x).toString());
-        //   this.renderer.setAttribute(crossDebugZoomv, "y1", (centerDebug.y - 20).toString());
-        //   this.renderer.setAttribute(crossDebugZoomv, "x2", (centerDebug.x).toString());
-        //   this.renderer.setAttribute(crossDebugZoomv, "y2", (centerDebug.y + 20).toString());
-        //   this.renderer.setAttribute(crossDebugZoomv, "class", "cross-debug");
-        //   this.renderer.setAttribute(crossDebugZoomh, "class", "cross-debug");
-        //   this.renderer.appendChild(this.svgDom?.nativeElement, this._crossDebugZoomg);
-        //   this.renderer.appendChild(this._crossDebugZoomg, crossDebugZoomh);
-        //   this.renderer.appendChild(this._crossDebugZoomg, crossDebugZoomv);
-        // }
       }
     }
     //and execute the same for the child of the current node and after the children are created we do the parent links

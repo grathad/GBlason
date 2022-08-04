@@ -454,7 +454,7 @@ namespace Ebnf
             IsRepetition |= onlyChild.IsRepetition;
             IsGroup |= onlyChild.IsGroup;
             IsLeaf |= onlyChild.IsLeaf;
-            //we keep the parent name though and rules content though
+            //we keep the parent name and rules content though
             //now that the parent can replace its only child, we do just that, replace all instances of the onlychild with a link to the parent
             //first stop, mapping the parent children directly to its grandchildren
             Children = onlyChild.Children.ToList();

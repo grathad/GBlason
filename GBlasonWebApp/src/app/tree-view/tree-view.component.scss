@@ -39,16 +39,23 @@
   stroke-opacity: 0.2;
 }
 
+.reference-card {
+  fill: #205139;
+  stroke-width: 1px;
+  stroke: black;
+  stroke-opacity: 0.2;
+}
+
 .active-icon {
-  fill: #fff;
   //necessary to let the click go through to the element behind
   pointer-events: none;
+  fill: #fff;
 }
 
 .passive-icon {
-  fill: rgba(255, 255, 255, .25);
   pointer-events: none;
   stroke-width: 1px;
+  fill: rgba(255, 255, 255, .25);
 }
 
 .node-text {
@@ -58,6 +65,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  fill: #fff;
 }
 
 .node-subtext {
@@ -79,20 +87,15 @@
   fill-opacity: 0%;
 }
 
-.node-link.hidden{
+.node-link.hidden {
   visibility: hidden;
 }
 
-.node-tooltip-area{
+.node-tooltip-area {
   fill-opacity: 0;
   pointer-events: all;
 }
 
-.cross-debug{
-  stroke-width: 1px;
-  stroke: red;
-}
-
-.invisible{
+.invisible {
   fill: none;
 }

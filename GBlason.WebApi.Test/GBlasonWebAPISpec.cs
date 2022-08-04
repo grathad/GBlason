@@ -118,7 +118,6 @@ namespace GBlason.WebApi.Test
             }
         }
 
-
         public class BuildSafeTree
         {
             Mock<EbnfControllerWrapper> bstMock;
@@ -155,6 +154,92 @@ nodeG = ""textG"";";
 
                 nodeA.Children.First().ElementId.Should().Be(nodeB.ElementId);
                 nodeA.Children[0].Children[2].ElementId.Should().Be(nodeE.ElementId);
+            }
+
+            [Fact]
+            public void ValidTreeUidForAllNodes()
+            {
+                var testValidGrammar =
+                    @"nodeA =  nodeB | nodeC;
+nodeB = nodeD | nodeE;
+nodeC = ""textC"";
+nodeD = ""textD""; 
+nodeE = ""textE""; ";
+                var testValidTreeStream = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(testValidGrammar)));
+                bstMock.Setup(b => b.RawEbnf).Returns(testValidTreeStream.BaseStream);
+
+                var result = bstMock.Object.BuildSafeTree();
+
+                result.Should().BeEmpty();
+                var resultTree = bstMock.Object.MemoryTree;
+                resultTree.Count.Should().Be(5);
+
+                //we are checking that the links of unique ID from the nodeA all the way to the nodeE (going through B is compatible)
+
+                var resultNodeA = resultTree.First();
+                var resultNodeB = resultTree[1];
+                var resultNodeE = resultTree[4];
+                resultNodeA.RealElement.Name.Should().Be("nodeA");
+                resultNodeB.RealElement.Name.Should().Be("nodeB");
+                resultNodeE.RealElement.Name.Should().Be("nodeE");
+
+                resultNodeA.Children.Should().Contain(resultNodeB);
+                resultNodeA.Children.First().ElementId.Should().Be(resultNodeB.ElementId);
+
+                resultNodeB.Children.Should().Contain(resultNodeE);
+                resultNodeB.Children[1].ElementId.Should().Be(resultNodeE.ElementId);
+            }
+        }
+
+        public class Branch
+        {
+            [Fact]
+            public void NonInitializedMemoryReturnError()
+            {
+                //tests this block
+                /*
+                 * var init = InitMemory();
+            if (!string.IsNullOrEmpty(init))
+            {
+                return init;
+            }
+                 */
+            }
+
+            [Fact]
+            public void NonExistingLeafreturnError()
+            {
+                /* testing this block
+                 * var leafnode = MemoryTree.FirstOrDefault(tn => tn.ElementId == leaf);
+            if (leafnode == null)
+            {
+                return $"Could not find the leaf with the ID {leaf}";
+            }
+                 */
+            }
+
+            [Fact]
+            public void BranchOfRootReturnRoot()
+            {
+                /* Testing this block
+                 * if (root == leafnode)
+            {
+                var subtree = TreeElementReference.CreateCopy(leafnode, 0);
+                return JsonSerializer.Serialize(subtree);
+            }
+                 */
+            }
+
+            [Fact]
+            public void ValidParameterCallsFindParent()
+            {
+                /* Testing this block
+                 //trying to reach the root from the leaf
+            var branch = new Collection<TreeElementReference>();
+            FindParent(leafnode, ref branch, root);
+
+            return JsonSerializer.Serialize(branch);
+                 */
             }
         }
     }

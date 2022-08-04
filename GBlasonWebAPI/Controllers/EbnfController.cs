@@ -58,14 +58,10 @@ namespace GBlasonWebAPI.Controllers
         [HttpGet("tree")]
         public string Tree(Guid? head = null)
         {
-            //todo Add a lock on memorytree, we should only build it once, if we ever have to rebuild it, it has to be locked
-            if (MemoryTree == null || !MemoryTree.Any())
+            var init = InitMemory();
+            if (!string.IsNullOrEmpty(init))
             {
-                var error = BuildSafeTree();
-                if (!string.IsNullOrEmpty(error))
-                {
-                    return error;
-                }
+                return init;
             }
 
             if (MemoryTree == null || !MemoryTree.Any())
@@ -112,6 +108,66 @@ namespace GBlasonWebAPI.Controllers
             //return it to the caller
 
             return jsonString;
+        }
+
+        /// <summary>
+        /// Return the branch from the leaf all the way to the root, containing only the branch with the main parent of all the nodes required to move to the root
+        /// </summary>
+        /// <param name="leaf">The leaf from which the branch is returned</param>
+        /// <returns>The branch all the way to the root or null if the leaf does not exist or have no link to the root</returns>
+        [HttpGet("branch")]
+        public string Branch(Guid leaf)
+        {
+            var init = InitMemory();
+            if (!string.IsNullOrEmpty(init))
+            {
+                return init;
+            }
+            var leafnode = MemoryTree.FirstOrDefault(tn => tn.ElementId == leaf);
+            if (leafnode == null)
+            {
+                return $"Could not find the leaf with the ID {leaf}";
+            }
+            var root = MemoryTree.FirstOrDefault();
+            if (root == null)
+            {
+                return "The tree is empty, can't return the path";
+            }
+            if (root == leafnode)
+            {
+                var subtree = TreeElementReference.CreateCopy(leafnode, 0);
+                return JsonSerializer.Serialize(subtree);
+            }
+
+            //trying to reach the root from the leaf
+            var branch = new Collection<TreeElementReference>();
+            leafnode.FindParent(ref branch, root);
+
+            var trimmedBranch = new Collection<TreeElementReference>();
+            //we create the copies to avoid cyclic references for all the level of the branch (but only against the nodes we want)
+            foreach(var node in branch)
+            {
+                trimmedBranch.Add(TreeElementReference.CreateCopy(node));
+            }
+
+            return JsonSerializer.Serialize(trimmedBranch);
+        }
+
+        /// <summary>
+        /// Initialize the tree in memory and return the potential error
+        /// </summary>
+        /// <returns>An error if the tree can't be build, an empty string in case of success</returns>
+        protected string InitMemory()
+        {
+            if (MemoryTree == null || !MemoryTree.Any())
+            {
+                var error = BuildSafeTree();
+                if (!string.IsNullOrEmpty(error))
+                {
+                    return error;
+                }
+            }
+            return string.Empty;
         }
 
         /// <summary>
